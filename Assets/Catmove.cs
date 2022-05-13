@@ -6,7 +6,10 @@ public class Catmove : MonoBehaviour
 {
     void Update()
     {
-      
+      if(Input.GetKeyDown(KeyCode.E))
+        {
+            transform.position += Vector3.left;
+        }
     }
 
     /// <summary>
