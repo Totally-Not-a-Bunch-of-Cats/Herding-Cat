@@ -1,9 +1,13 @@
+/*
+ * Author: Damian Link
+ * Version: 5/21/22
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 
+/// Base class for cats
 /// </summary>
 public class Cat : MonoBehaviour
 {
@@ -12,7 +16,7 @@ public class Cat : MonoBehaviour
     //---------------------------------------
 
     // 
-    Vector2Int Size;
+    Vector2Int Size = new Vector2Int(1,1);
     // 
     Vector2Int Location;
     // If cat can move/is asleep(if true cat cant move)
@@ -23,6 +27,15 @@ public class Cat : MonoBehaviour
     //----------------------------------------
     // Functions
     //----------------------------------------
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public Vector2Int Move()
+    {
+        return Vector2Int.zero;
+    }
 
     /// <summary>
     /// Sets the fuzz value of the cat
