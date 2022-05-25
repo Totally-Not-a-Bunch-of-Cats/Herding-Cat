@@ -9,6 +9,7 @@ using UnityEngine;
 /// <summary>
 /// Base class for cats
 /// </summary>
+[System.Serializable]
 public class Cat : MonoBehaviour
 {
     //---------------------------------------
