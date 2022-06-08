@@ -16,20 +16,40 @@ public class CatManager : MonoBehaviour
     // Varables
     //----------------------------------------------
 
-    // Array of cats on the leve9l
+    // Array of Cats on the level
+    [SerializeField]
     private Cat[] CatList;
 
     //----------------------------------------------
     // Functions
     //----------------------------------------------
 
-    public int MoveCat ()
+    public void MoveCat(Vector2 Distance)
     {
-        return 0;
+        for(int i = 0; i < CatList.Length; i++)
+        {
+            CatList[i].Move();
+        }
     }
 
-    public int MoveCat (Cat CurCat)
+    public void MoveCat (Cat CurCat, Vector2 Distance)
     {
+        int WhichCat = FindCat(CurCat);
+        CatList[WhichCat].Move();
+    }
+
+
+
+    private int FindCat(Cat CurCat)
+    {
+        int Location = 0;
+        for (int i = 0; i < CatList.Length; i++)
+        {
+            if(CatList[i] = CurCat)
+            {
+                return Location;
+            }
+        }
         return 0;
     }
 }
