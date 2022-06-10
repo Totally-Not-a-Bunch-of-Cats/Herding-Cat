@@ -9,7 +9,7 @@ public class Items
     //list of all items
     private Item[] allItems =
     {
-        new Item("Cucumber", WhichCat.CURRENT, 3, new Size(1, 3)),
+        new Item("Snake", WhichCat.CURRENT, 3, new Size(1, 3)),
         new Item("Toy", WhichCat.CLOSEST, -3, new Size(1, 3)),
         new Item("Loud Noise", WhichCat.ALL, 3, new Size(3, 3)),
         new Item("Treat", WhichCat.ALL, -3, new Size(1, 1)),

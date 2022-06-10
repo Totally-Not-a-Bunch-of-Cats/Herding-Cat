@@ -22,16 +22,21 @@ public class RoundManager : MonoBehaviour
     //-------------------------------------------
     // Functions
     //-------------------------------------------
-
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// is triggured when the player hits the end turn button. And triggures all of the chained items
+    /// </summary>
+    void EndTurn()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void CheckMovement()
     {
-        
+
+    }
+
+    void CaculateStars()
+    {
+
     }
 }
