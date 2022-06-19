@@ -15,6 +15,7 @@ public class RoundManager : MonoBehaviour
     // Varables
     //-------------------------------------------
 
+    private enums.spotType[,] board;
     private Vector2Int BoardSize;
     private int ItemPlaced = 0;
     private int RoundPassed = 0;
@@ -22,6 +23,7 @@ public class RoundManager : MonoBehaviour
     //-------------------------------------------
     // Functions
     //-------------------------------------------
+
     /// <summary>
     /// is triggured when the player hits the end turn button. And triggures all of the chained items
     /// </summary>
