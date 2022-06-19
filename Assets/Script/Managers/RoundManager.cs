@@ -4,6 +4,7 @@
  */
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 
@@ -36,45 +37,26 @@ public class RoundManager : MonoBehaviour
 
     }
 
-    public Vector2Int CheckMovement(Vector2Int Movement, Vector2Int Cords)
+
+    /// <summary>
+    /// better way to do it
+    /// </summary>
+    /// <param name="Movement"></param>
+    /// <param name="CoOrds"></param>
+    /// <returns></returns>
+    public Vector2Int CheckMovement(Vector2Int Movement, Vector2Int CoOrds)
     {
-        Direction TheWay;
-        Vector2Int RealMovement;
-        RealMovement = Movement;
-        Vector2Int TempCords = Cords;      
-        TempCords += Movement;
-        TheWay = CheckDirection(RealMovement);
-        bool OutBounds = Cords.x + RealMovement.x > BoardSize.x || Cords.y + RealMovement.y > BoardSize.y ||
-            Cords.x + RealMovement.x < 0 || Cords.y + RealMovement.y < 0;
 
+        Direction direction = CheckDirection(Movement);
 
-        while (RealMovement != Vector2Int.zero)
+        if (direction == Direction.Up || direction == Direction.Right)
         {
-            if (Board[TempCords.x, TempCords.y] == enums.spotType.Blank && !OutBounds)
-            {
-                return RealMovement; 
-            }
-            else
-            {
-                switch (TheWay)
-                {
-                    case Direction.Right:
-                        RealMovement.x -= 1;
-                        break;
-                    case Direction.Left:
-                        RealMovement.x += 1;
-                        break;
-                    case Direction.Up:
-                        RealMovement.y -= 1;
-                        break;
-                    case Direction.Down:
-                        RealMovement.y += 1;
-                        break;
-                }
-
-            }
+            return new Vector2Int(math.min(Movement.x, BoardSize.x - CoOrds.x), math.min(Movement.y, BoardSize.y - CoOrds.y));
         }
-        return Vector2Int.zero;
+        else
+        {
+            return new Vector2Int(math.max(Movement.x, 0 - CoOrds.x), math.max(Movement.y, 0 - CoOrds.y));
+        }
     }
 
     void CaculateStars()
@@ -119,3 +101,45 @@ public class RoundManager : MonoBehaviour
         }
     }
 }
+
+/*
+ *     public Vector2Int CheckMovement(Vector2Int Movement, Vector2Int Cords)
+    {
+        Direction TheWay;
+        Vector2Int RealMovement;
+        RealMovement = Movement;
+        Vector2Int TempCords = Cords;      
+        TempCords += Movement;
+        TheWay = CheckDirection(RealMovement);
+        bool OutBounds = Cords.x + RealMovement.x > BoardSize.x || Cords.y + RealMovement.y > BoardSize.y ||
+            Cords.x + RealMovement.x < 0 || Cords.y + RealMovement.y < 0;
+
+
+        while (RealMovement != Vector2Int.zero)
+        {
+            if (Board[TempCords.x, TempCords.y] == enums.spotType.Blank && !OutBounds)
+            {
+                return RealMovement;
+            }
+            else
+            {
+                switch (TheWay)
+                {
+                    case Direction.Right:
+                        RealMovement.x -= 1;
+                        break;
+                    case Direction.Left:
+                        RealMovement.x += 1;
+                        break;
+                    case Direction.Up:
+                        RealMovement.y -= 1;
+                        break;
+                    case Direction.Down:
+                        RealMovement.y += 1;
+                        break;
+                }
+            }
+        }
+        return Vector2Int.zero;
+    }
+ */
