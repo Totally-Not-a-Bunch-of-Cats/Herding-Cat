@@ -34,7 +34,8 @@ public class RoundManager : MonoBehaviour
     /// </summary>
     void EndTurn()
     {
-
+        RoundPassed++;
+        //call itemmanager to start using items
     }
 
 
@@ -98,6 +99,41 @@ public class RoundManager : MonoBehaviour
         else
         {
             return 0;
+        }
+    }
+
+    public Vector2Int WallCheck(Vector2Int Movement, Vector2Int CoOrds)
+    {
+        Vector2Int RealMovement = Vector2Int.zero;
+
+        Direction direction = CheckDirection(Movement);
+
+        do
+        {
+            switch (direction)
+            {
+                case Direction.Right:
+                    RealMovement.x++;
+                    break;
+                case Direction.Left:
+                    RealMovement.x--;
+                    break;
+                case Direction.Up:
+                    RealMovement.y++;
+                    break;
+                case Direction.Down:
+                    RealMovement.y--;
+                    break;
+            }
+        } while (Board[CoOrds.x + RealMovement.x, CoOrds.y + RealMovement.y] == enums.spotType.Blank && RealMovement.sqrMagnitude <= Movement.sqrMagnitude);
+
+        if (direction == Direction.Up || direction == Direction.Right)
+        {
+            return Vector2Int.Min(Movement, RealMovement);
+        }
+        else
+        {
+            return Vector2Int.Max(Movement, RealMovement);
         }
     }
 }

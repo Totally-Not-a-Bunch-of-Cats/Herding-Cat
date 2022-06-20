@@ -36,6 +36,7 @@ public class Cat : MonoBehaviour
     public void Move(Vector2Int Distance)
     {
         //call round manager to check movement and send adjustment movement back 
+        // then call wall check if movement isnt zero
         Location.x = Distance.x;
         Location.y = Distance.y;
         
