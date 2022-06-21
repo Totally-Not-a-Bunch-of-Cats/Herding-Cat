@@ -28,7 +28,7 @@ public class CatManager : MonoBehaviour
     /// </summary>
     /// <param name="Distance">the distance each cat should move</param>
     public void MoveCat(Vector2Int Distance)
-    {
+    { 
         for(int i = 0; i < CatList.Length; i++)
         {
             CatList[i].Move(Distance);
