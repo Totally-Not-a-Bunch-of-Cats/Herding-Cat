@@ -8,7 +8,7 @@ using Unity.Mathematics;
 using UnityEngine;
 
 
-
+[System.Serializable]
 /// <summary>
 /// 
 /// </summary>
@@ -18,24 +18,28 @@ public class RoundManager : MonoBehaviour
     // Varables
     //-------------------------------------------
 
-    public enum Direction {Right, Left, Up, Down};
-
-    private enums.spotType[,] Board;
+    public enum Direction { Right, Left, Up, Down };
+    [SerializeField]
+    public Board GameBoard = new Board(10, 10);
     private Vector2Int BoardSize;
-    private int ItemPlaced = 0;
     private int RoundPassed = 0;
 
     //-------------------------------------------
     // Functions
     //-------------------------------------------
-
+    private void Start()
+    {
+        //add board
+    }
     /// <summary>
     /// is triggured when the player hits the end turn button. And triggures all of the chained items
     /// </summary>
-    void EndTurn()
+    public void EndTurn()
     {
+        // disable item placemnt UI
+        //call itemManager to start using items
+        GameManager.Instance._ItemManager.CycyleItems();
         RoundPassed++;
-        //call itemmanager to start using items
     }
 
 
@@ -70,22 +74,22 @@ public class RoundManager : MonoBehaviour
     /// </summary>
     Direction CheckDirection(Vector2Int DirectionCords)
     {
-        if(DirectionCords.x != 0 && DirectionCords.y != 0)
+        if (DirectionCords.x != 0 && DirectionCords.y != 0)
         {
-            if(DirectionCords.x == 0)
+            if (DirectionCords.x == 0)
             {
-                if(DirectionCords.y > 0)
+                if (DirectionCords.y > 0)
                 {
                     return Direction.Up;
                 }
                 else
-                { 
+                {
                     return Direction.Down;
                 }
             }
             else
             {
-                if(DirectionCords.x > 0)
+                if (DirectionCords.x > 0)
                 {
                     return Direction.Right;
                 }
@@ -94,7 +98,7 @@ public class RoundManager : MonoBehaviour
                     return Direction.Left;
                 }
             }
-            
+
         }
         else
         {
@@ -125,8 +129,8 @@ public class RoundManager : MonoBehaviour
                     RealMovement.y--;
                     break;
             }
-        } while (Board[CoOrds.x + RealMovement.x, CoOrds.y + RealMovement.y] == enums.spotType.Blank && RealMovement.sqrMagnitude <= Movement.sqrMagnitude);
-
+        } while (GameBoard.GetCell(CoOrds + RealMovement).IsType(SpotType.Blank) && RealMovement.sqrMagnitude <= Movement.sqrMagnitude);
+        //the problem for the wrong mopvement is prob here
         if (direction == Direction.Up || direction == Direction.Right)
         {
             return Vector2Int.Min(Movement, RealMovement);
@@ -135,6 +139,11 @@ public class RoundManager : MonoBehaviour
         {
             return Vector2Int.Max(Movement, RealMovement);
         }
+    }
+
+    public void UpdateCatPosition()
+    {
+        //needs to change the cats postion
     }
 }
 

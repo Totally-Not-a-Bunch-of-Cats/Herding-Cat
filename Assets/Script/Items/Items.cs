@@ -1,3 +1,4 @@
+
 /// <summary>
 /// Holds reference to all the current items in the game
 /// 
@@ -9,20 +10,21 @@ public class Items
     //list of all items
     private Item[] allItems =
     {
-        new Item("Snake", WhichCat.CURRENT, 3, new Size(1, 3)),
-        new Item("Toy", WhichCat.CLOSEST, -3, new Size(1, 3)),
-        new Item("Loud Noise", WhichCat.ALL, 3, new Size(3, 3)),
-        new Item("Treat", WhichCat.ALL, -3, new Size(1, 1)),
-        new Item("Catnip", WhichCat.ALL, -5, new Size(2, 2)),
-        new Item("Dog", WhichCat.ALL, 5, new Size(3, 2))
+        new Item("Snake", WhichCat.CURRENT, 3),
+        new Item("Toy", WhichCat.CURRENT, -3),
+        new Item("Loud Noise", WhichCat.ALL, 3),
+        new Item("Treat", WhichCat.ALL, -3),
+        new Item("Catnip", WhichCat.ALL, -5),
+        new Item("Dog", WhichCat.ALL, 5)
     };
+
 
     /// <summary>
     /// Access the list of all items with it's name
     /// </summary>
     /// <param name="item">The string name of the item to be retrieved</param>
     /// <returns>The item found with the given name or null if no item found</returns>
-    public object this[string item]
+    public Item this[string item]
     {
         get
         {

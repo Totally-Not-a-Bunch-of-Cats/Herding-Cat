@@ -19,7 +19,8 @@ public class Cat : MonoBehaviour
     // stores the size of the cat
     Size CatSize = new Size(1,1);
     // stores the location of the cat 
-    public Vector2Int Location = new Vector2Int(1,1);   //this isnt nessarly world space careful 
+    public Vector2Int BoardLocation = new Vector2Int(1,1);   //this isnt nessarly world space careful 
+    public Vector2 WorldLocation;
     // If cat can move/is asleep(if true cat cant move)
     private bool Asleep = false;
     // Cat moves extra space next round if true
@@ -28,6 +29,13 @@ public class Cat : MonoBehaviour
     //----------------------------------------
     // Functions
     //----------------------------------------
+    private void Start()
+    {
+        WorldLocation = transform.localPosition;
+
+        BoardLocation.x = (int)Mathf.Round(WorldLocation.x - .5f);
+        BoardLocation.y = (int)Mathf.Round(WorldLocation.y - .5f);
+    }
 
     /// <summary>
     /// 
@@ -37,9 +45,10 @@ public class Cat : MonoBehaviour
     {
         //call round manager to check movement and send adjustment movement back 
         // then call wall check if movement isnt zero
-        Location.x = Distance.x;
-        Location.y = Distance.y;
-        
+        BoardLocation.x += Distance.x;
+        BoardLocation.y += Distance.y;
+        StagerMovement();
+
         UpdatePosition();
     }
     /// <summary>
@@ -48,6 +57,7 @@ public class Cat : MonoBehaviour
     public void UpdatePosition()
     {
         //updates the position of the cat with the round manager after movement
+        GameManager.Instance._roundManager.UpdateCatPosition();
     }
 
    
@@ -68,6 +78,26 @@ public class Cat : MonoBehaviour
     public void SetAsleep (bool SleepVal)
     {
         Asleep = SleepVal;
+    }
+
+    void StagerMovement()
+    {
+       if (WorldLocation.x != BoardLocation.x + .5)
+       {
+            WorldLocation.x += 1;
+            transform.position = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
+            //add small wait time 
+            StagerMovement();
+       }
+
+       if (WorldLocation.y != BoardLocation.y + .5)
+       {
+            WorldLocation.y += 1;
+            transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+            //add small wait time 
+            StagerMovement();
+       }
+       
     }
 
 }

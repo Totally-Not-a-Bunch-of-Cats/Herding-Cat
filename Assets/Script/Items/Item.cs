@@ -1,23 +1,33 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+
 /// <summary>
 /// A item class holds the name of the item, 
 /// what selection type it is for cats, the number of tiles a cat will move, and
 /// 
 /// Action Amoutn can be +/-. Positive means away from item, while negative means to move toward.
 /// </summary>
+[System.Serializable]
 public class Item
 {
+    [SerializeField]
     private string name;
+    [SerializeField]
     private WhichCat whichCat;
     //TODO Add action types
+    [SerializeField]
     private int actionAmount;
-    private Size size;
-
-    public Item(string name, WhichCat whichCat, int actionAmount, Size size)
+    [SerializeField]
+    private Vector2 Location;
+    [SerializeField]
+    private GameObject Prefab;
+    public Item(string name, WhichCat whichCat, int actionAmount)
     {
         this.name = name;
         this.whichCat = whichCat;
         this.actionAmount = actionAmount;
-        this.size = size;
     }
 
     public string getName()
@@ -35,9 +45,9 @@ public class Item
         return this.actionAmount;
     }
 
-    public Size getSize()
+    public Vector2 getLocation()
     {
-        return this.size;
+        return this.Location;
     }
 
     public void setName(string name)
@@ -46,6 +56,19 @@ public class Item
         {
             this.name = name;
         }
+    }
+
+    public void setPrefab(GameObject Prefab)
+    {
+        if (this.Prefab != Prefab)
+        {
+            this.Prefab = Prefab;
+        }
+    }
+
+    public GameObject getPrefab()
+    {
+        return this.Prefab;
     }
 
     public void setWhichCat(WhichCat whichCat)
@@ -64,14 +87,11 @@ public class Item
         }
     }
 
-    public void setSize(Size size)
+    public void setLocation(Vector2 location)
     {
-        if (this.size.getWidth() != size.getWidth())
+        if (this.Location != location)
         {
-            this.size = size;
-        } else if (this.size.getHeight() != size.getHeight())
-        {
-            this.size = size;
+            this.Location = location;
         }
     }
 }

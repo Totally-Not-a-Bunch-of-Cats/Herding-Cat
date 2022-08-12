@@ -9,6 +9,5 @@
 public enum WhichCat
 {
     CURRENT,
-    CLOSEST,
     ALL
 }

@@ -6,6 +6,10 @@ public class GameManager : MonoBehaviour
 {
     // Number of stars that the player has
     private int CurrentStars = 0;
+    //Holds references to the other managers
+    public ItemManager _ItemManager;
+    public CatManager _CatManager;
+    public RoundManager _roundManager;
 
     // Check to see if we're about to be destroyed.
     private static bool m_ShuttingDown = false;
@@ -43,5 +47,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+
 
 }

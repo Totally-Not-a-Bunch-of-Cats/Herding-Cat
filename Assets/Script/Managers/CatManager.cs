@@ -5,6 +5,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Mathematics;
 
 /// <summary>
 /// manages all of the behaviors of the cats 
@@ -24,14 +25,14 @@ public class CatManager : MonoBehaviour
     // Functions
     //----------------------------------------------
     /// <summary>
-    /// calls for all cats on the board to me moved
+    /// Pass in an item, then it goes through all the cats passing the item to GetMovementAmount in the itemManager to determine how much each cat should move.
     /// </summary>
     /// <param name="Distance">the distance each cat should move</param>
-    public void MoveCat(Vector2Int Distance)
-    { 
-        for(int i = 0; i < CatList.Length; i++)
+    public void MoveCats(Item item)
+    {
+        for (int i = 0; i < CatList.Length; i++)
         {
-            CatList[i].Move(Distance);
+            CatList[i].Move(GameManager.Instance._ItemManager.GetMovementAmount(item, CatList[i]));
         }
     }
     /// <summary>
@@ -39,8 +40,9 @@ public class CatManager : MonoBehaviour
     /// </summary>
     /// <param name="CurCat">the cat we want to move</param>
     /// <param name="Distance">the distance we want the cat to move</param>
-    public void MoveCat (Cat CurCat, Vector2Int Distance)
+    public void MoveCat(Cat CurCat, Vector2Int Distance)
     {
+        Debug.Log("moving the cat");
         int WhichCat = FindCat(CurCat);
         CatList[WhichCat].Move(Distance);
     }
@@ -62,5 +64,24 @@ public class CatManager : MonoBehaviour
             }
         }
         return 0;
+    }
+    public Cat FindCat(Vector2 Location)
+    {
+        Vector2 difference;
+        float closestLocation = 0;
+        float squareDifference;
+        Cat closestCat = null;
+        for (int i = 0; i < CatList.Length; i++)
+        {
+            difference = CatList[i].WorldLocation;
+            difference -= Location;
+            squareDifference = Vector2.SqrMagnitude(difference);
+            if(squareDifference <= closestLocation || closestCat == null)
+            {
+                closestLocation = squareDifference;
+                closestCat = CatList[i];
+            }
+        }
+        return closestCat;
     }
 }
