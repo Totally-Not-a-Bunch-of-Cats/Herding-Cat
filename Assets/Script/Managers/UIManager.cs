@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if(CanPlaceItem && SelectedItem.getName() != null)
+        /*if(CanPlaceItem && SelectedItem.getName() != null)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -21,25 +21,25 @@ public class UIManager : MonoBehaviour
                 WorldPosition = ItemLocationSanitization(WorldPosition);
                 //santise the mouse imput and lock it to elagal spots
                 Instantiate(SelectedItem.getPrefab(), WorldPosition, Quaternion.identity, Board.transform);  //make this place where mouse is
-                GameManager.Instance._ItemManager.AddItem(SelectedItem.getName());
+                *//*GameManager.Instance._ItemManager.AddItem(SelectedItem.getName());*//*
                 //give position of item to item manager.
                 CanPlaceItem = false;
             }
-        }
+        }*/
     }
 
 
     //is triggured when a button is pressed
     public void PlaceItem(string ItemName)
     {
-        SelectedItem = GameManager.Instance._ItemManager.GetItemList()[ItemName];
+        /*SelectedItem = GameManager.Instance._ItemManager.GetItemList()[ItemName];*/
         CanPlaceItem = true;
     }
 
 
     public void EndRound()
     {
-        GameManager.Instance._roundManager.EndTurn();
+        /*GameManager.Instance._roundManager.EndTurn();*/
         Debug.Log("end turn");
     }
 

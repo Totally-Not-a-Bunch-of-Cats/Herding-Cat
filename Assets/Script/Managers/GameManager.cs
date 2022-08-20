@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     // Number of stars that the player has
     private int CurrentStars = 0;
+
     //Holds references to the other managers
-    public ItemManager _ItemManager;
-    public CatManager _CatManager;
-    public RoundManager _roundManager;
+    public MatchManager _matchManager;
+    private static List<LevelData> Levels;
 
     // Check to see if we're about to be destroyed.
     private static bool m_ShuttingDown = false;
@@ -48,6 +51,50 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Get all instances of scriptable objects with given type.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public static List<T> GetAllInstances<T>() where T : ScriptableObject
+    {
+        return AssetDatabase.FindAssets($"t: {typeof(T).Name}").ToList()
+                    .Select(AssetDatabase.GUIDToAssetPath)
+                    .Select(AssetDatabase.LoadAssetAtPath<T>)
+                    .ToList();
+    }
 
+    private void Start()
+    {
+        Levels = GetAllInstances<LevelData>();
+        StartCoroutine(StartMatch());
+    }
 
+    IEnumerator StartMatch()
+    {
+        string level_name = "1-1";
+
+        SceneManager.LoadScene("Match");
+        yield return new WaitForEndOfFrame();
+
+        // TODO: Grab match manager from scene
+        GameObject _board = GameObject.Find("Board");
+        if (_board != null)
+        {
+            _matchManager = _board.GetComponent<MatchManager>();
+            LevelData _currentLevel = Levels.Find(level => level.name == level_name);
+
+            // Init round manager / match
+            if (_matchManager.InitMatch(_currentLevel))
+            {
+                Debug.Log($"Successfully initialized level {level_name}");
+                // Start match if initialized
+                /*_matchManager.StartMatch();*/
+            }
+            else
+            {
+                Debug.LogError("Failed to initialize the match");
+            }
+        }
+    }
 }
