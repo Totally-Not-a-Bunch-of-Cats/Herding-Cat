@@ -17,6 +17,7 @@ public class MatchManager : MonoBehaviour
     [Space]
     public Board GameBoard;
     [SerializeField] private Vector2Int BoardSize;
+    private bool ActiveMatch = false;
 
     [Header("Gameplay Info")]
     [Space]
@@ -24,6 +25,7 @@ public class MatchManager : MonoBehaviour
     [SerializeField] private int TargetItems = 10;
     [SerializeField] private int RoundsPlayed = 0;
     [SerializeField] private int ItemsUsed = 0;
+
 
     /// <summary>
     /// Initialize the <see cref="Board"/> and all scene <see cref="GameObject"/>s for the match
@@ -57,10 +59,15 @@ public class MatchManager : MonoBehaviour
         // Load board
         // Tell player it is strategy phase
         // Toggle flag to start match for update loop
+        ActiveMatch = true;
     }
 
     private void Update()
     {
+        if(ActiveMatch)
+        {
+
+        }
         // If match start
             // increment rounds played and update score
             // If player places item

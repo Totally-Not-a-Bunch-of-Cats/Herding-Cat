@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     //Holds references to the other managers
     public MatchManager _matchManager;
-    private static List<LevelData> Levels;
+    public static List<LevelData> Levels;
 
     // Check to see if we're about to be destroyed.
     private static bool m_ShuttingDown = false;
@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log($"Successfully initialized level {level_name}");
                 // Start match if initialized
-                /*_matchManager.StartMatch();*/
+                //_matchManager.StartMatch();
             }
             else
             {
