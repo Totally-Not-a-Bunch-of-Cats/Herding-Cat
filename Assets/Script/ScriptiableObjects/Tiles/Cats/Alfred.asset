@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d50602962f0ea0e4b98a3b37784fa532, type: 3}
   m_Name: Alfred
   m_EditorClassIdentifier: 
+  Image: {fileID: 21300000, guid: f51bb51e529f3f343a3a59b899f70f41, type: 3}
   Distance: 0
   Skipped: 0
   Speed: 0
+  Movement:
+    PathCount: 0

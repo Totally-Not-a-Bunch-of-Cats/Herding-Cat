@@ -8,6 +8,17 @@ using UnityEngine;
 [System.Serializable]
 public abstract class Tile : ScriptableObject
 {
+
+    [SerializeField] private Sprite Image;
+    
+    /// <summary>
+    /// Gets the image that shows the Tile
+    /// </summary>
+    /// <returns>The sprite of the Tile</returns>
+    public Sprite GetImage(){
+        return Image;
+    }
+
     /// <summary>
     /// Check if this object is of a certain type.
     /// </summary>

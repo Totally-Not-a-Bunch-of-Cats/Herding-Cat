@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartMatch());
     }
 
+    //IEnumerator
     IEnumerator StartMatch()
     {
         string level_name = "1-1";
@@ -77,7 +78,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Match");
         yield return new WaitForEndOfFrame();
 
-        // TODO: Grab match manager from scene
+        //TODO: Grab match manager from scene
         GameObject _board = GameObject.Find("Board");
         if (_board != null)
         {

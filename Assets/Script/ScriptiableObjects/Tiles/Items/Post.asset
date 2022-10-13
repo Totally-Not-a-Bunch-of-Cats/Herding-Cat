@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90d54665990fdc542a4d0cad6b312ea2, type: 3}
   m_Name: Post
   m_EditorClassIdentifier: 
+  Image: {fileID: 21300000, guid: 433102990e771b44fb9694eefaeafb1b, type: 3}
   Radius: -1
   Direction: 4
