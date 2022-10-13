@@ -6,6 +6,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using TMPro;
+using UnityEngine.UI;
 
 [System.Serializable]
 /// <summary>
@@ -50,7 +52,7 @@ public class MatchManager : MonoBehaviour
 
             BoardTileMap = GameObject.Find("Tilemap").GetComponent<Tilemap>();
             // TODO: Generate Grid and UI
-            int tempx = BoardSize.x / 2;
+            int tempx = BoardSize.x / 2;  //odd numbers will break
             int tempy = BoardSize.y / 2;
 
             // setup background(tilemap)
@@ -62,22 +64,18 @@ public class MatchManager : MonoBehaviour
             // place tiles associated to level
             foreach (PosTile CurPosTile in currentLevel.GetTiles())
             {
-                GameObject tempObj = new GameObject(CurPosTile.Slate.GetType().ToString());
-                tempObj.AddComponent<SpriteRenderer>().sprite = CurPosTile.Slate.GetImage();
-                tempObj.transform.SetParent(transform);
-                tempObj.transform.localScale = new Vector3(0.4f, 0.4f, 1f);
-                tempObj.transform.localPosition = new Vector3(CurPosTile.Position.x - tempx + 0.5f, CurPosTile.Position.y - tempy + 0.5f, 5);
+                Instantiate(CurPosTile.Slate.GetPrefab(), new Vector3(CurPosTile.Position.x - tempx + 0.5f, CurPosTile.Position.y - tempy + 0.5f, 5), 
+                    Quaternion.identity, transform);
+
             }
 
             for (int i = 0; i < currentLevel.GetPossibleItems().Length; i++)
             {
-                Instantiate(ItemButtonPrefab, GameObject.Find("GUI").transform);
-                //GameObject newButton = new GameObject(currentLevel.GetPossibleItems()[i].name);
-                //newButton.transform.parent = GameObject.Find("GUI").transform;
-                //newButton.transform.parent = GameObject.Find("GUI").transform;
-                Debug.Log("test");
+                Item item = currentLevel.GetPossibleItems()[i];
+                GameObject button = Instantiate(ItemButtonPrefab, new Vector3(10, -5, 4) ,Quaternion.identity, GameObject.Find("GUI").transform);
+                button.GetComponentInChildren<TextMeshProUGUI>().SetText(item.name);
+                button.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._uiManager.PlaceItem(item));
             }
-
             return true;
         }
         return false;

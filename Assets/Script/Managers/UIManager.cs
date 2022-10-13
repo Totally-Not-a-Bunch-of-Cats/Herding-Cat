@@ -10,9 +10,14 @@ public class UIManager : MonoBehaviour
     bool CanPlaceItem = false;
     public GameObject Board;
 
+    public void FindBoard(GameObject _board)
+    {
+        Board = _board;
+    }
+
     void Update()
     {
-        /*if(CanPlaceItem && SelectedItem.getName() != null)
+        if (CanPlaceItem)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -20,20 +25,21 @@ public class UIManager : MonoBehaviour
                 WorldPosition.z = 3;
                 WorldPosition = ItemLocationSanitization(WorldPosition);
                 //santise the mouse imput and lock it to elagal spots
-                Instantiate(SelectedItem.getPrefab(), WorldPosition, Quaternion.identity, Board.transform);  //make this place where mouse is
-                *//*GameManager.Instance._ItemManager.AddItem(SelectedItem.getName());*//*
+                Instantiate(SelectedItem, WorldPosition, Quaternion.identity, Board.transform);  //make this place where mouse is
+                //*GameManager.Instance._ItemManager.AddItem(SelectedItem.getName());*//*
                 //give position of item to item manager.
                 CanPlaceItem = false;
             }
-        }*/
+        }
     }
 
 
     //is triggured when a button is pressed
-    public void PlaceItem(string ItemName)
+    public void PlaceItem(Item item)
     {
-        /*SelectedItem = GameManager.Instance._ItemManager.GetItemList()[ItemName];*/
+        SelectedItem = item;
         CanPlaceItem = true;
+        //Debug.Log("in Place item");
     }
 
 

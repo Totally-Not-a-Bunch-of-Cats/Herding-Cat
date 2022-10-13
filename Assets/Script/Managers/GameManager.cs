@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     //Holds references to the other managers
     public MatchManager _matchManager;
+    public UIManager _uiManager;
     public static List<LevelData> Levels;
 
     // Check to see if we're about to be destroyed.
@@ -80,6 +81,7 @@ public class GameManager : MonoBehaviour
 
         //TODO: Grab match manager from scene
         GameObject _board = GameObject.Find("Board");
+        _uiManager.FindBoard(_board);
         if (_board != null)
         {
             _matchManager = _board.GetComponent<MatchManager>();

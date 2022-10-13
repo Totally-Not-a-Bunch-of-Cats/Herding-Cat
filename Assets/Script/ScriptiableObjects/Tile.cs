@@ -9,14 +9,14 @@ using UnityEngine;
 public abstract class Tile : ScriptableObject
 {
 
-    [SerializeField] private Sprite Image;
+    [SerializeField] private GameObject Prefab;
     
     /// <summary>
     /// Gets the image that shows the Tile
     /// </summary>
     /// <returns>The sprite of the Tile</returns>
-    public Sprite GetImage(){
-        return Image;
+    public GameObject GetPrefab(){
+        return Prefab;
     }
 
     /// <summary>
