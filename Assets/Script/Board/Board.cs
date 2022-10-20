@@ -75,9 +75,11 @@ public class Board
         {
             return _cells[_pos.x, _pos.y];
         }
-
-        Debug.LogError($"Position must be between (0, 0) and ({this._width}, {this._height})");
-        throw new ArgumentOutOfRangeException($"Position must be between (0, 0) and ({this._width}, {this._height})");
+        else
+        {
+            Debug.LogError($"Position must be between (0, 0) and ({this._width}, {this._height})");
+            throw new ArgumentOutOfRangeException($"Position must be between (0, 0) and ({this._width}, {this._height})");
+        }
     }
 
     /// <summary>
@@ -94,9 +96,11 @@ public class Board
         {
             return _cells[x, y];
         }
-
-        Debug.LogError($"Position must be between (0, 0) and ({this._width}, {this._height})");
-        throw new ArgumentOutOfRangeException($"Position must be between (0, 0) and ({this._width}, {this._height})");
+        else
+        {
+            Debug.LogError($"Position must be between (0, 0) and ({this._width}, {this._height})");
+            throw new ArgumentOutOfRangeException($"Position must be between (0, 0) and ({this._width}, {this._height})");
+        }
     }
 
     /// <summary>
@@ -111,9 +115,11 @@ public class Board
         {
             this._cells[_pos.x, _pos.y] = _tile;
         }
-
-        Debug.LogError($"Position must be between (0, 0) and ({this._width}, {this._height})");
-        throw new ArgumentOutOfRangeException($"Position must be between (0, 0) and ({this._width}, {this._height})");
+        else
+        {
+            Debug.LogError($"Position must be between (0, 0) and ({this._width}, {this._height})");
+            throw new ArgumentOutOfRangeException($"Position must be between (0, 0) and ({this._width}, {this._height})");
+        }
     }
 
     /// <summary>
@@ -128,8 +134,20 @@ public class Board
         {
             this._cells[x, y] = _tile;
         }
+        else
+        {
+            Debug.LogError($"Position must be between (0, 0) and ({this._width}, {this._height})");
+            throw new ArgumentOutOfRangeException($"Position must be between (0, 0) and ({this._width}, {this._height})");
+        }
+    }
+    
+    public int GetWidth()
+    {
+        return _width;
+    }
 
-        Debug.LogError($"Position must be between (0, 0) and ({this._width}, {this._height})");
-        throw new ArgumentOutOfRangeException($"Position must be between (0, 0) and ({this._width}, {this._height})");
+    public int GetHeight()
+    {
+        return _height;
     }
 }

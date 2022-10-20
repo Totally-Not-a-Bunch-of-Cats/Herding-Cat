@@ -23,12 +23,17 @@ public class UIManager : MonoBehaviour
             {
                 Vector3 WorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 WorldPosition.z = 3;
-                WorldPosition = ItemLocationSanitization(WorldPosition);
-                //santise the mouse imput and lock it to elagal spots
-                Instantiate(SelectedItem, WorldPosition, Quaternion.identity, Board.transform);  //make this place where mouse is
-                //*GameManager.Instance._ItemManager.AddItem(SelectedItem.getName());*//*
-                //give position of item to item manager.
+                WorldPosition = ItemLocationSanitization(WorldPosition); 
+                if((WorldPosition.x >= -5 && WorldPosition.x < GameManager.Instance._matchManager.GameBoard.GetWidth()/2) && 
+                    (WorldPosition.y >= -5 && WorldPosition.y < GameManager.Instance._matchManager.GameBoard.GetHeight()/2))
+                {
+                    Instantiate(SelectedItem.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);  //make this place where mouse is
+                    GameManager.Instance._matchManager.GameBoard.Set((int)WorldPosition.x, (int)WorldPosition.y, SelectedItem);
+                    Vector2Int itemLocation = new Vector2Int((int)WorldPosition.x, (int)WorldPosition.y);
+                    GameManager.Instance._matchManager.ItemLocations.Add(itemLocation);
+                }
                 CanPlaceItem = false;
+                Debug.Log("cant palce now");
             }
         }
     }
@@ -59,7 +64,6 @@ public class UIManager : MonoBehaviour
 
         Location.x -= 0.5f;
         Location.y -= 0.5f;
-
 
         return Location;
     }

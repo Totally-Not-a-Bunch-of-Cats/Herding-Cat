@@ -30,6 +30,7 @@ public class MatchManager : MonoBehaviour
 
     [SerializeField] private Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
+    [SerializeField] public List<Vector2Int> ItemLocations;
 
 
 
@@ -86,8 +87,6 @@ public class MatchManager : MonoBehaviour
     /// </summary>
     public void StartMatch()
     {
-        // Load board
-        // Tell player it is strategy phase
         // Toggle flag to start match for update loop
         ActiveMatch = true;
     }
@@ -96,7 +95,8 @@ public class MatchManager : MonoBehaviour
     {
         if(ActiveMatch)
         {
-
+            //end turn function triggures here
+            //
         }
         // If match start
             // increment rounds played and update score
