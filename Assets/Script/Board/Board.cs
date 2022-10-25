@@ -136,6 +136,7 @@ public class Board
         }
         else
         {
+            //Debug.Log(x + " " + y);
             Debug.LogError($"Position must be between (0, 0) and ({this._width}, {this._height})");
             throw new ArgumentOutOfRangeException($"Position must be between (0, 0) and ({this._width}, {this._height})");
         }

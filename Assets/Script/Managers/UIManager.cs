@@ -23,17 +23,25 @@ public class UIManager : MonoBehaviour
             {
                 Vector3 WorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 WorldPosition.z = 3;
-                WorldPosition = ItemLocationSanitization(WorldPosition); 
-                if((WorldPosition.x >= -5 && WorldPosition.x < GameManager.Instance._matchManager.GameBoard.GetWidth()/2) && 
-                    (WorldPosition.y >= -5 && WorldPosition.y < GameManager.Instance._matchManager.GameBoard.GetHeight()/2))
+                WorldPosition = ItemLocationSanitization(WorldPosition);
+                float clickableX = GameManager.Instance._matchManager.GameBoard.GetWidth() / 2;
+                float clickableY = GameManager.Instance._matchManager.GameBoard.GetHeight() / 2;
+                Vector2Int itemLocation = new Vector2Int((int)(WorldPosition.x - 0.5 + clickableX), (int)(WorldPosition.y - 0.5 + clickableY));
+
+                // TODO: have to check when no tile in spot is null, need to check for it
+                //if (GameManager.Instance._matchManager.GameBoard.) {  }
+                if ((WorldPosition.x >= -clickableX && WorldPosition.x < clickableX) && (WorldPosition.y >= -clickableY && WorldPosition.y < clickableY))
                 {
                     Instantiate(SelectedItem.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);  //make this place where mouse is
-                    GameManager.Instance._matchManager.GameBoard.Set((int)WorldPosition.x, (int)WorldPosition.y, SelectedItem);
-                    Vector2Int itemLocation = new Vector2Int((int)WorldPosition.x, (int)WorldPosition.y);
+                    Debug.Log(GameManager.Instance._matchManager.GameBoard.At(itemLocation));
+                    GameManager.Instance._matchManager.GameBoard.Set(itemLocation, SelectedItem);
                     GameManager.Instance._matchManager.ItemLocations.Add(itemLocation);
                 }
                 CanPlaceItem = false;
                 Debug.Log("cant palce now");
+            } else
+            {
+                CanPlaceItem = true;
             }
         }
     }
