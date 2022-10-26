@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,10 +10,12 @@ public class UIManager : MonoBehaviour
 
     bool CanPlaceItem = false;
     public GameObject Board;
+    public GameObject GUI;
 
     public void FindBoard(GameObject _board)
     {
         Board = _board;
+        GUI = GameObject.Find("GUI");
     }
 
     void Update()
@@ -46,6 +49,17 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void GetUI()
+    {
+        //get the end turn button and make an event
+        GameObject.Find("End Round Button").GetComponent<Button>().onClick.AddListener(() => EndRound());
+        //get the restart button and make an event 
+        GameObject.Find("Restart Button").GetComponent<Button>().onClick.AddListener(() => Restart());
+        //get main menu button and make an event (need a real menu)
+        //GameObject.Find("Main Menu Button").GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.SwitchScene("Menu"));
+
+    }
+
 
     //is triggured when a button is pressed
     public void PlaceItem(Item item)
@@ -56,11 +70,17 @@ public class UIManager : MonoBehaviour
     }
 
 
+    public void Restart()
+    {
+        Debug.Log("Restarted");
+    }
+
     public void EndRound()
     {
-        /*GameManager.Instance._roundManager.EndTurn();*/
-        Debug.Log("end turn");
+        //lock you out fron pressing buttons
+        Debug.Log("end round");
     }
+
 
     Vector3 ItemLocationSanitization(Vector3 Location)
     {

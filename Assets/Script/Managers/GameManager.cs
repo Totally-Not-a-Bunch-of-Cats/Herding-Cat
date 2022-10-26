@@ -71,6 +71,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartMatch());
     }
 
+    public void SwitchScene(string Name)
+    {
+        SceneManager.LoadScene(Name, LoadSceneMode.Single);
+    }
+
     //IEnumerator
     IEnumerator StartMatch()
     {

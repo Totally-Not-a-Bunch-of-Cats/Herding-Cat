@@ -65,11 +65,16 @@ public class MatchManager : MonoBehaviour
             // place tiles associated to level
             foreach (PosTile CurPosTile in currentLevel.GetTiles())
             {
+                //if(CurPosTile.Slate.Is<Cat>())
+                //{
+                //    GameBoard.Cats.Add(CurPosTile.Position);
+                //    Debug.Log(GameBoard.Cats);
+                //}
                 Instantiate(CurPosTile.Slate.GetPrefab(), new Vector3(CurPosTile.Position.x - tempx + 0.5f, CurPosTile.Position.y - tempy + 0.5f, 5), 
                     Quaternion.identity, transform);
 
             }
-
+            //places items 
             for (int i = 0; i < currentLevel.GetPossibleItems().Length; i++)
             {
                 Item item = currentLevel.GetPossibleItems()[i];
@@ -77,6 +82,7 @@ public class MatchManager : MonoBehaviour
                 button.GetComponentInChildren<TextMeshProUGUI>().SetText(item.name);
                 button.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._uiManager.PlaceItem(item));
             }
+            GameManager.Instance._uiManager.GetUI();
             return true;
         }
         return false;
@@ -96,7 +102,6 @@ public class MatchManager : MonoBehaviour
         if(ActiveMatch)
         {
             //end turn function triggures here
-            //
         }
         // If match start
             // increment rounds played and update score
@@ -108,5 +113,50 @@ public class MatchManager : MonoBehaviour
                 // call end match on game manager and pass the total score and the needed score
     }
 
-    
+    private void EndRound()
+    {
+        if(ItemLocations.Count != 0)
+        {
+            ItemsUsed += ItemLocations.Count;
+        }
+        //go through all the items
+        for (int i = 0; i < ItemLocations.Count; i++)
+        {
+            Item CurrentItem = GameBoard.At(ItemLocations[i]) as Item;
+            for(int j = 0; j < GameBoard.Cats.Count; j++)
+            {
+                if(CurrentItem.Radius == -1)
+                {
+                    //effects all cats 
+                }
+                else
+                {
+                    //find if the cat is in range and if so moves said cat
+                    if(GameBoard.Cats[j].x - CurrentItem.Radius >= ItemLocations[i].x)
+                    {
+                        GameBoard.CheckMovement(GameBoard.Cats[j], CurrentItem.MoveDistance, 
+                            GameBoard.Cats[j] += new Vector2Int(CurrentItem.MoveDistance, 0));
+                    }
+                    if(GameBoard.Cats[j].x + CurrentItem.Radius <= ItemLocations[i].x)
+                    {
+
+                    }
+                    if(GameBoard.Cats[j].y - CurrentItem.Radius >= ItemLocations[i].y)
+                    {
+
+                    }
+                    if(GameBoard.Cats[j].y + CurrentItem.Radius <= ItemLocations[i].y)
+                    {
+
+                    }
+                }
+            }
+            //get first item. Then determine what the item should do 
+            //then see which, if any cats it effects
+            //move cats
+
+        }
+    }
+
+
 }

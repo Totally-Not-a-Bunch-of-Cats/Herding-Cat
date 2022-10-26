@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90d54665990fdc542a4d0cad6b312ea2, type: 3}
-  m_Name: Toy
+  m_Name: Snake
   m_EditorClassIdentifier: 
   Prefab: {fileID: 7619289826447454721, guid: 7c6de61be506ed54494591413b03ee45, type: 3}
-  Radius: -1
+  Radius: 1
+  MoveDistance: 3
   Direction: 4

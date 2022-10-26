@@ -13,7 +13,7 @@ public class Board
 {
     [SerializeField]
     private Tile[,] _cells;
-    private List<Vector2Int> Cats;
+    public List<Vector2Int> Cats;
 
     private readonly int _width;
     private readonly int _height;
@@ -28,7 +28,7 @@ public class Board
         this._height = Height;
         this._width = Width;
         _cells = new Tile[this._width, this._height];
-
+        Cats = new List<Vector2Int>();
         if (Tiles != null)
         {
             foreach (PosTile tile in Tiles)
@@ -51,12 +51,16 @@ public class Board
         this._height = dimensions.y;
         this._width = dimensions.x;
         _cells = new Tile[this._height, this._width];
-
+        Cats = new List<Vector2Int>();
         if (Tiles != null)
         {
             foreach (PosTile tile in Tiles)
             {
                 _cells[tile.Position.x, tile.Position.y] = tile.Slate;
+                if (tile.Slate.Is<Cat>())
+                {
+                    Cats.Add(tile.Position);
+                }
             }
         }
     }
@@ -140,6 +144,42 @@ public class Board
             Debug.LogError($"Position must be between (0, 0) and ({this._width}, {this._height})");
             throw new ArgumentOutOfRangeException($"Position must be between (0, 0) and ({this._width}, {this._height})");
         }
+    }
+    public Vector2Int CheckMovement(Vector2Int Cat, int ItemMoveDistance, Vector2Int Destination)
+    {
+        Vector2Int RealMovement = new Vector2Int(0,0);
+        if (Cat.x == Destination.x)
+        {
+            if(Cat.y > Destination.y)
+            {
+                //go left
+            }
+            else
+            {
+                //go right
+            }
+        }
+        else //if Cat.y == Destination.y
+        {
+            if (Cat.x > Destination.x)
+            {
+                //go up
+            }
+            else
+            {
+                //go down
+            }
+        }
+
+        for (int i = 0; i < ItemMoveDistance; i++)
+        {
+            
+
+        }
+
+        //make sure cat doesnt leave board
+
+        return RealMovement;
     }
     
     public int GetWidth()
