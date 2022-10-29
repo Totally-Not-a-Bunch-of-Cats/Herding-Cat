@@ -36,7 +36,6 @@ public class UIManager : MonoBehaviour
                 if ((WorldPosition.x >= -clickableX && WorldPosition.x < clickableX) && (WorldPosition.y >= -clickableY && WorldPosition.y < clickableY))
                 {
                     Instantiate(SelectedItem.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);  //make this place where mouse is
-                    Debug.Log(GameManager.Instance._matchManager.GameBoard.At(itemLocation));
                     GameManager.Instance._matchManager.GameBoard.Set(itemLocation, SelectedItem);
                     GameManager.Instance._matchManager.ItemLocations.Add(itemLocation);
                 }
@@ -79,6 +78,7 @@ public class UIManager : MonoBehaviour
     {
         //lock you out fron pressing buttons
         Debug.Log("end round");
+        GameManager.Instance._matchManager.EndRound();
     }
 
 

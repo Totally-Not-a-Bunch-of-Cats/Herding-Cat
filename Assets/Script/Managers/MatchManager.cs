@@ -113,7 +113,7 @@ public class MatchManager : MonoBehaviour
                 // call end match on game manager and pass the total score and the needed score
     }
 
-    private void EndRound()
+    public void EndRound()
     {
         if(ItemLocations.Count != 0)
         {
@@ -123,7 +123,7 @@ public class MatchManager : MonoBehaviour
         for (int i = 0; i < ItemLocations.Count; i++)
         {
             Item CurrentItem = GameBoard.At(ItemLocations[i]) as Item;
-            for(int j = 0; j < GameBoard.Cats.Count; j++)
+            for (int j = 0; j < GameBoard.Cats.Count; j++)
             {
                 if(CurrentItem.Radius == -1)
                 {
@@ -131,23 +131,38 @@ public class MatchManager : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log(CurrentItem.name);
                     //find if the cat is in range and if so moves said cat
-                    if(GameBoard.Cats[j].x - CurrentItem.Radius >= ItemLocations[i].x)
+                    int deltaX = GameBoard.Cats[j].x - ItemLocations[i].x;
+                    int deltaY = GameBoard.Cats[j].y - ItemLocations[i].y;
+                    //if (GameBoard.Cats[j].x - CurrentItem.Radius >= ItemLocations[i].x)
+                    if (deltaX <= CurrentItem.Radius && deltaX > 0 && deltaY == 0) 
                     {
+                        Debug.Log("Right " + deltaX);
                         GameBoard.CheckMovement(GameBoard.Cats[j], CurrentItem.MoveDistance, 
                             GameBoard.Cats[j] += new Vector2Int(CurrentItem.MoveDistance, 0));
                     }
-                    if(GameBoard.Cats[j].x + CurrentItem.Radius <= ItemLocations[i].x)
-                    {
 
+                    //if(GameBoard.Cats[j].x + CurrentItem.Radius <= ItemLocations[i].x)
+                    if (deltaX >= -CurrentItem.Radius && deltaX < 0 && deltaY == 0)
+                    {
+                        Debug.Log("Left " + deltaX); 
+                        GameBoard.CheckMovement(GameBoard.Cats[j], CurrentItem.MoveDistance,
+                            GameBoard.Cats[j] += new Vector2Int(-CurrentItem.MoveDistance, 0));
                     }
-                    if(GameBoard.Cats[j].y - CurrentItem.Radius >= ItemLocations[i].y)
+                    //if(GameBoard.Cats[j].y - CurrentItem.Radius >= ItemLocations[i].y)
+                    if (deltaY <= CurrentItem.Radius && deltaY > 0 && deltaX == 0)
                     {
-
+                        Debug.Log("Up " + deltaY);
+                        GameBoard.CheckMovement(GameBoard.Cats[j], CurrentItem.MoveDistance,
+                            GameBoard.Cats[j] += new Vector2Int(0, CurrentItem.MoveDistance));
                     }
-                    if(GameBoard.Cats[j].y + CurrentItem.Radius <= ItemLocations[i].y)
+                    //if(GameBoard.Cats[j].y + CurrentItem.Radius <= ItemLocations[i].y)
+                    if (deltaY >= -CurrentItem.Radius && deltaY < 0 && deltaX == 0)
                     {
-
+                        Debug.Log("Down " + deltaY);
+                        GameBoard.CheckMovement(GameBoard.Cats[j], CurrentItem.MoveDistance,
+                                GameBoard.Cats[j] += new Vector2Int(0, -CurrentItem.MoveDistance));
                     }
                 }
             }

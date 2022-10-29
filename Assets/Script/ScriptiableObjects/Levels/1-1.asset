@@ -17,7 +17,7 @@ MonoBehaviour:
   TargetItems: 5
   BackgroundTile: {fileID: 11400000, guid: a7d44a4f5390d6540b67c603a1ee079a, type: 2}
   Tiles:
-  - Position: {x: 1, y: 1}
+  - Position: {x: 4, y: 4}
     Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
   - Position: {x: 2, y: 2}
     Slate: {fileID: 11400000, guid: 08292a09ee53d734c9280d670decd5ca, type: 2}

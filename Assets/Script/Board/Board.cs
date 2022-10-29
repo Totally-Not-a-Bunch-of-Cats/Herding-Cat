@@ -153,9 +153,30 @@ public class Board
             if(Cat.y > Destination.y)
             {
                 //go left
+                // checks for left side of board
+                Debug.Log("Down: " + Destination);
+                if (Destination.y < 0)
+                {
+                    Destination.y = 0;
+                } 
+                for (int y = Cat.y; y >= Destination.y; y--)
+                {
+                    if (_cells[Destination.x, y].Is<Trap>())
+                    {
+                        RealMovement.y = y + 1;
+                        break;
+                    } else
+                    {
+                        RealMovement.y = y;
+                    }
+                }
+
+                Debug.Log(RealMovement);
+                return RealMovement;
             }
             else
             {
+                Debug.Log("Up: " + Destination);
                 //go right
             }
         }
@@ -163,22 +184,17 @@ public class Board
         {
             if (Cat.x > Destination.x)
             {
+                Debug.Log("Left: " + Destination);
                 //go up
             }
-            else
+            else 
             {
+                Debug.Log("Right " + Destination);
                 //go down
             }
         }
 
-        for (int i = 0; i < ItemMoveDistance; i++)
-        {
-            
-
-        }
-
         //make sure cat doesnt leave board
-
         return RealMovement;
     }
     

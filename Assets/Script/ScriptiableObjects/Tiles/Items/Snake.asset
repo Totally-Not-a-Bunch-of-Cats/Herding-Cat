@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Snake
   m_EditorClassIdentifier: 
   Prefab: {fileID: 7619289826447454721, guid: 7c6de61be506ed54494591413b03ee45, type: 3}
-  Radius: 1
+  Radius: 2
   MoveDistance: 3
   Direction: 4
