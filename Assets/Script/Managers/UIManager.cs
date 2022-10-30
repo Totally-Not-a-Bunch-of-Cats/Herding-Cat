@@ -35,9 +35,12 @@ public class UIManager : MonoBehaviour
                 //if (GameManager.Instance._matchManager.GameBoard.) {  }
                 if ((WorldPosition.x >= -clickableX && WorldPosition.x < clickableX) && (WorldPosition.y >= -clickableY && WorldPosition.y < clickableY))
                 {
-                    Instantiate(SelectedItem.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);  //make this place where mouse is
                     GameManager.Instance._matchManager.GameBoard.Set(itemLocation, SelectedItem);
                     GameManager.Instance._matchManager.ItemLocations.Add(itemLocation);
+                    GameObject temp = Instantiate(SelectedItem.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);
+                    GameManager.Instance._matchManager.GameBoard.At(itemLocation).TileObject = temp.transform;
+                    Debug.Log(GameManager.Instance._matchManager.GameBoard.At(itemLocation).TileObject.localPosition);
+                    
                 }
                 CanPlaceItem = false;
                 Debug.Log("cant palce now");

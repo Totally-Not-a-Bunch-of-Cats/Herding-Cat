@@ -145,7 +145,7 @@ public class Board
             throw new ArgumentOutOfRangeException($"Position must be between (0, 0) and ({this._width}, {this._height})");
         }
     }
-    public Vector2Int CheckMovement(Vector2Int Cat, int ItemMoveDistance, Vector2Int Destination)
+    public void CheckMovement(Vector2Int Cat, int ItemMoveDistance, Vector2Int Destination)
     {
         Vector2Int RealMovement = new Vector2Int(0,0);
         if (Cat.x == Destination.x)
@@ -154,49 +154,85 @@ public class Board
             {
                 //go left
                 // checks for left side of board
-                Debug.Log("Down: " + Destination);
                 if (Destination.y < 0)
                 {
                     Destination.y = 0;
                 } 
                 for (int y = Cat.y; y >= Destination.y; y--)
                 {
-                    if (_cells[Destination.x, y].Is<Trap>())
+                    if(_cells[Destination.x, y] != null)
                     {
-                        RealMovement.y = y + 1;
-                        break;
-                    } else
-                    {
-                        RealMovement.y = y;
+                        if (_cells[Destination.x, y].Is<Trap>())
+                        {
+                            RealMovement.y = y + 1;
+                            break;
+                        }
+                        else
+                        {
+                            RealMovement.y = y;
+                        }
                     }
                 }
-
-                Debug.Log(RealMovement);
-                return RealMovement;
+                MoveCat(Vector2Int.down, At(Cat), Cat, Destination);
             }
             else
             {
-                Debug.Log("Up: " + Destination);
-                //go right
+                MoveCat(Vector2Int.up, At(Cat), Cat, Destination);
             }
         }
         else //if Cat.y == Destination.y
         {
             if (Cat.x > Destination.x)
             {
-                Debug.Log("Left: " + Destination);
-                //go up
+                MoveCat(Vector2Int.left, At(Cat), Cat, Destination);
             }
             else 
             {
-                Debug.Log("Right " + Destination);
-                //go down
+                MoveCat(Vector2Int.right, At(Cat), Cat, Destination);
             }
         }
 
         //make sure cat doesnt leave board
-        return RealMovement;
     }
+
+    void MoveCat(Vector2Int Direction, Tile Cat, Vector2Int CatPos, Vector2Int FinialDestination)
+    {
+        if (Direction.x > 0)
+        {
+            for (int i = CatPos.x; i < FinialDestination.x; i++)
+            {
+                Cat.TileObject.localPosition += new Vector3(Direction.x, Direction.y, 0);
+                //add a short wait function 
+            }
+        }
+        else if (Direction.y > 0)
+        {
+            for (int i = CatPos.y; i < FinialDestination.y; i++)
+            {
+                Cat.TileObject.localPosition += new Vector3(Direction.x, Direction.y, 0);
+            }
+        }
+        else if (Direction.x < 0)
+        {
+            for (int i = CatPos.x; i > FinialDestination.x; i--)
+            {
+                Cat.TileObject.localPosition += new Vector3(Direction.x, Direction.y, 0);
+            }
+        }
+        else
+        {
+            for (int i = CatPos.y; i > FinialDestination.y; i--)
+            {
+                Cat.TileObject.localPosition += new Vector3(Direction.x, Direction.y, 0);
+            }
+        }
+        //move cat in data structure all at once
+        Set(FinialDestination, Cat);
+        Set(CatPos, null);
+    }
+
+
+
     
     public int GetWidth()
     {

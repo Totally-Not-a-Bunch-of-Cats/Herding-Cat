@@ -65,14 +65,8 @@ public class MatchManager : MonoBehaviour
             // place tiles associated to level
             foreach (PosTile CurPosTile in currentLevel.GetTiles())
             {
-                //if(CurPosTile.Slate.Is<Cat>())
-                //{
-                //    GameBoard.Cats.Add(CurPosTile.Position);
-                //    Debug.Log(GameBoard.Cats);
-                //}
-                Instantiate(CurPosTile.Slate.GetPrefab(), new Vector3(CurPosTile.Position.x - tempx + 0.5f, CurPosTile.Position.y - tempy + 0.5f, 5), 
-                    Quaternion.identity, transform);
-
+                CurPosTile.Slate.TileObject = Instantiate(CurPosTile.Slate.GetPrefab(), new Vector3(CurPosTile.Position.x - tempx + 0.5f, CurPosTile.Position.y - tempy + 0.5f, 5), 
+                    Quaternion.identity, transform).transform;
             }
             //places items 
             for (int i = 0; i < currentLevel.GetPossibleItems().Length; i++)
@@ -115,7 +109,7 @@ public class MatchManager : MonoBehaviour
 
     public void EndRound()
     {
-        if(ItemLocations.Count != 0)
+        if (ItemLocations.Count != 0)
         {
             ItemsUsed += ItemLocations.Count;
         }
@@ -125,7 +119,7 @@ public class MatchManager : MonoBehaviour
             Item CurrentItem = GameBoard.At(ItemLocations[i]) as Item;
             for (int j = 0; j < GameBoard.Cats.Count; j++)
             {
-                if(CurrentItem.Radius == -1)
+                if (CurrentItem.Radius == -1)
                 {
                     //effects all cats 
                 }
@@ -136,42 +130,39 @@ public class MatchManager : MonoBehaviour
                     int deltaX = GameBoard.Cats[j].x - ItemLocations[i].x;
                     int deltaY = GameBoard.Cats[j].y - ItemLocations[i].y;
                     //if (GameBoard.Cats[j].x - CurrentItem.Radius >= ItemLocations[i].x)
-                    if (deltaX <= CurrentItem.Radius && deltaX > 0 && deltaY == 0) 
+                    if (deltaX <= CurrentItem.Radius && deltaX > 0 && deltaY == 0)
                     {
-                        Debug.Log("Right " + deltaX);
-                        GameBoard.CheckMovement(GameBoard.Cats[j], CurrentItem.MoveDistance, 
+                        GameBoard.CheckMovement(GameBoard.Cats[j], CurrentItem.MoveDistance,
                             GameBoard.Cats[j] += new Vector2Int(CurrentItem.MoveDistance, 0));
                     }
-
                     //if(GameBoard.Cats[j].x + CurrentItem.Radius <= ItemLocations[i].x)
                     if (deltaX >= -CurrentItem.Radius && deltaX < 0 && deltaY == 0)
                     {
-                        Debug.Log("Left " + deltaX); 
                         GameBoard.CheckMovement(GameBoard.Cats[j], CurrentItem.MoveDistance,
                             GameBoard.Cats[j] += new Vector2Int(-CurrentItem.MoveDistance, 0));
                     }
                     //if(GameBoard.Cats[j].y - CurrentItem.Radius >= ItemLocations[i].y)
                     if (deltaY <= CurrentItem.Radius && deltaY > 0 && deltaX == 0)
                     {
-                        Debug.Log("Up " + deltaY);
                         GameBoard.CheckMovement(GameBoard.Cats[j], CurrentItem.MoveDistance,
                             GameBoard.Cats[j] += new Vector2Int(0, CurrentItem.MoveDistance));
                     }
                     //if(GameBoard.Cats[j].y + CurrentItem.Radius <= ItemLocations[i].y)
                     if (deltaY >= -CurrentItem.Radius && deltaY < 0 && deltaX == 0)
                     {
-                        Debug.Log("Down " + deltaY);
                         GameBoard.CheckMovement(GameBoard.Cats[j], CurrentItem.MoveDistance,
                                 GameBoard.Cats[j] += new Vector2Int(0, -CurrentItem.MoveDistance));
                     }
                 }
             }
-            //get first item. Then determine what the item should do 
-            //then see which, if any cats it effects
-            //move cats
 
         }
+        Debug.Log(ItemLocations.Count);
+        for (int k = 0; k < ItemLocations.Count; k++)
+        {
+            GameBoard.At(ItemLocations[k]).TileObject.gameObject.SetActive(false);
+            GameBoard.Set(ItemLocations[k], null);
+        }
+        ItemLocations.Clear();
     }
-
-
 }

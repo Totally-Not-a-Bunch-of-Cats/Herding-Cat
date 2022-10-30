@@ -8,9 +8,9 @@ using UnityEngine;
 [System.Serializable]
 public abstract class Tile : ScriptableObject
 {
-
     [SerializeField] private GameObject Prefab;
-    
+    public Transform TileObject;
+
     /// <summary>
     /// Gets the image that shows the Tile
     /// </summary>
