@@ -30,8 +30,6 @@ public class MatchManager : MonoBehaviour
 
     [SerializeField] private Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
-    [SerializeField] public List<Vector2Int> ItemLocations;
-
 
 
     /// <summary>
@@ -63,10 +61,17 @@ public class MatchManager : MonoBehaviour
                 }
             }
             // place tiles associated to level
+            int count = 0;
             foreach (PosTile CurPosTile in currentLevel.GetTiles())
             {
-                CurPosTile.Slate.TileObject = Instantiate(CurPosTile.Slate.GetPrefab(), new Vector3(CurPosTile.Position.x - tempx + 0.5f, CurPosTile.Position.y - tempy + 0.5f, 5), 
+
+                Transform temp = Instantiate(CurPosTile.Slate.GetPrefab(), new Vector3(CurPosTile.Position.x - tempx + 0.5f, CurPosTile.Position.y - tempy + 0.5f, 5),
                     Quaternion.identity, transform).transform;
+                if (CurPosTile.Slate.Is<Cat>())
+                {
+                    GameBoard.Cats[count].Object = temp;
+                    count++;
+                }
             }
             //places items 
             for (int i = 0; i < currentLevel.GetPossibleItems().Length; i++)
@@ -109,14 +114,14 @@ public class MatchManager : MonoBehaviour
 
     public void EndRound()
     {
-        if (ItemLocations.Count != 0)
+        if (GameBoard.Items.Count != 0)
         {
-            ItemsUsed += ItemLocations.Count;
+            ItemsUsed += GameBoard.Items.Count;
         }
         //go through all the items
-        for (int i = 0; i < ItemLocations.Count; i++)
+        for (int i = 0; i < GameBoard.Items.Count; i++)
         {
-            Item CurrentItem = GameBoard.At(ItemLocations[i]) as Item;
+            Item CurrentItem = GameBoard.At(GameBoard.Items[i].Position) as Item;
             for (int j = 0; j < GameBoard.Cats.Count; j++)
             {
                 if (CurrentItem.Radius == -1)
@@ -125,44 +130,38 @@ public class MatchManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log(CurrentItem.name);
                     //find if the cat is in range and if so moves said cat
-                    int deltaX = GameBoard.Cats[j].x - ItemLocations[i].x;
-                    int deltaY = GameBoard.Cats[j].y - ItemLocations[i].y;
-                    //if (GameBoard.Cats[j].x - CurrentItem.Radius >= ItemLocations[i].x)
+                    int deltaX = GameBoard.Cats[j].Position.x - GameBoard.Items[i].Position.x;
+                    int deltaY = GameBoard.Cats[j].Position.y - GameBoard.Items[i].Position.y;
                     if (deltaX <= CurrentItem.Radius && deltaX > 0 && deltaY == 0)
                     {
-                        GameBoard.CheckMovement(GameBoard.Cats[j], CurrentItem.MoveDistance,
-                            GameBoard.Cats[j] += new Vector2Int(CurrentItem.MoveDistance, 0));
+                        GameBoard.CheckMovement(CurrentItem.MoveDistance,
+                            GameBoard.Cats[j].Position + new Vector2Int(CurrentItem.MoveDistance, 0), j);
                     }
-                    //if(GameBoard.Cats[j].x + CurrentItem.Radius <= ItemLocations[i].x)
                     if (deltaX >= -CurrentItem.Radius && deltaX < 0 && deltaY == 0)
                     {
-                        GameBoard.CheckMovement(GameBoard.Cats[j], CurrentItem.MoveDistance,
-                            GameBoard.Cats[j] += new Vector2Int(-CurrentItem.MoveDistance, 0));
+                        GameBoard.CheckMovement(CurrentItem.MoveDistance,
+                            GameBoard.Cats[j].Position + new Vector2Int(-CurrentItem.MoveDistance, 0), j);
                     }
-                    //if(GameBoard.Cats[j].y - CurrentItem.Radius >= ItemLocations[i].y)
                     if (deltaY <= CurrentItem.Radius && deltaY > 0 && deltaX == 0)
                     {
-                        GameBoard.CheckMovement(GameBoard.Cats[j], CurrentItem.MoveDistance,
-                            GameBoard.Cats[j] += new Vector2Int(0, CurrentItem.MoveDistance));
+                        GameBoard.CheckMovement(CurrentItem.MoveDistance,
+                            GameBoard.Cats[j].Position + new Vector2Int(0, CurrentItem.MoveDistance), j);
                     }
-                    //if(GameBoard.Cats[j].y + CurrentItem.Radius <= ItemLocations[i].y)
                     if (deltaY >= -CurrentItem.Radius && deltaY < 0 && deltaX == 0)
                     {
-                        GameBoard.CheckMovement(GameBoard.Cats[j], CurrentItem.MoveDistance,
-                                GameBoard.Cats[j] += new Vector2Int(0, -CurrentItem.MoveDistance));
+                        GameBoard.CheckMovement(CurrentItem.MoveDistance,
+                                GameBoard.Cats[j].Position + new Vector2Int(0, -CurrentItem.MoveDistance), j);
                     }
                 }
             }
 
         }
-        Debug.Log(ItemLocations.Count);
-        for (int k = 0; k < ItemLocations.Count; k++)
+        for (int k = 0; k < GameBoard.Items.Count; k++)
         {
-            GameBoard.At(ItemLocations[k]).TileObject.gameObject.SetActive(false);
-            GameBoard.Set(ItemLocations[k], null);
+            GameBoard.Items[k].Object.gameObject.SetActive(false);
+            GameBoard.Set(GameBoard.Items[k].Position, null);
         }
-        ItemLocations.Clear();
+        GameBoard.Items.Clear();
     }
 }

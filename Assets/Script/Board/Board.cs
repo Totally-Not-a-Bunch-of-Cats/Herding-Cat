@@ -13,7 +13,8 @@ public class Board
 {
     [SerializeField]
     private Tile[,] _cells;
-    public List<Vector2Int> Cats;
+    public List<PosObject> Cats;
+    public List<PosObject> Items;
 
     private readonly int _width;
     private readonly int _height;
@@ -28,7 +29,8 @@ public class Board
         this._height = Height;
         this._width = Width;
         _cells = new Tile[this._width, this._height];
-        Cats = new List<Vector2Int>();
+        Cats = new List<PosObject>();
+        Items = new List<PosObject>();
         if (Tiles != null)
         {
             foreach (PosTile tile in Tiles)
@@ -36,7 +38,7 @@ public class Board
                 Set(tile.Position, tile.Slate);
                 if (tile.Slate.Is<Cat>())
                 {
-                    Cats.Add(tile.Position);
+                    Cats.Add(new PosObject(tile.Position, tile.Slate.name));
                 }
             }
         }
@@ -51,7 +53,8 @@ public class Board
         this._height = dimensions.y;
         this._width = dimensions.x;
         _cells = new Tile[this._height, this._width];
-        Cats = new List<Vector2Int>();
+        Cats = new List<PosObject>();
+        Items = new List<PosObject>();
         if (Tiles != null)
         {
             foreach (PosTile tile in Tiles)
@@ -59,7 +62,7 @@ public class Board
                 _cells[tile.Position.x, tile.Position.y] = tile.Slate;
                 if (tile.Slate.Is<Cat>())
                 {
-                    Cats.Add(tile.Position);
+                    Cats.Add(new PosObject(tile.Position, tile.Slate.name));
                 }
             }
         }
@@ -145,9 +148,10 @@ public class Board
             throw new ArgumentOutOfRangeException($"Position must be between (0, 0) and ({this._width}, {this._height})");
         }
     }
-    public void CheckMovement(Vector2Int Cat, int ItemMoveDistance, Vector2Int Destination)
+    public void CheckMovement(int ItemMoveDistance, Vector2Int Destination, int ListPos)
     {
         Vector2Int RealMovement = new Vector2Int(0,0);
+        Vector2Int Cat = Cats[ListPos].Position;
         if (Cat.x == Destination.x)
         {
             if(Cat.y > Destination.y)
@@ -173,66 +177,76 @@ public class Board
                         }
                     }
                 }
-                MoveCat(Vector2Int.down, At(Cat), Cat, Destination);
+                MoveCat(Vector2Int.down, At(Cat), Destination, ListPos);
             }
             else
             {
-                MoveCat(Vector2Int.up, At(Cat), Cat, Destination);
+                if (Destination.y > _height - 1)
+                {
+                    Destination.y = _height - 1;
+                }
+                MoveCat(Vector2Int.up, At(Cat), Destination, ListPos);
             }
         }
         else //if Cat.y == Destination.y
         {
             if (Cat.x > Destination.x)
             {
-                MoveCat(Vector2Int.left, At(Cat), Cat, Destination);
+                if (Destination.x < 0)
+                {
+                    Destination.x = 0;
+                }
+                MoveCat(Vector2Int.left, At(Cat), Destination, ListPos);
             }
             else 
             {
-                MoveCat(Vector2Int.right, At(Cat), Cat, Destination);
+                if (Destination.x > _width - 1)
+                {
+                    Destination.x = _width - 1;
+                }
+                MoveCat(Vector2Int.right, At(Cat), Destination, ListPos);
             }
         }
-
+        Cats[ListPos].Position = Destination;
         //make sure cat doesnt leave board
     }
 
-    void MoveCat(Vector2Int Direction, Tile Cat, Vector2Int CatPos, Vector2Int FinialDestination)
+    void MoveCat(Vector2Int Direction, Tile Cat, Vector2Int FinalDestination, int ListPos)
     {
+        Vector2Int CatPos = Cats[ListPos].Position;
         if (Direction.x > 0)
         {
-            for (int i = CatPos.x; i < FinialDestination.x; i++)
+            for (int i = CatPos.x; i < FinalDestination.x; i++)
             {
-                Cat.TileObject.localPosition += new Vector3(Direction.x, Direction.y, 0);
+                Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
                 //add a short wait function 
             }
         }
         else if (Direction.y > 0)
         {
-            for (int i = CatPos.y; i < FinialDestination.y; i++)
+            for (int i = CatPos.y; i < FinalDestination.y; i++)
             {
-                Cat.TileObject.localPosition += new Vector3(Direction.x, Direction.y, 0);
+                Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
             }
         }
         else if (Direction.x < 0)
         {
-            for (int i = CatPos.x; i > FinialDestination.x; i--)
+            for (int i = CatPos.x; i > FinalDestination.x; i--)
             {
-                Cat.TileObject.localPosition += new Vector3(Direction.x, Direction.y, 0);
+                Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
             }
         }
         else
         {
-            for (int i = CatPos.y; i > FinialDestination.y; i--)
+            for (int i = CatPos.y; i > FinalDestination.y; i--)
             {
-                Cat.TileObject.localPosition += new Vector3(Direction.x, Direction.y, 0);
+                Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
             }
         }
         //move cat in data structure all at once
-        Set(FinialDestination, Cat);
+        Set(FinalDestination, Cat);
         Set(CatPos, null);
     }
-
-
-
     
     public int GetWidth()
     {

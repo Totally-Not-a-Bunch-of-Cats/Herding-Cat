@@ -32,15 +32,12 @@ public class UIManager : MonoBehaviour
                 Vector2Int itemLocation = new Vector2Int((int)(WorldPosition.x - 0.5 + clickableX), (int)(WorldPosition.y - 0.5 + clickableY));
 
                 // TODO: have to check when no tile in spot is null, need to check for it
-                //if (GameManager.Instance._matchManager.GameBoard.) {  }
                 if ((WorldPosition.x >= -clickableX && WorldPosition.x < clickableX) && (WorldPosition.y >= -clickableY && WorldPosition.y < clickableY))
                 {
                     GameManager.Instance._matchManager.GameBoard.Set(itemLocation, SelectedItem);
-                    GameManager.Instance._matchManager.ItemLocations.Add(itemLocation);
                     GameObject temp = Instantiate(SelectedItem.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);
-                    GameManager.Instance._matchManager.GameBoard.At(itemLocation).TileObject = temp.transform;
-                    Debug.Log(GameManager.Instance._matchManager.GameBoard.At(itemLocation).TileObject.localPosition);
-                    
+                    temp.name = SelectedItem.name + GameManager.Instance._matchManager.GameBoard.Items.Count;
+                    GameManager.Instance._matchManager.GameBoard.Items.Add(new PosObject(itemLocation, SelectedItem.name, temp.transform));
                 }
                 CanPlaceItem = false;
                 Debug.Log("cant palce now");
