@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -150,7 +151,6 @@ public class Board
     }
     public void CheckMovement(int ItemMoveDistance, Vector2Int Destination, int ListPos)
     {
-        Vector2Int RealMovement = new Vector2Int(0,0);
         Vector2Int Cat = Cats[ListPos].Position;
         if (Cat.x == Destination.x)
         {
@@ -162,18 +162,14 @@ public class Board
                 {
                     Destination.y = 0;
                 } 
-                for (int y = Cat.y; y >= Destination.y; y--)
+                for (int y = Cat.y - 1; y >= Destination.y; y--)
                 {
-                    if(_cells[Destination.x, y] != null)
+                    if (_cells[Destination.x, y] != null)
                     {
-                        if (_cells[Destination.x, y].Is<Trap>())
+                        if (_cells[Destination.x, y].Is<Trap>() || _cells[Destination.x, y].Is<Item>() || _cells[Destination.x, y].Is<Cat>())
                         {
-                            RealMovement.y = y + 1;
+                            Destination.y = y + 1;
                             break;
-                        }
-                        else
-                        {
-                            RealMovement.y = y;
                         }
                     }
                 }
@@ -184,6 +180,17 @@ public class Board
                 if (Destination.y > _height - 1)
                 {
                     Destination.y = _height - 1;
+                }
+                for (int y = Cat.y + 1; y <= Destination.y; y++)
+                {
+                    if (_cells[Destination.x, y] != null)
+                    {
+                        if (_cells[Destination.x, y].Is<Trap>() || _cells[Destination.x, y].Is<Item>() || _cells[Destination.x, y].Is<Cat>())
+                        {
+                            Destination.y = y - 1;
+                            break;
+                        }
+                    }
                 }
                 MoveCat(Vector2Int.up, At(Cat), Destination, ListPos);
             }
@@ -196,6 +203,18 @@ public class Board
                 {
                     Destination.x = 0;
                 }
+                for (int x = Cat.x - 1; x >= Destination.x; x--)
+                {
+                    if (_cells[x, Destination.y] != null)
+                    {
+                        if (_cells[x, Destination.y].Is<Trap>() || _cells[x, Destination.y].Is<Item>() 
+                            || _cells[x, Destination.y].Is<Cat>())
+                        {
+                            Destination.x = x + 1;
+                            break;
+                        }
+                    }
+                }
                 MoveCat(Vector2Int.left, At(Cat), Destination, ListPos);
             }
             else 
@@ -203,6 +222,18 @@ public class Board
                 if (Destination.x > _width - 1)
                 {
                     Destination.x = _width - 1;
+                }
+                for (int x = Cat.x + 1; x <= Destination.x; x++)
+                {
+                    if (_cells[x, Destination.y] != null)
+                    {
+                        if (_cells[x, Destination.y].Is<Trap>() || _cells[x, Destination.y].Is<Item>() || _cells[x, Destination.y].Is<Cat>())
+                        {
+                            Debug.Log("hey " + Destination.x);
+                            Destination.x = x - 1;
+                            break;
+                        }
+                    }
                 }
                 MoveCat(Vector2Int.right, At(Cat), Destination, ListPos);
             }
@@ -219,6 +250,7 @@ public class Board
             for (int i = CatPos.x; i < FinalDestination.x; i++)
             {
                 Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
+                Debug.Log(Cats[ListPos].Object.localPosition + new Vector3(Direction.x, Direction.y, 0));
                 //add a short wait function 
             }
         }
@@ -227,6 +259,7 @@ public class Board
             for (int i = CatPos.y; i < FinalDestination.y; i++)
             {
                 Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
+                Debug.Log(Cats[ListPos].Object.localPosition + new Vector3(Direction.x, Direction.y, 0));
             }
         }
         else if (Direction.x < 0)
@@ -234,6 +267,7 @@ public class Board
             for (int i = CatPos.x; i > FinalDestination.x; i--)
             {
                 Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
+                Debug.Log(Cats[ListPos].Object.localPosition + new Vector3(Direction.x, Direction.y, 0));
             }
         }
         else
@@ -241,11 +275,14 @@ public class Board
             for (int i = CatPos.y; i > FinalDestination.y; i--)
             {
                 Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
+                Debug.Log(Cats[ListPos].Object.localPosition + new Vector3(Direction.x, Direction.y, 0));
             }
         }
         //move cat in data structure all at once
-        Set(FinalDestination, Cat);
         Set(CatPos, null);
+        Set(FinalDestination, Cat);
+        Debug.Log(At(CatPos));
+        Debug.Log(At(FinalDestination));
     }
     
     public int GetWidth()
@@ -257,4 +294,6 @@ public class Board
     {
         return _height;
     }
+
+
 }

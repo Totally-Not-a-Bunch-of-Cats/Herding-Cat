@@ -25,11 +25,14 @@ public class MatchManager : MonoBehaviour
     [Space]
     [SerializeField] private int TargetRounds = 10;
     [SerializeField] private int TargetItems = 10;
-    [SerializeField] private int RoundsPlayed = 0;
+    public int RoundsPlayed = 0;
     [SerializeField] private int ItemsUsed = 0;
 
     [SerializeField] private Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
+
+
+    
 
 
     /// <summary>
@@ -122,6 +125,7 @@ public class MatchManager : MonoBehaviour
         for (int i = 0; i < GameBoard.Items.Count; i++)
         {
             Item CurrentItem = GameBoard.At(GameBoard.Items[i].Position) as Item;
+
             for (int j = 0; j < GameBoard.Cats.Count; j++)
             {
                 if (CurrentItem.Radius == -1)
@@ -155,7 +159,6 @@ public class MatchManager : MonoBehaviour
                     }
                 }
             }
-
         }
         for (int k = 0; k < GameBoard.Items.Count; k++)
         {

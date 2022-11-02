@@ -77,7 +77,7 @@ public class UIManager : MonoBehaviour
     public void EndRound()
     {
         //lock you out fron pressing buttons
-        Debug.Log("end round");
+        GameManager.Instance._matchManager.RoundsPlayed++;
         GameManager.Instance._matchManager.EndRound();
     }
 
