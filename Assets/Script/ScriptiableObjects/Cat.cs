@@ -14,7 +14,4 @@ public class Cat : Tile
 
     [Tooltip("The speed of the cat.")]
     public int Speed;
-
-    [Tooltip("The movement pattern of the cat.")]
-    public MovePattern Movement;
 }

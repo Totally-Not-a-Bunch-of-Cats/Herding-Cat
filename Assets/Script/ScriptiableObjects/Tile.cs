@@ -9,7 +9,6 @@ using UnityEngine;
 public abstract class Tile : ScriptableObject
 {
     [SerializeField] private GameObject Prefab;
-    public Transform TileObject;
 
     /// <summary>
     /// Gets the image that shows the Tile
@@ -26,6 +25,10 @@ public abstract class Tile : ScriptableObject
     /// <returns>True if this object is the same type.</returns>
     public bool Is<T>() where T : Tile
     {
-        return typeof(T).Equals(GetType());
+        if(GetType() != null)
+        {
+            return typeof(T).Equals(GetType());
+        }
+        return false;
     }
 }

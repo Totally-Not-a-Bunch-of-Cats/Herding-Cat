@@ -20,6 +20,7 @@ public class MatchManager : MonoBehaviour
     public Board GameBoard;
     [SerializeField] private Vector2Int BoardSize;
     private bool ActiveMatch = false;
+    private bool Won = false;
 
     [Header("Gameplay Info")]
     [Space]
@@ -44,6 +45,7 @@ public class MatchManager : MonoBehaviour
     {
         if (currentLevel != null && currentLevel.valid())
         {
+            
             BoardSize = currentLevel.GetDimensions();
             TargetRounds = currentLevel.GetTargetRounds();
             TargetItems = currentLevel.GetTargetItems();
@@ -85,34 +87,24 @@ public class MatchManager : MonoBehaviour
                 button.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._uiManager.PlaceItem(item));
             }
             GameManager.Instance._uiManager.GetUI();
+            ActiveMatch = true;
             return true;
         }
         return false;
-    }
-
-    /// <summary>
-    /// Start the match. This includes toggling flags and 
-    /// </summary>
-    public void StartMatch()
-    {
-        // Toggle flag to start match for update loop
-        ActiveMatch = true;
     }
 
     private void Update()
     {
         if(ActiveMatch)
         {
-            //end turn function triggures here
+
         }
-        // If match start
-            // increment rounds played and update score
-            // If player places item
-                // Pass the item data and position on grid to board
-            // Else if player ends their turn
-                // Tell board to execute items and save new score
-            // If game win
-                // call end match on game manager and pass the total score and the needed score
+        if(Won)
+        {
+            Debug.Log("You win");     
+            // call end match on game manager and pass the total score and the needed score
+        }
+    
     }
 
     public void EndRound()
@@ -125,66 +117,83 @@ public class MatchManager : MonoBehaviour
         for (int i = 0; i < GameBoard.Items.Count; i++)
         {
             Item CurrentItem = GameBoard.At(GameBoard.Items[i].Position) as Item;
-            int CurCatPos = 0;
+            int CurCatPos = -1;
             int ClosestDistance = -1;
             Vector2Int CurDestination = Vector2Int.zero;
             
             for (int j = 0; j < GameBoard.Cats.Count; j++)
             {
-                if (CurrentItem.Radius == -1)
+                if (GameBoard.Cats[j] != null)
                 {
-                    //effects all cats 
-                }
-                else
-                {
-
-                    //find if the cat is in range and if so moves said cat
-                    int deltaX = GameBoard.Cats[j].Position.x - GameBoard.Items[i].Position.x;
-                    int deltaY = GameBoard.Cats[j].Position.y - GameBoard.Items[i].Position.y;
-
-                    int Dist = System.Math.Abs(deltaX) + System.Math.Abs(deltaY);
-                    if (Dist < ClosestDistance || ClosestDistance < 0)
+                    if (CurrentItem.Radius == -1)
                     {
-                        ClosestDistance = Dist;
-                        CurCatPos = j;
-                        if (deltaX <= CurrentItem.Radius && deltaX > 0 && deltaY == 0)
+                        //effects all cats help
+                    }
+                    else
+                    {
+
+                        //find if the cat is in range and if so moves said cat
+                        int deltaX = GameBoard.Cats[j].Position.x - GameBoard.Items[i].Position.x;
+                        int deltaY = GameBoard.Cats[j].Position.y - GameBoard.Items[i].Position.y;
+
+                        int Dist = System.Math.Abs(deltaX) + System.Math.Abs(deltaY);
+                        if (Dist < ClosestDistance || ClosestDistance < 0)
                         {
-                            CurDestination = GameBoard.Cats[j].Position + new Vector2Int(CurrentItem.MoveDistance, 0);
-                            //GameBoard.CheckMovement(CurrentItem.MoveDistance,
-                            //    GameBoard.Cats[j].Position + new Vector2Int(CurrentItem.MoveDistance, 0), j);
-                        }
-                        if (deltaX >= -CurrentItem.Radius && deltaX < 0 && deltaY == 0)
-                        {
-                            CurDestination = GameBoard.Cats[j].Position + new Vector2Int(-CurrentItem.MoveDistance, 0);
-                            //GameBoard.CheckMovement(CurrentItem.MoveDistance,
-                            //    GameBoard.Cats[j].Position + new Vector2Int(-CurrentItem.MoveDistance, 0), j);
-                        }
-                        if (deltaY <= CurrentItem.Radius && deltaY > 0 && deltaX == 0)
-                        {
-                            CurDestination = GameBoard.Cats[j].Position + new Vector2Int(0, CurrentItem.MoveDistance);
-                            //GameBoard.CheckMovement(CurrentItem.MoveDistance,
-                            //    GameBoard.Cats[j].Position + new Vector2Int(0, CurrentItem.MoveDistance), j);
-                        }
-                        if (deltaY >= -CurrentItem.Radius && deltaY < 0 && deltaX == 0)
-                        {
-                            CurDestination = GameBoard.Cats[j].Position + new Vector2Int(0, -CurrentItem.MoveDistance);
-                            //GameBoard.CheckMovement(CurrentItem.MoveDistance,
-                            //        GameBoard.Cats[j].Position + new Vector2Int(0, -CurrentItem.MoveDistance), j);
+                            ClosestDistance = Dist;
+                            CurCatPos = j;
+                            if (deltaX <= CurrentItem.Radius && deltaX > 0 && deltaY == 0)
+                            {
+                                CurDestination = GameBoard.Cats[j].Position + new Vector2Int(CurrentItem.MoveDistance, 0);
+                                //GameBoard.CheckMovement(CurrentItem.MoveDistance,
+                                //    GameBoard.Cats[j].Position + new Vector2Int(CurrentItem.MoveDistance, 0), j);
+                            }
+                            if (deltaX >= -CurrentItem.Radius && deltaX < 0 && deltaY == 0)
+                            {
+                                CurDestination = GameBoard.Cats[j].Position + new Vector2Int(-CurrentItem.MoveDistance, 0);
+                                //GameBoard.CheckMovement(CurrentItem.MoveDistance,
+                                //    GameBoard.Cats[j].Position + new Vector2Int(-CurrentItem.MoveDistance, 0), j);
+                            }
+                            if (deltaY <= CurrentItem.Radius && deltaY > 0 && deltaX == 0)
+                            {
+                                CurDestination = GameBoard.Cats[j].Position + new Vector2Int(0, CurrentItem.MoveDistance);
+                                //GameBoard.CheckMovement(CurrentItem.MoveDistance,
+                                //    GameBoard.Cats[j].Position + new Vector2Int(0, CurrentItem.MoveDistance), j);
+                            }
+                            if (deltaY >= -CurrentItem.Radius && deltaY < 0 && deltaX == 0)
+                            {
+                                CurDestination = GameBoard.Cats[j].Position + new Vector2Int(0, -CurrentItem.MoveDistance);
+                                //GameBoard.CheckMovement(CurrentItem.MoveDistance,
+                                //        GameBoard.Cats[j].Position + new Vector2Int(0, -CurrentItem.MoveDistance), j);
+                            }
                         }
                     }
                 }
+                
             }
             Debug.Log("Move " + CurCatPos);
-            GameBoard.CheckMovement(CurrentItem.MoveDistance, CurDestination, CurCatPos);
+            if (CurCatPos > -1)
+            {
+                GameBoard.CheckMovement(CurrentItem.MoveDistance, CurDestination, CurCatPos);
+            }
         }
-
         for (int k = 0; k < GameBoard.Items.Count; k++)
         {
             GameBoard.Items[k].Object.gameObject.SetActive(false);
             GameBoard.Set(GameBoard.Items[k].Position, null);
         }
         GameBoard.Items.Clear();
+
+        int catsinPens = 0;
+        for (int z = 0; z < GameBoard.CatPenLocation.Count; z++)
+        {
+            catsinPens += ((CatPen)GameBoard.At(GameBoard.CatPenLocation[z])).NumCatinPen;
+        }
+
+        if(GameBoard.NumberofCats == catsinPens)
+        {
+            ActiveMatch = false;
+            Won = true;
+        }
+
     }
-
-
 }

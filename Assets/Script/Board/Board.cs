@@ -15,7 +15,9 @@ public class Board
     [SerializeField]
     private Tile[,] _cells;
     public List<PosObject> Cats;
+    public int NumberofCats = 0;
     public List<PosObject> Items;
+    public List<Vector2Int> CatPenLocation;
 
     private readonly int _width;
     private readonly int _height;
@@ -32,6 +34,7 @@ public class Board
         _cells = new Tile[this._width, this._height];
         Cats = new List<PosObject>();
         Items = new List<PosObject>();
+        CatPenLocation = new List<Vector2Int>();
         if (Tiles != null)
         {
             foreach (PosTile tile in Tiles)
@@ -40,6 +43,11 @@ public class Board
                 if (tile.Slate.Is<Cat>())
                 {
                     Cats.Add(new PosObject(tile.Position, tile.Slate.name));
+                    NumberofCats++;
+                }
+                if (tile.Slate.Is<CatPen>())
+                {
+                    CatPenLocation.Add(tile.Position);
                 }
             }
         }
@@ -56,6 +64,7 @@ public class Board
         _cells = new Tile[this._height, this._width];
         Cats = new List<PosObject>();
         Items = new List<PosObject>();
+        CatPenLocation = new List<Vector2Int>();
         if (Tiles != null)
         {
             foreach (PosTile tile in Tiles)
@@ -64,6 +73,11 @@ public class Board
                 if (tile.Slate.Is<Cat>())
                 {
                     Cats.Add(new PosObject(tile.Position, tile.Slate.name));
+                    NumberofCats++;
+                }
+                if (tile.Slate.Is<CatPen>())
+                {
+                    CatPenLocation.Add(tile.Position);
                 }
             }
         }
@@ -171,6 +185,11 @@ public class Board
                             Destination.y = y + 1;
                             break;
                         }
+                        else if (_cells[Destination.x, y].Is<CatPen>())
+                        {
+                            Destination.y = y;
+                            break;
+                        }
                     }
                 }
                 MoveCat(Vector2Int.down, At(Cat), Destination, ListPos);
@@ -188,6 +207,11 @@ public class Board
                         if (_cells[Destination.x, y].Is<Trap>() || _cells[Destination.x, y].Is<Item>() || _cells[Destination.x, y].Is<Cat>())
                         {
                             Destination.y = y - 1;
+                            break;
+                        }
+                        else if (_cells[Destination.x, y].Is<CatPen>())
+                        {
+                            Destination.y = y;
                             break;
                         }
                     }
@@ -213,6 +237,11 @@ public class Board
                             Destination.x = x + 1;
                             break;
                         }
+                        else if (_cells[x, Destination.y].Is<CatPen>())
+                        {
+                            Destination.x = x;
+                            break;
+                        }
                     }
                 }
                 MoveCat(Vector2Int.left, At(Cat), Destination, ListPos);
@@ -233,13 +262,20 @@ public class Board
                             Destination.x = x - 1;
                             break;
                         }
+                        else if(_cells[x, Destination.y].Is<CatPen>())
+                        {
+                            Destination.x = x;
+                            break;
+                        }
                     }
                 }
                 MoveCat(Vector2Int.right, At(Cat), Destination, ListPos);
             }
         }
-        Cats[ListPos].Position = Destination;
-        //make sure cat doesnt leave board
+        if(Cats[ListPos] != null)
+        {
+            Cats[ListPos].Position = Destination;
+        }
     }
 
     void MoveCat(Vector2Int Direction, Tile Cat, Vector2Int FinalDestination, int ListPos)
@@ -275,10 +311,20 @@ public class Board
             }
         }
         //move cat in data structure all at once
-        Set(CatPos, null);
-        Set(FinalDestination, Cat);
-        //Debug.Log(At(CatPos));
-        //Debug.Log(At(FinalDestination));
+        if(At(FinalDestination) != null)
+        {
+            if (At(FinalDestination).Is<CatPen>()) //maybe store location of cat pen when we add more than 1
+            {
+                Set(CatPos, null);
+                ((CatPen)At(FinalDestination)).NumCatinPen++;
+                Cats[ListPos] = null;
+            }
+        }
+        else
+        {
+            Set(CatPos, null);
+            Set(FinalDestination, Cat);
+        }
     }
     
     public int GetWidth()
