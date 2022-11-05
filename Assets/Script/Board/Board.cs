@@ -250,7 +250,6 @@ public class Board
             for (int i = CatPos.x; i < FinalDestination.x; i++)
             {
                 Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
-                Debug.Log(Cats[ListPos].Object.localPosition + new Vector3(Direction.x, Direction.y, 0));
                 //add a short wait function 
             }
         }
@@ -259,7 +258,6 @@ public class Board
             for (int i = CatPos.y; i < FinalDestination.y; i++)
             {
                 Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
-                Debug.Log(Cats[ListPos].Object.localPosition + new Vector3(Direction.x, Direction.y, 0));
             }
         }
         else if (Direction.x < 0)
@@ -267,7 +265,6 @@ public class Board
             for (int i = CatPos.x; i > FinalDestination.x; i--)
             {
                 Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
-                Debug.Log(Cats[ListPos].Object.localPosition + new Vector3(Direction.x, Direction.y, 0));
             }
         }
         else
@@ -275,14 +272,13 @@ public class Board
             for (int i = CatPos.y; i > FinalDestination.y; i--)
             {
                 Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
-                Debug.Log(Cats[ListPos].Object.localPosition + new Vector3(Direction.x, Direction.y, 0));
             }
         }
         //move cat in data structure all at once
         Set(CatPos, null);
         Set(FinalDestination, Cat);
-        Debug.Log(At(CatPos));
-        Debug.Log(At(FinalDestination));
+        //Debug.Log(At(CatPos));
+        //Debug.Log(At(FinalDestination));
     }
     
     public int GetWidth()
