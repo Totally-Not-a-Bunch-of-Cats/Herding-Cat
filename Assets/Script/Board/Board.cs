@@ -258,7 +258,7 @@ public class Board
                     {
                         if (_cells[x, Destination.y].Is<Trap>() || _cells[x, Destination.y].Is<Item>() || _cells[x, Destination.y].Is<Cat>())
                         {
-                            Debug.Log("hey " + Destination.x);
+                            Debug.Log("hey " + Destination);
                             Destination.x = x - 1;
                             break;
                         }

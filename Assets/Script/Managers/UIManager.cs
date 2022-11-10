@@ -32,7 +32,9 @@ public class UIManager : MonoBehaviour
                 Vector2Int itemLocation = new Vector2Int((int)(WorldPosition.x - 0.5 + clickableX), (int)(WorldPosition.y - 0.5 + clickableY));
 
                 // TODO: have to check when no tile in spot is null, need to check for it
-                if ((WorldPosition.x >= -clickableX && WorldPosition.x < clickableX) && (WorldPosition.y >= -clickableY && WorldPosition.y < clickableY))
+                if ((WorldPosition.x >= -clickableX && WorldPosition.x < clickableX) 
+                    && (WorldPosition.y >= -clickableY && WorldPosition.y < clickableY) 
+                    && GameManager.Instance._matchManager.GameBoard.At(itemLocation) == null)
                 {
                     GameManager.Instance._matchManager.GameBoard.Set(itemLocation, SelectedItem);
                     GameObject temp = Instantiate(SelectedItem.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);
@@ -72,13 +74,14 @@ public class UIManager : MonoBehaviour
     public void Restart()
     {
         Debug.Log("Restarted");
+        StartCoroutine(GameManager.Instance.StartMatch());
     }
 
     public void EndRound()
     {
         //lock you out fron pressing buttons
         GameManager.Instance._matchManager.RoundsPlayed++;
-        GameManager.Instance._matchManager.EndRound();
+        GameManager.Instance._matchManager.EndRound(); 
     }
 
 

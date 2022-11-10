@@ -120,6 +120,10 @@ public class MatchManager : MonoBehaviour
             int CurCatPos = -1;
             int ClosestDistance = -1;
             Vector2Int CurDestination = Vector2Int.zero;
+
+            List<Vector2Int> CurDestinationList = new List<Vector2Int>();
+            List<int> CatListPositions = new List<int>();
+
             
             for (int j = 0; j < GameBoard.Cats.Count; j++)
             {
@@ -137,31 +141,46 @@ public class MatchManager : MonoBehaviour
                         int deltaY = GameBoard.Cats[j].Position.y - GameBoard.Items[i].Position.y;
 
                         int Dist = System.Math.Abs(deltaX) + System.Math.Abs(deltaY);
-                        if (Dist < ClosestDistance || ClosestDistance < 0)
+                        if (Dist <= ClosestDistance || ClosestDistance < 0 && Dist <= CurrentItem.Radius)
                         {
                             ClosestDistance = Dist;
                             CurCatPos = j;
+                            if (ClosestDistance == Dist)
+                            {
+                                CatListPositions.Add(j);
+                            } else
+                            {
+                                CurDestinationList.Clear();
+                                CatListPositions.Clear();
+                                CatListPositions.Add(j);
+                            }
+                            
                             if (deltaX <= CurrentItem.Radius && deltaX > 0 && deltaY == 0)
                             {
+                                
                                 CurDestination = GameBoard.Cats[j].Position + new Vector2Int(CurrentItem.MoveDistance, 0);
+                                CurDestinationList.Add(CurDestination);
                                 //GameBoard.CheckMovement(CurrentItem.MoveDistance,
                                 //    GameBoard.Cats[j].Position + new Vector2Int(CurrentItem.MoveDistance, 0), j);
                             }
                             if (deltaX >= -CurrentItem.Radius && deltaX < 0 && deltaY == 0)
                             {
                                 CurDestination = GameBoard.Cats[j].Position + new Vector2Int(-CurrentItem.MoveDistance, 0);
+                                CurDestinationList.Add(CurDestination);
                                 //GameBoard.CheckMovement(CurrentItem.MoveDistance,
                                 //    GameBoard.Cats[j].Position + new Vector2Int(-CurrentItem.MoveDistance, 0), j);
                             }
                             if (deltaY <= CurrentItem.Radius && deltaY > 0 && deltaX == 0)
                             {
                                 CurDestination = GameBoard.Cats[j].Position + new Vector2Int(0, CurrentItem.MoveDistance);
+                                CurDestinationList.Add(CurDestination);
                                 //GameBoard.CheckMovement(CurrentItem.MoveDistance,
                                 //    GameBoard.Cats[j].Position + new Vector2Int(0, CurrentItem.MoveDistance), j);
                             }
                             if (deltaY >= -CurrentItem.Radius && deltaY < 0 && deltaX == 0)
                             {
                                 CurDestination = GameBoard.Cats[j].Position + new Vector2Int(0, -CurrentItem.MoveDistance);
+                                CurDestinationList.Add(CurDestination);
                                 //GameBoard.CheckMovement(CurrentItem.MoveDistance,
                                 //        GameBoard.Cats[j].Position + new Vector2Int(0, -CurrentItem.MoveDistance), j);
                             }
@@ -170,10 +189,15 @@ public class MatchManager : MonoBehaviour
                 }
                 
             }
-            Debug.Log("Move " + CurCatPos);
-            if (CurCatPos > -1)
+            if (ClosestDistance > -1)
             {
-                GameBoard.CheckMovement(CurrentItem.MoveDistance, CurDestination, CurCatPos);
+                for(int c = 0; c < CurDestinationList.Count; c++)
+                {
+                    GameBoard.CheckMovement(CurrentItem.MoveDistance, CurDestinationList[c], CatListPositions[c]);
+                    //GameBoard.CheckMovement(CurrentItem.MoveDistance, CurDestination, CurCatPos);
+                }
+                CurDestinationList.Clear();
+                CatListPositions.Clear();
             }
         }
         for (int k = 0; k < GameBoard.Items.Count; k++)

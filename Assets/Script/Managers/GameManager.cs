@@ -77,10 +77,10 @@ public class GameManager : MonoBehaviour
     }
 
     //IEnumerator
-    IEnumerator StartMatch()
+    public IEnumerator StartMatch()
     {
         string level_name = "1-1";
-
+        
         SceneManager.LoadScene("Match");
         yield return new WaitForEndOfFrame();
 
