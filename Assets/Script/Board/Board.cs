@@ -192,6 +192,7 @@ public class Board
                         }
                     }
                 }
+                Debug.Log(Destination);
                 MoveCat(Vector2Int.down, At(Cat), Destination, ListPos);
             }
             else
@@ -244,7 +245,7 @@ public class Board
                         }
                     }
                 }
-                MoveCat(Vector2Int.left, At(Cat), Destination, ListPos);
+;                MoveCat(Vector2Int.left, At(Cat), Destination, ListPos);
             }
             else 
             {
@@ -286,7 +287,6 @@ public class Board
             for (int i = CatPos.x; i < FinalDestination.x; i++)
             {
                 Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
-                //add a short wait function 
             }
         }
         else if (Direction.y > 0)

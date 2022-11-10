@@ -43,9 +43,10 @@ public class MatchManager : MonoBehaviour
     /// <returns>True if match was successfully initialized</returns>
     public bool InitMatch(LevelData currentLevel)
     {
+        Debug.Log("im out");
         if (currentLevel != null && currentLevel.valid())
         {
-            
+            Debug.Log(currentLevel.name);   
             BoardSize = currentLevel.GetDimensions();
             TargetRounds = currentLevel.GetTargetRounds();
             TargetItems = currentLevel.GetTargetItems();
@@ -54,7 +55,10 @@ public class MatchManager : MonoBehaviour
             RoundsPlayed = 0;
             ItemsUsed = 0;
 
+            
+
             BoardTileMap = GameObject.Find("Tilemap").GetComponent<Tilemap>();
+            Debug.Log(BoardTileMap);
             // TODO: Generate Grid and UI
             int tempx = BoardSize.x / 2;  //odd numbers will break
             int tempy = BoardSize.y / 2;
@@ -63,6 +67,7 @@ public class MatchManager : MonoBehaviour
             for (int x = -tempx; x < tempx; x++) {
                 for (int y = -tempy; y < tempy; y++) {
                     BoardTileMap.SetTile(new Vector3Int(x,y,0), currentLevel.GetBackgroundTile());
+                    Debug.Log("im making a tile stew");
                 }
             }
             // place tiles associated to level
@@ -143,21 +148,23 @@ public class MatchManager : MonoBehaviour
                         int Dist = System.Math.Abs(deltaX) + System.Math.Abs(deltaY);
                         if (Dist <= ClosestDistance || ClosestDistance < 0 && Dist <= CurrentItem.Radius)
                         {
-                            ClosestDistance = Dist;
                             CurCatPos = j;
                             if (ClosestDistance == Dist)
                             {
                                 CatListPositions.Add(j);
-                            } else
+                            } 
+                            else
                             {
                                 CurDestinationList.Clear();
                                 CatListPositions.Clear();
                                 CatListPositions.Add(j);
                             }
-                            
+
+                            ClosestDistance = Dist;
+
                             if (deltaX <= CurrentItem.Radius && deltaX > 0 && deltaY == 0)
                             {
-                                
+
                                 CurDestination = GameBoard.Cats[j].Position + new Vector2Int(CurrentItem.MoveDistance, 0);
                                 CurDestinationList.Add(CurDestination);
                                 //GameBoard.CheckMovement(CurrentItem.MoveDistance,
@@ -199,11 +206,8 @@ public class MatchManager : MonoBehaviour
                 CurDestinationList.Clear();
                 CatListPositions.Clear();
             }
-        }
-        for (int k = 0; k < GameBoard.Items.Count; k++)
-        {
-            GameBoard.Items[k].Object.gameObject.SetActive(false);
-            GameBoard.Set(GameBoard.Items[k].Position, null);
+                GameBoard.Items[i].Object.gameObject.SetActive(false);
+                GameBoard.Set(GameBoard.Items[i].Position, null);
         }
         GameBoard.Items.Clear();
 
@@ -212,7 +216,7 @@ public class MatchManager : MonoBehaviour
         {
             catsinPens += ((CatPen)GameBoard.At(GameBoard.CatPenLocation[z])).NumCatinPen;
         }
-
+        Debug.Log(catsinPens);
         if(GameBoard.NumberofCats == catsinPens)
         {
             ActiveMatch = false;

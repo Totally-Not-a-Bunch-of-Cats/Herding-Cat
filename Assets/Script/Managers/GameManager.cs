@@ -81,8 +81,17 @@ public class GameManager : MonoBehaviour
     {
         string level_name = "1-1";
         
-        SceneManager.LoadScene("Match");
-        yield return new WaitForEndOfFrame();
+        if (SceneManager.GetActiveScene().name != "Match")
+        {
+            SceneManager.LoadScene("Match");
+            yield return new WaitForEndOfFrame();
+        }
+        else
+        {
+            yield return new WaitForEndOfFrame();
+            SceneManager.LoadScene("Match");
+            yield return new WaitForEndOfFrame();
+        }
 
         //TODO: Grab match manager from scene
         GameObject _board = GameObject.Find("Board");
