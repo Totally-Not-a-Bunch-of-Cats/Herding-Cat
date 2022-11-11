@@ -163,6 +163,13 @@ public class Board
             throw new ArgumentOutOfRangeException($"Position must be between (0, 0) and ({this._width}, {this._height})");
         }
     }
+
+    /// <summary>
+    /// Moves a spcific cat to the farthest empty spot inbetween Destination and cats location
+    /// </summary>
+    /// <param name="ItemMoveDistance">Number of tiles the Item moves on the <see cref="Board"/></param>
+    /// <param name="Destination">Farthest Location on the <see cref="Board"/> that the cat will move</param>
+    /// <param name="ListPos">Position in the list that the moving cat is</param>
     public void CheckMovement(int ItemMoveDistance, Vector2Int Destination, int ListPos)
     {
         Vector2Int Cat = Cats[ListPos].Position;
@@ -170,10 +177,10 @@ public class Board
         {
             if(Cat.y > Destination.y)
             {
-                //go left
-                // checks for left side of board
+                // Moves down
                 if (Destination.y < 0)
                 {
+                    // Stops movement when at bottom of board
                     Destination.y = 0;
                 } 
                 for (int y = Cat.y - 1; y >= Destination.y; y--)
@@ -192,13 +199,14 @@ public class Board
                         }
                     }
                 }
-                Debug.Log(Destination);
                 MoveCat(Vector2Int.down, At(Cat), Destination, ListPos);
             }
             else
             {
+                // Moves Up
                 if (Destination.y > _height - 1)
                 {
+                    // Stops movement at top of board
                     Destination.y = _height - 1;
                 }
                 for (int y = Cat.y + 1; y <= Destination.y; y++)
@@ -222,10 +230,12 @@ public class Board
         }
         else //if Cat.y == Destination.y
         {
+            // Moves Left
             if (Cat.x > Destination.x)
             {
                 if (Destination.x < 0)
                 {
+                    // Stops at left Side of board
                     Destination.x = 0;
                 }
                 for (int x = Cat.x - 1; x >= Destination.x; x--)
@@ -249,8 +259,10 @@ public class Board
             }
             else 
             {
+                // Moves Right
                 if (Destination.x > _width - 1)
                 {
+                    // Stops at Right Side of board
                     Destination.x = _width - 1;
                 }
                 for (int x = Cat.x + 1; x <= Destination.x; x++)
@@ -279,6 +291,13 @@ public class Board
         }
     }
 
+    /// <summary>
+    /// Moves the cat object to the visualy in cell on board
+    /// </summary>
+    /// <param name="Direction">Unit vector of direction that cat is moving</param>
+    /// <param name="Cat">tile of Cat the is being moved</param>
+    /// <param name="FinalDestination">End location on board for the cat</param>
+    /// <param name="ListPos">Location in list that cat is stored</param>
     void MoveCat(Vector2Int Direction, Tile Cat, Vector2Int FinalDestination, int ListPos)
     {
         Vector2Int CatPos = Cats[ListPos].Position;
@@ -326,12 +345,20 @@ public class Board
             Set(FinalDestination, Cat);
         }
     }
-    
+
+    /// <summary>
+    /// Gets the Width of the Board
+    /// </summary>
+    /// <returns>Width of the Board</returns>
     public int GetWidth()
     {
         return _width;
     }
 
+    /// <summary>
+    /// Gets the Height of the Board
+    /// </summary>
+    /// <returns>Height of the Board</returns>
     public int GetHeight()
     {
         return _height;

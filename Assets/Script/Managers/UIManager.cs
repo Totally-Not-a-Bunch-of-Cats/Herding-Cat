@@ -1,9 +1,13 @@
+/** @Author Damian Link, Aaron */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
 using UnityEngine.UI;
 
+/// <summary>
+/// Controls the Match UI
+/// </summary>
 public class UIManager : MonoBehaviour
 {
     Item SelectedItem;
@@ -12,12 +16,19 @@ public class UIManager : MonoBehaviour
     public GameObject Board;
     public GameObject GUI;
 
+    /// <summary>
+    /// finds the Board game object and GUI object
+    /// </summary>
+    /// <param name="_board"></param>
     public void FindBoard(GameObject _board)
     {
         Board = _board;
         GUI = GameObject.Find("GUI");
     }
 
+    /// <summary>
+    /// Detects when mouse is clicked to place items
+    /// </summary>
     void Update()
     {
         if (CanPlaceItem)
@@ -31,7 +42,7 @@ public class UIManager : MonoBehaviour
                 float clickableY = GameManager.Instance._matchManager.GameBoard.GetHeight() / 2;
                 Vector2Int itemLocation = new Vector2Int((int)(WorldPosition.x - 0.5 + clickableX), (int)(WorldPosition.y - 0.5 + clickableY));
 
-                // TODO: have to check when no tile in spot is null, need to check for it
+                // Checks if position is within board and if the tile is empty
                 if ((WorldPosition.x >= -clickableX && WorldPosition.x < clickableX) 
                     && (WorldPosition.y >= -clickableY && WorldPosition.y < clickableY) 
                     && GameManager.Instance._matchManager.GameBoard.At(itemLocation) == null)
@@ -50,6 +61,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    
+    /// <summary>
+    /// Adds the Listeners to the End round, Restart, and Main Menu Buttons
+    /// </summary>
     public void GetUI()
     {
         //get the end turn button and make an event
@@ -63,20 +78,29 @@ public class UIManager : MonoBehaviour
 
 
     //is triggured when a button is pressed
+    /// <summary>
+    /// Sets able to be place an item
+    /// </summary>
+    /// <param name="item"><see cref="Item"/> that will be placed when clicked on board</param>
     public void PlaceItem(Item item)
     {
         SelectedItem = item;
         CanPlaceItem = true;
-        //Debug.Log("in Place item");
     }
 
 
+    /// <summary>
+    /// Restarts the current round
+    /// </summary>
     public void Restart()
     {
         Debug.Log("Restarted");
         StartCoroutine(GameManager.Instance.StartMatch());
     }
-
+    
+    /// <summary>
+    /// Starts the end of round actions
+    /// </summary>
     public void EndRound()
     {
         //lock you out fron pressing buttons
@@ -85,6 +109,11 @@ public class UIManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Sanitizes the items location to line up on the cell
+    /// </summary>
+    /// <param name="Location">Location that needs to be Sanitized</param>
+    /// <returns>Location that is centered on a 0.5 to line up with the cell</returns>
     Vector3 ItemLocationSanitization(Vector3 Location)
     {
         Location.x += 0.5f;
