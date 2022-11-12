@@ -15,6 +15,7 @@ using UnityEngine.UI;
 /// </summary>
 public class MatchManager : MonoBehaviour
 {
+    //general useful level info such as the board size and the board data type
     [Header("Board")]
     [Space]
     public Board GameBoard;
@@ -22,6 +23,7 @@ public class MatchManager : MonoBehaviour
     private bool ActiveMatch = false;
     private bool Won = false;
 
+    //stores the items used, rounds passed, and targets for starts gained
     [Header("Gameplay Info")]
     [Space]
     [SerializeField] private int TargetRounds = 10;

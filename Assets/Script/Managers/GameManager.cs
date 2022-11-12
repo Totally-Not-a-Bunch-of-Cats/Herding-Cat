@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     //Holds references to the other managers
     public MatchManager _matchManager;
     public UIManager _uiManager;
+    //list of all level data
     public static List<LevelData> Levels;
 
     // Check to see if we're about to be destroyed.
@@ -64,23 +65,27 @@ public class GameManager : MonoBehaviour
                     .Select(AssetDatabase.LoadAssetAtPath<T>)
                     .ToList();
     }
-
+    //runs on start to start the first level
     private void Start()
     {
         Levels = GetAllInstances<LevelData>();
         StartCoroutine(StartMatch());
     }
-
+    //switches scenes 
     public void SwitchScene(string Name)
     {
         SceneManager.LoadScene(Name, LoadSceneMode.Single);
     }
 
-    //IEnumerator
+    /// <summary>
+    /// starts the match of level 1-1, also checks if the level is already loaded,
+    /// so it handles restarting
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator StartMatch()
     {
         string level_name = "1-1";
-        
+        //checks to see what current level is and if so it reload the level (update later for better functinality)
         if (SceneManager.GetActiveScene().name != "Match")
         {
             SceneManager.LoadScene("Match");
@@ -93,7 +98,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        //TODO: Grab match manager from scene
+        //loads the board and starts the level by generating a match using the match info and matchmanager
         GameObject _board = GameObject.Find("Board");
         _uiManager.FindBoard(_board);
         if (_board != null)
@@ -105,8 +110,6 @@ public class GameManager : MonoBehaviour
             if (_matchManager.InitMatch(_currentLevel))
             {
                 Debug.Log($"Successfully initialized level {level_name}");
-                // Start match if initialized
-                //_matchManager.StartMatch();
             }
             else
             {

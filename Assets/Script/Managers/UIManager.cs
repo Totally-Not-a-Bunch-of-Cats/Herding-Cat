@@ -27,14 +27,19 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Detects when mouse is clicked to place items
+    /// governs if you can place and item and 
+    /// when you can place an item it places it both on the baord and as a gameobject
+    /// then prevents you from placing it
     /// </summary>
     void Update()
     {
+        //checks to see if you can place an item
         if (CanPlaceItem)
         {
+            //checks to see if the mouse button was pressed (update for mobile maybe use unity buttons)
             if (Input.GetMouseButtonDown(0))
             {
+                //gets world position and translates it to a vec2int
                 Vector3 WorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 WorldPosition.z = 3;
                 WorldPosition = ItemLocationSanitization(WorldPosition);
@@ -54,7 +59,8 @@ public class UIManager : MonoBehaviour
                 }
                 CanPlaceItem = false;
                 Debug.Log("cant palce now");
-            } else
+            } 
+            else
             {
                 CanPlaceItem = true;
             }
@@ -63,7 +69,7 @@ public class UIManager : MonoBehaviour
 
     
     /// <summary>
-    /// Adds the Listeners to the End round, Restart, and Main Menu Buttons
+    /// Adds the Listeners to the End round, Restart, and Main Menu Buttons, generated at ui start
     /// </summary>
     public void GetUI()
     {
@@ -75,11 +81,8 @@ public class UIManager : MonoBehaviour
         //GameObject.Find("Main Menu Button").GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.SwitchScene("Menu"));
 
     }
-
-
-    //is triggured when a button is pressed
     /// <summary>
-    /// Sets able to be place an item
+    /// allows an item to be placed and is handed which item to place
     /// </summary>
     /// <param name="item"><see cref="Item"/> that will be placed when clicked on board</param>
     public void PlaceItem(Item item)
@@ -99,7 +102,7 @@ public class UIManager : MonoBehaviour
     }
     
     /// <summary>
-    /// Starts the end of round actions
+    /// Calls the end of round
     /// </summary>
     public void EndRound()
     {
@@ -110,7 +113,7 @@ public class UIManager : MonoBehaviour
 
 
     /// <summary>
-    /// Sanitizes the items location to line up on the cell
+    /// Sanitizes the items location to line up on the cell by turning it from a vec3 to a vec2int
     /// </summary>
     /// <param name="Location">Location that needs to be Sanitized</param>
     /// <returns>Location that is centered on a 0.5 to line up with the cell</returns>

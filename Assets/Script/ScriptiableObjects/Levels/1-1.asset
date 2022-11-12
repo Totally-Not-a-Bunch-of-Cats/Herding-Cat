@@ -12,16 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c857a80b025c74e9b3eeffa0c4e268, type: 3}
   m_Name: 1-1
   m_EditorClassIdentifier: 
-  Dimensions: {x: 10, y: 10}
+  Dimensions: {x: 8, y: 8}
   TargetRounds: 10
   TargetItems: 5
   BackgroundTile: {fileID: 11400000, guid: a7d44a4f5390d6540b67c603a1ee079a, type: 2}
   Tiles:
-  - Position: {x: 3, y: 2}
+  - Position: {x: 6, y: 2}
     Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
   - Position: {x: 2, y: 3}
     Slate: {fileID: 11400000, guid: e9d6189f63d821045ab761e537a50a9c, type: 2}
-  - Position: {x: 2, y: 2}
+  - Position: {x: 2, y: 6}
+    Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
+  - Position: {x: 2, y: 5}
     Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
   PossibleItems:
   - {fileID: 11400000, guid: a58def140dd3b74468a5da712b3041fa, type: 2}
