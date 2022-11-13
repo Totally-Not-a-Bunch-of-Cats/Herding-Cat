@@ -1,3 +1,4 @@
+/** @Author Zachary Boehm, Damian Link, Aaron */
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,6 +6,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Runs the Game
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     // Number of stars that the player has
@@ -65,13 +69,20 @@ public class GameManager : MonoBehaviour
                     .Select(AssetDatabase.LoadAssetAtPath<T>)
                     .ToList();
     }
-    //runs on start to start the first level
+
+    /// <summary>
+    /// Runs on start to start the first level
+    /// </summary>
     private void Start()
     {
         Levels = GetAllInstances<LevelData>();
         StartCoroutine(StartMatch());
     }
-    //switches scenes 
+
+    /// <summary>
+    /// Switches scenes
+    /// </summary>
+    /// <param name="Name">Name of scene that you want to switch to</param>
     public void SwitchScene(string Name)
     {
         SceneManager.LoadScene(Name, LoadSceneMode.Single);

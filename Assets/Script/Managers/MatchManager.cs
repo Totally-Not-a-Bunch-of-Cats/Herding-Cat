@@ -61,8 +61,8 @@ public class MatchManager : MonoBehaviour
 
             BoardTileMap = GameObject.Find("Tilemap").GetComponent<Tilemap>();
             Debug.Log(BoardTileMap);
-            // TODO: Generate Grid and UI
-            int tempx = BoardSize.x / 2;  //odd numbers will break
+            // Generates grid (Odd numbered sizes will break)
+            int tempx = BoardSize.x / 2;
             int tempy = BoardSize.y / 2;
 
             // setup background(tilemap)
@@ -72,7 +72,7 @@ public class MatchManager : MonoBehaviour
                     Debug.Log("im making a tile stew");
                 }
             }
-            // place tiles associated to level
+            // place tiles(cat pens/cats/traps) associated to level
             int count = 0;
             foreach (PosTile CurPosTile in currentLevel.GetTiles())
             {
@@ -114,24 +114,28 @@ public class MatchManager : MonoBehaviour
     
     }
 
+    /// <summary>
+    /// Finds closest cat to an item and starts the movement 
+    /// </summary>
     public void EndRound()
     {
+        // Adds number of placed items to the total used items
         if (GameBoard.Items.Count != 0)
         {
             ItemsUsed += GameBoard.Items.Count;
         }
-        //go through all the items
+        //go through all the items that were placed
         for (int i = 0; i < GameBoard.Items.Count; i++)
         {
             Item CurrentItem = GameBoard.At(GameBoard.Items[i].Position) as Item;
-            int CurCatPos = -1;
+            //int CurCatPos = -1;
             int ClosestDistance = -1;
             Vector2Int CurDestination = Vector2Int.zero;
 
             List<Vector2Int> CurDestinationList = new List<Vector2Int>();
             List<int> CatListPositions = new List<int>();
 
-            
+            // loops through cats to find the closest one to the item to move
             for (int j = 0; j < GameBoard.Cats.Count; j++)
             {
                 if (GameBoard.Cats[j] != null)
@@ -148,15 +152,18 @@ public class MatchManager : MonoBehaviour
                         int deltaY = GameBoard.Cats[j].Position.y - GameBoard.Items[i].Position.y;
 
                         int Dist = System.Math.Abs(deltaX) + System.Math.Abs(deltaY);
+                        // Checks if cat is closer than current cat and within radius
                         if (Dist <= ClosestDistance || ClosestDistance < 0 && Dist <= CurrentItem.Radius)
                         {
-                            CurCatPos = j;
+                            //CurCatPos = j;
                             if (ClosestDistance == Dist)
                             {
+                                // Adds postioin of cat in list to cat distance CurDestinationList if cat distance from item is same distance
                                 CatListPositions.Add(j);
                             } 
                             else
                             {
+                                // Clears the lists of the farther cat information and adds the new one
                                 CurDestinationList.Clear();
                                 CatListPositions.Clear();
                                 CatListPositions.Add(j);
@@ -164,6 +171,7 @@ public class MatchManager : MonoBehaviour
 
                             ClosestDistance = Dist;
 
+                            // Gets the farthest that the cat will move of item (Right)
                             if (deltaX <= CurrentItem.Radius && deltaX > 0 && deltaY == 0)
                             {
 
@@ -172,6 +180,7 @@ public class MatchManager : MonoBehaviour
                                 //GameBoard.CheckMovement(CurrentItem.MoveDistance,
                                 //    GameBoard.Cats[j].Position + new Vector2Int(CurrentItem.MoveDistance, 0), j);
                             }
+                            // Gets the farthest that the cat will move of item (Left)
                             if (deltaX >= -CurrentItem.Radius && deltaX < 0 && deltaY == 0)
                             {
                                 CurDestination = GameBoard.Cats[j].Position + new Vector2Int(-CurrentItem.MoveDistance, 0);
@@ -179,6 +188,7 @@ public class MatchManager : MonoBehaviour
                                 //GameBoard.CheckMovement(CurrentItem.MoveDistance,
                                 //    GameBoard.Cats[j].Position + new Vector2Int(-CurrentItem.MoveDistance, 0), j);
                             }
+                            // Gets the farthest that the cat will move of item (Up)
                             if (deltaY <= CurrentItem.Radius && deltaY > 0 && deltaX == 0)
                             {
                                 CurDestination = GameBoard.Cats[j].Position + new Vector2Int(0, CurrentItem.MoveDistance);
@@ -186,6 +196,7 @@ public class MatchManager : MonoBehaviour
                                 //GameBoard.CheckMovement(CurrentItem.MoveDistance,
                                 //    GameBoard.Cats[j].Position + new Vector2Int(0, CurrentItem.MoveDistance), j);
                             }
+                            // Gets the farthest that the cat will move of item (Down)
                             if (deltaY >= -CurrentItem.Radius && deltaY < 0 && deltaX == 0)
                             {
                                 CurDestination = GameBoard.Cats[j].Position + new Vector2Int(0, -CurrentItem.MoveDistance);
@@ -198,8 +209,10 @@ public class MatchManager : MonoBehaviour
                 }
                 
             }
+            // Checks if cat was in range
             if (ClosestDistance > -1)
             {
+                // Checks movement/Moves cat of effected cats
                 for(int c = 0; c < CurDestinationList.Count; c++)
                 {
                     GameBoard.CheckMovement(CurrentItem.MoveDistance, CurDestinationList[c], CatListPositions[c]);
