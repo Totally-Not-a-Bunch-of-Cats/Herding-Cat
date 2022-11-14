@@ -113,7 +113,7 @@ public class UIManager : MonoBehaviour
 
 
     /// <summary>
-    /// Sanitizes the items location to line up on the cell by turning it from a vec3 to a vec2int
+    /// Sanitizes the items location to line up on the cell by getting our vec3 ready to be changed to a vec2int
     /// </summary>
     /// <param name="Location">Location that needs to be Sanitized</param>
     /// <returns>Location that is centered on a 0.5 to line up with the cell</returns>

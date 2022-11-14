@@ -18,6 +18,7 @@ public class Board
     public int NumberofCats = 0;
     public List<PosObject> Items;
     public List<Vector2Int> CatPenLocation;
+    public int NumCatinPen = 0;
 
     private readonly int _width;
     private readonly int _height;
@@ -185,15 +186,18 @@ public class Board
                 } 
                 for (int y = Cat.y - 1; y >= Destination.y; y--)
                 {
+                    //checks what the destination is
                     if (_cells[Destination.x, y] != null)
                     {
                         if (_cells[Destination.x, y].Is<Trap>() || _cells[Destination.x, y].Is<Item>() || _cells[Destination.x, y].Is<Cat>())
                         {
+                            //if the destination has something the cat cant be on, make sure it does step on it
                             Destination.y = y + 1;
                             break;
                         }
                         else if (_cells[Destination.x, y].Is<CatPen>())
                         {
+                            //allows cat to move on cat pen
                             Destination.y = y;
                             break;
                         }
@@ -211,15 +215,18 @@ public class Board
                 }
                 for (int y = Cat.y + 1; y <= Destination.y; y++)
                 {
+                    //checks what the destination is
                     if (_cells[Destination.x, y] != null)
                     {
                         if (_cells[Destination.x, y].Is<Trap>() || _cells[Destination.x, y].Is<Item>() || _cells[Destination.x, y].Is<Cat>())
                         {
+                            //if the destination has something the cat cant be on, make sure it does step on it
                             Destination.y = y - 1;
                             break;
                         }
                         else if (_cells[Destination.x, y].Is<CatPen>())
                         {
+                            //allows cat to move on cat pen
                             Destination.y = y;
                             break;
                         }
@@ -240,16 +247,19 @@ public class Board
                 }
                 for (int x = Cat.x - 1; x >= Destination.x; x--)
                 {
+                    //checks what the destination is
                     if (_cells[x, Destination.y] != null)
                     {
                         if (_cells[x, Destination.y].Is<Trap>() || _cells[x, Destination.y].Is<Item>() 
                             || _cells[x, Destination.y].Is<Cat>())
                         {
+                            //if the destination has something the cat cant be on, make sure it does step on it
                             Destination.x = x + 1;
                             break;
                         }
                         else if (_cells[x, Destination.y].Is<CatPen>())
                         {
+                            //allows cat to move on cat pen
                             Destination.x = x;
                             break;
                         }
@@ -267,16 +277,18 @@ public class Board
                 }
                 for (int x = Cat.x + 1; x <= Destination.x; x++)
                 {
+                    //checks what the destination is
                     if (_cells[x, Destination.y] != null)
                     {
                         if (_cells[x, Destination.y].Is<Trap>() || _cells[x, Destination.y].Is<Item>() || _cells[x, Destination.y].Is<Cat>())
                         {
-                            Debug.Log("hey " + Destination);
+                            //if the destination has something the cat cant be on, make sure it does step on it
                             Destination.x = x - 1;
                             break;
                         }
                         else if(_cells[x, Destination.y].Is<CatPen>())
                         {
+                            //allows cat to move on cat pen
                             Destination.x = x;
                             break;
                         }
@@ -301,8 +313,10 @@ public class Board
     void MoveCat(Vector2Int Direction, Tile Cat, Vector2Int FinalDestination, int ListPos)
     {
         Vector2Int CatPos = Cats[ListPos].Position;
+        //moves the cat the correct the direction
         if (Direction.x > 0)
         {
+            //moves cat one tile at a time 
             for (int i = CatPos.x; i < FinalDestination.x; i++)
             {
                 Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
@@ -332,15 +346,17 @@ public class Board
         //move cat in data structure all at once
         if(At(FinalDestination) != null)
         {
-            if (At(FinalDestination).Is<CatPen>()) //maybe store location of cat pen when we add more than 1
+            //adds cats to the pen count when they move in
+            if (At(FinalDestination).Is<CatPen>())
             {
                 Set(CatPos, null);
-                ((CatPen)At(FinalDestination)).NumCatinPen++;
+                NumCatinPen++;
                 Cats[ListPos] = null;
             }
         }
         else
         {
+            //moves the cat to the new position in the board data
             Set(CatPos, null);
             Set(FinalDestination, Cat);
         }

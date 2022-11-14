@@ -221,18 +221,13 @@ public class MatchManager : MonoBehaviour
                 CurDestinationList.Clear();
                 CatListPositions.Clear();
             }
+            //turns the item game object off and sets its position to null/empty
                 GameBoard.Items[i].Object.gameObject.SetActive(false);
                 GameBoard.Set(GameBoard.Items[i].Position, null);
         }
         GameBoard.Items.Clear();
 
-        int catsinPens = 0;
-        for (int z = 0; z < GameBoard.CatPenLocation.Count; z++)
-        {
-            catsinPens += ((CatPen)GameBoard.At(GameBoard.CatPenLocation[z])).NumCatinPen;
-        }
-        Debug.Log(catsinPens);
-        if(GameBoard.NumberofCats == catsinPens)
+        if(GameBoard.NumberofCats == GameBoard.NumCatinPen)
         {
             ActiveMatch = false;
             Won = true;
