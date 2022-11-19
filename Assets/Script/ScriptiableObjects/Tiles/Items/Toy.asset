@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Toy
   m_EditorClassIdentifier: 
   Prefab: {fileID: 6920015196089483598, guid: 45d8e17159b784b41a61edf25190dcc6, type: 3}
-  Radius: 1
-  MoveDistance: 2
+  Radius: 2
+  AllCatsinRadius: 0
+  MoveDistance: -1
   Direction: 5

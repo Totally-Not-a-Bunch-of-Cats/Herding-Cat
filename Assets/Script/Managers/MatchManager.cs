@@ -223,7 +223,7 @@ public class MatchManager : MonoBehaviour
             //checks to run for loop
             if(CurrentItem.AllCatsinRadius == true)
             {
-                List<int> Temp  = new List<int>();
+                int[] Temps = new int[DistList.Count];
                 //loops through all caps
                 for(int zz = 0; zz < DistList.Count; zz++)
                 {
@@ -234,9 +234,9 @@ public class MatchManager : MonoBehaviour
                         //checks to see if the cats is actually in range  
                         if (CurrentItem.Radius >= DistList[y])
                         {
-                            if (Temp.Count != 0)
+                            if (Temps.Length != 0)
                             {
-                                if (small >= DistList[y] && Temp[zz] >= DistList[y])
+                                if (small >= DistList[y] && Temps[zz] >= DistList[y])
                                 {
                                     small = DistList[y];
                                     smallIndex = y;
@@ -252,7 +252,7 @@ public class MatchManager : MonoBehaviour
                             }
                         }
                     }
-                    Temp.Add(smallIndex);
+                    Temps[zz] = smallIndex;
                 }
             }
             // Checks to see if a cat is actually in range
