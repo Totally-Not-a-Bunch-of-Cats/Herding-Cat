@@ -89,7 +89,7 @@ public class MatchManager : MonoBehaviour
             for (int i = 0; i < currentLevel.GetPossibleItems().Length; i++)
             {
                 Item item = currentLevel.GetPossibleItems()[i];
-                GameObject button = Instantiate(ItemButtonPrefab, new Vector3(10, -5, 4) ,Quaternion.identity, GameObject.Find("GUI").transform);
+                GameObject button = Instantiate(ItemButtonPrefab, new Vector3(10 - i*2, -5, 4) ,Quaternion.identity, GameObject.Find("GUI").transform);
                 button.GetComponentInChildren<TextMeshProUGUI>().SetText(item.name);
                 button.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._uiManager.PlaceItem(item));
             }
@@ -131,6 +131,7 @@ public class MatchManager : MonoBehaviour
             //int CurCatPos = -1;
             int ClosestDistance = -1;
             Vector2Int CurDestination = Vector2Int.zero;
+            List<int> DistList = new List<int>();
 
             List<Vector2Int> CurDestinationList = new List<Vector2Int>();
             List<int> CatListPositions = new List<int>();
@@ -140,9 +141,19 @@ public class MatchManager : MonoBehaviour
             {
                 if (GameBoard.Cats[j] != null)
                 {
-                    if (CurrentItem.Radius == -1)
+                    if (CurrentItem.AllCatsinRadius == true)
                     {
-                        //effects all cats help
+                        //moves all cats in radius of the item
+                        //start by moving the furest cat then
+                        //sort the list by cat distace
+                        //then move the cats one at a time
+
+                        int deltaX = GameBoard.Cats[j].Position.x - GameBoard.Items[i].Position.x;
+                        int deltaY = GameBoard.Cats[j].Position.y - GameBoard.Items[i].Position.y;
+
+                        int Dist = System.Math.Abs(deltaX) + System.Math.Abs(deltaY);
+                        //adds distance to the list 
+                        DistList.Add(Dist);
                     }
                     else
                     {
@@ -209,7 +220,42 @@ public class MatchManager : MonoBehaviour
                 }
                 
             }
-            // Checks if cat was in range
+            //checks to run for loop
+            if(CurrentItem.AllCatsinRadius == true)
+            {
+                List<int> Temp  = new List<int>();
+                //loops through all caps
+                for(int zz = 0; zz < DistList.Count; zz++)
+                {
+                    int small = 100;
+                    int smallIndex = 0;
+                    for (int y = 0; y < DistList.Count; y++)
+                    {
+                        //checks to see if the cats is actually in range  
+                        if (CurrentItem.Radius >= DistList[y])
+                        {
+                            if (Temp.Count != 0)
+                            {
+                                if (small >= DistList[y] && Temp[zz] >= DistList[y])
+                                {
+                                    small = DistList[y];
+                                    smallIndex = y;
+                                }
+                            }
+                            else
+                            {
+                                if (small >= DistList[y])
+                                {
+                                    small = DistList[y];
+                                    smallIndex = y;
+                                }
+                            }
+                        }
+                    }
+                    Temp.Add(smallIndex);
+                }
+            }
+            // Checks to see if a cat is actually in range
             if (ClosestDistance > -1)
             {
                 // Checks movement/Moves cat of effected cats
