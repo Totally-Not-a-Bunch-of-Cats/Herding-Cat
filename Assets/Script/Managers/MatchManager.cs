@@ -131,7 +131,7 @@ public class MatchManager : MonoBehaviour
             //int CurCatPos = -1;
             int ClosestDistance = -1;
             Vector2Int CurDestination = Vector2Int.zero;
-            List<int> DistList = new List<int>();
+            List<CatMovementInfo> CatMoveInfo = new List<CatMovementInfo>();
 
             List<Vector2Int> CurDestinationList = new List<Vector2Int>();
             List<int> CatListPositions = new List<int>();
@@ -144,16 +144,17 @@ public class MatchManager : MonoBehaviour
                     if (CurrentItem.AllCatsinRadius == true)
                     {
                         //moves all cats in radius of the item
-                        //start by moving the furest cat then
-                        //sort the list by cat distace
-                        //then move the cats one at a time
-
                         int deltaX = GameBoard.Cats[j].Position.x - GameBoard.Items[i].Position.x;
                         int deltaY = GameBoard.Cats[j].Position.y - GameBoard.Items[i].Position.y;
 
                         int Dist = System.Math.Abs(deltaX) + System.Math.Abs(deltaY);
                         //adds distance to the list 
-                        DistList.Add(Dist);
+                        CatMoveInfo.Add(new CatMovementInfo(j, Dist));
+                        Vector2Int test = DestinationList(deltaX, deltaY, CurrentItem, j);
+                        if(test != new Vector2Int(-100, -100))
+                        {
+                            CatMoveInfo[j].Destination = test;
+                        }
                     }
                     else
                     {
@@ -182,38 +183,31 @@ public class MatchManager : MonoBehaviour
 
                             ClosestDistance = Dist;
 
+                            //CurDestinationList.Add(DestinationList(deltaX, deltaY, CurrentItem, j));
+
                             // Gets the farthest that the cat will move of item (Right)
                             if (deltaX <= CurrentItem.Radius && deltaX > 0 && deltaY == 0)
                             {
-
                                 CurDestination = GameBoard.Cats[j].Position + new Vector2Int(CurrentItem.MoveDistance, 0);
                                 CurDestinationList.Add(CurDestination);
-                                //GameBoard.CheckMovement(CurrentItem.MoveDistance,
-                                //    GameBoard.Cats[j].Position + new Vector2Int(CurrentItem.MoveDistance, 0), j);
                             }
                             // Gets the farthest that the cat will move of item (Left)
                             if (deltaX >= -CurrentItem.Radius && deltaX < 0 && deltaY == 0)
                             {
                                 CurDestination = GameBoard.Cats[j].Position + new Vector2Int(-CurrentItem.MoveDistance, 0);
                                 CurDestinationList.Add(CurDestination);
-                                //GameBoard.CheckMovement(CurrentItem.MoveDistance,
-                                //    GameBoard.Cats[j].Position + new Vector2Int(-CurrentItem.MoveDistance, 0), j);
                             }
                             // Gets the farthest that the cat will move of item (Up)
                             if (deltaY <= CurrentItem.Radius && deltaY > 0 && deltaX == 0)
                             {
                                 CurDestination = GameBoard.Cats[j].Position + new Vector2Int(0, CurrentItem.MoveDistance);
                                 CurDestinationList.Add(CurDestination);
-                                //GameBoard.CheckMovement(CurrentItem.MoveDistance,
-                                //    GameBoard.Cats[j].Position + new Vector2Int(0, CurrentItem.MoveDistance), j);
                             }
                             // Gets the farthest that the cat will move of item (Down)
                             if (deltaY >= -CurrentItem.Radius && deltaY < 0 && deltaX == 0)
                             {
                                 CurDestination = GameBoard.Cats[j].Position + new Vector2Int(0, -CurrentItem.MoveDistance);
                                 CurDestinationList.Add(CurDestination);
-                                //GameBoard.CheckMovement(CurrentItem.MoveDistance,
-                                //        GameBoard.Cats[j].Position + new Vector2Int(0, -CurrentItem.MoveDistance), j);
                             }
                         }
                     }
@@ -223,49 +217,69 @@ public class MatchManager : MonoBehaviour
             //checks to run for loop
             if(CurrentItem.AllCatsinRadius == true)
             {
-                int[] Temps = new int[DistList.Count];
+                List<CatMovementInfo> Temps = new List<CatMovementInfo>();
                 //loops through all caps
-                for(int zz = 0; zz < DistList.Count; zz++)
+                for(int zz = 0; zz < GameBoard.Cats.Count; zz++)
                 {
                     int small = 100;
                     int smallIndex = 0;
-                    for (int y = 0; y < DistList.Count; y++)
+                    for (int y = 0; y < GameBoard.Cats.Count; y++)
                     {
                         //checks to see if the cats is actually in range  
-                        if (CurrentItem.Radius >= DistList[y])
+                        if (CurrentItem.Radius >= CatMoveInfo[y].Distance)
                         {
-                            if (Temps.Length != 0)
+                            //says there are cats with in range
+                            ClosestDistance = 1;
+                            if (zz != 0)
                             {
-                                if (small >= DistList[y] && Temps[zz] >= DistList[y])
+                                if (small >= CatMoveInfo[y].Distance && Temps[zz - 1].Distance >= CatMoveInfo[y].Distance)
                                 {
-                                    small = DistList[y];
+                                    small = CatMoveInfo[y].Distance;
                                     smallIndex = y;
                                 }
                             }
                             else
                             {
-                                if (small >= DistList[y])
+                                Debug.Log("ran once");
+                                if (small >= CatMoveInfo[y].Distance)
                                 {
-                                    small = DistList[y];
+                                    small = CatMoveInfo[y].Distance;
                                     smallIndex = y;
                                 }
                             }
                         }
                     }
-                    Temps[zz] = smallIndex;
+                    if (CurrentItem.Radius < small)
+                    {
+                        break;
+                    }
+                    Temps.Add(CatMoveInfo[smallIndex]);
+                    
                 }
+                CatMoveInfo = Temps;
             }
             // Checks to see if a cat is actually in range
             if (ClosestDistance > -1)
             {
-                // Checks movement/Moves cat of effected cats
-                for(int c = 0; c < CurDestinationList.Count; c++)
+                if(!CurrentItem.AllCatsinRadius)
                 {
-                    GameBoard.CheckMovement(CurrentItem.MoveDistance, CurDestinationList[c], CatListPositions[c]);
-                    //GameBoard.CheckMovement(CurrentItem.MoveDistance, CurDestination, CurCatPos);
+                    // Checks movement/Moves cat of effected cats
+                    for (int c = 0; c < CurDestinationList.Count; c++)
+                    {
+                        GameBoard.CheckMovement(CurrentItem.MoveDistance, CurDestinationList[c], CatListPositions[c]);
+                    }
+                    CurDestinationList.Clear();
+                    CatListPositions.Clear();
                 }
-                CurDestinationList.Clear();
-                CatListPositions.Clear();
+                else
+                {
+                    // Checks movement/Moves cat of effected cats
+                    for (int c = 0; c < CatMoveInfo.Count; c++)
+                    {
+                        GameBoard.CheckMovement(CurrentItem.MoveDistance, (Vector2Int)CatMoveInfo[c].Destination, CatMoveInfo[c].Index);
+                    }
+                    CatMoveInfo.Clear();
+                }
             }
             //turns the item game object off and sets its position to null/empty
                 GameBoard.Items[i].Object.gameObject.SetActive(false);
@@ -279,5 +293,36 @@ public class MatchManager : MonoBehaviour
             Won = true;
         }
 
+    }
+
+
+    Vector2Int DestinationList(int deltaX, int deltaY, Item CurrentItem, int index)
+    {
+        Vector2Int CurDestination;
+        // Gets the farthest that the cat will move of item (Right)
+        if (deltaX <= CurrentItem.Radius && deltaX > 0 && deltaY == 0)
+        {
+            CurDestination = GameBoard.Cats[index].Position + new Vector2Int(CurrentItem.MoveDistance, 0);
+            return CurDestination;
+        }
+        // Gets the farthest that the cat will move of item (Left)
+        if (deltaX >= -CurrentItem.Radius && deltaX < 0 && deltaY == 0)
+        {
+            CurDestination = GameBoard.Cats[index].Position + new Vector2Int(-CurrentItem.MoveDistance, 0);
+            return CurDestination;
+        }
+        // Gets the farthest that the cat will move of item (Up)
+        if (deltaY <= CurrentItem.Radius && deltaY > 0 && deltaX == 0)
+        {
+            CurDestination = GameBoard.Cats[index].Position + new Vector2Int(0, CurrentItem.MoveDistance);
+            return CurDestination;
+        }
+        // Gets the farthest that the cat will move of item (Down)
+        if (deltaY >= -CurrentItem.Radius && deltaY < 0 && deltaX == 0)
+        {
+            CurDestination = GameBoard.Cats[index].Position + new Vector2Int(0, -CurrentItem.MoveDistance);
+            return CurDestination;
+        }
+        return new Vector2Int(-100, -100);
     }
 }

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: 1600882896633416353, guid: fcac2a2303e07b141acc031ad98b9359, type: 3}
   Radius: 3
-  AllCatsinRadius: 0
+  AllCatsinRadius: 1
   MoveDistance: 3
   Direction: 4
