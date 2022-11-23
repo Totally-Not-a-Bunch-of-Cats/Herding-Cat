@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     bool CanPlaceItem = false;
     public GameObject Board;
     public GameObject GUI;
+    public GameObject ItemAdjPrefab;
+    public GameObject ItemAdjPanel;
 
     /// <summary>
     /// finds the Board game object and GUI object
@@ -24,6 +26,7 @@ public class UIManager : MonoBehaviour
     {
         Board = _board;
         GUI = GameObject.Find("GUI");
+        ItemAdjPanel = GameObject.Find("ItemAdjPanel");
     }
 
     /// <summary>
@@ -56,9 +59,16 @@ public class UIManager : MonoBehaviour
                     GameObject temp = Instantiate(SelectedItem.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);
                     temp.name = SelectedItem.name + GameManager.Instance._matchManager.GameBoard.Items.Count;
                     GameManager.Instance._matchManager.GameBoard.Items.Add(new PosObject(itemLocation, SelectedItem.name, temp.transform));
+                    // Adds Item to the list to delete/adjust order of items
+                    float ItemPrefabHeight = ItemAdjPrefab.GetComponent<RectTransform>().sizeDelta.y;
+                    Vector3 ItemAdjPos = new Vector3(0, -(GameManager.Instance._matchManager.GameBoard.Items.Count * ItemPrefabHeight));
+                    //Vector3 ItemAdjPos = new Vector3(0, ItemAdjPanel.GetComponent<RectTransform>().sizeDelta.y / 2 - ((GameManager.Instance._matchManager.GameBoard.Items.Count * 2 - 1) * ItemPrefabHeight)/2);
+                    GameManager.Instance._matchManager.GameBoard.Items[GameManager.Instance._matchManager.GameBoard.Items.Count - 1].ItemAdjObject =
+                        Instantiate(ItemAdjPrefab, Vector3.zero, Quaternion.identity, ItemAdjPanel.transform.GetChild(0).GetChild(0));
+
                 }
                 CanPlaceItem = false;
-                Debug.Log("cant palce now");
+                //Debug.Log("cant palce now");
             } 
             else
             {
@@ -130,5 +140,7 @@ public class UIManager : MonoBehaviour
 
         return Location;
     }
+
+
 
 }

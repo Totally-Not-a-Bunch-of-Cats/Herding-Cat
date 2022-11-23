@@ -173,6 +173,7 @@ public class Board
     /// <param name="ListPos">Position in the list that the moving cat is</param>
     public void CheckMovement(int ItemMoveDistance, Vector2Int Destination, int ListPos)
     {
+        //Debug.Log("List Pos:" + ListPos);
         Vector2Int Cat = Cats[ListPos].Position;
         if (Cat.x == Destination.x)
         {
