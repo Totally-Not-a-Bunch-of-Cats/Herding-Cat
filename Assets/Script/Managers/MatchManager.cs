@@ -64,7 +64,6 @@ public class MatchManager : MonoBehaviour
             for (int x = -tempx; x < tempx; x++) {
                 for (int y = -tempy; y < tempy; y++) {
                     BoardTileMap.SetTile(new Vector3Int(x,y,0), currentLevel.GetBackgroundTile());
-                    Debug.Log("im making a tile stew");
                 }
             }
             // place tiles(cat pens/cats/traps) associated to level
@@ -227,7 +226,6 @@ public class MatchManager : MonoBehaviour
                             ClosestDistance = 1;
                             if (zz != 0)
                             {
-                                Debug.Log("InIf1: " + small + " " + CatMoveInfo[y].Distance + " " + Temps[zz - 1].Distance);
                                 if (small >= CatMoveInfo[y].Distance && Temps[zz - 1].Distance >= CatMoveInfo[y].Distance)
                                 {
                                     small = CatMoveInfo[y].Distance;
@@ -236,6 +234,7 @@ public class MatchManager : MonoBehaviour
                             }
                             else
                             {
+                                
                                 if (small >= CatMoveInfo[y].Distance)
                                 {
                                     small = CatMoveInfo[y].Distance;
@@ -244,14 +243,18 @@ public class MatchManager : MonoBehaviour
                             }
                         }
                     }
+                    Debug.Log(Temps.Count);
                     if (CurrentItem.Radius < small)
                     {
                         break;
                     }
                     CatMoveInfo[smallIndex].Used = true;
                     Temps.Add(CatMoveInfo[smallIndex]);
+                    Debug.Log(CatMoveInfo[smallIndex].Used);
                 }
                 CatMoveInfo = Temps;
+                Debug.Log(Temps.Count + "temp size");
+                Debug.Log(CatMoveInfo.Count + "catmove size");
             }
             // Checks to see if a cat is actually in range
             if (ClosestDistance > -1)
@@ -271,6 +274,8 @@ public class MatchManager : MonoBehaviour
                     // Checks movement/Moves cat of effected cats
                     for (int c = 0; c < CatMoveInfo.Count; c++)
                     {
+                        Debug.Log(CatMoveInfo.Count + "cat move count");
+                        Debug.Log("we are in the move area for All");
                         GameBoard.CheckMovement(CurrentItem.MoveDistance, (Vector2Int)CatMoveInfo[c].Destination, CatMoveInfo[c].Index);
                     }
                     CatMoveInfo.Clear();
@@ -323,6 +328,7 @@ public class MatchManager : MonoBehaviour
 
     Vector2Int DestinationAll(int deltaX, int deltaY, Item CurrentItem, int index)
     {
+        Debug.Log("we are in Destination All");
         Vector2Int CurDestination;
         // Gets the farthest that the cat will move of item (Right)
         if (deltaX <= CurrentItem.Radius && deltaX > 0)
