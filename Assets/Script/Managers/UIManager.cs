@@ -62,10 +62,12 @@ public class UIManager : MonoBehaviour
                     temp.name = SelectedItem.name + $" ({itemLocation.x}, {itemLocation.y})";
                     GameManager.Instance._matchManager.GameBoard.Items.Add(new PosObject(itemLocation, SelectedItem.name, temp.transform));
                     // Adds Item to the list to delete/adjust order of items
-                    GameObject NewItemEntry = Instantiate(ItemAdjPrefab, Vector3.zero, Quaternion.identity, ItemAdjPanel.transform.GetChild(0).GetChild(0));
-                    NewItemEntry.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = SelectedItem.name;
-                    NewItemEntry.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = temp.GetComponent<SpriteRenderer>().sprite;
+                    GameObject NewItemEntry = Instantiate(ItemAdjPrefab, new Vector3(0,0,0), Quaternion.identity, ItemAdjPanel.transform.GetChild(0).GetChild(0));
+                    NewItemEntry.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = SelectedItem.name;
+                    NewItemEntry.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = temp.GetComponent<SpriteRenderer>().sprite;
                     GameManager.Instance._matchManager.GameBoard.Items[GameManager.Instance._matchManager.GameBoard.Items.Count - 1].ItemAdjObject = NewItemEntry;
+                    NewItemEntry.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteItem(GameManager.Instance._matchManager.GameBoard.Items.Count - 1));
+                    Debug.Log("ive made the deleted function");
                 }
                 CanPlaceItem = false;
             } 
@@ -86,9 +88,6 @@ public class UIManager : MonoBehaviour
         GameObject.Find("End Round Button").GetComponent<Button>().onClick.AddListener(() => EndRound());
         //get the restart button and make an event 
         GameObject.Find("Restart Button").GetComponent<Button>().onClick.AddListener(() => Restart());
-        //get main menu button and make an event (need a real menu)
-        //GameObject.Find("Main Menu Button").GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.SwitchScene("Menu"));
-
     }
     /// <summary>
     /// allows an item to be placed and is handed which item to place
@@ -141,10 +140,15 @@ public class UIManager : MonoBehaviour
 
     void DeleteItem(int Index)
     {
+        Debug.Log("im deleted");
         if (Index >= 0 && Index < GameManager.Instance._matchManager.GameBoard.Items.Count)
         {
+            Destroy(GameManager.Instance._matchManager.GameBoard.Items[Index].Object.gameObject);
+            Destroy(GameManager.Instance._matchManager.GameBoard.Items[Index].ItemAdjObject);
+            GameManager.Instance._matchManager.GameBoard.Set(GameManager.Instance._matchManager.GameBoard.Items[Index].Position, null);
             GameManager.Instance._matchManager.GameBoard.Items.RemoveAt(Index);
-        } else
+        } 
+        else
         {
             Debug.LogError($"Index must be between 0 and ({GameManager.Instance._matchManager.GameBoard.Items.Count}");
             throw new ArgumentOutOfRangeException($"Index must be between 0 and ({GameManager.Instance._matchManager.GameBoard.Items.Count}");

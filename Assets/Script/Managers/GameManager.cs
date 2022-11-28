@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     public IEnumerator StartMatch()
     {
-        string level_name = "1-1";
+        string level_name = "Test";
         //checks to see what current level is and if so it reload the level (update later for better functinality)
         if (SceneManager.GetActiveScene().name != "Match")
         {
