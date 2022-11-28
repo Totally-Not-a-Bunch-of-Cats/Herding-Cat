@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
 using UnityEngine.UI;
+using System;
+using TMPro;
 
 /// <summary>
 /// Controls the Match UI
@@ -57,18 +59,15 @@ public class UIManager : MonoBehaviour
                 {
                     GameManager.Instance._matchManager.GameBoard.Set(itemLocation, SelectedItem);
                     GameObject temp = Instantiate(SelectedItem.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);
-                    temp.name = SelectedItem.name + GameManager.Instance._matchManager.GameBoard.Items.Count;
+                    temp.name = SelectedItem.name + $" ({itemLocation.x}, {itemLocation.y})";
                     GameManager.Instance._matchManager.GameBoard.Items.Add(new PosObject(itemLocation, SelectedItem.name, temp.transform));
                     // Adds Item to the list to delete/adjust order of items
-                    float ItemPrefabHeight = ItemAdjPrefab.GetComponent<RectTransform>().sizeDelta.y;
-                    Vector3 ItemAdjPos = new Vector3(0, -(GameManager.Instance._matchManager.GameBoard.Items.Count * ItemPrefabHeight));
-                    //Vector3 ItemAdjPos = new Vector3(0, ItemAdjPanel.GetComponent<RectTransform>().sizeDelta.y / 2 - ((GameManager.Instance._matchManager.GameBoard.Items.Count * 2 - 1) * ItemPrefabHeight)/2);
-                    GameManager.Instance._matchManager.GameBoard.Items[GameManager.Instance._matchManager.GameBoard.Items.Count - 1].ItemAdjObject =
-                        Instantiate(ItemAdjPrefab, Vector3.zero, Quaternion.identity, ItemAdjPanel.transform.GetChild(0).GetChild(0));
-
+                    GameObject NewItemEntry = Instantiate(ItemAdjPrefab, Vector3.zero, Quaternion.identity, ItemAdjPanel.transform.GetChild(0).GetChild(0));
+                    NewItemEntry.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = SelectedItem.name;
+                    NewItemEntry.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = temp.GetComponent<SpriteRenderer>().sprite;
+                    GameManager.Instance._matchManager.GameBoard.Items[GameManager.Instance._matchManager.GameBoard.Items.Count - 1].ItemAdjObject = NewItemEntry;
                 }
                 CanPlaceItem = false;
-                //Debug.Log("cant palce now");
             } 
             else
             {
@@ -107,7 +106,6 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void Restart()
     {
-        Debug.Log("Restarted");
         StartCoroutine(GameManager.Instance.StartMatch());
     }
     
@@ -141,6 +139,17 @@ public class UIManager : MonoBehaviour
         return Location;
     }
 
+    void DeleteItem(int Index)
+    {
+        if (Index >= 0 && Index < GameManager.Instance._matchManager.GameBoard.Items.Count)
+        {
+            GameManager.Instance._matchManager.GameBoard.Items.RemoveAt(Index);
+        } else
+        {
+            Debug.LogError($"Index must be between 0 and ({GameManager.Instance._matchManager.GameBoard.Items.Count}");
+            throw new ArgumentOutOfRangeException($"Index must be between 0 and ({GameManager.Instance._matchManager.GameBoard.Items.Count}");
+        }
+    }
 
 
 }

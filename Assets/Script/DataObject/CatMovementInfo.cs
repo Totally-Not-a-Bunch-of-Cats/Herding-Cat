@@ -27,7 +27,6 @@ public class CatMovementInfo
 
     public CatMovementInfo()
     {
-        Debug.Log("default con");
         this.Index = 0;
         this.Destination = null;
         this.Distance = 0;

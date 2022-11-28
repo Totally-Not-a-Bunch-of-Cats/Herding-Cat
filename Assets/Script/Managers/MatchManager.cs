@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 [System.Serializable]
 /// <summary>
@@ -33,6 +34,7 @@ public class MatchManager : MonoBehaviour
 
     [SerializeField] private Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
+    [SerializeField] private LevelData CurrentLevel;
 
 
     /// <summary>
@@ -52,8 +54,8 @@ public class MatchManager : MonoBehaviour
             GameBoard = new Board(BoardSize, currentLevel.GetTiles());
             RoundsPlayed = 0;
             ItemsUsed = 0;
+            CurrentLevel = currentLevel;
 
-            
 
             BoardTileMap = GameObject.Find("Tilemap").GetComponent<Tilemap>();
             // Generates grid (Odd numbered sizes will break)
@@ -145,7 +147,7 @@ public class MatchManager : MonoBehaviour
                         //adds distance to the list 
                         CatMoveInfo.Add(new CatMovementInfo(j, Dist));
                         Vector2Int test = DestinationAll(deltaX, deltaY, CurrentItem, j);
-                        if(test != new Vector2Int(-100, -100))
+                        if (test != new Vector2Int(-100, -100))
                         {
                             CatMoveInfo[j].Destination = test;
                         }
@@ -226,7 +228,7 @@ public class MatchManager : MonoBehaviour
                             ClosestDistance = 1;
                             if (zz != 0)
                             {
-                                if (small >= CatMoveInfo[y].Distance && Temps[zz - 1].Distance >= CatMoveInfo[y].Distance)
+                                if (small >= CatMoveInfo[y].Distance && Temps[zz - 1].Distance <= CatMoveInfo[y].Distance)
                                 {
                                     small = CatMoveInfo[y].Distance;
                                     smallIndex = y;
@@ -243,18 +245,14 @@ public class MatchManager : MonoBehaviour
                             }
                         }
                     }
-                    Debug.Log(Temps.Count);
                     if (CurrentItem.Radius < small)
                     {
                         break;
                     }
                     CatMoveInfo[smallIndex].Used = true;
                     Temps.Add(CatMoveInfo[smallIndex]);
-                    Debug.Log(CatMoveInfo[smallIndex].Used);
                 }
                 CatMoveInfo = Temps;
-                Debug.Log(Temps.Count + "temp size");
-                Debug.Log(CatMoveInfo.Count + "catmove size");
             }
             // Checks to see if a cat is actually in range
             if (ClosestDistance > -1)
@@ -274,8 +272,6 @@ public class MatchManager : MonoBehaviour
                     // Checks movement/Moves cat of effected cats
                     for (int c = 0; c < CatMoveInfo.Count; c++)
                     {
-                        Debug.Log(CatMoveInfo.Count + "cat move count");
-                        Debug.Log("we are in the move area for All");
                         GameBoard.CheckMovement(CurrentItem.MoveDistance, (Vector2Int)CatMoveInfo[c].Destination, CatMoveInfo[c].Index);
                     }
                     CatMoveInfo.Clear();
@@ -285,12 +281,73 @@ public class MatchManager : MonoBehaviour
                 GameBoard.Items[i].Object.gameObject.SetActive(false);
                 GameBoard.Set(GameBoard.Items[i].Position, null);
         }
+        
+        // Removes entries in item adjust window
+        for (int i = 0; i < GameBoard.Items.Count; i++)
+        {
+            Destroy(GameBoard.Items[i].ItemAdjObject.gameObject);
+        }
         GameBoard.Items.Clear();
-
+        
+        // Determines if level has been won
         if(GameBoard.NumberofCats == GameBoard.NumCatinPen)
         {
             ActiveMatch = false;
             Won = true;
+            // Calculates star count earned from level(1 for finshing, 1 for items used, 1 for rounds)
+            int StarCount = 1;
+            // checking/adding star for items used
+            if(TargetItems >= ItemsUsed)
+            {
+                StarCount++;
+            }
+            // Checking/Adding star for round count
+            if (TargetRounds >= RoundsPlayed)
+            {
+                StarCount++;
+            }
+
+
+            // Finds next level name 
+            string[] LevelNameParts = CurrentLevel.name.Split('-');
+            string NextLevelName = LevelNameParts[0] + "-";
+            try
+            {
+                NextLevelName += int.Parse(LevelNameParts[1]) + 1; 
+            }
+            catch (FormatException)
+            {
+                Debug.LogError($"Unable to parse '{LevelNameParts[1]}'");
+            }
+            if (!GameManager.Levels.Exists(level => level.name == NextLevelName))
+            {
+                NextLevelName = "";
+                try
+                {
+                    NextLevelName += int.Parse(LevelNameParts[0]) + 1;
+                }
+                catch (FormatException)
+                {
+                    Debug.LogError($"Unable to parse '{LevelNameParts[1]}'");
+                }
+                NextLevelName = NextLevelName + "-" + LevelNameParts[1];
+                if (!GameManager.Levels.Exists(level => level.name == NextLevelName))
+                {
+                    Debug.LogWarning("No Next Level");
+                }
+            }
+            // Checks if wants to update leveldata info
+            if (GameManager.Instance.UpdateLevelData == true)
+            {
+                // Updates level data info for current/next level
+                CurrentLevel.SetStarsEarned(StarCount);
+                GameManager.Levels.Find(level => level.name == NextLevelName).SetUnlocked(true);
+            } else
+            {
+                // Logs in console that next level would be unlocked and value that current levels star count would be set to
+                Debug.Log($"Level {NextLevelName} Unlocked");
+                Debug.Log($"Level {CurrentLevel.name}: {StarCount}");
+            }
         }
 
     }
@@ -326,9 +383,16 @@ public class MatchManager : MonoBehaviour
         return new Vector2Int(-100, -100);
     }
 
+    /// <summary>
+    /// Gets the destination of a cat after movement
+    /// </summary>
+    /// <param name="deltaX">Distance in X between cat and item</param>
+    /// <param name="deltaY">Distance in Y between cat and item</param>
+    /// <param name="CurrentItem">Item that is afecting the cat</param>
+    /// <param name="index">Index of the cat to move</param>
+    /// <returns></returns>
     Vector2Int DestinationAll(int deltaX, int deltaY, Item CurrentItem, int index)
     {
-        Debug.Log("we are in Destination All");
         Vector2Int CurDestination;
         // Gets the farthest that the cat will move of item (Right)
         if (deltaX <= CurrentItem.Radius && deltaX > 0)
@@ -356,4 +420,5 @@ public class MatchManager : MonoBehaviour
         }
         return new Vector2Int(-100, -100);
     }
+
 }

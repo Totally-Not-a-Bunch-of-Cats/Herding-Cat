@@ -159,7 +159,6 @@ public class Board
         }
         else
         {
-            //Debug.Log(x + " " + y);
             Debug.LogError($"Position must be between (0, 0) and ({this._width}, {this._height})");
             throw new ArgumentOutOfRangeException($"Position must be between (0, 0) and ({this._width}, {this._height})");
         }
@@ -173,7 +172,6 @@ public class Board
     /// <param name="ListPos">Position in the list that the moving cat is</param>
     public void CheckMovement(int ItemMoveDistance, Vector2Int Destination, int ListPos)
     {
-        //Debug.Log("List Pos:" + ListPos);
         Vector2Int Cat = Cats[ListPos].Position;
         if (Cat.x == Destination.x)
         {

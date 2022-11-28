@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
     private static object m_Lock = new object();
     private static GameManager m_Instance;
 
+    // Used for testing to determine if star count for a level should be changed or outputed in console.
+    [SerializeField] public bool UpdateLevelData = false;
+
     public static GameManager Instance
     {
         get
@@ -128,4 +131,5 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
 }
