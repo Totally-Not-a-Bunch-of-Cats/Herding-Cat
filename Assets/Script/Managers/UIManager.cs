@@ -85,7 +85,7 @@ public class UIManager : MonoBehaviour
     public void GetUI()
     {
         //get the end turn button and make an event
-        GameObject.Find("End Round Button").GetComponent<Button>().onClick.AddListener(() => EndRound());
+        GameObject.Find("End Turn Button").GetComponent<Button>().onClick.AddListener(() => EndRound());
         //get the restart button and make an event 
         GameObject.Find("Restart Button").GetComponent<Button>().onClick.AddListener(() => Restart());
     }

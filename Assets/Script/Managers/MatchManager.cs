@@ -215,14 +215,14 @@ public class MatchManager : MonoBehaviour
             {
                 List<CatMovementInfo> Temps = new List<CatMovementInfo>();
                 //loops through all caps
-                for(int zz = 0; zz < GameBoard.Cats.Count; zz++)
+                for(int zz = 0; zz < CatMoveInfo.Count; zz++)
                 {
                     int small = 100;
                     int smallIndex = 0;
-                    for (int y = 0; y < GameBoard.Cats.Count; y++)
+                    for (int y = 0; y < CatMoveInfo.Count; y++)
                     {
                         //checks to see if the cats is actually in range  
-                        if (CurrentItem.Radius >= CatMoveInfo[y].Distance && CatMoveInfo[y].Used == false)
+                        if (CatMoveInfo[y] != null && CurrentItem.Radius >= CatMoveInfo[y].Distance && CatMoveInfo[y].Used == false)
                         {
                             //says there are cats with in range
                             ClosestDistance = 1;
@@ -236,7 +236,6 @@ public class MatchManager : MonoBehaviour
                             }
                             else
                             {
-                                
                                 if (small >= CatMoveInfo[y].Distance)
                                 {
                                     small = CatMoveInfo[y].Distance;
