@@ -98,4 +98,31 @@ public class LevelData: ScriptableObject
     {
         return PossibleItems;
     }
+
+    /// <summary>
+    /// Sets the number of stars for this level
+    /// </summary>
+    /// <param name="StarsEarned">Number of stars for the level</param>
+    public void SetStarsEarned(int StarsEarned) 
+    {
+        this.StarsEarned = StarsEarned;
+    }
+
+    /// <summary>
+    /// Sets if level has been unlocked
+    /// </summary>
+    /// <param name="NewUnlocked">If the level has been unlocked or not</param>
+    public void SetUnlocked(bool NewUnlocked)
+    {
+        this.Unlocked = NewUnlocked;
+    }
+
+    /// <summary>
+    /// Gets the value if the level has been unlocked or not
+    /// </summary>
+    /// <returns>If the level has been unlocked or not</returns>
+    public bool GetUnlocked()
+    {
+        return Unlocked;
+    }
 }
