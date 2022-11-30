@@ -60,9 +60,9 @@ public class Board
     /// <param name="dimensions">Board dimensions as a vector</param>
     public Board(Vector2Int dimensions, PosTile[] Tiles = null)
     {
-        this._height = dimensions.y;
         this._width = dimensions.x;
-        _cells = new Tile[this._height, this._width];
+        this._height = dimensions.y;
+        _cells = new Tile[this._width, this._height];
         Cats = new List<PosObject>();
         Items = new List<PosObject>();
         CatPenLocation = new List<Vector2Int>();
@@ -159,7 +159,6 @@ public class Board
         }
         else
         {
-            //Debug.Log(x + " " + y);
             Debug.LogError($"Position must be between (0, 0) and ({this._width}, {this._height})");
             throw new ArgumentOutOfRangeException($"Position must be between (0, 0) and ({this._width}, {this._height})");
         }
@@ -319,7 +318,7 @@ public class Board
             //moves cat one tile at a time 
             for (int i = CatPos.x; i < FinalDestination.x; i++)
             {
-                Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
+                    Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
             }
         }
         else if (Direction.y > 0)

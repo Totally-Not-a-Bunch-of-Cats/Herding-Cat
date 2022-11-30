@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb1c1d9a7271884fb975b9f9fd10576, type: 3}
   m_Name: Wall
   m_EditorClassIdentifier: 
+  Prefab: {fileID: 3736245672645167621, guid: 2a884673268e16140926a270f22a4ab1, type: 3}
   EndsTurn: 0
   Skipped: 0
   Direction: -1

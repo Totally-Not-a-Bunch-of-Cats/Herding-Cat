@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
 using UnityEngine.UI;
+using System;
+using TMPro;
 
 /// <summary>
 /// Controls the Match UI
@@ -15,6 +17,8 @@ public class UIManager : MonoBehaviour
     bool CanPlaceItem = false;
     public GameObject Board;
     public GameObject GUI;
+    public GameObject ItemAdjPrefab;
+    public GameObject ItemAdjPanel;
 
     /// <summary>
     /// finds the Board game object and GUI object
@@ -24,6 +28,7 @@ public class UIManager : MonoBehaviour
     {
         Board = _board;
         GUI = GameObject.Find("GUI");
+        ItemAdjPanel = GameObject.Find("ItemAdjPanel");
     }
 
     /// <summary>
@@ -54,11 +59,17 @@ public class UIManager : MonoBehaviour
                 {
                     GameManager.Instance._matchManager.GameBoard.Set(itemLocation, SelectedItem);
                     GameObject temp = Instantiate(SelectedItem.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);
-                    temp.name = SelectedItem.name + GameManager.Instance._matchManager.GameBoard.Items.Count;
+                    temp.name = SelectedItem.name + $" ({itemLocation.x}, {itemLocation.y})";
                     GameManager.Instance._matchManager.GameBoard.Items.Add(new PosObject(itemLocation, SelectedItem.name, temp.transform));
+                    // Adds Item to the list to delete/adjust order of items
+                    GameObject NewItemEntry = Instantiate(ItemAdjPrefab, new Vector3(0,0,0), Quaternion.identity, ItemAdjPanel.transform.GetChild(0).GetChild(0));
+                    NewItemEntry.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = SelectedItem.name;
+                    NewItemEntry.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = temp.GetComponent<SpriteRenderer>().sprite;
+                    GameManager.Instance._matchManager.GameBoard.Items[GameManager.Instance._matchManager.GameBoard.Items.Count - 1].ItemAdjObject = NewItemEntry;
+                    NewItemEntry.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteItem(GameManager.Instance._matchManager.GameBoard.Items.Count - 1));
+                    Debug.Log("ive made the deleted function");
                 }
                 CanPlaceItem = false;
-                Debug.Log("cant palce now");
             } 
             else
             {
@@ -74,12 +85,9 @@ public class UIManager : MonoBehaviour
     public void GetUI()
     {
         //get the end turn button and make an event
-        GameObject.Find("End Round Button").GetComponent<Button>().onClick.AddListener(() => EndRound());
+        GameObject.Find("End Turn Button").GetComponent<Button>().onClick.AddListener(() => EndRound());
         //get the restart button and make an event 
         GameObject.Find("Restart Button").GetComponent<Button>().onClick.AddListener(() => Restart());
-        //get main menu button and make an event (need a real menu)
-        //GameObject.Find("Main Menu Button").GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.SwitchScene("Menu"));
-
     }
     /// <summary>
     /// allows an item to be placed and is handed which item to place
@@ -97,7 +105,6 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void Restart()
     {
-        Debug.Log("Restarted");
         StartCoroutine(GameManager.Instance.StartMatch());
     }
     
@@ -130,5 +137,23 @@ public class UIManager : MonoBehaviour
 
         return Location;
     }
+
+    void DeleteItem(int Index)
+    {
+        Debug.Log("im deleted");
+        if (Index >= 0 && Index < GameManager.Instance._matchManager.GameBoard.Items.Count)
+        {
+            Destroy(GameManager.Instance._matchManager.GameBoard.Items[Index].Object.gameObject);
+            Destroy(GameManager.Instance._matchManager.GameBoard.Items[Index].ItemAdjObject);
+            GameManager.Instance._matchManager.GameBoard.Set(GameManager.Instance._matchManager.GameBoard.Items[Index].Position, null);
+            GameManager.Instance._matchManager.GameBoard.Items.RemoveAt(Index);
+        } 
+        else
+        {
+            Debug.LogError($"Index must be between 0 and ({GameManager.Instance._matchManager.GameBoard.Items.Count}");
+            throw new ArgumentOutOfRangeException($"Index must be between 0 and ({GameManager.Instance._matchManager.GameBoard.Items.Count}");
+        }
+    }
+
 
 }
