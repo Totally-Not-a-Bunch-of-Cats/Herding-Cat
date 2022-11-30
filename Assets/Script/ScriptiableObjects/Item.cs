@@ -14,4 +14,6 @@ public class Item : Tile
     public int MoveDistance = 0;
     [Tooltip("Direction of item's movement.")]
     public Direction Direction = Direction.Away;
+    [Tooltip("A picture of the Item.")]
+    public Sprite Picture;
 }

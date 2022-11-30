@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c857a80b025c74e9b3eeffa0c4e268, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  Dimensions: {x: 12, y: 10}
+  Dimensions: {x: 8, y: 10}
   TargetRounds: 10
   TargetItems: 5
   BackgroundTile: {fileID: 11400000, guid: a7d44a4f5390d6540b67c603a1ee079a, type: 2}

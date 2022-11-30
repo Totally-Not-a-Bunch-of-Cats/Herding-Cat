@@ -85,8 +85,8 @@ public class MatchManager : MonoBehaviour
             for (int i = 0; i < currentLevel.GetPossibleItems().Length; i++)
             {
                 Item item = currentLevel.GetPossibleItems()[i];
-                GameObject button = Instantiate(ItemButtonPrefab, new Vector3(10 - i*2, -5, 4) ,Quaternion.identity, GameObject.Find("GUI").transform);
-                button.GetComponentInChildren<TextMeshProUGUI>().SetText(item.name);
+                GameObject button = Instantiate(ItemButtonPrefab, new Vector3(9.05f,-2.5f+1.75f*i, 4) ,Quaternion.identity, GameObject.Find("GUI").transform);
+                button.transform.GetChild(0).GetComponent<Image>().sprite = item.Picture;
                 button.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._uiManager.PlaceItem(item));
             }
             GameManager.Instance._uiManager.GetUI();

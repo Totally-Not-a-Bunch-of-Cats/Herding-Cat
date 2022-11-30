@@ -17,3 +17,4 @@ MonoBehaviour:
   AllCatsinRadius: 1
   MoveDistance: -3
   Direction: 5
+  Picture: {fileID: 21300000, guid: 0449a590c4ee24c4d906586f92ac9313, type: 3}
