@@ -133,7 +133,7 @@ PrefabInstance:
     - target: {fileID: 590294061082041606, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
       propertyPath: _uiManager
       value: 
-      objectReference: {fileID: 718158496}
+      objectReference: {fileID: 1483397854}
     - target: {fileID: 590294061082041607, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -184,7 +184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
---- !u!114 &718158496 stripped
+--- !u!114 &1483397854 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7126871971944188214, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
   m_PrefabInstance: {fileID: 718158495}
