@@ -419,5 +419,74 @@ public class MatchManager : MonoBehaviour
         }
         return new Vector2Int(-100, -100);
     }
+    /// <summary>
+    /// Moves the cat object to the visualy in cell on board
+    /// </summary>
+    /// <param name="Direction">Unit vector of direction that cat is moving</param>
+    /// <param name="Cat">tile of Cat the is being moved</param>
+    /// <param name="FinalDestination">End location on board for the cat</param>
+    /// <param name="ListPos">Location in list that cat is stored</param>
+    public void MoveCat(Vector2Int Direction, Tile Cat, Vector2Int FinalDestination, int ListPos)
+    {
+        Vector2Int CatPos = GameBoard.Cats[ListPos].Position;
+        //moves the cat the correct the direction
+        if (Direction.x > 0)
+        {                                                       
+            Vector3 Goalpos = new Vector3(((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x))), 0f, 0f);
 
-}
+            Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
+
+            StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos));
+        }
+        else if (Direction.y > 0)
+        {
+            for (int i = CatPos.y; i < FinalDestination.y; i++)
+            {
+                GameBoard.Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
+            }
+        }
+        else if (Direction.x < 0)
+        {
+            for (int i = CatPos.x; i > FinalDestination.x; i--)
+            {
+                GameBoard.Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
+            }
+        }
+        else
+        {
+            for (int i = CatPos.y; i > FinalDestination.y; i--)
+            {
+                GameBoard.Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
+            }
+        }
+        //move cat in data structure all at once
+        if (GameBoard.At(FinalDestination) != null)
+        {
+            //adds cats to the pen count when they move in
+            if (GameBoard.At(FinalDestination).Is<CatPen>())
+            {
+                GameBoard.Set(CatPos, null);
+                GameBoard.NumCatinPen++;
+                GameBoard.Cats[ListPos] = null;
+            }
+        }
+        else
+        {
+            //moves the cat to the new position in the board data
+            GameBoard.Set(CatPos, null);
+            GameBoard.Set(FinalDestination, Cat);
+        }
+    }
+
+    IEnumerator MoveObject(Vector3 source, Vector3 target, float overTime, int ListPos)
+    {
+        float startTime = Time.time;
+        while (Time.time < startTime + overTime)
+        {
+            GameBoard.Cats[ListPos].Object.localPosition = Vector3.Lerp(source, target, (Time.time - startTime) / overTime);
+            yield return null;
+        }
+        GameBoard.Cats[ListPos].Object.localPosition = target;
+    }
+
+ }
