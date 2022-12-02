@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 /// Runs the Game
@@ -18,8 +19,8 @@ public class GameManager : MonoBehaviour
     public MatchManager _matchManager;
     public UIManager _uiManager;
     //list of all level data
-    public static List<LevelData> Levels;
-
+    //public static List<LevelData> Levels;
+    public List<LevelData> Levels = new List<LevelData>();
     // Check to see if we're about to be destroyed.
     private static bool m_ShuttingDown = false;
     private static object m_Lock = new object();
@@ -65,20 +66,27 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public static List<T> GetAllInstances<T>() where T : ScriptableObject
-    {
-        return AssetDatabase.FindAssets($"t: {typeof(T).Name}").ToList()
-                    .Select(AssetDatabase.GUIDToAssetPath)
-                    .Select(AssetDatabase.LoadAssetAtPath<T>)
-                    .ToList();
-    }
+    //public static List<T> GetAllInstances<T>() where T : ScriptableObject
+    //{
+    //    return AssetDatabase.FindAssets($"t: {typeof(T).Name}").ToList()
+    //                .Select(AssetDatabase.GUIDToAssetPath)
+    //                .Select(AssetDatabase.LoadAssetAtPath<T>)
+    //                .ToList();
+    //}
 
     /// <summary>
     /// Runs on start to start the first level
     /// </summary>
     private void Start()
     {
-        Levels = GetAllInstances<LevelData>();
+        //Levels = GetAllInstances<LevelData>();
+        //StartCoroutine(SwitchScene("Menu"));
+        StartCoroutine(StartMatch());
+    }
+
+
+    public void ClicktoStart()
+    {
         StartCoroutine(StartMatch());
     }
 
@@ -86,9 +94,10 @@ public class GameManager : MonoBehaviour
     /// Switches scenes
     /// </summary>
     /// <param name="Name">Name of scene that you want to switch to</param>
-    public void SwitchScene(string Name)
+    public IEnumerator SwitchScene(string Name)
     {
         SceneManager.LoadScene(Name, LoadSceneMode.Single);
+        yield return new WaitForEndOfFrame();
     }
 
     /// <summary>
@@ -104,22 +113,24 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("Match");
             yield return new WaitForEndOfFrame();
+            Debug.Log("im at match");
         }
         else
         {
             yield return new WaitForEndOfFrame();
             SceneManager.LoadScene("Match");
             yield return new WaitForEndOfFrame();
+            Debug.Log("restarted");
         }
 
         //loads the board and starts the level by generating a match using the match info and matchmanager
+        yield return new WaitForEndOfFrame();
         GameObject _board = GameObject.Find("Board");
         _uiManager.FindBoard(_board);
         if (_board != null)
         {
             _matchManager = _board.GetComponent<MatchManager>();
             LevelData _currentLevel = Levels.Find(level => level.name == level_name);
-
             // Init round manager / match
             if (_matchManager.InitMatch(_currentLevel))
             {
