@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     //Holds references to the other managers
     public MatchManager _matchManager;
     public UIManager _uiManager;
+    public ScreenResizeManager _screenResizeManager;
     //list of all level data
     public static List<LevelData> Levels;
 
@@ -123,6 +124,7 @@ public class GameManager : MonoBehaviour
             // Init round manager / match
             if (_matchManager.InitMatch(_currentLevel))
             {
+                _screenResizeManager.ScaleBoard();
                 Debug.Log($"Successfully initialized level {level_name}");
             }
             else
