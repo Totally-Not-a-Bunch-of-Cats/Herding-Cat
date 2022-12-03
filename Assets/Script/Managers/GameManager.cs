@@ -92,6 +92,14 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Starts the level
+    /// </summary>
+    public void LevelSelected()
+    {
+        SceneManager.LoadScene("Match");
+    }
+
+    /// <summary>
     /// starts the match of level 1-1, also checks if the level is already loaded,
     /// so it handles restarting
     /// </summary>
@@ -113,6 +121,7 @@ public class GameManager : MonoBehaviour
         }
 
         //loads the board and starts the level by generating a match using the match info and matchmanager
+        Debug.Log(GameObject.Find("Board"));
         GameObject _board = GameObject.Find("Board");
         _uiManager.FindBoard(_board);
         if (_board != null)
