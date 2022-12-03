@@ -15,7 +15,7 @@ MonoBehaviour:
   Dimensions: {x: 4, y: 4}
   TargetRounds: 2
   TargetItems: 5
-  BackgroundTile: {fileID: 11400000, guid: a7d44a4f5390d6540b67c603a1ee079a, type: 2}
+  BackgroundTile: {fileID: 11400000, guid: d756be87d23ee174f869fab071be06bf, type: 2}
   Tiles:
   - Position: {x: 1, y: 1}
     Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}

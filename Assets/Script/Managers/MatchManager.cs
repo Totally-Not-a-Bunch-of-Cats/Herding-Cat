@@ -24,6 +24,7 @@ public class MatchManager : MonoBehaviour
     private bool ActiveMatch = false;
     private bool Won = false;
     private bool CatMoving = false;
+    private bool newbool = false;
 
     //stores the items used, rounds passed, and targets for starts gained
     [Header("Gameplay Info")]
@@ -101,14 +102,14 @@ public class MatchManager : MonoBehaviour
     {
         if(ActiveMatch)
         {
-
+            Debug.Log(CatMoving);
         }
         if(Won)
         {
             Debug.Log("You win");     
             // call end match on game manager and pass the total score and the needed score
         }
-    
+            
     }
 
     /// <summary>
@@ -257,7 +258,7 @@ public class MatchManager : MonoBehaviour
             // Checks to see if a cat is actually in range
             if (ClosestDistance > -1)
             {
-                StartCoroutine(CallCheckMovement(CurrentItem, CurDestinationList,CatListPositions, CatMoveInfo));
+                StartCoroutine(CallCheckMovement(CurrentItem, CurDestinationList, CatListPositions, CatMoveInfo));
             }
             //turns the item game object off and sets its position to null/empty
                 GameBoard.Items[i].Object.gameObject.SetActive(false);
@@ -270,9 +271,8 @@ public class MatchManager : MonoBehaviour
             Destroy(GameBoard.Items[i].ItemAdjObject.gameObject);
         }
         GameBoard.Items.Clear();
-        
         // Determines if level has been won
-        if(GameBoard.NumberofCats == GameBoard.NumCatinPen)
+        if (GameBoard.NumberofCats == GameBoard.NumCatinPen)
         {
             ActiveMatch = false;
             Won = true;
@@ -420,6 +420,7 @@ public class MatchManager : MonoBehaviour
 
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
+            CatMoving = true;
             StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
         }
         else if (Direction.y > 0)
@@ -428,6 +429,7 @@ public class MatchManager : MonoBehaviour
 
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
+            CatMoving = true;
             StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
         }
         else if (Direction.x < 0)
@@ -436,6 +438,7 @@ public class MatchManager : MonoBehaviour
 
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
+            CatMoving = true;
             StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
         }
         else
@@ -444,6 +447,7 @@ public class MatchManager : MonoBehaviour
 
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
+            CatMoving = true;
             StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
 
             //for (int i = CatPos.y; i > FinalDestination.y; i--)
@@ -468,31 +472,12 @@ public class MatchManager : MonoBehaviour
             GameBoard.Set(FinalDestination, Cat);
         }
     }
-   IEnumerator CallCheckMovement(Item CurrentItem, List<Vector2Int> CurDestinationList, List<int> CatListPositions,List<CatMovementInfo> CatMoveInfo)
+    IEnumerator CallCheckMovement(Item CurrentItem, List<Vector2Int> CurDestinationList, List<int> CatListPositions,List<CatMovementInfo> CatMoveInfo)
     {
         if (!CurrentItem.AllCatsinRadius)
         {
-            //int c = 0;
-            //bool once = false;
-            // Checks movement/Moves cat of effected cats
-            //while (c < CurDestinationList.Count)
-            //{
-            //    Debug.Log("Called Check movement");
-            //    if (!CatMoving)
-            //    {
-            //        Debug.Log(c + " " + CurDestinationList.Count);
-            //        c++;
-            //    }
-            //    else
-            //    {
-            //        if(!once)
-            //        {
-            //            GameBoard.CheckMovement(CurrentItem.MoveDistance, CurDestinationList[c], CatListPositions[c]);
-            //            once = true;
-            //        }
-            //    }
-            //    yield return null;
-            //}
+            Debug.Log(CurDestinationList.Count);
+            yield return new WaitForEndOfFrame();
             for (int c = 0; c < CurDestinationList.Count; c++)
             {
                 GameBoard.CheckMovement(CurrentItem.MoveDistance, CurDestinationList[c], CatListPositions[c]);
@@ -502,6 +487,7 @@ public class MatchManager : MonoBehaviour
         }
         else
         {
+            yield return new WaitWhile(() => CatMoving);
             // Checks movement/Moves cat of effected cats
             for (int c = 0; c < CatMoveInfo.Count; c++)
             {
@@ -509,17 +495,15 @@ public class MatchManager : MonoBehaviour
             }
             CatMoveInfo.Clear();
         }
-        yield return null;
     }
-
-   IEnumerator MoveObject(Vector3 source, Vector3 target, float overTime, int ListPos, Vector2Int FinalDestination)
+    IEnumerator MoveObject(Vector3 source, Vector3 target, float overTime, int ListPos, Vector2Int FinalDestination)
     {
+        Debug.Log("Im Moving");
         float startTime = Time.time;
         while (Time.time < startTime + overTime)
         {
             GameBoard.Cats[ListPos].Object.localPosition = Vector3.Lerp(source, target, (Time.time - startTime) / overTime);
-            Debug.Log(target);
-            CatMoving = true;
+
             yield return null;
         }
         GameBoard.Cats[ListPos].Object.localPosition = target;
