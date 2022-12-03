@@ -67,7 +67,7 @@ public class UIManager : MonoBehaviour
                     NewItemEntry.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = temp.GetComponent<SpriteRenderer>().sprite;
                     GameManager.Instance._matchManager.GameBoard.Items[GameManager.Instance._matchManager.GameBoard.Items.Count - 1].ItemAdjObject = NewItemEntry;
                     NewItemEntry.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteItem(GameManager.Instance._matchManager.GameBoard.Items.Count - 1));
-                    Debug.Log("ive made the deleted function");
+                    
                 }
                 CanPlaceItem = false;
             } 
