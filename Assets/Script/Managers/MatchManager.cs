@@ -24,7 +24,6 @@ public class MatchManager : MonoBehaviour
     private bool ActiveMatch = false;
     private bool Won = false;
     private bool CatMoving = false;
-    private bool newbool = false;
 
     //stores the items used, rounds passed, and targets for starts gained
     [Header("Gameplay Info")]
@@ -87,8 +86,7 @@ public class MatchManager : MonoBehaviour
             for (int i = 0; i < currentLevel.GetPossibleItems().Length; i++)
             {
                 Item item = currentLevel.GetPossibleItems()[i];
-                GameObject button = Instantiate(ItemButtonPrefab, new Vector3(9.05f,-2.5f+1.75f*i, 4) ,Quaternion.identity, GameObject.Find("GUI").transform);
-                button.transform.GetChild(0).GetComponent<Image>().sprite = item.Picture;
+                GameObject button = Instantiate(item.ButtonPrefab, new Vector3(9.05f,-2.5f+1.75f*i, 4) ,Quaternion.identity, GameObject.Find("GUI").transform);
                 button.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._uiManager.PlaceItem(item));
             }
             GameManager.Instance._uiManager.GetUI();
@@ -100,22 +98,17 @@ public class MatchManager : MonoBehaviour
 
     private void Update()
     {
-        //if(ActiveMatch)
-        //{
-        //    Debug.Log(CatMoving);
-        //}
-        if(Won)
+        if (Won)
         {
             Debug.Log("You win");     
             // call end match on game manager and pass the total score and the needed score
         }
-            
     }
 
     /// <summary>
     /// Finds closest cat to an item and starts the movement 
     /// </summary>
-    public void EndRound()
+    public IEnumerator EndRound()
     {
         // Adds number of placed items to the total used items
         if (GameBoard.Items.Count != 0)
@@ -125,8 +118,8 @@ public class MatchManager : MonoBehaviour
         //go through all the items that were placed
         for (int i = 0; i < GameBoard.Items.Count; i++)
         {
+            yield return new WaitWhile(() => CatMoving);
             Item CurrentItem = GameBoard.At(GameBoard.Items[i].Position) as Item;
-            //int CurCatPos = -1;
             int ClosestDistance = -1;
             Vector2Int CurDestination = Vector2Int.zero;
             List<CatMovementInfo> CatMoveInfo = new List<CatMovementInfo>();
@@ -258,7 +251,24 @@ public class MatchManager : MonoBehaviour
             // Checks to see if a cat is actually in range
             if (ClosestDistance > -1)
             {
-                StartCoroutine(CallCheckMovement(CurrentItem, CurDestinationList, CatListPositions, CatMoveInfo));
+                if (!CurrentItem.AllCatsinRadius)
+                {
+                    for (int c = 0; c < CurDestinationList.Count; c++)
+                    {
+                        GameBoard.CheckMovement(CurrentItem.MoveDistance, CurDestinationList[c], CatListPositions[c]);
+                    }
+                    CurDestinationList.Clear();
+                    CatListPositions.Clear();
+                }
+                else
+                {
+                    // Checks movement/Moves cat of effected cats
+                    for (int c = 0; c < CatMoveInfo.Count; c++)
+                    {
+                        GameBoard.CheckMovement(CurrentItem.MoveDistance, (Vector2Int)CatMoveInfo[c].Destination, CatMoveInfo[c].Index);
+                    }
+                    CatMoveInfo.Clear();
+                }
             }
             //turns the item game object off and sets its position to null/empty
                 GameBoard.Items[i].Object.gameObject.SetActive(false);
@@ -332,7 +342,7 @@ public class MatchManager : MonoBehaviour
                 Debug.Log($"Level {CurrentLevel.name}: {StarCount}");
             }
         }
-
+        yield return null;
     }
 
 
@@ -420,8 +430,7 @@ public class MatchManager : MonoBehaviour
 
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
-            CatMoving = true;
-            StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
+            StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination,  .5f,  ListPos,  FinalDestination));
         }
         else if (Direction.y > 0)
         {
@@ -429,7 +438,6 @@ public class MatchManager : MonoBehaviour
 
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
-            CatMoving = true;
             StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
         }
         else if (Direction.x < 0)
@@ -438,7 +446,6 @@ public class MatchManager : MonoBehaviour
 
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
-            CatMoving = true;
             StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
         }
         else
@@ -447,7 +454,6 @@ public class MatchManager : MonoBehaviour
 
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
-            CatMoving = true;
             StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
 
             //for (int i = CatPos.y; i > FinalDestination.y; i--)
@@ -472,33 +478,9 @@ public class MatchManager : MonoBehaviour
             GameBoard.Set(FinalDestination, Cat);
         }
     }
-    IEnumerator CallCheckMovement(Item CurrentItem, List<Vector2Int> CurDestinationList, List<int> CatListPositions,List<CatMovementInfo> CatMoveInfo)
-    {
-        if (!CurrentItem.AllCatsinRadius)
-        {
-            Debug.Log(CurDestinationList.Count);
-            yield return new WaitForEndOfFrame();
-            for (int c = 0; c < CurDestinationList.Count; c++)
-            {
-                GameBoard.CheckMovement(CurrentItem.MoveDistance, CurDestinationList[c], CatListPositions[c]);
-            }
-            CurDestinationList.Clear();
-            CatListPositions.Clear();
-        }
-        else
-        {
-            yield return new WaitWhile(() => CatMoving);
-            // Checks movement/Moves cat of effected cats
-            for (int c = 0; c < CatMoveInfo.Count; c++)
-            {
-                GameBoard.CheckMovement(CurrentItem.MoveDistance, (Vector2Int)CatMoveInfo[c].Destination, CatMoveInfo[c].Index);
-            }
-            CatMoveInfo.Clear();
-        }
-    }
     IEnumerator MoveObject(Vector3 source, Vector3 target, float overTime, int ListPos, Vector2Int FinalDestination)
     {
-        Debug.Log("Im Moving");
+        CatMoving = true;
         float startTime = Time.time;
         while (Time.time < startTime + overTime)
         {

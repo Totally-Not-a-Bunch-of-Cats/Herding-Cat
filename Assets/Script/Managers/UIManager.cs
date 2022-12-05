@@ -67,7 +67,6 @@ public class UIManager : MonoBehaviour
                     NewItemEntry.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = temp.GetComponent<SpriteRenderer>().sprite;
                     GameManager.Instance._matchManager.GameBoard.Items[GameManager.Instance._matchManager.GameBoard.Items.Count - 1].ItemAdjObject = NewItemEntry;
                     int num = GameManager.Instance._matchManager.GameBoard.Items.Count - 1;
-                    Debug.Log(num);
                     NewItemEntry.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteItem(num));
                     
                 }
@@ -119,7 +118,7 @@ public class UIManager : MonoBehaviour
     {
         //lock you out fron pressing buttons
         GameManager.Instance._matchManager.RoundsPlayed++;
-        GameManager.Instance._matchManager.EndRound(); 
+        StartCoroutine(GameManager.Instance._matchManager.EndRound());
     }
 
 
@@ -144,8 +143,7 @@ public class UIManager : MonoBehaviour
 
     void DeleteItem(int Index)
     {
-        Debug.Log("im deleted " + Index);
-        if (Index >= 0 && Index < GameManager.Instance._matchManager.GameBoard.Items.Count)
+        if (Index >= 0 && Index <= GameManager.Instance._matchManager.GameBoard.Items.Count)
         {
             Destroy(GameManager.Instance._matchManager.GameBoard.Items[Index].Object.gameObject);
             Destroy(GameManager.Instance._matchManager.GameBoard.Items[Index].ItemAdjObject);
