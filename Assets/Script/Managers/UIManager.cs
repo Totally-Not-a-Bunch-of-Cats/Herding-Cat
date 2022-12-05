@@ -66,7 +66,9 @@ public class UIManager : MonoBehaviour
                     NewItemEntry.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = SelectedItem.name;
                     NewItemEntry.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = temp.GetComponent<SpriteRenderer>().sprite;
                     GameManager.Instance._matchManager.GameBoard.Items[GameManager.Instance._matchManager.GameBoard.Items.Count - 1].ItemAdjObject = NewItemEntry;
-                    NewItemEntry.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteItem(GameManager.Instance._matchManager.GameBoard.Items.Count - 1));
+                    int num = GameManager.Instance._matchManager.GameBoard.Items.Count - 1;
+                    Debug.Log(num);
+                    NewItemEntry.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteItem(num));
                     
                 }
                 CanPlaceItem = false;
@@ -88,6 +90,8 @@ public class UIManager : MonoBehaviour
         GameObject.Find("End Turn Button").GetComponent<Button>().onClick.AddListener(() => EndRound());
         //get the restart button and make an event 
         GameObject.Find("Restart Button").GetComponent<Button>().onClick.AddListener(() => Restart());
+
+
     }
     /// <summary>
     /// allows an item to be placed and is handed which item to place
@@ -105,7 +109,7 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void Restart()
     {
-        StartCoroutine(GameManager.Instance.StartMatch());
+        StartCoroutine(GameManager.Instance.StartMatch(GameManager.Instance._matchManager.CurrentLevel.name));
     }
     
     /// <summary>
@@ -140,7 +144,7 @@ public class UIManager : MonoBehaviour
 
     void DeleteItem(int Index)
     {
-        Debug.Log("im deleted");
+        Debug.Log("im deleted " + Index);
         if (Index >= 0 && Index < GameManager.Instance._matchManager.GameBoard.Items.Count)
         {
             Destroy(GameManager.Instance._matchManager.GameBoard.Items[Index].Object.gameObject);

@@ -81,13 +81,13 @@ public class GameManager : MonoBehaviour
     {
         //Levels = GetAllInstances<LevelData>();
         //StartCoroutine(SwitchScene("Menu"));
-        StartCoroutine(StartMatch());
+        StartCoroutine(StartMatch("Test"));
     }
 
 
     public void ClicktoStart()
     {
-        StartCoroutine(StartMatch());
+        StartCoroutine(StartMatch("Test"));
     }
 
     /// <summary>
@@ -103,9 +103,9 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Starts the level
     /// </summary>
-    public void LevelSelected()
+    public void LevelSelected(string level_name)
     {
-        SceneManager.LoadScene("Match");
+        StartCoroutine(StartMatch(level_name));
     }
 
     /// <summary>
@@ -113,22 +113,24 @@ public class GameManager : MonoBehaviour
     /// so it handles restarting
     /// </summary>
     /// <returns></returns>
-    public IEnumerator StartMatch()
+    public IEnumerator StartMatch(string level_name)
     {
-        string level_name = "1-8";
+        //string level_name = "Test";
+        Debug.Log("In start match");
         //checks to see what current level is and if so it reload the level (update later for better functinality)
         if (SceneManager.GetActiveScene().name != "Match")
         {
             SceneManager.LoadScene("Match");
             yield return new WaitForEndOfFrame();
-            Debug.Log("im at match");
         }
         else
         {
+            Debug.Log("Else");
             yield return new WaitForEndOfFrame();
             SceneManager.LoadScene("Match");
+            Debug.Log("AfterLoad");
             yield return new WaitForEndOfFrame();
-            Debug.Log("restarted");
+            Debug.Log("Test");
         }
 
         //loads the board and starts the level by generating a match using the match info and matchmanager
@@ -136,10 +138,13 @@ public class GameManager : MonoBehaviour
 
         GameObject _board = GameObject.Find("Board");
         _uiManager.FindBoard(_board);
+        Debug.Log("Board Found");
         if (_board != null)
         {
+            Debug.Log("Board Not null");
             _matchManager = _board.GetComponent<MatchManager>();
             LevelData _currentLevel = Levels.Find(level => level.name == level_name);
+            Debug.Log(_currentLevel.name);
             // Init round manager / match
             if (_matchManager.InitMatch(_currentLevel))
             {

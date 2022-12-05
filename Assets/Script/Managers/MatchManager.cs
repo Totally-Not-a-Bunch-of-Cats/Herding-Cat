@@ -36,7 +36,7 @@ public class MatchManager : MonoBehaviour
 
     [SerializeField] private Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
-    [SerializeField] private LevelData CurrentLevel;
+    [SerializeField] public LevelData CurrentLevel;
 
 
     /// <summary>
@@ -48,7 +48,6 @@ public class MatchManager : MonoBehaviour
     {
         if (currentLevel != null && currentLevel.valid())
         {
-            Debug.Log(currentLevel.name);   
             BoardSize = currentLevel.GetDimensions();
             TargetRounds = currentLevel.GetTargetRounds();
             TargetItems = currentLevel.GetTargetItems();
@@ -60,6 +59,7 @@ public class MatchManager : MonoBehaviour
 
 
             BoardTileMap = GameObject.Find("Tilemap").GetComponent<Tilemap>();
+            GameObject.Find("OutlineSquare").transform.localScale = new Vector3(BoardSize.x, BoardSize.y, 1);
             // Generates grid (Odd numbered sizes will break)
             int tempx = BoardSize.x / 2;
             int tempy = BoardSize.y / 2;
@@ -100,10 +100,10 @@ public class MatchManager : MonoBehaviour
 
     private void Update()
     {
-        if(ActiveMatch)
-        {
-            Debug.Log(CatMoving);
-        }
+        //if(ActiveMatch)
+        //{
+        //    Debug.Log(CatMoving);
+        //}
         if(Won)
         {
             Debug.Log("You win");     
