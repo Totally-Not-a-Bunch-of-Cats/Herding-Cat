@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     private static bool m_ShuttingDown = false;
     private static object m_Lock = new object();
     private static GameManager m_Instance;
+    public int LevelPosition = 1;
+
 
     // Used for testing to determine if star count for a level should be changed or outputed in console.
     [SerializeField] public bool UpdateLevelData = false;
@@ -80,8 +82,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         //Levels = GetAllInstances<LevelData>();
-        //StartCoroutine(SwitchScene("Menu"));
-        StartCoroutine(StartMatch("Test"));
+        //StartCoroutine(StartMatch("1-1"));
+        StartCoroutine(SwitchScene("Main Menu"));
     }
 
 
@@ -105,7 +107,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void LevelSelected(string level_name)
     {
-        StartCoroutine(StartMatch(level_name));
+        Instance.StartCoroutine(StartMatch(level_name));
     }
 
     /// <summary>
@@ -137,16 +139,17 @@ public class GameManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
 
         GameObject _board = GameObject.Find("Board");
-        _uiManager.FindBoard(_board);
+        Instance._uiManager.FindBoard(_board);
         Debug.Log("Board Found");
         if (_board != null)
         {
             Debug.Log("Board Not null");
-            _matchManager = _board.GetComponent<MatchManager>();
+            Instance._matchManager = _board.GetComponent<MatchManager>();
             LevelData _currentLevel = Levels.Find(level => level.name == level_name);
+            LevelPosition = Levels.IndexOf(_currentLevel) + 1;
             Debug.Log(_currentLevel.name);
             // Init round manager / match
-            if (_matchManager.InitMatch(_currentLevel))
+            if (Instance._matchManager.InitMatch(_currentLevel))
             {
                 Debug.Log($"Successfully initialized level {level_name}");
             }

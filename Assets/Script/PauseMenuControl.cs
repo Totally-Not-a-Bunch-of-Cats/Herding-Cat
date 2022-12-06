@@ -9,7 +9,16 @@ public class PauseMenuControl : MonoBehaviour
     public void RestartLevel ()
     {
         Debug.Log("Restart Initiated");
-        StartCoroutine(GameManager.Instance.StartMatch(GameManager.Instance._matchManager.CurrentLevel.name));
+        GameManager.Instance.StartCoroutine(GameManager.Instance.StartMatch(GameManager.Instance._matchManager.CurrentLevel.name));
+    }
+
+    public void NextLevel()
+    {
+        Debug.Log("Next Level");
+        LevelData NextLevel = GameManager.Instance.Levels[GameManager.Instance.LevelPosition++];
+        Debug.Log("LevelPosition is equal to: " + GameManager.Instance.LevelPosition);
+        Debug.Log("The Next Level should be 1-2 but its: " + NextLevel.name);
+        GameManager.Instance.StartCoroutine(GameManager.Instance.StartMatch(NextLevel.name));
     }
 
     public void ReturnMainMenu ()

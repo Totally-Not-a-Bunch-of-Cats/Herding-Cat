@@ -48,6 +48,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _matchManager: {fileID: 0}
   _uiManager: {fileID: 7126871971944188214}
+  Levels:
+  - {fileID: 11400000, guid: 4b5e58be8b5d392428f2660c046c36bd, type: 2}
+  - {fileID: 11400000, guid: 2c69fe15f16c5e148bb5f504dcbb8ca0, type: 2}
+  - {fileID: 11400000, guid: fd3e3e0bf7f31a2408b1a1428451e78e, type: 2}
+  - {fileID: 11400000, guid: 39580af3e25cb71489f6c117a4c28759, type: 2}
+  - {fileID: 11400000, guid: 99154c6651af4ed4f90a6d0533563c43, type: 2}
+  - {fileID: 11400000, guid: 39ee58e77b2a11643bd058adb69f8740, type: 2}
+  - {fileID: 11400000, guid: b2453c90dfcfafb4dbcd0420668d8f69, type: 2}
+  - {fileID: 11400000, guid: 47e3c83a5abae974dacc9b38b5ff78ea, type: 2}
+  - {fileID: 11400000, guid: 7df1f00ee9ead4143960b895b9f21aad, type: 2}
+  - {fileID: 11400000, guid: 5317104dc40e56942aa2599ce3865e22, type: 2}
+  - {fileID: 11400000, guid: 0e964405e9b6ecb4e932a5ebdf42645d, type: 2}
   UpdateLevelData: 0
 --- !u!114 &590294061082041625
 MonoBehaviour:

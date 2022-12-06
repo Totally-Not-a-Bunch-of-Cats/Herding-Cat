@@ -36,7 +36,7 @@ public class MatchManager : MonoBehaviour
     [SerializeField] private Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
     [SerializeField] public LevelData CurrentLevel;
-
+    [SerializeField] public GameObject GameWonUI;
 
     /// <summary>
     /// Initialize the <see cref="Board"/> and all scene <see cref="GameObject"/>s for the match
@@ -100,7 +100,7 @@ public class MatchManager : MonoBehaviour
     {
         if (Won)
         {
-            Debug.Log("You win");     
+            GameWonUI.SetActive(true);
             // call end match on game manager and pass the total score and the needed score
         }
     }
