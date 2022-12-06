@@ -110,6 +110,11 @@ public class GameManager : MonoBehaviour
         Instance.StartCoroutine(StartMatch(level_name));
     }
 
+    public void ButtonOfSelectedNum(int buttonPressed)
+    {
+        Instance.LevelPosition = buttonPressed + 1;
+    }
+
     /// <summary>
     /// starts the match of level 1-1, also checks if the level is already loaded,
     /// so it handles restarting
