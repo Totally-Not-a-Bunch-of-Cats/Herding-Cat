@@ -148,7 +148,8 @@ public class UIManager : MonoBehaviour
             Destroy(GameManager.Instance._matchManager.GameBoard.Items[Index].Object.gameObject);
             Destroy(GameManager.Instance._matchManager.GameBoard.Items[Index].ItemAdjObject);
             GameManager.Instance._matchManager.GameBoard.Set(GameManager.Instance._matchManager.GameBoard.Items[Index].Position, null);
-            GameManager.Instance._matchManager.GameBoard.Items.RemoveAt(Index);
+            GameManager.Instance._matchManager.GameBoard.Items[Index] = null;
+            GameManager.Instance._matchManager.ItemsUsed -= 1;
         } 
         else
         {

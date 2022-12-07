@@ -31,7 +31,7 @@ public class MatchManager : MonoBehaviour
     [SerializeField] private int TargetRounds = 10;
     [SerializeField] private int TargetItems = 10;
     public int RoundsPlayed = 0;
-    [SerializeField] private int ItemsUsed = 0;
+    [SerializeField] public int ItemsUsed = 0;
 
     [SerializeField] private Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
@@ -118,167 +118,169 @@ public class MatchManager : MonoBehaviour
         //go through all the items that were placed
         for (int i = 0; i < GameBoard.Items.Count; i++)
         {
-            yield return new WaitWhile(() => CatMoving);
-            Item CurrentItem = GameBoard.At(GameBoard.Items[i].Position) as Item;
-            int ClosestDistance = -1;
-            Vector2Int CurDestination = Vector2Int.zero;
-            List<CatMovementInfo> CatMoveInfo = new List<CatMovementInfo>();
-
-            List<Vector2Int> CurDestinationList = new List<Vector2Int>();
-            List<int> CatListPositions = new List<int>();
-
-            // loops through cats to find the closest one to the item to move
-            for (int j = 0; j < GameBoard.Cats.Count; j++)
+            //makes sure the item slot isnt null, we make it null to delete it, unity bad
+            if(GameBoard.Items[i] != null)
             {
-                if (GameBoard.Cats[j] != null)
-                {
-                    if (CurrentItem.AllCatsinRadius == true)
-                    {
-                        //moves all cats in radius of the item
-                        int deltaX = GameBoard.Cats[j].Position.x - GameBoard.Items[i].Position.x;
-                        int deltaY = GameBoard.Cats[j].Position.y - GameBoard.Items[i].Position.y;
+                yield return new WaitWhile(() => CatMoving);
+                Item CurrentItem = GameBoard.At(GameBoard.Items[i].Position) as Item;
+                int ClosestDistance = -1;
+                Vector2Int CurDestination = Vector2Int.zero;
+                List<CatMovementInfo> CatMoveInfo = new List<CatMovementInfo>();
 
-                        int Dist = System.Math.Abs(deltaX) + System.Math.Abs(deltaY);
-                        //adds distance to the list 
-                        CatMoveInfo.Add(new CatMovementInfo(j, Dist));
-                        Vector2Int test = DestinationAll(deltaX, deltaY, CurrentItem, j);
-                        if (test != new Vector2Int(-100, -100))
+                List<Vector2Int> CurDestinationList = new List<Vector2Int>();
+                List<int> CatListPositions = new List<int>();
+
+                // loops through cats to find the closest one to the item to move
+                for (int j = 0; j < GameBoard.Cats.Count; j++)
+                {
+                    if (GameBoard.Cats[j] != null)
+                    {
+                        if (CurrentItem.AllCatsinRadius == true)
                         {
-                            CatMoveInfo[j].Destination = test;
+                            //moves all cats in radius of the item
+                            int deltaX = GameBoard.Cats[j].Position.x - GameBoard.Items[i].Position.x;
+                            int deltaY = GameBoard.Cats[j].Position.y - GameBoard.Items[i].Position.y;
+
+                            int Dist = System.Math.Abs(deltaX) + System.Math.Abs(deltaY);
+                            //adds distance to the list 
+                            CatMoveInfo.Add(new CatMovementInfo(j, Dist));
+                            Vector2Int test = DestinationAll(deltaX, deltaY, CurrentItem, j);
+                            if (test != new Vector2Int(-100, -100))
+                            {
+                                CatMoveInfo[j].Destination = test;
+                            }
                         }
+                        else
+                        {
+                            //find if the cat is in range and if so moves said cat
+                            int deltaX = GameBoard.Cats[j].Position.x - GameBoard.Items[i].Position.x;
+                            int deltaY = GameBoard.Cats[j].Position.y - GameBoard.Items[i].Position.y;
+
+                            int Dist = System.Math.Abs(deltaX) + System.Math.Abs(deltaY);
+                            // Checks if cat is closer than current cat and within radius
+                            if (Dist <= ClosestDistance && (deltaY == 0 || deltaX == 0) || ClosestDistance < 0 && Dist <= CurrentItem.Radius
+                                && (deltaY == 0 || deltaX == 0))
+                            {
+                                if (ClosestDistance == Dist)
+                                {
+                                    // Adds postioin of cat in list to cat distance CurDestinationList if cat distance from item is same distance
+                                    CatListPositions.Add(j);
+                                }
+                                else
+                                {
+                                    // Clears the lists of the farther cat information and adds the new one
+                                    CurDestinationList.Clear();
+                                    CatListPositions.Clear();
+                                    CatListPositions.Add(j);
+                                }
+                                ClosestDistance = Dist;
+
+                                // Gets the farthest that the cat will move of item (Right)
+                                if (deltaX <= CurrentItem.Radius && deltaX > 0 && deltaY == 0)
+                                {
+                                    CurDestination = GameBoard.Cats[j].Position + new Vector2Int(CurrentItem.MoveDistance, 0);
+                                    CurDestinationList.Add(CurDestination);
+                                }
+                                // Gets the farthest that the cat will move of item (Left)
+                                if (deltaX >= -CurrentItem.Radius && deltaX < 0 && deltaY == 0)
+                                {
+                                    CurDestination = GameBoard.Cats[j].Position + new Vector2Int(-CurrentItem.MoveDistance, 0);
+                                    CurDestinationList.Add(CurDestination);
+                                }
+                                // Gets the farthest that the cat will move of item (Up)
+                                if (deltaY <= CurrentItem.Radius && deltaY > 0 && deltaX == 0)
+                                {
+                                    CurDestination = GameBoard.Cats[j].Position + new Vector2Int(0, CurrentItem.MoveDistance);
+                                    CurDestinationList.Add(CurDestination);
+                                }
+                                // Gets the farthest that the cat will move of item (Down)
+                                if (deltaY >= -CurrentItem.Radius && deltaY < 0 && deltaX == 0)
+                                {
+                                    CurDestination = GameBoard.Cats[j].Position + new Vector2Int(0, -CurrentItem.MoveDistance);
+                                    CurDestinationList.Add(CurDestination);
+                                }
+                            }
+                        }
+                    }
+                }
+                //checks to run for loop
+                if (CurrentItem.AllCatsinRadius == true)
+                {
+                    List<CatMovementInfo> Temps = new List<CatMovementInfo>();
+                    //loops through all caps
+                    for (int zz = 0; zz < CatMoveInfo.Count; zz++)
+                    {
+                        int small = 100;
+                        int smallIndex = 0;
+                        for (int y = 0; y < CatMoveInfo.Count; y++)
+                        {
+                            //checks to see if the cats is actually in range  
+                            if (CatMoveInfo[y] != null && CurrentItem.Radius >= CatMoveInfo[y].Distance && CatMoveInfo[y].Used == false)
+                            {
+                                //says there are cats with in range
+                                ClosestDistance = 1;
+                                if (zz != 0)
+                                {
+                                    if (small >= CatMoveInfo[y].Distance && Temps[zz - 1].Distance <= CatMoveInfo[y].Distance)
+                                    {
+                                        small = CatMoveInfo[y].Distance;
+                                        smallIndex = y;
+                                    }
+                                }
+                                else
+                                {
+                                    if (small >= CatMoveInfo[y].Distance)
+                                    {
+                                        small = CatMoveInfo[y].Distance;
+                                        smallIndex = y;
+                                    }
+                                }
+                            }
+                        }
+                        if (CurrentItem.Radius < small)
+                        {
+                            break;
+                        }
+                        CatMoveInfo[smallIndex].Used = true;
+                        Temps.Add(CatMoveInfo[smallIndex]);
+                    }
+                    CatMoveInfo = Temps;
+                }
+                // Checks to see if a cat is actually in range
+                if (ClosestDistance > -1)
+                {
+                    if (!CurrentItem.AllCatsinRadius)
+                    {
+                        for (int c = 0; c < CurDestinationList.Count; c++)
+                        {
+                            GameBoard.CheckMovement(CurrentItem.MoveDistance, CurDestinationList[c], CatListPositions[c]);
+                        }
+                        CurDestinationList.Clear();
+                        CatListPositions.Clear();
                     }
                     else
                     {
-
-                        //find if the cat is in range and if so moves said cat
-                        int deltaX = GameBoard.Cats[j].Position.x - GameBoard.Items[i].Position.x;
-                        int deltaY = GameBoard.Cats[j].Position.y - GameBoard.Items[i].Position.y;
-
-                        int Dist = System.Math.Abs(deltaX) + System.Math.Abs(deltaY);
-                        // Checks if cat is closer than current cat and within radius
-                        if (Dist <= ClosestDistance || ClosestDistance < 0 && Dist <= CurrentItem.Radius)
+                        // Checks movement/Moves cat of effected cats
+                        for (int c = 0; c < CatMoveInfo.Count; c++)
                         {
-                            //CurCatPos = j;
-                            if (ClosestDistance == Dist)
-                            {
-                                // Adds postioin of cat in list to cat distance CurDestinationList if cat distance from item is same distance
-                                CatListPositions.Add(j);
-                            } 
-                            else
-                            {
-                                // Clears the lists of the farther cat information and adds the new one
-                                CurDestinationList.Clear();
-                                CatListPositions.Clear();
-                                CatListPositions.Add(j);
-                            }
-
-                            ClosestDistance = Dist;
-
-                            //CurDestinationList.Add(DestinationList(deltaX, deltaY, CurrentItem, j));
-
-                            // Gets the farthest that the cat will move of item (Right)
-                            if (deltaX <= CurrentItem.Radius && deltaX > 0 && deltaY == 0)
-                            {
-                                CurDestination = GameBoard.Cats[j].Position + new Vector2Int(CurrentItem.MoveDistance, 0);
-                                CurDestinationList.Add(CurDestination);
-                            }
-                            // Gets the farthest that the cat will move of item (Left)
-                            if (deltaX >= -CurrentItem.Radius && deltaX < 0 && deltaY == 0)
-                            {
-                                CurDestination = GameBoard.Cats[j].Position + new Vector2Int(-CurrentItem.MoveDistance, 0);
-                                CurDestinationList.Add(CurDestination);
-                            }
-                            // Gets the farthest that the cat will move of item (Up)
-                            if (deltaY <= CurrentItem.Radius && deltaY > 0 && deltaX == 0)
-                            {
-                                CurDestination = GameBoard.Cats[j].Position + new Vector2Int(0, CurrentItem.MoveDistance);
-                                CurDestinationList.Add(CurDestination);
-                            }
-                            // Gets the farthest that the cat will move of item (Down)
-                            if (deltaY >= -CurrentItem.Radius && deltaY < 0 && deltaX == 0)
-                            {
-                                CurDestination = GameBoard.Cats[j].Position + new Vector2Int(0, -CurrentItem.MoveDistance);
-                                CurDestinationList.Add(CurDestination);
-                            }
+                            GameBoard.CheckMovement(CurrentItem.MoveDistance, (Vector2Int)CatMoveInfo[c].Destination, CatMoveInfo[c].Index);
                         }
+                        CatMoveInfo.Clear();
                     }
                 }
-                
-            }
-            //checks to run for loop
-            if(CurrentItem.AllCatsinRadius == true)
-            {
-                List<CatMovementInfo> Temps = new List<CatMovementInfo>();
-                //loops through all caps
-                for(int zz = 0; zz < CatMoveInfo.Count; zz++)
-                {
-                    int small = 100;
-                    int smallIndex = 0;
-                    for (int y = 0; y < CatMoveInfo.Count; y++)
-                    {
-                        //checks to see if the cats is actually in range  
-                        if (CatMoveInfo[y] != null && CurrentItem.Radius >= CatMoveInfo[y].Distance && CatMoveInfo[y].Used == false)
-                        {
-                            //says there are cats with in range
-                            ClosestDistance = 1;
-                            if (zz != 0)
-                            {
-                                if (small >= CatMoveInfo[y].Distance && Temps[zz - 1].Distance <= CatMoveInfo[y].Distance)
-                                {
-                                    small = CatMoveInfo[y].Distance;
-                                    smallIndex = y;
-                                }
-                            }
-                            else
-                            {
-                                if (small >= CatMoveInfo[y].Distance)
-                                {
-                                    small = CatMoveInfo[y].Distance;
-                                    smallIndex = y;
-                                }
-                            }
-                        }
-                    }
-                    if (CurrentItem.Radius < small)
-                    {
-                        break;
-                    }
-                    CatMoveInfo[smallIndex].Used = true;
-                    Temps.Add(CatMoveInfo[smallIndex]);
-                }
-                CatMoveInfo = Temps;
-            }
-            // Checks to see if a cat is actually in range
-            if (ClosestDistance > -1)
-            {
-                if (!CurrentItem.AllCatsinRadius)
-                {
-                    for (int c = 0; c < CurDestinationList.Count; c++)
-                    {
-                        GameBoard.CheckMovement(CurrentItem.MoveDistance, CurDestinationList[c], CatListPositions[c]);
-                    }
-                    CurDestinationList.Clear();
-                    CatListPositions.Clear();
-                }
-                else
-                {
-                    // Checks movement/Moves cat of effected cats
-                    for (int c = 0; c < CatMoveInfo.Count; c++)
-                    {
-                        GameBoard.CheckMovement(CurrentItem.MoveDistance, (Vector2Int)CatMoveInfo[c].Destination, CatMoveInfo[c].Index);
-                    }
-                    CatMoveInfo.Clear();
-                }
-            }
-            //turns the item game object off and sets its position to null/empty
+                //turns the item game object off and sets its position to null/empty
                 GameBoard.Items[i].Object.gameObject.SetActive(false);
                 GameBoard.Set(GameBoard.Items[i].Position, null);
+            }
         }
         
         // Removes entries in item adjust window
         for (int i = 0; i < GameBoard.Items.Count; i++)
         {
-            Destroy(GameBoard.Items[i].ItemAdjObject.gameObject);
+            if (GameBoard.Items[i] != null)
+            {
+                Destroy(GameBoard.Items[i].ItemAdjObject.gameObject);
+            }
         }
         GameBoard.Items.Clear();
         // Determines if level has been won
