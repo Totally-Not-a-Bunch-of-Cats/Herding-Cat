@@ -29,6 +29,10 @@ MonoBehaviour:
     Slate: {fileID: 11400000, guid: b1b6c6f21d028124bbc63e252f176c41, type: 2}
   - Position: {x: 3, y: 3}
     Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
+  - Position: {x: 4, y: 3}
+    Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
+  - Position: {x: 3, y: 4}
+    Slate: {fileID: 11400000, guid: e555ba895d5a24446bccda1cb968e5d7, type: 2}
   PossibleItems:
   - {fileID: 11400000, guid: 089f360dd355a504085896f04d3eb986, type: 2}
   - {fileID: 11400000, guid: a58def140dd3b74468a5da712b3041fa, type: 2}

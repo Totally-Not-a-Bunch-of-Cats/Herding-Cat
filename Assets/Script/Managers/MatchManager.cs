@@ -101,8 +101,23 @@ public class MatchManager : MonoBehaviour
         if (Won)
         {
             GameWonUI.SetActive(true);
-            // call end match on game manager and pass the total score and the needed score
+            ActivateStars();
         }
+    }
+
+    void ActivateStars()
+    {
+        //get references to stars and activate them
+        List<Image> Stars = new List<Image>();
+        Stars.Add(GameObject.Find("Star1").GetComponent<Image>());
+        Stars.Add(GameObject.Find("Star2").GetComponent<Image>());
+        Stars.Add(GameObject.Find("Star3").GetComponent<Image>());
+
+        for(int i = 0; i < CurrentLevel.StarsEarned; i++)
+        {
+            Stars[i].color = Color.white;
+        }
+        //GameObject.Find("Star3").GetComponent<Image>().color = Color.white;
     }
 
     /// <summary>
