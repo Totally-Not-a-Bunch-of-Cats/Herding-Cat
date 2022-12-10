@@ -202,7 +202,7 @@ public class Board
                         }
                     }
                 }
-                MoveCat(Vector2Int.down, At(Cat), Destination, ListPos);
+                GameManager.Instance._matchManager.MoveCat(Vector2Int.down, At(Cat), Destination, ListPos);
             }
             else
             {
@@ -231,7 +231,7 @@ public class Board
                         }
                     }
                 }
-                MoveCat(Vector2Int.up, At(Cat), Destination, ListPos);
+                GameManager.Instance._matchManager.MoveCat(Vector2Int.up, At(Cat), Destination, ListPos);
             }
         }
         else //if Cat.y == Destination.y
@@ -264,7 +264,7 @@ public class Board
                         }
                     }
                 }
-;                MoveCat(Vector2Int.left, At(Cat), Destination, ListPos);
+               GameManager.Instance._matchManager.MoveCat(Vector2Int.left, At(Cat), Destination, ListPos);
             }
             else 
             {
@@ -293,7 +293,7 @@ public class Board
                         }
                     }
                 }
-                MoveCat(Vector2Int.right, At(Cat), Destination, ListPos);
+                GameManager.Instance._matchManager.MoveCat(Vector2Int.right, At(Cat), Destination, ListPos);
             }
         }
         if(Cats[ListPos] != null)
@@ -302,64 +302,7 @@ public class Board
         }
     }
 
-    /// <summary>
-    /// Moves the cat object to the visualy in cell on board
-    /// </summary>
-    /// <param name="Direction">Unit vector of direction that cat is moving</param>
-    /// <param name="Cat">tile of Cat the is being moved</param>
-    /// <param name="FinalDestination">End location on board for the cat</param>
-    /// <param name="ListPos">Location in list that cat is stored</param>
-    void MoveCat(Vector2Int Direction, Tile Cat, Vector2Int FinalDestination, int ListPos)
-    {
-        Vector2Int CatPos = Cats[ListPos].Position;
-        //moves the cat the correct the direction
-        if (Direction.x > 0)
-        {
-            //moves cat one tile at a time 
-            for (int i = CatPos.x; i < FinalDestination.x; i++)
-            {
-                    Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
-            }
-        }
-        else if (Direction.y > 0)
-        {
-            for (int i = CatPos.y; i < FinalDestination.y; i++)
-            {
-                Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
-            }
-        }
-        else if (Direction.x < 0)
-        {
-            for (int i = CatPos.x; i > FinalDestination.x; i--)
-            {
-                Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
-            }
-        }
-        else
-        {
-            for (int i = CatPos.y; i > FinalDestination.y; i--)
-            {
-                Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
-            }
-        }
-        //move cat in data structure all at once
-        if(At(FinalDestination) != null)
-        {
-            //adds cats to the pen count when they move in
-            if (At(FinalDestination).Is<CatPen>())
-            {
-                Set(CatPos, null);
-                NumCatinPen++;
-                Cats[ListPos] = null;
-            }
-        }
-        else
-        {
-            //moves the cat to the new position in the board data
-            Set(CatPos, null);
-            Set(FinalDestination, Cat);
-        }
-    }
+ 
 
     /// <summary>
     /// Gets the Width of the Board

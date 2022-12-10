@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _matchManager: {fileID: 0}
-  _uiManager: {fileID: 0}
+  _uiManager: {fileID: 7126871971944188214}
   UpdateLevelData: 0
 --- !u!114 &590294061082041625
 MonoBehaviour:
