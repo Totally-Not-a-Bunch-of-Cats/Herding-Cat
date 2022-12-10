@@ -35,5 +35,10 @@ public class ScreenResizeManager : MonoBehaviour
     {
         float OrthoSize = (GameManager.Instance._matchManager.BoardSize[1] + 1f) * 0.5f;
         Camera.main.orthographicSize = OrthoSize;
+
+        float ScreenScale = (float)Screen.height / (float)Screen.width;
+        GameObject.Find("End Turn Button").transform.localScale *= ScreenScale * 2f;
+        GameObject.Find("Restart Button").transform.localScale *= ScreenScale * 2f;
+        GameObject.Find("Pause Button").transform.localScale *= ScreenScale * 2f;
     }
 }
