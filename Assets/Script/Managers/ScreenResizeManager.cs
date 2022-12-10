@@ -1,0 +1,44 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+/// <summary>
+/// Controls being able to scale to the size of the screen
+/// </summary>
+public class ScreenResizeManager : MonoBehaviour
+{
+    
+    public enum Rotation {Landscape, Portrait }
+
+    // Rotation of the device
+    public Rotation CurrentRotation;
+
+    /// <summary>
+    /// Starts the script
+    /// </summary>
+    void Start()
+    {
+        if (Screen.height > Screen.width)
+        {
+            CurrentRotation = Rotation.Portrait;
+        } else
+        {
+            CurrentRotation = Rotation.Landscape;
+        }
+    }
+
+    /// <summary>
+    /// Sets orthographic size of camera to the size requried to make board fill screen
+    /// </summary>
+    public void ScaleBoard ()
+    {
+        float OrthoSize = (GameManager.Instance._matchManager.BoardSize[1] + 1f) * 0.5f;
+        Camera.main.orthographicSize = OrthoSize;
+
+        float ScreenScale = (float)Screen.height / (float)Screen.width;
+        GameObject.Find("End Turn Button").transform.localScale *= ScreenScale * 2f;
+        GameObject.Find("Restart Button").transform.localScale *= ScreenScale * 2f;
+        GameObject.Find("Pause Button").transform.localScale *= ScreenScale * 2f;
+    }
+}
