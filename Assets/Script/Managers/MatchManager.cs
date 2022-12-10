@@ -20,7 +20,7 @@ public class MatchManager : MonoBehaviour
     [Header("Board")]
     [Space]
     public Board GameBoard;
-    [SerializeField] private Vector2Int BoardSize;
+    [SerializeField] public Vector2Int BoardSize;
     private bool ActiveMatch = false;
     private bool Won = false;
     private bool CatMoving = false;
@@ -34,7 +34,7 @@ public class MatchManager : MonoBehaviour
     public int RoundsPlayed = 0;
     [SerializeField] private int ItemsUsed = 0;
 
-    [SerializeField] private Tilemap BoardTileMap;
+    [SerializeField] public Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
     [SerializeField] private LevelData CurrentLevel;
 
