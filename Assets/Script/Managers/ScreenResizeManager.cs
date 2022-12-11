@@ -10,7 +10,7 @@ public class ScreenResizeManager : MonoBehaviour
 {
     
     public enum Rotation {Landscape, Portrait }
-
+    float ScreenScale;
     // Rotation of the device
     public Rotation CurrentRotation;
 
@@ -31,14 +31,21 @@ public class ScreenResizeManager : MonoBehaviour
     /// <summary>
     /// Sets orthographic size of camera to the size requried to make board fill screen
     /// </summary>
-    public void ScaleBoard ()
+    public void ScaleBoard()
     {
         float OrthoSize = (GameManager.Instance._matchManager.BoardSize[1] + 1f) * 0.5f;
         Camera.main.orthographicSize = OrthoSize;
 
-        float ScreenScale = (float)Screen.height / (float)Screen.width;
-        GameObject.Find("End Turn Button").transform.localScale *= ScreenScale * 2f;
-        GameObject.Find("Restart Button").transform.localScale *= ScreenScale * 2f;
-        GameObject.Find("Pause Button").transform.localScale *= ScreenScale * 2f;
+        ScreenScale = (float)Screen.height / 1000;
+        Debug.Log(ScreenScale);
+        GameObject.Find("End Turn Button").transform.localScale *= ScreenScale;
+        GameObject.Find("Restart Button").transform.localScale *= ScreenScale;
+        GameObject.Find("Pause Button").transform.localScale *= ScreenScale;
+    }
+
+    public void RescaleItem(GameObject button)
+    {
+        ScreenScale = (float)Screen.height / 1000;
+        button.transform.localScale *= ScreenScale;
     }
 }

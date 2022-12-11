@@ -88,6 +88,7 @@ public class MatchManager : MonoBehaviour
                 Item item = currentLevel.GetPossibleItems()[i];
                 GameObject button = Instantiate(item.ButtonPrefab, new Vector3(9.05f,-2.5f+1.75f*i, 4) ,Quaternion.identity, GameObject.Find("GUI").transform);
                 button.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._uiManager.PlaceItem(item));
+                GameManager.Instance._screenResizeManager.RescaleItem(button);
             }
             GameManager.Instance._uiManager.GetUI();
             ActiveMatch = true;
