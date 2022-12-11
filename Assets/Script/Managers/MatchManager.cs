@@ -89,7 +89,6 @@ public class MatchManager : MonoBehaviour
                 float ScreenScale = (float)Screen.width / 1000;
                 Transform EndturnButton = GameObject.Find("End Turn Button").transform;
                 GameObject button = Instantiate(item.ButtonPrefab, new Vector3(0, EndturnButton.position.y + 2f + (2f * i), 4) ,Quaternion.identity, GameObject.Find("GUI").transform);
-                Debug.Log(EndturnButton.localPosition.x);
                 button.transform.localPosition += new Vector3(EndturnButton.localPosition.x, 0, 0);
                 button.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._uiManager.PlaceItem(item));
                 GameManager.Instance._screenResizeManager.RescaleItem(button);
@@ -165,11 +164,9 @@ public class MatchManager : MonoBehaviour
                             //adds distance to the list 
                             CatMoveInfo.Add(new CatMovementInfo(j, Dist));
                             Vector2Int test = DestinationAll(deltaX, deltaY, CurrentItem, j);
-                            Debug.Log(deltaY + " delta y");
-                            Debug.Log(deltaX + " delta x");
                             if (test != new Vector2Int(-100, -100))
                             {
-                                CatMoveInfo[j].Destination = test;
+                                CatMoveInfo[CatMoveInfo.Count-1].Destination = test;
                             }
                         }
                         else
@@ -201,7 +198,6 @@ public class MatchManager : MonoBehaviour
                                 if (deltaX <= CurrentItem.Radius && deltaX > 0 && deltaY == 0)
                                 {
                                     CurDestination = GameBoard.Cats[j].Position + new Vector2Int(CurrentItem.MoveDistance, 0);
-                                    Debug.Log("going right");
                                     CurDestinationList.Add(CurDestination);
                                 }
                                 // Gets the farthest that the cat will move of item (Left)
@@ -436,6 +432,7 @@ public class MatchManager : MonoBehaviour
             CurDestination = GameBoard.Cats[index].Position + new Vector2Int(0, -CurrentItem.MoveDistance);
             return CurDestination;
         }
+        Debug.Log("fucked up");
         return new Vector2Int(-100, -100);
     }
     /// <summary>
