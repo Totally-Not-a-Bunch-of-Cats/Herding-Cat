@@ -152,8 +152,10 @@ public class MatchManager : MonoBehaviour
                 // loops through cats to find the closest one to the item to move
                 for (int j = 0; j < GameBoard.Cats.Count; j++)
                 {
+                    Debug.Log(GameBoard.Cats[j]);
                     if (GameBoard.Cats[j] != null)
                     {
+                        Debug.Log(CurrentItem.AllCatsinRadius);
                         if (CurrentItem.AllCatsinRadius == true)
                         {
                             //moves all cats in radius of the item

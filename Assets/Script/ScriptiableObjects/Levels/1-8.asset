@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 1-8
   m_EditorClassIdentifier: 
   Dimensions: {x: 8, y: 8}
-  TargetRounds: 8
-  TargetItems: 8
+  TargetRounds: 5
+  TargetItems: 9
   BackgroundTile: {fileID: 11400000, guid: 103593486162c964aa10539a0ed04a9e, type: 2}
   Tiles:
   - Position: {x: 0, y: 0}
@@ -38,4 +38,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a58def140dd3b74468a5da712b3041fa, type: 2}
   - {fileID: 11400000, guid: 99a1a1af1fa148340b1cc9b1f706880c, type: 2}
   StarsEarned: 0
-  Unlocked: 0
+  Unlocked: 1

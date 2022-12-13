@@ -46,6 +46,8 @@ public class ScreenResizeManager : MonoBehaviour
     public void RescaleItem(GameObject button)
     {
         ScreenScale = (float)Screen.height / 1000;
+        Debug.Log((float)Screen.height);
+        Debug.Log(ScreenScale);
         button.transform.localScale *= ScreenScale;
     }
 }
