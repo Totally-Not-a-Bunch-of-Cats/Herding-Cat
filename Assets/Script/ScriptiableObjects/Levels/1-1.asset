@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 1-1
   m_EditorClassIdentifier: 
   Dimensions: {x: 4, y: 4}
-  TargetRounds: 4
-  TargetItems: 6
+  TargetRounds: 5
+  TargetItems: 10
   BackgroundTile: {fileID: 11400000, guid: d756be87d23ee174f869fab071be06bf, type: 2}
   Tiles:
   - Position: {x: 0, y: 3}
@@ -23,5 +23,5 @@ MonoBehaviour:
     Slate: {fileID: 11400000, guid: e9d6189f63d821045ab761e537a50a9c, type: 2}
   PossibleItems:
   - {fileID: 11400000, guid: 089f360dd355a504085896f04d3eb986, type: 2}
-  StarsEarned: 0
+  StarsEarned: 3
   Unlocked: 1
