@@ -27,5 +27,5 @@ MonoBehaviour:
     Slate: {fileID: 11400000, guid: e555ba895d5a24446bccda1cb968e5d7, type: 2}
   PossibleItems:
   - {fileID: 11400000, guid: 99a1a1af1fa148340b1cc9b1f706880c, type: 2}
-  StarsEarned: 3
+  StarsEarned: 0
   Unlocked: 1
