@@ -365,6 +365,7 @@ public class MatchManager : MonoBehaviour
                 Debug.Log($"Level {CurrentLevel.name}: {StarCount}");
             }
         }
+        GameManager.Instance._uiManager.Override = true;
         yield return null;
     }
 

@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     Item SelectedItem;
 
     bool CanPlaceItem = false;
+    public bool Override = true;
     public GameObject Board;
     public GameObject GUI;
     public GameObject ItemAdjPrefab;
@@ -72,10 +73,10 @@ public class UIManager : MonoBehaviour
                 }
                 CanPlaceItem = false;
             } 
-            else
-            {
-                CanPlaceItem = true;
-            }
+        }
+        else
+        {
+            CanPlaceItem = true;
         }
     }
 
@@ -108,6 +109,7 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void Restart()
     {
+        Override = false;
         StartCoroutine(GameManager.Instance.StartMatch(GameManager.Instance._matchManager.CurrentLevel.name));
     }
     
@@ -116,6 +118,7 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void EndRound()
     {
+        Override = false;
         //lock you out fron pressing buttons
         GameManager.Instance._matchManager.RoundsPlayed++;
         StartCoroutine(GameManager.Instance._matchManager.EndRound());
