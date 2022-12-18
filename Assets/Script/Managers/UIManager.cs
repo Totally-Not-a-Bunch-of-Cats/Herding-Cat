@@ -12,9 +12,9 @@ using TMPro;
 /// </summary>
 public class UIManager : MonoBehaviour
 {
-    Item SelectedItem;
+    public Item SelectedItem;
 
-    bool CanPlaceItem = false;
+    public bool CanPlaceItem = false;
     public bool Override = true;
     public GameObject Board;
     public GameObject GUI;
@@ -40,7 +40,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         //checks to see if you can place an item
-        if (CanPlaceItem)
+        if (CanPlaceItem && Override)
         {
             //checks to see if the mouse button was pressed (update for mobile maybe use unity buttons)
             if (Input.GetMouseButtonDown(0))
@@ -90,8 +90,6 @@ public class UIManager : MonoBehaviour
         GameObject.Find("End Turn Button").GetComponent<Button>().onClick.AddListener(() => EndRound());
         //get the restart button and make an event 
         GameObject.Find("Restart Button").GetComponent<Button>().onClick.AddListener(() => Restart());
-
-
     }
     /// <summary>
     /// allows an item to be placed and is handed which item to place
@@ -109,7 +107,7 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void Restart()
     {
-        Override = false;
+        SelectedItem = null;
         StartCoroutine(GameManager.Instance.StartMatch(GameManager.Instance._matchManager.CurrentLevel.name));
     }
     

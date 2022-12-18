@@ -108,6 +108,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void LevelSelected(string level_name)
     {
+        Debug.Log(_uiManager.SelectedItem);
         Instance.StartCoroutine(StartMatch(level_name));
     }
 
@@ -147,6 +148,7 @@ public class GameManager : MonoBehaviour
         GameObject _board = GameObject.Find("Board");
         Instance._uiManager.FindBoard(_board);
         Debug.Log("Board Found");
+        _uiManager.SelectedItem = null;
         if (_board != null)
         {
             Debug.Log("Board Not null");
