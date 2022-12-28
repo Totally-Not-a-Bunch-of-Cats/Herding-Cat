@@ -6,6 +6,8 @@ using Unity.Mathematics;
 using UnityEngine.UI;
 using System;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 
 /// <summary>
 /// Controls the Match UI
@@ -39,44 +41,52 @@ public class UIManager : MonoBehaviour
     /// </summary>
     void Update()
     {
-        //checks to see if you can place an item
-        if (CanPlaceItem && Override)
+        if (SceneManager.GetActiveScene().name == "Match")
         {
-            //checks to see if the mouse button was pressed (update for mobile maybe use unity buttons)
-            if (Input.GetMouseButtonDown(0))
+            //checks to see if you can place an item
+            if (CanPlaceItem && Override)
             {
-                //gets world position and translates it to a vec2int
-                Vector3 WorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                WorldPosition.z = 3;
-                WorldPosition = ItemLocationSanitization(WorldPosition);
-                float clickableX = GameManager.Instance._matchManager.GameBoard.GetWidth() / 2;
-                float clickableY = GameManager.Instance._matchManager.GameBoard.GetHeight() / 2;
-                Vector2Int itemLocation = new Vector2Int((int)(WorldPosition.x - 0.5 + clickableX), (int)(WorldPosition.y - 0.5 + clickableY));
-
-                // Checks if position is within board and if the tile is empty
-                if ((WorldPosition.x >= -clickableX && WorldPosition.x < clickableX) 
-                    && (WorldPosition.y >= -clickableY && WorldPosition.y < clickableY) 
-                    && GameManager.Instance._matchManager.GameBoard.At(itemLocation) == null)
+                //checks to see if the mouse button was pressed (update for mobile maybe use unity buttons)
+                if (Input.GetMouseButtonDown(0))
                 {
-                    GameManager.Instance._matchManager.GameBoard.Set(itemLocation, SelectedItem);
-                    GameObject temp = Instantiate(SelectedItem.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);
-                    temp.name = SelectedItem.name + $" ({itemLocation.x}, {itemLocation.y})";
-                    GameManager.Instance._matchManager.GameBoard.Items.Add(new PosObject(itemLocation, SelectedItem.name, temp.transform));
-                    // Adds Item to the list to delete/adjust order of items
-                    GameObject NewItemEntry = Instantiate(ItemAdjPrefab, new Vector3(0,0,0), Quaternion.identity, ItemAdjPanel.transform.GetChild(0).GetChild(0));
-                    NewItemEntry.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = SelectedItem.name;
-                    NewItemEntry.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = temp.GetComponent<SpriteRenderer>().sprite;
-                    GameManager.Instance._matchManager.GameBoard.Items[GameManager.Instance._matchManager.GameBoard.Items.Count - 1].ItemAdjObject = NewItemEntry;
-                    int num = GameManager.Instance._matchManager.GameBoard.Items.Count - 1;
-                    NewItemEntry.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteItem(num));
-                    
+                    //gets world position and translates it to a vec2int
+                    Vector3 WorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    WorldPosition.z = 3;
+                    WorldPosition = ItemLocationSanitization(WorldPosition);
+                    float clickableX = GameManager.Instance._matchManager.GameBoard.GetWidth() / 2;
+                    float clickableY = GameManager.Instance._matchManager.GameBoard.GetHeight() / 2;
+                    Debug.Log($"Item Pos X: {(WorldPosition.x - 0.5 + clickableX)}");
+                    // Need to add 1 to this when odd
+                    Debug.Log($"Item Pos X int: {(int)(WorldPosition.x - 0.5 + clickableX)}");
+
+                    Vector2Int itemLocation = new Vector2Int((int)(WorldPosition.x - 0.5 + clickableX),
+                        (int)(WorldPosition.y - 0.5 + clickableY));
+
+                    // Checks if position is within board and if the tile is empty
+                    if ((WorldPosition.x >= -clickableX && WorldPosition.x < clickableX)
+                        && (WorldPosition.y >= -clickableY && WorldPosition.y < clickableY)
+                        && GameManager.Instance._matchManager.GameBoard.At(itemLocation) == null)
+                    {
+                        GameManager.Instance._matchManager.GameBoard.Set(itemLocation, SelectedItem);
+                        GameObject temp = Instantiate(SelectedItem.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);
+                        temp.name = SelectedItem.name + $" ({itemLocation.x}, {itemLocation.y})";
+                        GameManager.Instance._matchManager.GameBoard.Items.Add(new PosObject(itemLocation, SelectedItem.name, temp.transform));
+                        // Adds Item to the list to delete/adjust order of items
+                        GameObject NewItemEntry = Instantiate(ItemAdjPrefab, new Vector3(0, 0, 0), Quaternion.identity, ItemAdjPanel.transform.GetChild(0).GetChild(0));
+                        NewItemEntry.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = SelectedItem.name;
+                        NewItemEntry.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = temp.GetComponent<SpriteRenderer>().sprite;
+                        GameManager.Instance._matchManager.GameBoard.Items[GameManager.Instance._matchManager.GameBoard.Items.Count - 1].ItemAdjObject = NewItemEntry;
+                        int num = GameManager.Instance._matchManager.GameBoard.Items.Count - 1;
+                        NewItemEntry.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteItem(num));
+
+                    }
+                    CanPlaceItem = false;
                 }
-                CanPlaceItem = false;
-            } 
-        }
-        else
-        {
-            CanPlaceItem = true;
+            }
+            else
+            {
+                CanPlaceItem = true;
+            }
         }
     }
 
@@ -136,9 +146,15 @@ public class UIManager : MonoBehaviour
         Location.x = Mathf.Round(Location.x);
         Location.y = Mathf.Round(Location.y);
 
-        Location.x -= 0.5f;
-        Location.y -= 0.5f;
-
+        if (GameManager.Instance._matchManager.BoardOffset.x == 0.0f)
+        {
+            Location.x -= 0.5f;
+        }
+        if (GameManager.Instance._matchManager.BoardOffset.y == 0.0f)
+        {
+            Location.y -= 0.5f;
+        }
+ 
         return Location;
     }
 

@@ -108,7 +108,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void LevelSelected(string level_name)
     {
-        Debug.Log(_uiManager.SelectedItem);
         Instance.StartCoroutine(StartMatch(level_name));
     }
 
@@ -125,7 +124,6 @@ public class GameManager : MonoBehaviour
     public IEnumerator StartMatch(string level_name)
     {
         //string level_name = "Test";
-        Debug.Log("In start match");
         //checks to see what current level is and if so it reload the level (update later for better functinality)
         if (SceneManager.GetActiveScene().name != "Match")
         {
@@ -134,12 +132,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Else");
             yield return new WaitForEndOfFrame();
             SceneManager.LoadScene("Match");
-            Debug.Log("AfterLoad");
             yield return new WaitForEndOfFrame();
-            Debug.Log("Test");
         }
 
         //loads the board and starts the level by generating a match using the match info and matchmanager
@@ -147,11 +142,9 @@ public class GameManager : MonoBehaviour
 
         GameObject _board = GameObject.Find("Board");
         Instance._uiManager.FindBoard(_board);
-        Debug.Log("Board Found");
         _uiManager.SelectedItem = null;
         if (_board != null)
         {
-            Debug.Log("Board Not null");
             Instance._matchManager = _board.GetComponent<MatchManager>();
             LevelData _currentLevel = Levels.Find(level => level.name == level_name);
             LevelPosition = Levels.IndexOf(_currentLevel) + 1;

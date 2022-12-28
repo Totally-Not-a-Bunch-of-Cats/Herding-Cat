@@ -24,6 +24,7 @@ public class MatchManager : MonoBehaviour
     private bool ActiveMatch = false;
     private bool Won = false;
     private bool CatMoving = false;
+    public Vector3 BoardOffset;
 
     //stores the items used, rounds passed, and targets for starts gained
     [Header("Gameplay Info")]
@@ -62,20 +63,40 @@ public class MatchManager : MonoBehaviour
             // Generates grid (Odd numbered sizes will break)
             int tempx = BoardSize.x / 2;
             int tempy = BoardSize.y / 2;
+            bool oddX = BoardSize.x % 2 != 0;
+            bool oddY = BoardSize.y % 2 != 0;
+
+            if (oddX)
+            {
+                BoardOffset.x = 0.5f;
+            }
+            if (oddY)
+            {
+                BoardOffset.y = 0.5f;
+            }
+
+            if (oddX || oddY)
+            {
+                BoardTileMap.transform.localPosition += BoardOffset;
+            }
 
             // setup background(tilemap)
-            for (int x = -tempx; x < tempx; x++) {
-                for (int y = -tempy; y < tempy; y++) {
-                    BoardTileMap.SetTile(new Vector3Int(x,y,0), currentLevel.GetBackgroundTile());
+            for (int x = (int)(-tempx - (0.5f + BoardOffset.y)); x < tempx; x++)
+            {
+                for (int y = (int)(-tempy - (0.5f + BoardOffset.y)) ; y < tempy; y++)
+                {
+                    BoardTileMap.SetTile(new Vector3Int(x, y, 0), currentLevel.GetBackgroundTile());
                 }
             }
+
             // place tiles(cat pens/cats/traps) associated to level
             int count = 0;
             foreach (PosTile CurPosTile in currentLevel.GetTiles())
             {
-
-                Transform temp = Instantiate(CurPosTile.Slate.GetPrefab(), new Vector3(CurPosTile.Position.x - tempx + 0.5f, CurPosTile.Position.y - tempy + 0.5f, 5),
-                    Quaternion.identity, transform).transform;
+                Vector3 pos = new Vector3(CurPosTile.Position.x - tempx + 0.5f - BoardOffset.x,
+                    CurPosTile.Position.y - tempy + 0.5f - BoardOffset.y, 5);
+                Transform temp = Instantiate(CurPosTile.Slate.GetPrefab(), pos, Quaternion.identity, transform).transform;
+                temp.gameObject.name = CurPosTile.Slate.name + $" ({CurPosTile.Position.x}, {CurPosTile.Position.y})";
                 if (CurPosTile.Slate.Is<Cat>())
                 {
                     GameBoard.Cats[count].Object = temp;

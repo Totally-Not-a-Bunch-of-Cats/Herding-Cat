@@ -67,6 +67,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f5d5bd19159eb314c8567b304de4fd6a, type: 2}
   - {fileID: 11400000, guid: 70861889a4e9b6242972cffc98dd2a42, type: 2}
   - {fileID: 11400000, guid: c8fef117fb396744cbeb19e5ce29dbe8, type: 2}
+  - {fileID: 11400000, guid: 52208975bafc6e24fa6e7398efcbb7c4, type: 2}
   LevelPosition: 0
   UpdateLevelData: 0
 --- !u!114 &590294061082041625
@@ -93,6 +94,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ebb21c06c6f2a64f94e72b382662e2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectedItem: {fileID: 0}
+  CanPlaceItem: 0
+  Override: 1
   Board: {fileID: 0}
   GUI: {fileID: 0}
   ItemAdjPrefab: {fileID: 4897113919975755801, guid: 3efadeb619f8cb14992fc7c06b7793d9, type: 3}
