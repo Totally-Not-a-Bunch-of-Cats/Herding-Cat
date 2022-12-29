@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     private static bool m_ShuttingDown = false;
     private static object m_Lock = new object();
     private static GameManager m_Instance;
+    public int LevelPosition = 1;
+
 
     // Used for testing to determine if star count for a level should be changed or outputed in console.
     [SerializeField] public bool UpdateLevelData = false;
@@ -81,14 +83,14 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         //Levels = GetAllInstances<LevelData>();
-        //StartCoroutine(SwitchScene("Menu"));
-        StartCoroutine(StartMatch());
+        //StartCoroutine(StartMatch("1-1"));
+        StartCoroutine(SwitchScene("Main Menu"));
     }
 
 
     public void ClicktoStart()
     {
-        StartCoroutine(StartMatch());
+        StartCoroutine(StartMatch("Test"));
     }
 
     /// <summary>
@@ -104,9 +106,14 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Starts the level
     /// </summary>
-    public void LevelSelected()
+    public void LevelSelected(string level_name)
     {
-        SceneManager.LoadScene("Match");
+        Instance.StartCoroutine(StartMatch(level_name));
+    }
+
+    public void ButtonOfSelectedNum(int buttonPressed)
+    {
+        Instance.LevelPosition = buttonPressed + 1;
     }
 
     /// <summary>
@@ -114,35 +121,36 @@ public class GameManager : MonoBehaviour
     /// so it handles restarting
     /// </summary>
     /// <returns></returns>
-    public IEnumerator StartMatch()
+    public IEnumerator StartMatch(string level_name)
     {
-        string level_name = "Test";
+        //string level_name = "Test";
         //checks to see what current level is and if so it reload the level (update later for better functinality)
         if (SceneManager.GetActiveScene().name != "Match")
         {
             SceneManager.LoadScene("Match");
             yield return new WaitForEndOfFrame();
-            Debug.Log("im at match");
         }
         else
         {
             yield return new WaitForEndOfFrame();
             SceneManager.LoadScene("Match");
             yield return new WaitForEndOfFrame();
-            Debug.Log("restarted");
         }
 
         //loads the board and starts the level by generating a match using the match info and matchmanager
         yield return new WaitForEndOfFrame();
 
         GameObject _board = GameObject.Find("Board");
-        _uiManager.FindBoard(_board);
+        Instance._uiManager.FindBoard(_board);
+        _uiManager.SelectedItem = null;
         if (_board != null)
         {
-            _matchManager = _board.GetComponent<MatchManager>();
+            Instance._matchManager = _board.GetComponent<MatchManager>();
             LevelData _currentLevel = Levels.Find(level => level.name == level_name);
+            LevelPosition = Levels.IndexOf(_currentLevel) + 1;
+            Debug.Log(_currentLevel.name);
             // Init round manager / match
-            if (_matchManager.InitMatch(_currentLevel))
+            if (Instance._matchManager.InitMatch(_currentLevel))
             {
                 _screenResizeManager.ScaleBoard();
                 Debug.Log($"Successfully initialized level {level_name}");
