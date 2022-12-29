@@ -16,4 +16,6 @@ public class Item : Tile
     public Direction Direction = Direction.Away;
     [Tooltip("A picture of the Item.")]
     public Sprite Picture;
+    [Tooltip("Prefab of the item in a cat bed button.")]
+    public GameObject ButtonPrefab;
 }

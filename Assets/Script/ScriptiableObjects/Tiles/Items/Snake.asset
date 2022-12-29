@@ -18,3 +18,4 @@ MonoBehaviour:
   MoveDistance: 2
   Direction: 4
   Picture: {fileID: 21300000, guid: ddad149a4a2d376429689cc6824af54a, type: 3}
+  ButtonPrefab: {fileID: 7992114167247847449, guid: 3a7867f59f498714596dcfb13c0ee3e7, type: 3}

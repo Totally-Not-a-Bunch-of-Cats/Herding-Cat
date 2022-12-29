@@ -20,7 +20,7 @@ public class LevelData: ScriptableObject
     [SerializeField] UnityEngine.Tilemaps.Tile BackgroundTile;
     [SerializeField] PosTile[] Tiles; // cats/traps(obsticles)
     [SerializeField] Item[] PossibleItems;
-    [SerializeField] int StarsEarned = 0;
+    [SerializeField] public int StarsEarned = 0;
     [SerializeField] bool Unlocked = false;
 
     /// <summary>

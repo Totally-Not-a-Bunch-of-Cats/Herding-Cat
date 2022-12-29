@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 /// Runs the Game
@@ -17,13 +18,16 @@ public class GameManager : MonoBehaviour
     //Holds references to the other managers
     public MatchManager _matchManager;
     public UIManager _uiManager;
+    public ScreenResizeManager _screenResizeManager;
     //list of all level data
-    public static List<LevelData> Levels;
-
+    //public static List<LevelData> Levels;
+    public List<LevelData> Levels = new List<LevelData>();
     // Check to see if we're about to be destroyed.
     private static bool m_ShuttingDown = false;
     private static object m_Lock = new object();
     private static GameManager m_Instance;
+    public int LevelPosition = 1;
+
 
     // Used for testing to determine if star count for a level should be changed or outputed in console.
     [SerializeField] public bool UpdateLevelData = false;
@@ -65,30 +69,51 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public static List<T> GetAllInstances<T>() where T : ScriptableObject
-    {
-        return AssetDatabase.FindAssets($"t: {typeof(T).Name}").ToList()
-                    .Select(AssetDatabase.GUIDToAssetPath)
-                    .Select(AssetDatabase.LoadAssetAtPath<T>)
-                    .ToList();
-    }
+    //public static List<T> GetAllInstances<T>() where T : ScriptableObject
+    //{
+    //    return AssetDatabase.FindAssets($"t: {typeof(T).Name}").ToList()
+    //                .Select(AssetDatabase.GUIDToAssetPath)
+    //                .Select(AssetDatabase.LoadAssetAtPath<T>)
+    //                .ToList();
+    //}
 
     /// <summary>
     /// Runs on start to start the first level
     /// </summary>
     private void Start()
     {
-        Levels = GetAllInstances<LevelData>();
-        StartCoroutine(StartMatch());
+        //Levels = GetAllInstances<LevelData>();
+        //StartCoroutine(StartMatch("1-1"));
+        StartCoroutine(SwitchScene("Main Menu"));
+    }
+
+
+    public void ClicktoStart()
+    {
+        StartCoroutine(StartMatch("Test"));
     }
 
     /// <summary>
     /// Switches scenes
     /// </summary>
     /// <param name="Name">Name of scene that you want to switch to</param>
-    public void SwitchScene(string Name)
+    public IEnumerator SwitchScene(string Name)
     {
         SceneManager.LoadScene(Name, LoadSceneMode.Single);
+        yield return new WaitForEndOfFrame();
+    }
+
+    /// <summary>
+    /// Starts the level
+    /// </summary>
+    public void LevelSelected(string level_name)
+    {
+        Instance.StartCoroutine(StartMatch(level_name));
+    }
+
+    public void ButtonOfSelectedNum(int buttonPressed)
+    {
+        Instance.LevelPosition = buttonPressed + 1;
     }
 
     /// <summary>
@@ -96,9 +121,9 @@ public class GameManager : MonoBehaviour
     /// so it handles restarting
     /// </summary>
     /// <returns></returns>
-    public IEnumerator StartMatch()
+    public IEnumerator StartMatch(string level_name)
     {
-        string level_name = "Test";
+        //string level_name = "Test";
         //checks to see what current level is and if so it reload the level (update later for better functinality)
         if (SceneManager.GetActiveScene().name != "Match")
         {
@@ -113,16 +138,21 @@ public class GameManager : MonoBehaviour
         }
 
         //loads the board and starts the level by generating a match using the match info and matchmanager
+        yield return new WaitForEndOfFrame();
+
         GameObject _board = GameObject.Find("Board");
-        _uiManager.FindBoard(_board);
+        Instance._uiManager.FindBoard(_board);
+        _uiManager.SelectedItem = null;
         if (_board != null)
         {
-            _matchManager = _board.GetComponent<MatchManager>();
+            Instance._matchManager = _board.GetComponent<MatchManager>();
             LevelData _currentLevel = Levels.Find(level => level.name == level_name);
-
+            LevelPosition = Levels.IndexOf(_currentLevel) + 1;
+            Debug.Log(_currentLevel.name);
             // Init round manager / match
-            if (_matchManager.InitMatch(_currentLevel))
+            if (Instance._matchManager.InitMatch(_currentLevel))
             {
+                _screenResizeManager.ScaleBoard();
                 Debug.Log($"Successfully initialized level {level_name}");
             }
             else
