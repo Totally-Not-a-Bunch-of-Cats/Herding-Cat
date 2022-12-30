@@ -25,6 +25,14 @@ public class CatMovementInfo
         this.Used = false;
     }
 
+    public CatMovementInfo(int Index = 0)
+    {
+        this.Index = Index;
+        this.Destination = null;
+        this.Distance = 0;
+        this.Used = false;
+    }
+
     public CatMovementInfo()
     {
         this.Index = 0;
