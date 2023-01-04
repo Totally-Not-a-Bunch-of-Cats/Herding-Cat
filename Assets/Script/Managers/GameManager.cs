@@ -82,15 +82,11 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        //Levels = GetAllInstances<LevelData>();
-        //StartCoroutine(StartMatch("1-1"));
         StartCoroutine(SwitchScene("Main Menu"));
     }
-
-
-    public void ClicktoStart()
+    public void ChangeScene(string Name)
     {
-        StartCoroutine(StartMatch("Test"));
+        Instance.StartCoroutine(SwitchScene(Name));
     }
 
     /// <summary>
