@@ -58,9 +58,18 @@ public class UIManager : MonoBehaviour
                     Debug.Log($"Item Pos X: {(WorldPosition.x - 0.5 + clickableX)}");
                     // Need to add 1 to this when odd
                     Debug.Log($"Item Pos X int: {(int)(WorldPosition.x - 0.5 + clickableX)}");
-
+                    
                     Vector2Int itemLocation = new Vector2Int((int)(WorldPosition.x - 0.5 + clickableX),
                         (int)(WorldPosition.y - 0.5 + clickableY));
+
+                    if (GameManager.Instance._matchManager.BoardOffset.x == 0.5f)
+                    {
+                        itemLocation.x = itemLocation.x + 1;
+                    }
+                    if (GameManager.Instance._matchManager.BoardOffset.y == 0.5f)
+                    {
+                        itemLocation.y = itemLocation.y + 1;
+                    }
 
                     // Checks if position is within board and if the tile is empty
                     if ((WorldPosition.x >= -clickableX && WorldPosition.x < clickableX)

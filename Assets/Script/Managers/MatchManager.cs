@@ -121,16 +121,6 @@ public class MatchManager : MonoBehaviour
         return false;
     }
 
-    // TODO: (Potential)Can be deleted if move Activate stars out of Match manager and setting gameWonUI at end of end round function
-    private void Update()
-    {
-        if (Won)
-        {
-            GameWonUI.SetActive(true);
-            ActivateStars();
-        }
-    }
-
     // TODO: (Potential)Maybe move this out of Match Manager?
     void ActivateStars()
     {
@@ -172,14 +162,14 @@ public class MatchManager : MonoBehaviour
                 {
                     if (GameBoard.Cats[j] != null)
                     {
-                        // TODO: (Potential) Could Move deltaX, deltaY, and Dist Varable out of if/else statement(next to this todo)
+                        //moves all cats in radius of the item
+                        int deltaX = GameBoard.Cats[j].Position.x - GameBoard.Items[i].Position.x;
+                        int deltaY = GameBoard.Cats[j].Position.y - GameBoard.Items[i].Position.y;
+                        int Dist = System.Math.Abs(deltaX) + System.Math.Abs(deltaY);
+
                         if (CurrentItem.AllCatsinRadius == true)
                         {
                             //moves all cats in radius of the item
-                            int deltaX = GameBoard.Cats[j].Position.x - GameBoard.Items[i].Position.x;
-                            int deltaY = GameBoard.Cats[j].Position.y - GameBoard.Items[i].Position.y;
-
-                            int Dist = System.Math.Abs(deltaX) + System.Math.Abs(deltaY);
                             //adds distance to the list 
                             CatMoveInfo.Add(new CatMovementInfo(j, Dist));
                             Vector2Int test = DestinationAll(deltaX, deltaY, CurrentItem, j);
@@ -191,10 +181,6 @@ public class MatchManager : MonoBehaviour
                         else
                         {
                             //find if the cat is in range and if so moves said cat
-                            int deltaX = GameBoard.Cats[j].Position.x - GameBoard.Items[i].Position.x;
-                            int deltaY = GameBoard.Cats[j].Position.y - GameBoard.Items[i].Position.y;
-
-                            int Dist = System.Math.Abs(deltaX) + System.Math.Abs(deltaY);
                             // Checks if cat is closer than current cat and within radius
                             if (Dist <= ClosestDistance && (deltaY == 0 || deltaX == 0) || ClosestDistance < 0 
                                 && Dist <= CurrentItem.Radius && (deltaY == 0 || deltaX == 0))
@@ -302,7 +288,6 @@ public class MatchManager : MonoBehaviour
                 StarCount++;
             }
 
-
             // Finds next level name 
             string[] LevelNameParts = CurrentLevel.name.Split('-');
             string NextLevelName = LevelNameParts[0] + "-";
@@ -331,6 +316,10 @@ public class MatchManager : MonoBehaviour
                     Debug.LogWarning("No Next Level");
                 }
             }
+
+            GameWonUI.SetActive(true);
+            ActivateStars();
+
             // Checks if wants to update leveldata info
             if (GameManager.Instance.UpdateLevelData == true)
             {
@@ -415,7 +404,6 @@ public class MatchManager : MonoBehaviour
             CurDestination = GameBoard.Cats[index].Position + new Vector2Int(0, -CurrentItem.MoveDistance);
             return CurDestination;
         }
-        Debug.Log("fucked up");
         return new Vector2Int(-100, -100);
     }
     /// <summary>
@@ -432,7 +420,6 @@ public class MatchManager : MonoBehaviour
         if (Direction.x > 0)
         {                                                       
             Vector3 Goalpos = new Vector3(((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x))), 0f, 0f);
-
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
             StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination,  .5f,  ListPos,  FinalDestination));
@@ -440,7 +427,6 @@ public class MatchManager : MonoBehaviour
         else if (Direction.y > 0)
         {
             Vector3 Goalpos = new Vector3(0f, ((Math.Abs(GameBoard.Cats[ListPos].Position.y - FinalDestination.y))), 0f);
-
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
             StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
@@ -448,7 +434,6 @@ public class MatchManager : MonoBehaviour
         else if (Direction.x < 0)
         {
             Vector3 Goalpos = new Vector3(((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x))), 0f, 0f);
-
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
             StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
@@ -456,7 +441,6 @@ public class MatchManager : MonoBehaviour
         else
         {
             Vector3 Goalpos = new Vector3(0f, ((Math.Abs(GameBoard.Cats[ListPos].Position.y - FinalDestination.y))), 0f);
-
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
             StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
