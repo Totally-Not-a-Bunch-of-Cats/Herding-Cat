@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
             Instance._matchManager = _board.GetComponent<MatchManager>();
             LevelData _currentLevel = Levels.Find(level => level.name == level_name);
             LevelPosition = Levels.IndexOf(_currentLevel) + 1;
-            Debug.Log(_currentLevel.name);
+            //Debug.Log(_currentLevel.name);
             // Init round manager / match
             if (Instance._matchManager.InitMatch(_currentLevel))
             {
