@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
+using UnityEditor;
 
+[ExecuteInEditMode]
 public class LevelCreationTool : MonoBehaviour
 {
     public Vector2Int BoardSize;
@@ -16,9 +18,10 @@ public class LevelCreationTool : MonoBehaviour
     public bool CanPlaceBoardTile = false;
     public GameObject Board;
     Board GameBoard;
-    public List<PosObject> Tiles;
+    public List<PosTile> Tiles;
     Vector3 BoardOffset = new Vector3();
-
+    public int GoalRounds;
+    public int GoalItems;
 
     //then activates buttons to begin working on the level
 
@@ -36,6 +39,28 @@ public class LevelCreationTool : MonoBehaviour
         if (int.Parse(X) > 0)
         {
             BoardSize.x = int.Parse(X);
+        }
+    }
+    /// <summary>
+    /// takes the input for the num of turns to beat the level
+    /// </summary>
+    /// <param name="turn"></param>
+    public void GoalTurnInput(string turn)
+    {
+        if (int.Parse(turn) > 0)
+        {
+            GoalRounds = int.Parse(turn);
+        }
+    }
+    /// <summary>
+    /// takes the input for the num of items to beat the level
+    /// </summary>
+    /// <param name="items"></param>
+    public void GoalItemsInput(string items)
+    {
+        if (int.Parse(items) > 0)
+        {
+            GoalItems = int.Parse(items);
         }
     }
     /// <summary>
@@ -80,7 +105,14 @@ public class LevelCreationTool : MonoBehaviour
     /// </summary>
     public void Save()
     {
-
+        LevelData Level = ScriptableObject.CreateInstance<LevelData>();
+        Level.BackgroundTile = BackgroundTile;
+        Level.Dimensions = BoardSize;
+        //Level.PossibleItems;
+        Level.TargetItems = GoalItems;
+        Level.TargetRounds = GoalRounds;
+        Level.Tiles = Tiles.ToArray();
+        AssetDatabase.CreateAsset(Level, "Assets/Script/ScriptiableObjects/Levels/" + LevelName + ".asset");
     }
 
     /// <summary>
@@ -162,7 +194,7 @@ public class LevelCreationTool : MonoBehaviour
                     GameObject temp = Instantiate(SelectedBoardTile.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);
                     temp.name = SelectedBoardTile.name + $" ({tileLocation.x}, {tileLocation.y})";
 
-                    Tiles.Add(new PosObject(tileLocation, SelectedBoardTile.name, temp.transform));
+                    //Tiles.Add(new PosTile(tileLocation, SelectedBoardTile.name, temp.transform));
                 }
                 CanPlaceBoardTile = false;
             }

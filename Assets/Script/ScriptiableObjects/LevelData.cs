@@ -11,15 +11,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LevelData", menuName = "ScriptableObjects/New LevelData", order = 1)]
 public class LevelData: ScriptableObject
 {
-    [SerializeField] Vector2Int Dimensions;
-    [SerializeField] int TargetRounds;
-    [SerializeField] int TargetItems;
+    [SerializeField] public Vector2Int Dimensions;
+    [SerializeField] public int TargetRounds;
+    [SerializeField] public int TargetItems;
 
     [Header("Tile Data")]
     // Tile that is set for the backgound of play area
-    [SerializeField] UnityEngine.Tilemaps.Tile BackgroundTile;
-    [SerializeField] PosTile[] Tiles; // cats/traps(obsticles)
-    [SerializeField] Item[] PossibleItems;
+    [SerializeField] public UnityEngine.Tilemaps.Tile BackgroundTile;
+    [SerializeField] public PosTile[] Tiles; // cats/traps(obsticles)
+    [SerializeField] public Item[] PossibleItems;
     [SerializeField] public int StarsEarned = 0;
     [SerializeField] bool Unlocked = false;
 
