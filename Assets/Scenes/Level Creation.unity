@@ -4834,7 +4834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BoardSize: {x: 0, y: 0}
   LevelName: 
-  BackgroundTile: {fileID: 0}
+  BackgroundTile: {fileID: 11400000, guid: 76cbab4e70ed36846808f77c6f9b14f9, type: 2}
   TileImages:
   - {fileID: 11400000, guid: 76cbab4e70ed36846808f77c6f9b14f9, type: 2}
   - {fileID: 11400000, guid: 76fd22e01f2468b4792085d395c67cd9, type: 2}
@@ -4843,11 +4843,12 @@ MonoBehaviour:
   ItemBoardButtons: {fileID: 1430579400}
   SelectedBoardTile: {fileID: 0}
   Override: 1
-  CanPlaceBoardTile: 0
+  CanPlaceBoardTile: 1
   Board: {fileID: 1047726921}
   Tiles: []
-  GoalTurns: 0
+  GoalRounds: 0
   GoalItems: 0
+  GamelevelList: {fileID: 11400000, guid: c8a95196aa4f1044ebf30b9017149d3b, type: 2}
 --- !u!1 &851919135
 GameObject:
   m_ObjectHideFlags: 0

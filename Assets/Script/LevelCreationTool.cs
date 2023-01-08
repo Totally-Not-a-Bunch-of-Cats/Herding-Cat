@@ -22,6 +22,7 @@ public class LevelCreationTool : MonoBehaviour
     Vector3 BoardOffset = new Vector3();
     public int GoalRounds;
     public int GoalItems;
+    public GameLevels GamelevelList;
 
     //then activates buttons to begin working on the level
 
@@ -113,7 +114,7 @@ public class LevelCreationTool : MonoBehaviour
         Level.TargetRounds = GoalRounds;
         Level.Tiles = Tiles.ToArray();
         AssetDatabase.CreateAsset(Level, "Assets/Script/ScriptiableObjects/Levels/" + LevelName + ".asset");
-        GameManager.Instance.Levels.Add(Level);
+        GamelevelList.GameLevel.Add(Level);
     }
 
     /// <summary>
