@@ -27,7 +27,7 @@ public class LevelData: ScriptableObject
     /// Checks if Level Data has all valid information
     /// </summary>
     /// <returns>True if valid, False if not</returns>
-    public bool valid()
+    public bool Valid()
     {
         int numCats = 0;
         foreach (PosTile _tile in Tiles)

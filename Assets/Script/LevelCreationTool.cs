@@ -113,6 +113,7 @@ public class LevelCreationTool : MonoBehaviour
         Level.TargetRounds = GoalRounds;
         Level.Tiles = Tiles.ToArray();
         AssetDatabase.CreateAsset(Level, "Assets/Script/ScriptiableObjects/Levels/" + LevelName + ".asset");
+        GameManager.Instance.Levels.Add(Level);
     }
 
     /// <summary>
@@ -194,7 +195,7 @@ public class LevelCreationTool : MonoBehaviour
                     GameObject temp = Instantiate(SelectedBoardTile.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);
                     temp.name = SelectedBoardTile.name + $" ({tileLocation.x}, {tileLocation.y})";
 
-                    //Tiles.Add(new PosTile(tileLocation, SelectedBoardTile.name, temp.transform));
+                    Tiles.Add(new PosTile(tileLocation, SelectedBoardTile));
                 }
                 CanPlaceBoardTile = false;
             }
