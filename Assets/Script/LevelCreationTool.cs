@@ -23,6 +23,14 @@ public class LevelCreationTool : MonoBehaviour
     public int GoalRounds;
     public int GoalItems;
     public GameLevels GamelevelList;
+    public List<Item> SelectedItems;
+    public Item Toy;
+    public Item Snake;
+    public Item AirHorn;
+    public Item Treat;
+    public bool Remove;
+    public List<Vector2Int> TileLocations;
+    public List<GameObject> ItemReferences;
 
     //then activates buttons to begin working on the level
 
@@ -75,6 +83,24 @@ public class LevelCreationTool : MonoBehaviour
             BoardSize.y = int.Parse(Y);
         }
     }
+
+    public void SelectedToyItem(bool ItemSelected)
+    {
+        SelectedItems.Add(Toy);
+    }
+    public void SelectedSnakeItem(bool ItemSelected)
+    {
+        SelectedItems.Add(Snake);
+    }
+    public void SelectedAirHornItem(bool ItemSelected)
+    {
+        SelectedItems.Add(AirHorn);
+    }
+    public void SelectedTreatItem(bool ItemSelected)
+    {
+        SelectedItems.Add(Treat);
+    }
+
     /// <summary>
     /// lets the desginer input the name of the level
     /// </summary>
@@ -109,7 +135,7 @@ public class LevelCreationTool : MonoBehaviour
         LevelData Level = ScriptableObject.CreateInstance<LevelData>();
         Level.BackgroundTile = BackgroundTile;
         Level.Dimensions = BoardSize;
-        //Level.PossibleItems;
+        Level.PossibleItems = SelectedItems.ToArray();
         Level.TargetItems = GoalItems;
         Level.TargetRounds = GoalRounds;
         Level.Tiles = Tiles.ToArray();
@@ -164,6 +190,11 @@ public class LevelCreationTool : MonoBehaviour
         CanPlaceBoardTile = true;
     }
 
+    public void Delete()
+    {
+        CanPlaceBoardTile = true;
+        Remove = true;
+    }
 
     void Update()
     {
@@ -185,18 +216,38 @@ public class LevelCreationTool : MonoBehaviour
 
                 Vector2Int tileLocation = new Vector2Int((int)(WorldPosition.x - 0.5 + clickableX),
                     (int)(WorldPosition.y - 0.5 + clickableY));
-
-                // Checks if position is within board and if the tile is empty
-                if ((WorldPosition.x >= -clickableX && WorldPosition.x < clickableX)
-                    && (WorldPosition.y >= -clickableY && WorldPosition.y < clickableY)
-                    && GameBoard.At(tileLocation) == null) //&& GameBoard.At(tileLocation) == null
+                if((WorldPosition.x >= -clickableX && WorldPosition.x < clickableX)
+                    && (WorldPosition.y >= -clickableY && WorldPosition.y < clickableY))
                 {
-                    GameBoard.Set(tileLocation, SelectedBoardTile);
-                    Debug.Log(SelectedBoardTile.GetPrefab());
-                    GameObject temp = Instantiate(SelectedBoardTile.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);
-                    temp.name = SelectedBoardTile.name + $" ({tileLocation.x}, {tileLocation.y})";
-
-                    Tiles.Add(new PosTile(tileLocation, SelectedBoardTile));
+                    if(Remove)
+                    {
+                        GameBoard.Set(tileLocation, null);
+                        for(int i = 0; i < Tiles.Count; i++)
+                        {
+                            if(Tiles[i].Position == tileLocation)
+                            {
+                                Tiles.RemoveAt(i);
+                                TileLocations.Remove(tileLocation);
+                                Destroy(ItemReferences[i]);
+                                ItemReferences.RemoveAt(i);
+                                break;
+                            }
+                        }
+                        //remove in game object 
+                        Remove = false;
+                    }
+                    else
+                    {
+                        if (GameBoard.At(tileLocation) == null)
+                        {
+                            TileLocations.Add(tileLocation);
+                            GameBoard.Set(tileLocation, SelectedBoardTile);
+                            GameObject temp = Instantiate(SelectedBoardTile.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);
+                            temp.name = SelectedBoardTile.name + $" ({tileLocation.x}, {tileLocation.y})";
+                            ItemReferences.Add(temp);
+                            Tiles.Add(new PosTile(tileLocation, SelectedBoardTile));
+                        }
+                    }
                 }
                 CanPlaceBoardTile = false;
             }
