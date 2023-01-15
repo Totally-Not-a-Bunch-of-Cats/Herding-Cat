@@ -55,25 +55,38 @@ public class UIManager : MonoBehaviour
                     WorldPosition = ItemLocationSanitization(WorldPosition);
                     float clickableX = GameManager.Instance._matchManager.GameBoard.GetWidth() / 2;
                     float clickableY = GameManager.Instance._matchManager.GameBoard.GetHeight() / 2;
-                    Debug.Log($"Item Pos X: {(WorldPosition.x - 0.5 + clickableX)}");
-                    // Need to add 1 to this when odd
-                    Debug.Log($"Item Pos X int: {(int)(WorldPosition.x - 0.5 + clickableX)}");
-                    
+                    if(GameManager.Instance._matchManager.BoardOffset.y == 0.5f)
+                    {
+                        clickableX -= 0.5f;
+                    }
+                    if (GameManager.Instance._matchManager.BoardOffset.x == 0.5f)
+                    {
+                        clickableY -= 0.5f;
+                    }
+
                     Vector2Int itemLocation = new Vector2Int((int)(WorldPosition.x - 0.5 + clickableX),
                         (int)(WorldPosition.y - 0.5 + clickableY));
 
                     if (GameManager.Instance._matchManager.BoardOffset.x == 0.5f)
                     {
-                        itemLocation.x = itemLocation.x + 1;
+                        itemLocation.x += 1;
                     }
                     if (GameManager.Instance._matchManager.BoardOffset.y == 0.5f)
                     {
-                        itemLocation.y = itemLocation.y + 1;
+                        itemLocation.y += 1;
                     }
-
+                    //checs for edge casts hehe and adjusts accordingly
+                    if(itemLocation.y == 0 || itemLocation.x == GameManager.Instance._matchManager.GameBoard.GetHeight() - 1)
+                    {
+                        clickableY += 1;
+                    }
+                    if (itemLocation.x == 0 || itemLocation.x == GameManager.Instance._matchManager.GameBoard.GetWidth() - 1)
+                    {
+                        clickableX += 1;
+                    }
                     // Checks if position is within board and if the tile is empty
-                    if ((WorldPosition.x >= -clickableX && WorldPosition.x < clickableX)
-                        && (WorldPosition.y >= -clickableY && WorldPosition.y < clickableY)
+                    if ((WorldPosition.x >= -clickableX && WorldPosition.x < clickableX) && 
+                        (WorldPosition.y >= -clickableY && WorldPosition.y < clickableY)
                         && GameManager.Instance._matchManager.GameBoard.At(itemLocation) == null)
                     {
                         GameManager.Instance._matchManager.GameBoard.Set(itemLocation, SelectedItem);
@@ -149,21 +162,27 @@ public class UIManager : MonoBehaviour
     /// <returns>Location that is centered on a 0.5 to line up with the cell</returns>
     Vector3 ItemLocationSanitization(Vector3 Location)
     {
-        Location.x += 0.5f;
-        Location.y += 0.5f;
+        if(GameManager.Instance._matchManager.BoardOffset.x == 0.0f)
+        {
+            Location.x += 0.5f;
+        }
+        if (GameManager.Instance._matchManager.BoardOffset.y == 0.0f)
+        {
+            Location.y += 0.5f;
+        }
 
         Location.x = Mathf.Round(Location.x);
         Location.y = Mathf.Round(Location.y);
 
         if (GameManager.Instance._matchManager.BoardOffset.x == 0.0f)
         {
-            Location.x -= 0.5f;
+            Location.x -= .5f;
         }
         if (GameManager.Instance._matchManager.BoardOffset.y == 0.0f)
         {
-            Location.y -= 0.5f;
+            Location.y -= .5f;
         }
- 
+
         return Location;
     }
 
