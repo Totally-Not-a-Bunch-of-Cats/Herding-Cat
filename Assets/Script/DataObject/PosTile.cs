@@ -8,4 +8,10 @@ public class PosTile
 {
     [SerializeField] public Vector2Int Position;
     [SerializeField] public Tile Slate;
-};
+
+    public PosTile(Vector2Int TileLocation, Tile TileType)
+    {
+        Position = TileLocation;
+        Slate = TileType;
+    }
+    };

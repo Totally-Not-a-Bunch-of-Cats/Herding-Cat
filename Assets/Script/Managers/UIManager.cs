@@ -138,7 +138,7 @@ public class UIManager : MonoBehaviour
     /// </summary>
     /// <param name="Location">Location that needs to be Sanitized</param>
     /// <returns>Location that is centered on a 0.5 to line up with the cell</returns>
-    Vector3 ItemLocationSanitization(Vector3 Location)
+    public Vector3 ItemLocationSanitization(Vector3 Location)
     {
         Location.x += 0.5f;
         Location.y += 0.5f;

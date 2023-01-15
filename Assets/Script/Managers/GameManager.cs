@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     //list of all level data
     //public static List<LevelData> Levels;
     public List<LevelData> Levels = new List<LevelData>();
+    public GameLevels GamelevelList;
     // Check to see if we're about to be destroyed.
     private static bool m_ShuttingDown = false;
     private static object m_Lock = new object();
@@ -82,15 +83,12 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        //Levels = GetAllInstances<LevelData>();
-        //StartCoroutine(StartMatch("1-1"));
+        Levels = GamelevelList.GameLevel;
         StartCoroutine(SwitchScene("Main Menu"));
     }
-
-
-    public void ClicktoStart()
+    public void ChangeScene(string Name)
     {
-        StartCoroutine(StartMatch("Test"));
+        Instance.StartCoroutine(SwitchScene(Name));
     }
 
     /// <summary>
@@ -148,7 +146,7 @@ public class GameManager : MonoBehaviour
             Instance._matchManager = _board.GetComponent<MatchManager>();
             LevelData _currentLevel = Levels.Find(level => level.name == level_name);
             LevelPosition = Levels.IndexOf(_currentLevel) + 1;
-            Debug.Log(_currentLevel.name);
+            //Debug.Log(_currentLevel.name);
             // Init round manager / match
             if (Instance._matchManager.InitMatch(_currentLevel))
             {
