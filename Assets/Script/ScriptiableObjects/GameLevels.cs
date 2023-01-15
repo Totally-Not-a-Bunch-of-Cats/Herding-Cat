@@ -12,4 +12,15 @@ public class GameLevels : ScriptableObject
     {
         return GameLevel[level];
     }
+    public bool CheckListForName(string name)
+    {
+        for(int i = 0; i < GameLevel.Count; i++)
+        {
+            if (GameLevel[i].name == name)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -132,6 +132,11 @@ public class LevelCreationTool : MonoBehaviour
     /// </summary>
     public void Save()
     {
+        if(GamelevelList.CheckListForName(LevelName))
+        {
+            Debug.LogWarning("Name already Taken please change name");
+            return;
+        }
         LevelData Level = ScriptableObject.CreateInstance<LevelData>();
         Level.BackgroundTile = BackgroundTile;
         Level.Dimensions = BoardSize;
