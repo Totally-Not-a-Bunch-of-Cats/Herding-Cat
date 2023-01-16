@@ -159,7 +159,7 @@ public class UIManager : MonoBehaviour
     /// Sanitizes the items location to line up on the cell by getting our vec3 ready to be changed to a vec2int
     /// </summary>
     /// <param name="Location">Location that needs to be Sanitized</param>
-    /// <returns>Location that is centered on a 0.5 to line up with the cell</returns>
+    /// <returns>Location that is centered in the cell</returns>
     Vector3 ItemLocationSanitization(Vector3 Location)
     {
         if(GameManager.Instance._matchManager.BoardOffset.x == 0.0f)
@@ -186,6 +186,10 @@ public class UIManager : MonoBehaviour
         return Location;
     }
 
+    /// <summary>
+    /// Deletes Item on board
+    /// </summary>
+    /// <param name="Index">Index of item to delete from the board from the item list</param>
     void DeleteItem(int Index)
     {
         if (Index >= 0 && Index <= GameManager.Instance._matchManager.GameBoard.Items.Count)
@@ -202,6 +206,4 @@ public class UIManager : MonoBehaviour
             throw new ArgumentOutOfRangeException($"Index must be between 0 and ({GameManager.Instance._matchManager.GameBoard.Items.Count}");
         }
     }
-
-
 }

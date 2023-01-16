@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Stores information about cat movement
+/// </summary>
 public class CatMovementInfo
 {
     public int Index;
