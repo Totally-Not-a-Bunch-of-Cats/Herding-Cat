@@ -22,7 +22,6 @@ public class MatchManager : MonoBehaviour
     public Board GameBoard;
     [SerializeField] public Vector2Int BoardSize;
     private bool ActiveMatch = false;
-    private bool Won = false;
     private bool CatMoving = false;
     public Vector3 BoardOffset;
 
@@ -121,15 +120,6 @@ public class MatchManager : MonoBehaviour
         return false;
     }
 
-    private void Update()
-    {
-        if (Won)
-        {
-            GameWonUI.SetActive(true);
-            ActivateStars();
-        }
-    }
-
     void ActivateStars()
     {
         //get references to stars and activate them
@@ -142,7 +132,6 @@ public class MatchManager : MonoBehaviour
         {
             Stars[i].color = Color.white;
         }
-        //GameObject.Find("Star3").GetComponent<Image>().color = Color.white;
     }
 
     /// <summary>
@@ -164,26 +153,21 @@ public class MatchManager : MonoBehaviour
                 yield return new WaitWhile(() => CatMoving);
                 Item CurrentItem = GameBoard.At(GameBoard.Items[i].Position) as Item;
                 int ClosestDistance = -1;
-                Vector2Int CurDestination = Vector2Int.zero;
                 List<CatMovementInfo> CatMoveInfo = new List<CatMovementInfo>();
-
-                List<Vector2Int> CurDestinationList = new List<Vector2Int>();
-                List<int> CatListPositions = new List<int>();
 
                 // loops through cats to find the closest one to the item to move
                 for (int j = 0; j < GameBoard.Cats.Count; j++)
                 {
-                    Debug.Log(GameBoard.Cats[j]);
                     if (GameBoard.Cats[j] != null)
                     {
-                        Debug.Log(CurrentItem.AllCatsinRadius);
+                        //moves all cats in radius of the item
+                        int deltaX = GameBoard.Cats[j].Position.x - GameBoard.Items[i].Position.x;
+                        int deltaY = GameBoard.Cats[j].Position.y - GameBoard.Items[i].Position.y;
+                        int Dist = System.Math.Abs(deltaX) + System.Math.Abs(deltaY);
+
                         if (CurrentItem.AllCatsinRadius == true)
                         {
                             //moves all cats in radius of the item
-                            int deltaX = GameBoard.Cats[j].Position.x - GameBoard.Items[i].Position.x;
-                            int deltaY = GameBoard.Cats[j].Position.y - GameBoard.Items[i].Position.y;
-
-                            int Dist = System.Math.Abs(deltaX) + System.Math.Abs(deltaY);
                             //adds distance to the list 
                             CatMoveInfo.Add(new CatMovementInfo(j, Dist));
                             Vector2Int test = DestinationAll(deltaX, deltaY, CurrentItem, j);
@@ -195,52 +179,24 @@ public class MatchManager : MonoBehaviour
                         else
                         {
                             //find if the cat is in range and if so moves said cat
-                            int deltaX = GameBoard.Cats[j].Position.x - GameBoard.Items[i].Position.x;
-                            int deltaY = GameBoard.Cats[j].Position.y - GameBoard.Items[i].Position.y;
-
-                            int Dist = System.Math.Abs(deltaX) + System.Math.Abs(deltaY);
                             // Checks if cat is closer than current cat and within radius
-                            if (Dist <= ClosestDistance && (deltaY == 0 || deltaX == 0) || ClosestDistance < 0 && Dist <= CurrentItem.Radius
-                                && (deltaY == 0 || deltaX == 0))
+                            if (Dist <= ClosestDistance && (deltaY == 0 || deltaX == 0) || ClosestDistance < 0 
+                                && Dist <= CurrentItem.Radius && (deltaY == 0 || deltaX == 0))
                             {
-                                if (ClosestDistance == Dist)
-                                {
-                                    // Adds postioin of cat in list to cat distance CurDestinationList if cat distance from item is same distance
-                                    CatListPositions.Add(j);
-                                }
-                                else
+                                if (ClosestDistance != Dist)
                                 {
                                     // Clears the lists of the farther cat information and adds the new one
-                                    CurDestinationList.Clear();
-                                    CatListPositions.Clear();
-                                    CatListPositions.Add(j);
+                                    CatMoveInfo.Clear();
                                 }
-                                ClosestDistance = Dist;
 
-                                // Gets the farthest that the cat will move of item (Right) is revered for items that pull cats
-                                if (deltaX <= CurrentItem.Radius && deltaX > 0 && deltaY == 0)
+                                CatMoveInfo.Add(new CatMovementInfo(j));
+                                Vector2Int test = DestinationList(deltaX, deltaY, CurrentItem, j);
+                                if (test != new Vector2Int(-100, -100))
                                 {
-                                    CurDestination = GameBoard.Cats[j].Position + new Vector2Int(CurrentItem.MoveDistance, 0);
-                                    CurDestinationList.Add(CurDestination);
+                                    CatMoveInfo[CatMoveInfo.Count - 1].Destination = test;
                                 }
-                                // Gets the farthest that the cat will move of item (Left)
-                                if (deltaX >= -CurrentItem.Radius && deltaX < 0 && deltaY == 0)
-                                {
-                                    CurDestination = GameBoard.Cats[j].Position + new Vector2Int(-CurrentItem.MoveDistance, 0);
-                                    CurDestinationList.Add(CurDestination);
-                                }
-                                // Gets the farthest that the cat will move of item (Up)
-                                if (deltaY <= CurrentItem.Radius && deltaY > 0 && deltaX == 0)
-                                {
-                                    CurDestination = GameBoard.Cats[j].Position + new Vector2Int(0, CurrentItem.MoveDistance);
-                                    CurDestinationList.Add(CurDestination);
-                                }
-                                // Gets the farthest that the cat will move of item (Down)
-                                if (deltaY >= -CurrentItem.Radius && deltaY < 0 && deltaX == 0)
-                                {
-                                    CurDestination = GameBoard.Cats[j].Position + new Vector2Int(0, -CurrentItem.MoveDistance);
-                                    CurDestinationList.Add(CurDestination);
-                                }
+                                
+                                ClosestDistance = Dist;
                             }
                         }
                     }
@@ -249,7 +205,7 @@ public class MatchManager : MonoBehaviour
                 if (CurrentItem.AllCatsinRadius == true)
                 {
                     List<CatMovementInfo> Temps = new List<CatMovementInfo>();
-                    //loops through all caps
+                    //loops through all cats
                     for (int zz = 0; zz < CatMoveInfo.Count; zz++)
                     {
                         int small = 100;
@@ -291,24 +247,11 @@ public class MatchManager : MonoBehaviour
                 // Checks to see if a cat is actually in range
                 if (ClosestDistance > -1)
                 {
-                    if (!CurrentItem.AllCatsinRadius)
+                    for (int c = 0; c < CatMoveInfo.Count; c++)
                     {
-                        for (int c = 0; c < CurDestinationList.Count; c++)
-                        {
-                            GameBoard.CheckMovement(CurrentItem.MoveDistance, CurDestinationList[c], CatListPositions[c]);
-                        }
-                        CurDestinationList.Clear();
-                        CatListPositions.Clear();
+                        GameBoard.CheckMovement(CurrentItem.MoveDistance, (Vector2Int)CatMoveInfo[c].Destination, CatMoveInfo[c].Index);
                     }
-                    else
-                    {
-                        // Checks movement/Moves cat of effected cats
-                        for (int c = 0; c < CatMoveInfo.Count; c++)
-                        {
-                            GameBoard.CheckMovement(CurrentItem.MoveDistance, (Vector2Int)CatMoveInfo[c].Destination, CatMoveInfo[c].Index);
-                        }
-                        CatMoveInfo.Clear();
-                    }
+                    CatMoveInfo.Clear();
                 }
                 //turns the item game object off and sets its position to null/empty
                 GameBoard.Items[i].Object.gameObject.SetActive(false);
@@ -329,7 +272,6 @@ public class MatchManager : MonoBehaviour
         if (GameBoard.NumberofCats == GameBoard.NumCatinPen)
         {
             ActiveMatch = false;
-            Won = true;
             // Calculates star count earned from level(1 for finshing, 1 for items used, 1 for rounds)
             int StarCount = 1;
             // checking/adding star for items used
@@ -342,7 +284,6 @@ public class MatchManager : MonoBehaviour
             {
                 StarCount++;
             }
-
 
             // Finds next level name 
             string[] LevelNameParts = CurrentLevel.name.Split('-');
@@ -372,6 +313,10 @@ public class MatchManager : MonoBehaviour
                     Debug.LogWarning("No Next Level");
                 }
             }
+
+            GameWonUI.SetActive(true);
+            ActivateStars();
+
             // Checks if wants to update leveldata info
             if (GameManager.Instance.UpdateLevelData == true)
             {
@@ -390,33 +335,35 @@ public class MatchManager : MonoBehaviour
         yield return null;
     }
 
-
+    /// <summary>
+    /// Gets the destination of a cat after movement
+    /// </summary>
+    /// <param name="deltaX">Distance in X between cat and item</param>
+    /// <param name="deltaY">Distance in Y between cat and item</param>
+    /// <param name="CurrentItem">Item that is afecting the cat</param>
+    /// <param name="index">Index of the cat to move</param>
+    /// <returns>Destination on board for cat, -100,-100 is default</returns>
     Vector2Int DestinationList(int deltaX, int deltaY, Item CurrentItem, int index)
     {
-        Vector2Int CurDestination;
         // Gets the farthest that the cat will move of item (Right)
         if (deltaX <= CurrentItem.Radius && deltaX > 0 && deltaY == 0)
         {
-            CurDestination = GameBoard.Cats[index].Position + new Vector2Int(CurrentItem.MoveDistance, 0);
-            return CurDestination;
+            return GameBoard.Cats[index].Position + new Vector2Int(CurrentItem.MoveDistance, 0);
         }
         // Gets the farthest that the cat will move of item (Left)
         if (deltaX >= -CurrentItem.Radius && deltaX < 0 && deltaY == 0)
         {
-            CurDestination = GameBoard.Cats[index].Position + new Vector2Int(-CurrentItem.MoveDistance, 0);
-            return CurDestination;
+            return GameBoard.Cats[index].Position + new Vector2Int(-CurrentItem.MoveDistance, 0);
         }
         // Gets the farthest that the cat will move of item (Up)
         if (deltaY <= CurrentItem.Radius && deltaY > 0 && deltaX == 0)
         {
-            CurDestination = GameBoard.Cats[index].Position + new Vector2Int(0, CurrentItem.MoveDistance);
-            return CurDestination;
+            return GameBoard.Cats[index].Position + new Vector2Int(0, CurrentItem.MoveDistance);
         }
         // Gets the farthest that the cat will move of item (Down)
         if (deltaY >= -CurrentItem.Radius && deltaY < 0 && deltaX == 0)
         {
-            CurDestination = GameBoard.Cats[index].Position + new Vector2Int(0, -CurrentItem.MoveDistance);
-            return CurDestination;
+            return GameBoard.Cats[index].Position + new Vector2Int(0, -CurrentItem.MoveDistance);
         }
         return new Vector2Int(-100, -100);
     }
@@ -428,35 +375,29 @@ public class MatchManager : MonoBehaviour
     /// <param name="deltaY">Distance in Y between cat and item</param>
     /// <param name="CurrentItem">Item that is afecting the cat</param>
     /// <param name="index">Index of the cat to move</param>
-    /// <returns></returns>
+    /// <returns>Destination on board for cat, -100,-100 is default</returns>
     Vector2Int DestinationAll(int deltaX, int deltaY, Item CurrentItem, int index)
     {
-        Vector2Int CurDestination;
         // Gets the farthest that the cat will move of item (Right) is reversed for items that pull cats
         if (deltaX <= CurrentItem.Radius && deltaX > 0 && deltaY < deltaX && (-deltaY < -deltaX || -deltaY < deltaX))
-        {                                            
-            CurDestination = GameBoard.Cats[index].Position + new Vector2Int(CurrentItem.MoveDistance, 0);
-            return CurDestination;
+        {
+            return GameBoard.Cats[index].Position + new Vector2Int(CurrentItem.MoveDistance, 0);
         }
         // Gets the farthest that the cat will move of item (Left)
         if (deltaX >= -CurrentItem.Radius && deltaX < 0 && deltaY < -deltaX && -deltaY < -deltaX)
-        {                                                  
-            CurDestination = GameBoard.Cats[index].Position + new Vector2Int(-CurrentItem.MoveDistance, 0);
-            return CurDestination;
+        {
+            return GameBoard.Cats[index].Position + new Vector2Int(-CurrentItem.MoveDistance, 0);
         }
         // Gets the farthest that the cat will move of item (Up)
         if (deltaY <= CurrentItem.Radius && deltaY > 0)
         {
-            CurDestination = GameBoard.Cats[index].Position + new Vector2Int(0, CurrentItem.MoveDistance);
-            return CurDestination;
+            return GameBoard.Cats[index].Position + new Vector2Int(0, CurrentItem.MoveDistance);
         }
         // Gets the farthest that the cat will move of item (Down)
         if (deltaY >= -CurrentItem.Radius && deltaY < 0)
         {
-            CurDestination = GameBoard.Cats[index].Position + new Vector2Int(0, -CurrentItem.MoveDistance);
-            return CurDestination;
+            return GameBoard.Cats[index].Position + new Vector2Int(0, -CurrentItem.MoveDistance);
         }
-        Debug.Log("fucked up");
         return new Vector2Int(-100, -100);
     }
     /// <summary>
@@ -473,7 +414,6 @@ public class MatchManager : MonoBehaviour
         if (Direction.x > 0)
         {                                                       
             Vector3 Goalpos = new Vector3(((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x))), 0f, 0f);
-
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
             StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination,  .5f,  ListPos,  FinalDestination));
@@ -481,7 +421,6 @@ public class MatchManager : MonoBehaviour
         else if (Direction.y > 0)
         {
             Vector3 Goalpos = new Vector3(0f, ((Math.Abs(GameBoard.Cats[ListPos].Position.y - FinalDestination.y))), 0f);
-
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
             StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
@@ -489,7 +428,6 @@ public class MatchManager : MonoBehaviour
         else if (Direction.x < 0)
         {
             Vector3 Goalpos = new Vector3(((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x))), 0f, 0f);
-
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
             StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
@@ -497,7 +435,6 @@ public class MatchManager : MonoBehaviour
         else
         {
             Vector3 Goalpos = new Vector3(0f, ((Math.Abs(GameBoard.Cats[ListPos].Position.y - FinalDestination.y))), 0f);
-
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
             StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
@@ -524,6 +461,16 @@ public class MatchManager : MonoBehaviour
             GameBoard.Set(FinalDestination, Cat);
         }
     }
+
+    /// <summary>
+    /// Lerps the cat to its target destination in world space
+    /// </summary>
+    /// <param name="source">Starting World postion of cat</param>
+    /// <param name="target">Final World Postition of cat to be at</param>
+    /// <param name="overTime">time that it takes to get to the target location</param>
+    /// <param name="ListPos">Index that cat is in the cats list</param>
+    /// <param name="FinalDestination">Final Destination of cat on Board</param>
+    /// <returns></returns>
     IEnumerator MoveObject(Vector3 source, Vector3 target, float overTime, int ListPos, Vector2Int FinalDestination)
     {
         CatMoving = true;
