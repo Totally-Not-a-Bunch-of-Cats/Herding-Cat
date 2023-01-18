@@ -846,7 +846,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1559508770955936745, guid: 4c8629dcaeee4b448a477c75028852b6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LevelCreationTool, Assembly-CSharp
+      value: LevelCreationTool, Scripts
       objectReference: {fileID: 0}
     - target: {fileID: 1559508770955936745, guid: 4c8629dcaeee4b448a477c75028852b6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
@@ -854,7 +854,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: e555ba895d5a24446bccda1cb968e5d7, type: 2}
     - target: {fileID: 1559508770955936745, guid: 4c8629dcaeee4b448a477c75028852b6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: Tile, Assembly-CSharp
+      value: Tile, Scripts
       objectReference: {fileID: 0}
     - target: {fileID: 7992114167247847449, guid: 4c8629dcaeee4b448a477c75028852b6, type: 3}
       propertyPath: m_Name
@@ -4375,7 +4375,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1559508770955936745, guid: a427937b08ef2d7488c3be98cd49a644, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LevelCreationTool, Assembly-CSharp
+      value: LevelCreationTool, Scripts
       objectReference: {fileID: 0}
     - target: {fileID: 1559508770955936745, guid: a427937b08ef2d7488c3be98cd49a644, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
@@ -4383,7 +4383,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: b1b6c6f21d028124bbc63e252f176c41, type: 2}
     - target: {fileID: 1559508770955936745, guid: a427937b08ef2d7488c3be98cd49a644, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: Tile, Assembly-CSharp
+      value: Tile, Scripts
       objectReference: {fileID: 0}
     - target: {fileID: 7992114167247847449, guid: a427937b08ef2d7488c3be98cd49a644, type: 3}
       propertyPath: m_Name
@@ -5390,7 +5390,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1559508770955936745, guid: 0bd58967928ccef4eaae36c9b4e9eb39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LevelCreationTool, Assembly-CSharp
+      value: LevelCreationTool, Scripts
       objectReference: {fileID: 0}
     - target: {fileID: 1559508770955936745, guid: 0bd58967928ccef4eaae36c9b4e9eb39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
@@ -5398,7 +5398,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     - target: {fileID: 1559508770955936745, guid: 0bd58967928ccef4eaae36c9b4e9eb39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: Tile, Assembly-CSharp
+      value: Tile, Scripts
       objectReference: {fileID: 0}
     - target: {fileID: 7992114167247847449, guid: 0bd58967928ccef4eaae36c9b4e9eb39, type: 3}
       propertyPath: m_Name
@@ -5648,6 +5648,9 @@ MonoBehaviour:
   Snake: {fileID: 11400000, guid: a58def140dd3b74468a5da712b3041fa, type: 2}
   AirHorn: {fileID: 11400000, guid: 03a6e1d0183e6fe40b890a4610ea706a, type: 2}
   Treat: {fileID: 11400000, guid: 99a1a1af1fa148340b1cc9b1f706880c, type: 2}
+  Remove: 0
+  TileLocations: []
+  ItemReferences: []
 --- !u!1 &841240388
 GameObject:
   m_ObjectHideFlags: 0
@@ -8720,7 +8723,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1559508770955936745, guid: 0594119db42410a48bc0fead40e5402f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LevelCreationTool, Assembly-CSharp
+      value: LevelCreationTool, Scripts
       objectReference: {fileID: 0}
     - target: {fileID: 1559508770955936745, guid: 0594119db42410a48bc0fead40e5402f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
@@ -8728,7 +8731,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: e9d6189f63d821045ab761e537a50a9c, type: 2}
     - target: {fileID: 1559508770955936745, guid: 0594119db42410a48bc0fead40e5402f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: Tile, Assembly-CSharp
+      value: Tile, Scripts
       objectReference: {fileID: 0}
     - target: {fileID: 7992114167247847449, guid: 0594119db42410a48bc0fead40e5402f, type: 3}
       propertyPath: m_Name
@@ -9471,7 +9474,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1559508770955936745, guid: 6586dab698b84b14ba1c45ba489773d7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LevelCreationTool, Assembly-CSharp
+      value: LevelCreationTool, Scripts
       objectReference: {fileID: 0}
     - target: {fileID: 1559508770955936745, guid: 6586dab698b84b14ba1c45ba489773d7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
@@ -9479,7 +9482,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
     - target: {fileID: 1559508770955936745, guid: 6586dab698b84b14ba1c45ba489773d7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: Tile, Assembly-CSharp
+      value: Tile, Scripts
       objectReference: {fileID: 0}
     - target: {fileID: 7992114167247847449, guid: 6586dab698b84b14ba1c45ba489773d7, type: 3}
       propertyPath: m_Name

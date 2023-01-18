@@ -80,7 +80,7 @@ public class MatchManager : MonoBehaviour
             }
 
             // setup background(tilemap)
-            for (int x = (int)(-tempx - (0.5f + BoardOffset.y)); x < tempx; x++)
+            for (int x = (int)(-tempx - (0.5f + BoardOffset.x)); x < tempx; x++)
             {
                 for (int y = (int)(-tempy - (0.5f + BoardOffset.y)) ; y < tempy; y++)
                 {

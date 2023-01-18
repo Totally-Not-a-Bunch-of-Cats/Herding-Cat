@@ -177,7 +177,7 @@ public class LevelCreationTool : MonoBehaviour
         }
 
         // setup background(tilemap)
-        for (int x = (int)(-tempx - (0.5f + BoardOffset.y)); x < tempx; x++)
+        for (int x = (int)(-tempx - (0.5f + BoardOffset.x)); x < tempx; x++)
         {
             for (int y = (int)(-tempy - (0.5f + BoardOffset.y)); y < tempy; y++)
             {
@@ -215,13 +215,33 @@ public class LevelCreationTool : MonoBehaviour
                 WorldPosition = TileLocationSanitization(WorldPosition);
                 float clickableX = BoardSize.x / 2;
                 float clickableY = BoardSize.y / 2;
-                Debug.Log($"Item Pos X: {(WorldPosition.x - 0.5 + clickableX)}");
-                // Need to add 1 to this when odd
-                Debug.Log($"Item Pos X int: {(int)(WorldPosition.x - 0.5 + clickableX)}");
-
+                if (BoardOffset.y == 0.5f)
+                {
+                    clickableY -= 0.5f;
+                }
+                if (BoardOffset.x == 0.5f)
+                {
+                    clickableX -= 0.5f;
+                }
                 Vector2Int tileLocation = new Vector2Int((int)(WorldPosition.x - 0.5 + clickableX),
                     (int)(WorldPosition.y - 0.5 + clickableY));
-                if((WorldPosition.x >= -clickableX && WorldPosition.x < clickableX)
+                if (BoardOffset.x == 0.5f)
+                {
+                    tileLocation.x += 1;
+                }
+                if (BoardOffset.y == 0.5f)
+                {
+                    tileLocation.y += 1;
+                }
+                if (tileLocation.x == 0 || tileLocation.x == BoardSize.x - 1)
+                {
+                    clickableX += 1;
+                }
+                if (tileLocation.y == 0 || tileLocation.y == BoardSize.y - 1)
+                {
+                    clickableY += 1;
+                }
+                if ((WorldPosition.x >= -clickableX && WorldPosition.x < clickableX)
                     && (WorldPosition.y >= -clickableY && WorldPosition.y < clickableY))
                 {
                     if(Remove)
@@ -266,8 +286,14 @@ public class LevelCreationTool : MonoBehaviour
 
     public Vector3 TileLocationSanitization(Vector3 Location)
     {
-        Location.x += 0.5f;
-        Location.y += 0.5f;
+        if (BoardOffset.x == 0.0f)
+        {
+            Location.x += 0.5f;
+        }
+        if (BoardOffset.y == 0.0f)
+        {
+            Location.y += 0.5f;
+        }
 
         Location.x = Mathf.Round(Location.x);
         Location.y = Mathf.Round(Location.y);

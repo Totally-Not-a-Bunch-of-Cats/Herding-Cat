@@ -4115,6 +4115,7 @@ MonoBehaviour:
     CatPenLocation: []
     NumCatinPen: 0
   BoardSize: {x: 0, y: 0}
+  BoardOffset: {x: 0, y: 0, z: 0}
   TargetRounds: 10
   TargetItems: 10
   RoundsPlayed: 0

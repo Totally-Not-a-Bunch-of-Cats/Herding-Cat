@@ -57,11 +57,11 @@ public class UIManager : MonoBehaviour
                     float clickableY = GameManager.Instance._matchManager.GameBoard.GetHeight() / 2;
                     if(GameManager.Instance._matchManager.BoardOffset.y == 0.5f)
                     {
-                        clickableX -= 0.5f;
+                        clickableY -= 0.5f;
                     }
                     if (GameManager.Instance._matchManager.BoardOffset.x == 0.5f)
                     {
-                        clickableY -= 0.5f;
+                        clickableX -= 0.5f;
                     }
 
                     Vector2Int itemLocation = new Vector2Int((int)(WorldPosition.x - 0.5 + clickableX),
@@ -76,7 +76,7 @@ public class UIManager : MonoBehaviour
                         itemLocation.y += 1;
                     }
                     //checs for edge casts hehe and adjusts accordingly
-                    if(itemLocation.y == 0 || itemLocation.x == GameManager.Instance._matchManager.GameBoard.GetHeight() - 1)
+                    if(itemLocation.y == 0 || itemLocation.y == GameManager.Instance._matchManager.GameBoard.GetHeight() - 1)
                     {
                         clickableY += 1;
                     }
