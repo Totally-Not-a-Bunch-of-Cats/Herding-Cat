@@ -45,7 +45,7 @@ public class MatchManager : MonoBehaviour
     /// <returns>True if match was successfully initialized</returns>
     public bool InitMatch(LevelData currentLevel)
     {
-        if (currentLevel != null && currentLevel.valid())
+        if (currentLevel != null && currentLevel.Valid())
         {
             BoardSize = currentLevel.GetDimensions();
             TargetRounds = currentLevel.GetTargetRounds();

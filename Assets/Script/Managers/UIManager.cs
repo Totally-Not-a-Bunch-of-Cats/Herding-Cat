@@ -159,8 +159,8 @@ public class UIManager : MonoBehaviour
     /// Sanitizes the items location to line up on the cell by getting our vec3 ready to be changed to a vec2int
     /// </summary>
     /// <param name="Location">Location that needs to be Sanitized</param>
-    /// <returns>Location that is centered in the cell</returns>
-    Vector3 ItemLocationSanitization(Vector3 Location)
+    /// <returns>Location that is centered on a 0.5 to line up with the cell</returns>
+    public Vector3 ItemLocationSanitization(Vector3 Location)
     {
         if(GameManager.Instance._matchManager.BoardOffset.x == 0.0f)
         {
