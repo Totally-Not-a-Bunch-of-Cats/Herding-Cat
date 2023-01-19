@@ -272,18 +272,7 @@ public class MatchManager : MonoBehaviour
         if (GameBoard.NumberofCats == GameBoard.NumCatinPen)
         {
             ActiveMatch = false;
-            // Calculates star count earned from level(1 for finshing, 1 for items used, 1 for rounds)
-            int StarCount = 1;
-            // checking/adding star for items used
-            if(TargetItems >= ItemsUsed)
-            {
-                StarCount++;
-            }
-            // Checking/Adding star for round count
-            if (TargetRounds >= RoundsPlayed)
-            {
-                StarCount++;
-            }
+            CurrentLevel.CalculateStars(RoundsPlayed, ItemsUsed, GameManager.Instance.UpdateLevelData);
 
             // Finds next level name 
             string[] LevelNameParts = CurrentLevel.name.Split('-');
@@ -321,14 +310,12 @@ public class MatchManager : MonoBehaviour
             if (GameManager.Instance.UpdateLevelData == true)
             {
                 // Updates level data info for current/next level
-                CurrentLevel.SetStarsEarned(StarCount);
                 GameManager.Instance.Levels.Find(level => level.name == NextLevelName).SetUnlocked(true);
             } 
             else
             {
                 // Logs in console that next level would be unlocked and value that current levels star count would be set to
                 Debug.Log($"Level {NextLevelName} Unlocked");
-                Debug.Log($"Level {CurrentLevel.name}: {StarCount}");
             }
         }
         GameManager.Instance._uiManager.Override = true;
