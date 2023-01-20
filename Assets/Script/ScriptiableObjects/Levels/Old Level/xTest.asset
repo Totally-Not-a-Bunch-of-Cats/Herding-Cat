@@ -10,26 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16c857a80b025c74e9b3eeffa0c4e268, type: 3}
-  m_Name: 1-2
+  m_Name: xTest
   m_EditorClassIdentifier: 
-  Dimensions: {x: 3, y: 3}
-  TargetRounds: 3
-  TargetItems: 8
+  Dimensions: {x: 8, y: 10}
+  TargetRounds: 10
+  TargetItems: 5
   BackgroundTile: {fileID: 11400000, guid: d756be87d23ee174f869fab071be06bf, type: 2}
   Tiles:
-  - Position: {x: 1, y: 1}
-    Slate: {fileID: 11400000, guid: e9d6189f63d821045ab761e537a50a9c, type: 2}
-  - Position: {x: 0, y: 2}
+  - Position: {x: 6, y: 2}
     Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
-  - Position: {x: 0, y: 1}
-    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
-  - Position: {x: 2, y: 1}
-    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
-  - Position: {x: 2, y: 0}
-    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
-  - Position: {x: 0, y: 0}
-    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+  - Position: {x: 2, y: 3}
+    Slate: {fileID: 11400000, guid: e9d6189f63d821045ab761e537a50a9c, type: 2}
+  - Position: {x: 2, y: 7}
+    Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
+  - Position: {x: 2, y: 4}
+    Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
   PossibleItems:
+  - {fileID: 11400000, guid: a58def140dd3b74468a5da712b3041fa, type: 2}
   - {fileID: 11400000, guid: 089f360dd355a504085896f04d3eb986, type: 2}
+  - {fileID: 11400000, guid: 03a6e1d0183e6fe40b890a4610ea706a, type: 2}
+  - {fileID: 11400000, guid: 99a1a1af1fa148340b1cc9b1f706880c, type: 2}
   StarsEarned: 0
   Unlocked: 0
