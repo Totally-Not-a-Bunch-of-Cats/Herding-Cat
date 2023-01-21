@@ -8,9 +8,16 @@ using UnityEditor;
 [ExecuteInEditMode]
 public class LevelCreationTool : MonoBehaviour
 {
-    public Vector2Int BoardSize;
-    public string LevelName;
+    [Header("New Board Info")]
     public UnityEngine.Tilemaps.Tile BackgroundTile;
+    public Vector2Int BoardSize;
+    public List<Item> SelectedItems;
+    public int GoalItems;
+    public int GoalRounds;
+    public List<PosTile> Tiles;
+    public string LevelName;
+
+    [Header("Other Info")]
     public List<UnityEngine.Tilemaps.Tile> TileImages;
     public GameObject ItemBoardButtons;
     public Tile SelectedBoardTile;
@@ -18,12 +25,8 @@ public class LevelCreationTool : MonoBehaviour
     public bool CanPlaceBoardTile = false;
     public GameObject Board;
     Board GameBoard;
-    public List<PosTile> Tiles;
     Vector3 BoardOffset = new Vector3();
-    public int GoalRounds;
-    public int GoalItems;
     public GameLevels GamelevelList;
-    public List<Item> SelectedItems;
     public Item Toy;
     public Item Snake;
     public Item AirHorn;
@@ -31,6 +34,8 @@ public class LevelCreationTool : MonoBehaviour
     public bool Remove;
     public List<Vector2Int> TileLocations;
     public List<GameObject> ItemReferences;
+    public GameObject LevelCreateMenuObject;
+
 
     //then activates buttons to begin working on the level
 
@@ -113,13 +118,25 @@ public class LevelCreationTool : MonoBehaviour
     {
         BackgroundTile = TileImages[ListTileNum];
     }
+    public void CreateLevel ()
+    {
+        //turn off level info
+        GameObject.Find("Level Design Startup Screen").SetActive(false);
+        LevelCreateMenuObject.SetActive(true);
+    }
+
+    public void EditLevel()
+    {
+        //turn off level info
+        GameObject.Find("Level Design Startup Screen").SetActive(false);
+    }
 
     public void Continue()
     {
         if (LevelName != null && BoardSize.x != 0 && BoardSize.y != 0)
         {
             //turn off level info
-            GameObject.Find("Level Set Up").SetActive(false);
+            LevelCreateMenuObject.SetActive(false);
             //then make blank of proper size
             GenerateBlankBoard();
             //then turn on buttons with items

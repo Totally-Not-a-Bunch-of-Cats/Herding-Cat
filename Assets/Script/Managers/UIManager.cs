@@ -44,7 +44,7 @@ public class UIManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Match")
         {
             //checks to see if you can place an item
-            if (CanPlaceItem && Override)
+            if (CanPlaceItem && Override && GameManager.Instance._matchManager.ActiveMatch == true)
             {
                 //checks to see if the mouse button was pressed (update for mobile maybe use unity buttons)
                 if (Input.GetMouseButtonDown(0))

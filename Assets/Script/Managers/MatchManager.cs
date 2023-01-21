@@ -21,7 +21,7 @@ public class MatchManager : MonoBehaviour
     [Space]
     public Board GameBoard;
     [SerializeField] public Vector2Int BoardSize;
-    private bool ActiveMatch = false;
+    public bool ActiveMatch = false;
     private bool CatMoving = false;
     public Vector3 BoardOffset;
 
