@@ -221,6 +221,14 @@ public class Board
                         {
                             //if the destination has something the cat cant be on, make sure it does step on it
                             Destination.y = y - 1;
+                            if(_cells[Destination.x, y].name == "Post")
+                            {
+                                //make the catstop moveing and make sure it moves on the cat post
+                            }
+                            if (_cells[Destination.x, y].name == "Bed")
+                            {
+                                //make the catstop moveing on the bed and not move for the rest of the round.
+                            }
                             break;
                         }
                         else if (_cells[Destination.x, y].Is<CatPen>())
