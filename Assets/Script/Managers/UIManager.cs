@@ -47,7 +47,7 @@ public class UIManager : MonoBehaviour
             if (CanPlaceItem && Override && GameManager.Instance._matchManager.ActiveMatch == true)
             {
                 //checks to see if the mouse button was pressed (update for mobile maybe use unity buttons)
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && SelectedItem != null)
                 {
                     //gets world position and translates it to a vec2int
                     Vector3 WorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

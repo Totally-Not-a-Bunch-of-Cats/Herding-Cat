@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using UnityEditor;
+using TMPro;
 
 [ExecuteInEditMode]
 public class LevelCreationTool : MonoBehaviour
@@ -17,9 +18,15 @@ public class LevelCreationTool : MonoBehaviour
     public List<PosTile> Tiles;
     public string LevelName;
 
+    [Header("UI Objects")]
+    public GameObject ItemBoardButtons;
+    public GameObject LevelCreateMenuObject;
+    public GameObject LevelEditNameObject;
+    public GameObject LevelDesignStartupObject;
+    public GameObject ConfirmationWindowObject;
+
     [Header("Other Info")]
     public List<UnityEngine.Tilemaps.Tile> TileImages;
-    public GameObject ItemBoardButtons;
     public Tile SelectedBoardTile;
     public bool Override = true;
     public bool CanPlaceBoardTile = false;
@@ -34,7 +41,8 @@ public class LevelCreationTool : MonoBehaviour
     public bool Remove;
     public List<Vector2Int> TileLocations;
     public List<GameObject> ItemReferences;
-    public GameObject LevelCreateMenuObject;
+    public List<Item> PossibleItems;
+    public List<Toggle> ItemToggles;
 
 
     //then activates buttons to begin working on the level
@@ -114,21 +122,38 @@ public class LevelCreationTool : MonoBehaviour
     {
         LevelName = name;
     }
+
     public void TileSelect(int ListTileNum)
     {
         BackgroundTile = TileImages[ListTileNum];
     }
-    public void CreateLevel ()
+    /*public void CreateLevel ()
     {
-        //turn off level info
-        GameObject.Find("Level Design Startup Screen").SetActive(false);
+        LevelDesignStartupObject.SetActive(false);
         LevelCreateMenuObject.SetActive(true);
     }
 
     public void EditLevel()
     {
-        //turn off level info
-        GameObject.Find("Level Design Startup Screen").SetActive(false);
+        LevelDesignStartupObject.SetActive(false);
+        LevelEditNameObject.SetActive(true);
+    }*/
+
+    public void EditLevelLayout()
+    {
+        if (GamelevelList.CheckListForName(LevelName))
+        {
+            //navigates to be able to edit an existing layout
+            GameObject.Find("Error").GetComponent<TextMeshProUGUI>().text = "";
+            LevelEditNameObject.SetActive(false);
+            GetLevelData(LevelName);
+            GenerateExistingBoard();
+        } else
+        {
+            //error that level does not exist
+            GameObject.Find("Error").GetComponent<TextMeshProUGUI>().text = $"* {LevelName}: Level Does not Exist";
+        }
+        
     }
 
     public void Continue()
@@ -164,6 +189,21 @@ public class LevelCreationTool : MonoBehaviour
         AssetDatabase.CreateAsset(Level, "Assets/Script/ScriptiableObjects/Levels/" + LevelName + ".asset");
         GamelevelList.GameLevel.Add(Level);
     }
+
+    public void GetLevelData(string LevelName)
+    {
+        if (GamelevelList.CheckListForName(LevelName))
+        {
+            LevelData Level = GamelevelList.GetLevelOfName(LevelName);
+            BackgroundTile = Level.BackgroundTile;
+            BoardSize = Level.Dimensions;
+            SelectedItems = new List<Item>(Level.PossibleItems);
+            GoalItems = Level.TargetItems;
+            GoalRounds = Level.TargetRounds;
+            Tiles = new List<PosTile>(Level.Tiles);
+        }
+    }
+
 
     /// <summary>
     /// Generates a blank tilemap of the new board size
@@ -202,6 +242,42 @@ public class LevelCreationTool : MonoBehaviour
             }
         }
     }
+
+    public void GenerateExistingBoard()
+    {
+        GameBoard = new Board(BoardSize);
+        Tilemap BoardTileMap = GameObject.Find("Tilemap").GetComponent<Tilemap>();
+        GameObject.Find("OutlineSquare").transform.localScale = new Vector3(BoardSize.x, BoardSize.y, 1);
+        // Generates grid (Odd numbered sizes will break)
+        int tempx = BoardSize.x / 2;
+        int tempy = BoardSize.y / 2;
+        bool oddX = BoardSize.x % 2 != 0;
+        bool oddY = BoardSize.y % 2 != 0;
+
+        if (oddX)
+        {
+            BoardOffset.x = 0.5f;
+        }
+        if (oddY)
+        {
+            BoardOffset.y = 0.5f;
+        }
+
+        if (oddX || oddY)
+        {
+            BoardTileMap.transform.localPosition += BoardOffset;
+        }
+
+        // setup background(tilemap)
+        for (int x = (int)(-tempx - (0.5f + BoardOffset.x)); x < tempx; x++)
+        {
+            for (int y = (int)(-tempy - (0.5f + BoardOffset.y)); y < tempy; y++)
+            {
+                BoardTileMap.SetTile(new Vector3Int(x, y, 0), BackgroundTile);
+            }
+        }
+    }
+
     /// <summary>
     /// passes the select item to some code that will place it
     /// </summary>

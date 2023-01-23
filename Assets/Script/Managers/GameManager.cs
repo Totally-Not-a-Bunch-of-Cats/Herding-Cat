@@ -144,7 +144,6 @@ public class GameManager : MonoBehaviour
         if (_board != null)
         {
             Instance._matchManager = _board.GetComponent<MatchManager>();
-            Debug.Log(Instance._matchManager);
             LevelData _currentLevel = null;
             //LevelData _currentLevel = Levels.Find(level => level.name == level_name);
             for (int i =0; i < Instance.Levels.Count; i++)
