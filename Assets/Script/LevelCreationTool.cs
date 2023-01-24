@@ -152,8 +152,23 @@ public class LevelCreationTool : MonoBehaviour
         {
             //error that level does not exist
             GameObject.Find("Error").GetComponent<TextMeshProUGUI>().text = $"* {LevelName}: Level Does not Exist";
+        } 
+    }
+
+    public void EditLevelInfo()
+    {
+        if (GamelevelList.CheckListForName(LevelName))
+        {
+            //navigates to be able to edit an existing layout
+            GameObject.Find("Error").GetComponent<TextMeshProUGUI>().text = "";
+
+            LevelCreateMenuObject.SetActive(true);
         }
-        
+        else
+        {
+            //error that level does not exist
+            GameObject.Find("Error").GetComponent<TextMeshProUGUI>().text = $"* {LevelName}: Level Does not Exist";
+        }
     }
 
     public void Continue()
@@ -167,6 +182,25 @@ public class LevelCreationTool : MonoBehaviour
             //then turn on buttons with items
             ItemBoardButtons.SetActive(true);
         }
+    }
+
+    public void FillLevelInfoForm ()
+    {
+        GameObject.Find("InputField for size X").GetComponent<TextMeshProUGUI>().text = $"{BoardSize.x}";
+        GameObject.Find("InputField for size Y").GetComponent<TextMeshProUGUI>().text = $"{BoardSize.y}";
+        GameObject.Find("Turn goal input feild").GetComponent<TextMeshProUGUI>().text = $"{GoalRounds}";
+        GameObject.Find("Item goal input feild").GetComponent<TextMeshProUGUI>().text = $"{GoalItems}";
+        /*for (int i = 0; i < Tiles.Count; i++)
+        {
+            for (int j = 0; j < ItemToggles.Count; j++)
+            {
+                if (ItemToggles[i].isOn == false || Tiles[i].)
+                {
+                    ItemToggles[i].isOn = true;
+                    break;
+                }
+            }
+        }*/
     }
 
     /// <summary>
@@ -190,6 +224,10 @@ public class LevelCreationTool : MonoBehaviour
         GamelevelList.GameLevel.Add(Level);
     }
 
+    /// <summary>
+    /// if the Level exists, it gets the data from the scriptable object
+    /// </summary>
+    /// <param name="LevelName">Name of the level to get info of</param>
     public void GetLevelData(string LevelName)
     {
         if (GamelevelList.CheckListForName(LevelName))
@@ -203,7 +241,6 @@ public class LevelCreationTool : MonoBehaviour
             Tiles = new List<PosTile>(Level.Tiles);
         }
     }
-
 
     /// <summary>
     /// Generates a blank tilemap of the new board size
@@ -243,6 +280,9 @@ public class LevelCreationTool : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Generates a existing board
+    /// </summary>
     public void GenerateExistingBoard()
     {
         GameBoard = new Board(BoardSize);
@@ -276,6 +316,14 @@ public class LevelCreationTool : MonoBehaviour
                 BoardTileMap.SetTile(new Vector3Int(x, y, 0), BackgroundTile);
             }
         }
+
+        foreach (PosTile CurPosTile in Tiles)
+        {
+            Vector3 pos = new Vector3(CurPosTile.Position.x - tempx + 0.5f - BoardOffset.x,
+            CurPosTile.Position.y - tempy + 0.5f - BoardOffset.y, 5);
+            Transform temp = Instantiate(CurPosTile.Slate.GetPrefab(), pos, Quaternion.identity, transform).transform;
+            temp.gameObject.name = CurPosTile.Slate.name + $" ({CurPosTile.Position.x}, {CurPosTile.Position.y})";
+        }
     }
 
     /// <summary>
@@ -288,6 +336,9 @@ public class LevelCreationTool : MonoBehaviour
         CanPlaceBoardTile = true;
     }
 
+    /// <summary>
+    /// Turns on Delete mode, to delete an object
+    /// </summary>
     public void Delete()
     {
         CanPlaceBoardTile = true;
@@ -377,6 +428,11 @@ public class LevelCreationTool : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Sanitizes the location to make the object centered in the cell
+    /// </summary>
+    /// <param name="Location">Location to be Sanitizationed</param>
+    /// <returns>Location after being Sanitizationed</returns>
     public Vector3 TileLocationSanitization(Vector3 Location)
     {
         if (BoardOffset.x == 0.0f)
