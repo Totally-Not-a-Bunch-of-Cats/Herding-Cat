@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Bed
   m_EditorClassIdentifier: 
   Prefab: {fileID: 1839284877676352582, guid: 01904f1e848e6e549b2559d314ea5d7b, type: 3}
-  EndsTurn: 0
+  EndsTurn: 1
   Skipped: 0
   Direction: -1

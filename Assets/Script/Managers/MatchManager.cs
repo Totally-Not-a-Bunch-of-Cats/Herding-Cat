@@ -158,7 +158,7 @@ public class MatchManager : MonoBehaviour
                 // loops through cats to find the closest one to the item to move
                 for (int j = 0; j < GameBoard.Cats.Count; j++)
                 {
-                    if (GameBoard.Cats[j] != null)
+                    if (GameBoard.Cats[j] != null && GameBoard.Cats[j].Sleeping == false)
                     {
                         //moves all cats in radius of the item
                         int deltaX = GameBoard.Cats[j].Position.x - GameBoard.Items[i].Position.x;
@@ -265,6 +265,14 @@ public class MatchManager : MonoBehaviour
             if (GameBoard.Items[i] != null)
             {
                 Destroy(GameBoard.Items[i].ItemAdjObject.gameObject);
+            }
+        }
+        //makes sure all the cats are sleeping wont be bigger than 5
+        for(int i = 0; i < GameBoard.Cats.Count; i++)
+        {
+            if(GameBoard.Cats[i] != null)
+            {
+                GameBoard.Cats[i].Sleeping = false;
             }
         }
         GameBoard.Items.Clear();

@@ -12,6 +12,7 @@ public class PosObject
     [SerializeField] public Vector2Int Position;
     [SerializeField] public Transform Object;
     [SerializeField] public GameObject ItemAdjObject;
+    [SerializeField] public bool Sleeping = false;
 
 
     /// <summary>

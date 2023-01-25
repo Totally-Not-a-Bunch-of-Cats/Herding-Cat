@@ -192,6 +192,18 @@ public class Board
                         {
                             //if the destination has something the cat cant be on, make sure it does step on it
                             Destination.y = y + 1;
+                            Debug.Log(_cells[Destination.x, y].name + "name of cell");
+                            if (_cells[Destination.x, y].name == "Post")
+                            {
+                                Destination.y = y;
+                                break;
+                            }
+                            if (_cells[Destination.x, y].name == "Bed")
+                            {
+                                Destination.y = y;
+                                Cats[ListPos].Sleeping = true;
+                                break;
+                            }
                             break;
                         }
                         else if (_cells[Destination.x, y].Is<CatPen>())
@@ -221,13 +233,17 @@ public class Board
                         {
                             //if the destination has something the cat cant be on, make sure it does step on it
                             Destination.y = y - 1;
+                            Debug.Log(_cells[Destination.x, y].name + "name of cell");
                             if(_cells[Destination.x, y].name == "Post")
                             {
-                                //make the catstop moveing and make sure it moves on the cat post
+                                Destination.y = y;
+                                break;
                             }
                             if (_cells[Destination.x, y].name == "Bed")
                             {
-                                //make the catstop moveing on the bed and not move for the rest of the round.
+                                Destination.y = y;
+                                Cats[ListPos].Sleeping = true;
+                                break;
                             }
                             break;
                         }
@@ -262,6 +278,18 @@ public class Board
                         {
                             //if the destination has something the cat cant be on, make sure it does step on it
                             Destination.x = x + 1;
+                            Debug.Log(_cells[x, Destination.y].name + "name of cell");
+                            if (_cells[x, Destination.y].name == "Post")
+                            {
+                                Destination.x = x;
+                                break;
+                            }
+                            if (_cells[x, Destination.y].name == "Bed")
+                            {
+                                Destination.x = x;
+                                Cats[ListPos].Sleeping = true;
+                                break;
+                            }
                             break;
                         }
                         else if (_cells[x, Destination.y].Is<CatPen>())
@@ -291,6 +319,18 @@ public class Board
                         {
                             //if the destination has something the cat cant be on, make sure it does step on it
                             Destination.x = x - 1;
+                            Debug.Log(_cells[x, Destination.y].name + "name of cell");
+                            if (_cells[x, Destination.y].name == "Post")
+                            {
+                                Destination.x = x;
+                                break;
+                            }
+                            if (_cells[x, Destination.y].name == "Bed")
+                            {
+                                Destination.x = x;
+                                Cats[ListPos].Sleeping = true;
+                                break;
+                            }
                             break;
                         }
                         else if(_cells[x, Destination.y].Is<CatPen>())
