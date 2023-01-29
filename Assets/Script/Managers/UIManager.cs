@@ -95,7 +95,6 @@ public class UIManager : MonoBehaviour
                         GameManager.Instance._matchManager.GameBoard.Items.Add(new PosObject(itemLocation, SelectedItem.name, temp.transform));
                         // Adds Item to the list to delete/adjust order of items
                         GameObject NewItemEntry = Instantiate(ItemAdjPrefab, new Vector3(0, 0, 0), Quaternion.identity, ItemAdjPanel.transform.GetChild(0).GetChild(0));
-                        NewItemEntry.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = SelectedItem.name;
                         NewItemEntry.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = temp.GetComponent<SpriteRenderer>().sprite;
                         GameManager.Instance._matchManager.GameBoard.Items[GameManager.Instance._matchManager.GameBoard.Items.Count - 1].ItemAdjObject = NewItemEntry;
                         int num = GameManager.Instance._matchManager.GameBoard.Items.Count - 1;
