@@ -139,6 +139,9 @@ public class LevelCreationTool : MonoBehaviour
         LevelEditNameObject.SetActive(true);
     }*/
 
+    /// <summary>
+    /// check if a level with the name exists and pulls up if the level layout editor
+    /// </summary>
     public void EditLevelLayout()
     {
         if (GamelevelList.CheckListForName(LevelName))
@@ -148,6 +151,8 @@ public class LevelCreationTool : MonoBehaviour
             LevelEditNameObject.SetActive(false);
             GetLevelData(LevelName);
             GenerateExistingBoard();
+            //then turn on buttons with items
+            ItemBoardButtons.SetActive(true);
         } else
         {
             //error that level does not exist
@@ -155,14 +160,18 @@ public class LevelCreationTool : MonoBehaviour
         } 
     }
 
+    /// <summary>
+    /// check if a level with the name exists and pulls up if the level info editor
+    /// </summary>
     public void EditLevelInfo()
     {
         if (GamelevelList.CheckListForName(LevelName))
         {
             //navigates to be able to edit an existing layout
             GameObject.Find("Error").GetComponent<TextMeshProUGUI>().text = "";
-
+            GetLevelData(LevelName);
             LevelCreateMenuObject.SetActive(true);
+            FillLevelInfoForm();
         }
         else
         {
@@ -184,23 +193,30 @@ public class LevelCreationTool : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Fills the Info into the Info Setup screen
+    /// </summary>
     public void FillLevelInfoForm ()
     {
-        GameObject.Find("InputField for size X").GetComponent<TextMeshProUGUI>().text = $"{BoardSize.x}";
-        GameObject.Find("InputField for size Y").GetComponent<TextMeshProUGUI>().text = $"{BoardSize.y}";
-        GameObject.Find("Turn goal input feild").GetComponent<TextMeshProUGUI>().text = $"{GoalRounds}";
-        GameObject.Find("Item goal input feild").GetComponent<TextMeshProUGUI>().text = $"{GoalItems}";
-        /*for (int i = 0; i < Tiles.Count; i++)
+        GameObject.Find("InputField for size X").GetComponent<TMP_InputField>().text = $"{BoardSize.x}";
+        GameObject.Find("InputField for size Y").GetComponent<TMP_InputField>().text = $"{BoardSize.y}";
+        GameObject.Find("Turn goal input feild").GetComponent<TMP_InputField>().text = $"{GoalRounds}";
+        GameObject.Find("Item goal input feild").GetComponent<TMP_InputField>().text = $"{GoalItems}";
+        //TMP_InputField LevelNameInputObject = GameObject.Find("InputField for Name").GetComponent<TMP_InputField>();
+        //LevelNameInputObject.text = $"{LevelName}";
+        //LevelNameInputObject.interactable = false;
+
+        for (int i = 0; i < SelectedItems.Count; i++)
         {
             for (int j = 0; j < ItemToggles.Count; j++)
             {
-                if (ItemToggles[i].isOn == false || Tiles[i].)
+                if (ItemToggles[j].isOn == false && ItemToggles[j].name.Contains(SelectedItems[i].name))
                 {
-                    ItemToggles[i].isOn = true;
+                    ItemToggles[j].isOn = true;
                     break;
                 }
             }
-        }*/
+        }
     }
 
     /// <summary>

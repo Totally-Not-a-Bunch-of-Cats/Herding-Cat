@@ -12435,7 +12435,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 801340852}
         m_TargetAssemblyTypeName: LevelCreationTool, Scripts
-        m_MethodName: CreateLevel
+        m_MethodName: EditLevelInfo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
