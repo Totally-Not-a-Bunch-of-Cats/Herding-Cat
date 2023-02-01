@@ -33,13 +33,13 @@ public class ScreenResizeManager : MonoBehaviour
     /// </summary>
     public void ScaleBoard()
     {
-        float OrthoSize = (GameManager.Instance._matchManager.BoardSize[1] + 1f) * 0.5f;
+        float OrthoSize = (GameManager.Instance._matchManager.BoardSize[1] + 2f) * 0.5f;
         Camera.main.orthographicSize = OrthoSize;
 
-        ScreenScale = (float)Screen.height / 1000;
-        GameObject.Find("End Turn Button").transform.localScale *= ScreenScale;
-        GameObject.Find("Restart Button").transform.localScale *= ScreenScale;
-        GameObject.Find("Pause Button").transform.localScale *= ScreenScale;
+        //ScreenScale = (float)Screen.height / 1000;
+        //GameObject.Find("End Turn Button").transform.localScale *= ScreenScale;
+        //GameObject.Find("Restart Button").transform.localScale *= ScreenScale;
+        //GameObject.Find("Pause Button").transform.localScale *= ScreenScale;
     }
 
     public void RescaleItem(GameObject button)

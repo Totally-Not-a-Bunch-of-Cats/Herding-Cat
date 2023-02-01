@@ -106,12 +106,14 @@ public class MatchManager : MonoBehaviour
             for (int i = 0; i < currentLevel.GetPossibleItems().Length; i++)
             {
                 Item item = currentLevel.GetPossibleItems()[i];
-                float ScreenScale = (float)Screen.width / 1000;
                 Transform EndturnButton = GameObject.Find("End Turn Button").transform;
-                GameObject button = Instantiate(item.ButtonPrefab, new Vector3(0, EndturnButton.position.y + 2f + (2f * i), 4) ,Quaternion.identity, GameObject.Find("GUI").transform);
-                button.transform.localPosition += new Vector3(EndturnButton.localPosition.x, 0, 0);
+                GameObject button = Instantiate(item.ButtonPrefab, new Vector3(0, 0, 4) ,Quaternion.identity, GameObject.Find("GUI").transform);
+                button.transform.localPosition = new Vector3(EndturnButton.localPosition.x, EndturnButton.transform.position.y, 0);
+                button.transform.localPosition += new Vector3(0, 145 * (i + 1), 0);
+                button.GetComponent<RectTransform>().anchorMax = new Vector2(1, 0);
+                button.GetComponent<RectTransform>().anchorMin = new Vector2(1, 0);
                 button.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._uiManager.PlaceItem(item));
-                GameManager.Instance._screenResizeManager.RescaleItem(button);
+                //GameManager.Instance._screenResizeManager.RescaleItem(button);
             }
             GameManager.Instance._uiManager.GetUI();
             ActiveMatch = true;
