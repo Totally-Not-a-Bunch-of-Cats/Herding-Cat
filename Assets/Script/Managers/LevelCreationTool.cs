@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using TMPro;
 
 [ExecuteInEditMode]
@@ -43,7 +45,8 @@ public class LevelCreationTool : MonoBehaviour
     public List<GameObject> ItemReferences;
     public List<Item> PossibleItems;
     public List<Toggle> ItemToggles;
-
+    public enum Mode{Edit, Create};
+    public Mode CurrentMode = Mode.Create;
 
     //then activates buttons to begin working on the level
 
@@ -127,17 +130,6 @@ public class LevelCreationTool : MonoBehaviour
     {
         BackgroundTile = TileImages[ListTileNum];
     }
-    /*public void CreateLevel ()
-    {
-        LevelDesignStartupObject.SetActive(false);
-        LevelCreateMenuObject.SetActive(true);
-    }
-
-    public void EditLevel()
-    {
-        LevelDesignStartupObject.SetActive(false);
-        LevelEditNameObject.SetActive(true);
-    }*/
 
     /// <summary>
     /// check if a level with the name exists and pulls up if the level layout editor
@@ -146,6 +138,7 @@ public class LevelCreationTool : MonoBehaviour
     {
         if (GamelevelList.CheckListForName(LevelName))
         {
+            CurrentMode = Mode.Edit;
             //navigates to be able to edit an existing layout
             GameObject.Find("Error").GetComponent<TextMeshProUGUI>().text = "";
             LevelEditNameObject.SetActive(false);
@@ -167,8 +160,10 @@ public class LevelCreationTool : MonoBehaviour
     {
         if (GamelevelList.CheckListForName(LevelName))
         {
+            CurrentMode = Mode.Edit;
             //navigates to be able to edit an existing layout
             GameObject.Find("Error").GetComponent<TextMeshProUGUI>().text = "";
+            LevelEditNameObject.SetActive(false);
             GetLevelData(LevelName);
             LevelCreateMenuObject.SetActive(true);
             FillLevelInfoForm();
@@ -184,12 +179,59 @@ public class LevelCreationTool : MonoBehaviour
     {
         if (LevelName != null && BoardSize.x != 0 && BoardSize.y != 0)
         {
-            //turn off level info
-            LevelCreateMenuObject.SetActive(false);
-            //then make blank of proper size
-            GenerateBlankBoard();
-            //then turn on buttons with items
-            ItemBoardButtons.SetActive(true);
+            if (GamelevelList.CheckListForName(LevelName))
+            {
+                if (CurrentMode == Mode.Create)
+                {
+                    Debug.LogWarning("Name already Taken please change name");
+                    return;
+                }
+                if (CurrentMode == Mode.Edit)
+                {
+                    //for (int i = 0; i < ItemToggles.Count; i++)
+                    //{
+                    //    for (int j = 0; j < SelectedItems.Count; j++)
+                    //    {
+                    //        if (ItemToggles[i].isOn == false && ItemToggles[1].name.Contains(SelectedItems[j].name))
+                    //        {
+                    //            ItemToggles[j].isOn = true;
+                    //            break;
+                    //        }
+                    //    }
+                    //}
+                    //turn off level info
+                    LevelCreateMenuObject.SetActive(false);
+                    //then make blank of proper size
+                    GenerateExistingBoard();
+                    //then turn on buttons with items
+                    ItemBoardButtons.SetActive(true);
+                    return;
+                }
+            } else {
+                //turn off level info
+                LevelCreateMenuObject.SetActive(false);
+                //then make blank of proper size
+                GenerateBlankBoard();
+                //then turn on buttons with items
+                ItemBoardButtons.SetActive(true);
+            }
+        } else {
+            Debug.LogWarning("Level Name, Board size invalid");
+        }
+    }
+
+    /// <summary>
+    /// Resets star counts to 0 and locks all levels except first one
+    /// </summary>
+    public void ResetLevels()
+    {
+        for (int i = 0; i < GamelevelList.GameLevel.Count; i++)
+        {
+            GamelevelList.GameLevel[i].StarsEarned = 0;
+            if (i != 0)
+            {
+                GamelevelList.GameLevel[i].SetUnlocked(false);
+            }    
         }
     }
 
@@ -202,9 +244,9 @@ public class LevelCreationTool : MonoBehaviour
         GameObject.Find("InputField for size Y").GetComponent<TMP_InputField>().text = $"{BoardSize.y}";
         GameObject.Find("Turn goal input feild").GetComponent<TMP_InputField>().text = $"{GoalRounds}";
         GameObject.Find("Item goal input feild").GetComponent<TMP_InputField>().text = $"{GoalItems}";
-        //TMP_InputField LevelNameInputObject = GameObject.Find("InputField for Name").GetComponent<TMP_InputField>();
-        //LevelNameInputObject.text = $"{LevelName}";
-        //LevelNameInputObject.interactable = false;
+        TMP_InputField LevelNameInputObject = GameObject.Find("InputField for Name").GetComponent<TMP_InputField>();
+        LevelNameInputObject.text = $"{LevelName}";
+        LevelNameInputObject.interactable = false;
 
         for (int i = 0; i < SelectedItems.Count; i++)
         {
@@ -224,20 +266,17 @@ public class LevelCreationTool : MonoBehaviour
     /// </summary>
     public void Save()
     {
-        if(GamelevelList.CheckListForName(LevelName))
-        {
-            Debug.LogWarning("Name already Taken please change name");
-            return;
-        }
-        LevelData Level = ScriptableObject.CreateInstance<LevelData>();
-        Level.BackgroundTile = BackgroundTile;
-        Level.Dimensions = BoardSize;
-        Level.PossibleItems = SelectedItems.ToArray();
-        Level.TargetItems = GoalItems;
-        Level.TargetRounds = GoalRounds;
-        Level.Tiles = Tiles.ToArray();
-        AssetDatabase.CreateAsset(Level, "Assets/Script/ScriptiableObjects/Levels/" + LevelName + ".asset");
-        GamelevelList.GameLevel.Add(Level);
+        #if UNITY_EDITOR
+            LevelData Level = ScriptableObject.CreateInstance<LevelData>();
+            Level.BackgroundTile = BackgroundTile;
+            Level.Dimensions = BoardSize;
+            Level.PossibleItems = SelectedItems.ToArray();
+            Level.TargetItems = GoalItems;
+            Level.TargetRounds = GoalRounds;
+            Level.Tiles = Tiles.ToArray();
+            AssetDatabase.CreateAsset(Level, "Assets/Script/ScriptiableObjects/Levels/" + LevelName + ".asset");
+            GamelevelList.GameLevel.Add(Level);
+        #endif
     }
 
     /// <summary>
@@ -255,6 +294,7 @@ public class LevelCreationTool : MonoBehaviour
             GoalItems = Level.TargetItems;
             GoalRounds = Level.TargetRounds;
             Tiles = new List<PosTile>(Level.Tiles);
+            this.LevelName = Level.name;
         }
     }
 
