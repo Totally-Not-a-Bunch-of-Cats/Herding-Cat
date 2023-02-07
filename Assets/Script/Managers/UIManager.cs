@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     public GameObject GUI;
     public GameObject ItemAdjPrefab;
     public GameObject ItemAdjPanel;
+    public PosObject CurrentSelectedItem;
 
     /// <summary>
     /// finds the Board game object and GUI object
@@ -199,6 +200,23 @@ public class UIManager : MonoBehaviour
             GameManager.Instance._matchManager.GameBoard.Items[Index] = null;
             GameManager.Instance._matchManager.ItemsUsed -= 1;
         } 
+        else
+        {
+            Debug.LogError($"Index must be between 0 and ({GameManager.Instance._matchManager.GameBoard.Items.Count}");
+            throw new ArgumentOutOfRangeException($"Index must be between 0 and ({GameManager.Instance._matchManager.GameBoard.Items.Count}");
+        }
+    }
+
+    public void HighlightItem (int Index)
+    {
+        if (Index >= 0 && Index <= GameManager.Instance._matchManager.GameBoard.Items.Count)
+        {
+            CurrentSelectedItem = GameManager.Instance._matchManager.GameBoard.Items[Index];
+            // Highlight item Adjust entry
+            //CurrentSelectedItem.Object
+            // Highlight item circle
+            //CurrentSelectedItem.ItemAdjObject.transform.GetChild(0)
+        }
         else
         {
             Debug.LogError($"Index must be between 0 and ({GameManager.Instance._matchManager.GameBoard.Items.Count}");

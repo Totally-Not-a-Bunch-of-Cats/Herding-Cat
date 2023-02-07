@@ -26,6 +26,7 @@ public class LevelCreationTool : MonoBehaviour
     public GameObject LevelEditNameObject;
     public GameObject LevelDesignStartupObject;
     public GameObject ConfirmationWindowObject;
+    public List<Toggle> ItemToggles;
 
     [Header("Other Info")]
     public List<UnityEngine.Tilemaps.Tile> TileImages;
@@ -36,15 +37,10 @@ public class LevelCreationTool : MonoBehaviour
     Board GameBoard;
     Vector3 BoardOffset = new Vector3();
     public GameLevels GamelevelList;
-    public Item Toy;
-    public Item Snake;
-    public Item AirHorn;
-    public Item Treat;
     public bool Remove;
     public List<Vector2Int> TileLocations;
     public List<GameObject> ItemReferences;
     public List<Item> PossibleItems;
-    public List<Toggle> ItemToggles;
     public enum Mode{Edit, Create};
     public Mode CurrentMode = Mode.Create;
 
@@ -98,23 +94,6 @@ public class LevelCreationTool : MonoBehaviour
         {
             BoardSize.y = int.Parse(Y);
         }
-    }
-
-    public void SelectedToyItem(bool ItemSelected)
-    {
-        SelectedItems.Add(Toy);
-    }
-    public void SelectedSnakeItem(bool ItemSelected)
-    {
-        SelectedItems.Add(Snake);
-    }
-    public void SelectedAirHornItem(bool ItemSelected)
-    {
-        SelectedItems.Add(AirHorn);
-    }
-    public void SelectedTreatItem(bool ItemSelected)
-    {
-        SelectedItems.Add(Treat);
     }
 
     /// <summary>
@@ -188,17 +167,15 @@ public class LevelCreationTool : MonoBehaviour
                 }
                 if (CurrentMode == Mode.Edit)
                 {
-                    //for (int i = 0; i < ItemToggles.Count; i++)
-                    //{
-                    //    for (int j = 0; j < SelectedItems.Count; j++)
-                    //    {
-                    //        if (ItemToggles[i].isOn == false && ItemToggles[1].name.Contains(SelectedItems[j].name))
-                    //        {
-                    //            ItemToggles[j].isOn = true;
-                    //            break;
-                    //        }
-                    //    }
-                    //}
+                    // Adds the selected items to the newest values of selected items of the created level
+                    SelectedItems.Clear();
+                    for (int i = 0; i < ItemToggles.Count; i++)
+                    {
+                        if (ItemToggles[i].isOn)
+                        {
+                            SelectedItems.Add(PossibleItems[i]);
+                        }
+                    }
                     //turn off level info
                     LevelCreateMenuObject.SetActive(false);
                     //then make blank of proper size
@@ -208,6 +185,14 @@ public class LevelCreationTool : MonoBehaviour
                     return;
                 }
             } else {
+                // Adds the selected items to the selected items of the created level
+                for (int i = 0; i < ItemToggles.Count; i++)
+                {
+                    if (ItemToggles[i].isOn)
+                    {
+                        SelectedItems.Add(PossibleItems[i]);
+                    }
+                }
                 //turn off level info
                 LevelCreateMenuObject.SetActive(false);
                 //then make blank of proper size
@@ -216,7 +201,7 @@ public class LevelCreationTool : MonoBehaviour
                 ItemBoardButtons.SetActive(true);
             }
         } else {
-            Debug.LogWarning("Level Name, Board size invalid");
+            Debug.LogWarning("Level Name or Board size invalid");
         }
     }
 
