@@ -96,11 +96,11 @@ public class UIManager : MonoBehaviour
                         GameManager.Instance._matchManager.GameBoard.Items.Add(new PosObject(itemLocation, SelectedItem.name, temp.transform));
                         // Adds Item to the list to delete/adjust order of items
                         GameObject NewItemEntry = Instantiate(ItemAdjPrefab, new Vector3(0, 0, 0), Quaternion.identity, ItemAdjPanel.transform.GetChild(0).GetChild(0));
-                        NewItemEntry.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = temp.GetComponent<SpriteRenderer>().sprite;
+                        NewItemEntry.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = temp.GetComponent<SpriteRenderer>().sprite;
                         GameManager.Instance._matchManager.GameBoard.Items[GameManager.Instance._matchManager.GameBoard.Items.Count - 1].ItemAdjObject = NewItemEntry;
                         int num = GameManager.Instance._matchManager.GameBoard.Items.Count - 1;
-                        NewItemEntry.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteItem(num));
-
+                        NewItemEntry.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() => DeleteItem(num));
+                        NewItemEntry.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => HighlightItem(num));
                     }
                     CanPlaceItem = false;
                 }
@@ -211,11 +211,20 @@ public class UIManager : MonoBehaviour
     {
         if (Index >= 0 && Index <= GameManager.Instance._matchManager.GameBoard.Items.Count)
         {
+            if (CurrentSelectedItem.ItemAdjObject != null)
+            {
+                CurrentSelectedItem.ItemAdjObject.transform.GetChild(0).gameObject.SetActive(false);
+            }
             CurrentSelectedItem = GameManager.Instance._matchManager.GameBoard.Items[Index];
-            // Highlight item Adjust entry
-            //CurrentSelectedItem.Object
+            // Highlight item Adjust .transform.GetChild(0)
+            SpriteRenderer temp = CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>();
+            //CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>().color =
+            //    new Color(temp.color.);
+            //    temp.color.a = 0;
+                
             // Highlight item circle
-            //CurrentSelectedItem.ItemAdjObject.transform.GetChild(0)
+            Debug.Log("test");
+            CurrentSelectedItem.ItemAdjObject.transform.GetChild(0).gameObject.SetActive(true);
         }
         else
         {
