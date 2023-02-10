@@ -257,7 +257,10 @@ public class MatchManager : MonoBehaviour
                 }
                 //turns the item game object off and sets its position to null/empty
                 GameBoard.Items[i].Object.gameObject.SetActive(false);
-                GameBoard.Set(GameBoard.Items[i].Position, null);
+                if(GameBoard.At(GameBoard.Items[i].Position).Is<Item>())
+                {
+                    GameBoard.Set(GameBoard.Items[i].Position, null);
+                }
             }
         }
         
@@ -435,20 +438,21 @@ public class MatchManager : MonoBehaviour
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
             StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
-
-            //for (int i = CatPos.y; i > FinalDestination.y; i--)
-            //{
-            //    GameBoard.Cats[ListPos].Object.localPosition += new Vector3(Direction.x, Direction.y, 0);
-            //}
         }
         //move cat in data structure all at once
         if (GameBoard.At(FinalDestination) != null)
         {
+            
             //adds cats to the pen count when they move in
             if (GameBoard.At(FinalDestination).Is<CatPen>())
             {
                 GameBoard.Set(CatPos, null);
                 GameBoard.NumCatinPen++;
+            }
+            if (GameBoard.At(FinalDestination).name == "Toy")
+            {
+                GameBoard.Set(CatPos, null);
+                GameBoard.Set(FinalDestination, Cat);
             }
         }
         else
@@ -479,7 +483,7 @@ public class MatchManager : MonoBehaviour
             yield return null;
         }
         GameBoard.Cats[ListPos].Object.localPosition = target;
-        if(GameBoard.At(FinalDestination).Is<CatPen>())
+        if (GameBoard.At(FinalDestination).Is<CatPen>())
         {
             GameBoard.Cats[ListPos] = null;
         }

@@ -204,9 +204,15 @@ public class Board
                                 Cats[ListPos].Sleeping = true;
                                 break;
                             }
+                            if (_cells[Destination.x, y].name == "Toy")
+                            {
+                                //allows cat to move on cat pen
+                                Destination.y = y;
+                                break;
+                            }
                             break;
                         }
-                        else if (_cells[Destination.x, y].Is<CatPen>())
+                        else if (_cells[Destination.x, y].Is<CatPen>() || _cells[Destination.x, y].name == "Toy")
                         {
                             //allows cat to move on cat pen
                             Destination.y = y;
@@ -243,6 +249,12 @@ public class Board
                             {
                                 Destination.y = y;
                                 Cats[ListPos].Sleeping = true;
+                                break;
+                            }
+                            if (_cells[Destination.x, y].name == "Toy")
+                            {
+                                //allows cat to move on cat pen
+                                Destination.y = y;
                                 break;
                             }
                             break;
@@ -290,6 +302,12 @@ public class Board
                                 Cats[ListPos].Sleeping = true;
                                 break;
                             }
+                            if (_cells[x, Destination.y].name == "Toy")
+                            {
+                                //allows cat to move on cat pen
+                                Destination.x = x;
+                                break;
+                            }
                             break;
                         }
                         else if (_cells[x, Destination.y].Is<CatPen>())
@@ -329,6 +347,12 @@ public class Board
                             {
                                 Destination.x = x;
                                 Cats[ListPos].Sleeping = true;
+                                break;
+                            }
+                            if (_cells[x, Destination.y].name == "Toy")
+                            {
+                                //allows cat to move on cat pen
+                                Destination.x = x;
                                 break;
                             }
                             break;

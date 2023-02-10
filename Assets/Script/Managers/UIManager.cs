@@ -214,16 +214,13 @@ public class UIManager : MonoBehaviour
             if (CurrentSelectedItem.ItemAdjObject != null)
             {
                 CurrentSelectedItem.ItemAdjObject.transform.GetChild(0).gameObject.SetActive(false);
+                CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.9166545f, 1, 0, 0.5254902f);
             }
             CurrentSelectedItem = GameManager.Instance._matchManager.GameBoard.Items[Index];
-            // Highlight item Adjust .transform.GetChild(0)
             SpriteRenderer temp = CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>();
-            //CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>().color =
-            //    new Color(temp.color.);
-            //    temp.color.a = 0;
-                
+            CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, .9f);
+
             // Highlight item circle
-            Debug.Log("test");
             CurrentSelectedItem.ItemAdjObject.transform.GetChild(0).gameObject.SetActive(true);
         }
         else

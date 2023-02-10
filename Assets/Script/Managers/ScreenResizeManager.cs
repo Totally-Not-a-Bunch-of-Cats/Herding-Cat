@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class ScreenResizeManager : MonoBehaviour
 {
-    
     public enum Rotation {Landscape, Portrait }
     float ScreenScale;
     // Rotation of the device
