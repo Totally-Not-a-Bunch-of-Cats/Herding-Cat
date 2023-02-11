@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     private static object m_Lock = new object();
     private static GameManager m_Instance;
     public int LevelPosition = 0;
+    public bool ActivateItemIndicators = false;
 
 
     // Used for testing to determine if star count for a level should be changed or outputed in console.
@@ -111,7 +112,7 @@ public class GameManager : MonoBehaviour
 
     public void ButtonOfSelectedNum(int buttonPressed)
     {
-        Instance.LevelPosition = buttonPressed + 1;
+        Instance.LevelPosition = buttonPressed;
     }
 
     /// <summary>
