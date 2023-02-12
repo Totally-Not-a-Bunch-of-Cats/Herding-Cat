@@ -124,19 +124,7 @@ public class MatchManager : MonoBehaviour
         return false;
     }
 
-    void ActivateStars()
-    {
-        //get references to stars and activate them
-        List<Image> Stars = new List<Image>();
-        Stars.Add(GameObject.Find("Star1").GetComponent<Image>());
-        Stars.Add(GameObject.Find("Star2").GetComponent<Image>());
-        Stars.Add(GameObject.Find("Star3").GetComponent<Image>());
 
-        for(int i = 0; i < CurrentLevel.StarsEarned; i++)
-        {
-            Stars[i].color = Color.white;
-        }
-    }
 
     /// <summary>
     /// Finds closest cat to an item and starts the movement 
@@ -317,9 +305,7 @@ public class MatchManager : MonoBehaviour
                     Debug.LogWarning("No Next Level");
                 }
             }
-
-            GameWonUI.SetActive(true);
-            ActivateStars();
+            StartCoroutine(VictoryPause());
 
             // Checks if wants to update leveldata info
             if (GameManager.Instance.UpdateLevelData == true)
@@ -491,4 +477,24 @@ public class MatchManager : MonoBehaviour
         }
         CatMoving = false;
     }
- }
+    IEnumerator VictoryPause()
+    {
+        yield return new WaitWhile(() => CatMoving);
+        yield return new WaitForSeconds(.15f);
+        GameWonUI.SetActive(true);
+        ActivateStars();
+    }
+    void ActivateStars()
+    {
+        //get references to stars and activate them
+        List<Image> Stars = new List<Image>();
+        Stars.Add(GameObject.Find("Star1").GetComponent<Image>());
+        Stars.Add(GameObject.Find("Star2").GetComponent<Image>());
+        Stars.Add(GameObject.Find("Star3").GetComponent<Image>());
+
+        for (int i = 0; i < CurrentLevel.StarsEarned; i++)
+        {
+            Stars[i].color = Color.white;
+        }
+    }
+}
