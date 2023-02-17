@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 7262667986292470423}
   - component: {fileID: 3404416110560719114}
   - component: {fileID: 8942253796293772717}
+  - component: {fileID: 4320872120768020720}
   m_Layer: 0
   m_Name: ItemAdjPanelEntry
   m_TagString: Untagged
@@ -155,6 +156,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4320872120768020720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4897113919975755801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9c4e3532262c674d975f4f408a4046e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HighLightObject: {fileID: 5698944647860014930}
+  ItemImage: {fileID: 4670987370471983960}
+  DeleteButton: {fileID: 6644862066956517605}
+  HighlightButton: {fileID: 1233568746208501573}
+  num: 0
 --- !u!1 &5698944647860014930
 GameObject:
   m_ObjectHideFlags: 0
