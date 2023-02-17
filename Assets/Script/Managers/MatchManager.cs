@@ -67,17 +67,16 @@ public class MatchManager : MonoBehaviour
             bool oddX = BoardSize.x % 2 != 0;
             bool oddY = BoardSize.y % 2 != 0;
 
-            if (oddX)
-            {
-                BoardOffset.x = 0.5f;
-            }
-            if (oddY)
-            {
-                BoardOffset.y = 0.5f;
-            }
-
             if (oddX || oddY)
             {
+                if (oddX)
+                {
+                    BoardOffset.x = 0.5f;
+                }
+                if (oddY)
+                {
+                    BoardOffset.y = 0.5f;
+                }
                 BoardTileMap.transform.localPosition += BoardOffset;
             }
 
@@ -92,25 +91,27 @@ public class MatchManager : MonoBehaviour
 
             // place tiles(cat pens/cats/traps) associated to level
             int count = 0;
-            foreach (PosTile CurPosTile in currentLevel.GetTiles())
+            for (int i = 0; i < currentLevel.GetTiles().Length; i++)
             {
-                Vector3 pos = new Vector3(CurPosTile.Position.x - tempx + 0.5f - BoardOffset.x,
-                    CurPosTile.Position.y - tempy + 0.5f - BoardOffset.y, 5);
-                Transform temp = Instantiate(CurPosTile.Slate.GetPrefab(), pos, Quaternion.identity, transform).transform;
-                temp.gameObject.name = CurPosTile.Slate.name + $" ({CurPosTile.Position.x}, {CurPosTile.Position.y})";
-                if (CurPosTile.Slate.Is<Cat>())
+                Vector3 pos = new Vector3(currentLevel.GetTiles()[i].Position.x - tempx + 0.5f - BoardOffset.x,
+                    currentLevel.GetTiles()[i].Position.y - tempy + 0.5f - BoardOffset.y, 5);
+                Transform temp = Instantiate(currentLevel.GetTiles()[i].Slate.GetPrefab(), pos, Quaternion.identity, transform).transform;
+                temp.gameObject.name = currentLevel.GetTiles()[i].Slate.name + $" ({currentLevel.GetTiles()[i].Position.x}, {currentLevel.GetTiles()[i].Position.y})";
+                if (currentLevel.GetTiles()[i].Slate.Is<Cat>())
                 {
                     GameBoard.Cats[count].Object = temp;
                     count++;
                 }
             }
+
             //places items 
             for (int i = 0; i < currentLevel.GetPossibleItems().Length; i++)
             {
                 Item item = currentLevel.GetPossibleItems()[i];
                 Transform EndturnButton = GameObject.Find("End Turn Button").transform;
                 GameObject button = Instantiate(item.ButtonPrefab, new Vector3(0, 0, 4) ,Quaternion.identity, GameObject.Find("GUI").transform);
-                button.transform.localPosition = new Vector3(EndturnButton.localPosition.x, EndturnButton.transform.position.y, 0);
+                button.transform.localPosition = EndturnButton.localPosition;
+                //button.transform.localPosition = new Vector3(EndturnButton.localPosition.x, EndturnButton.transform.position.y, 0);
                 button.transform.localPosition += new Vector3(0, 145 * (i + 1), 0);
                 button.GetComponent<RectTransform>().anchorMax = new Vector2(1, 0);
                 button.GetComponent<RectTransform>().anchorMin = new Vector2(1, 0);

@@ -77,7 +77,7 @@ public class UIManager : MonoBehaviour
                         itemLocation.y += 1;
                     }
                     //checs for edge casts hehe and adjusts accordingly
-                    if(itemLocation.y == 0 || itemLocation.y == GameManager.Instance._matchManager.GameBoard.GetHeight() - 1)
+                    if (itemLocation.y == 0 || itemLocation.y == GameManager.Instance._matchManager.GameBoard.GetHeight() - 1)
                     {
                         clickableY += 1;
                     }
@@ -86,22 +86,20 @@ public class UIManager : MonoBehaviour
                         clickableX += 1;
                     }
                     // Checks if position is within board and if the tile is empty
-                    if ((WorldPosition.x >= -clickableX && WorldPosition.x < clickableX) && 
+                    if (WorldPosition.x >= -clickableX && WorldPosition.x < clickableX &&
                         (WorldPosition.y >= -clickableY && WorldPosition.y < clickableY)
                         && GameManager.Instance._matchManager.GameBoard.At(itemLocation) == null)
                     {
+                        // Creating Item for On Board
                         GameManager.Instance._matchManager.GameBoard.Set(itemLocation, SelectedItem);
                         GameObject temp = Instantiate(SelectedItem.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);
                         temp.name = SelectedItem.name + $" ({itemLocation.x}, {itemLocation.y})";
                         GameManager.Instance._matchManager.GameBoard.Items.Add(new PosObject(itemLocation, SelectedItem.name, temp.transform));
                         // Adds Item to the list to delete/adjust order of items
                         GameObject NewItemEntry = Instantiate(ItemAdjPrefab, new Vector3(0, 0, 0), Quaternion.identity, ItemAdjPanel.transform.GetChild(0).GetChild(0));
-                        NewItemEntry.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = temp.GetComponent<SpriteRenderer>().sprite;
-                        GameManager.Instance._matchManager.GameBoard.Items[GameManager.Instance._matchManager.GameBoard.Items.Count - 1].ItemAdjObject = NewItemEntry;
-                        int num = GameManager.Instance._matchManager.GameBoard.Items.Count - 1;
-                        NewItemEntry.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() => DeleteItem(num));
-                        NewItemEntry.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => HighlightItem(num));
-                    }
+                        NewItemEntry.GetComponent<ItemAdjPanel>().ItemImage.sprite = temp.GetComponent<SpriteRenderer>().sprite;
+                        GameManager.Instance._matchManager.GameBoard.Items[GameManager.Instance._matchManager.GameBoard.Items.Count - 1].ItemAdjObject = NewItemEntry.GetComponent<ItemAdjPanel>();
+                        }
                     CanPlaceItem = false;
                 }
             }
@@ -123,6 +121,7 @@ public class UIManager : MonoBehaviour
         //get the restart button and make an event 
         GameObject.Find("Restart Button").GetComponent<Button>().onClick.AddListener(() => Restart());
     }
+
     /// <summary>
     /// allows an item to be placed and is handed which item to place
     /// </summary>
@@ -132,7 +131,6 @@ public class UIManager : MonoBehaviour
         SelectedItem = item;
         CanPlaceItem = true;
     }
-
 
     /// <summary>
     /// Restarts the current round
@@ -187,46 +185,21 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Deletes Item on board
+    /// Turns on the highlight for the item adjust entry and item
     /// </summary>
-    /// <param name="Index">Index of item to delete from the board from the item list</param>
-    void DeleteItem(int Index)
+    /// <param name="Index">Index of item that is selected</param>
+    public void HighlightItem(int Index)
     {
-        if (Index >= 0 && Index <= GameManager.Instance._matchManager.GameBoard.Items.Count)
+        if (CurrentSelectedItem.ItemAdjObject != null)
         {
-            Destroy(GameManager.Instance._matchManager.GameBoard.Items[Index].Object.gameObject);
-            Destroy(GameManager.Instance._matchManager.GameBoard.Items[Index].ItemAdjObject);
-            GameManager.Instance._matchManager.GameBoard.Set(GameManager.Instance._matchManager.GameBoard.Items[Index].Position, null);
-            GameManager.Instance._matchManager.GameBoard.Items[Index] = null;
-            GameManager.Instance._matchManager.ItemsUsed -= 1;
-        } 
-        else
-        {
-            Debug.LogError($"Index must be between 0 and ({GameManager.Instance._matchManager.GameBoard.Items.Count}");
-            throw new ArgumentOutOfRangeException($"Index must be between 0 and ({GameManager.Instance._matchManager.GameBoard.Items.Count}");
+            CurrentSelectedItem.ItemAdjObject.HighLightObject.SetActive(false);
+            CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.9166545f, 1, 0, 0.5254902f);
         }
-    }
+        CurrentSelectedItem = GameManager.Instance._matchManager.GameBoard.Items[Index];
+        SpriteRenderer temp = CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, .9f);
 
-    public void HighlightItem (int Index)
-    {
-        if (Index >= 0 && Index <= GameManager.Instance._matchManager.GameBoard.Items.Count)
-        {
-            if (CurrentSelectedItem.ItemAdjObject != null)
-            {
-                CurrentSelectedItem.ItemAdjObject.transform.GetChild(0).gameObject.SetActive(false);
-                CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.9166545f, 1, 0, 0.5254902f);
-            }
-            CurrentSelectedItem = GameManager.Instance._matchManager.GameBoard.Items[Index];
-            SpriteRenderer temp = CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>();
-            CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, .9f);
-
-            // Highlight item circle
-            CurrentSelectedItem.ItemAdjObject.transform.GetChild(0).gameObject.SetActive(true);
-        }
-        else
-        {
-            Debug.LogError($"Index must be between 0 and ({GameManager.Instance._matchManager.GameBoard.Items.Count}");
-            throw new ArgumentOutOfRangeException($"Index must be between 0 and ({GameManager.Instance._matchManager.GameBoard.Items.Count}");
-        }
+        // Highlight item circle
+        CurrentSelectedItem.ItemAdjObject.HighLightObject.SetActive(true);
     }
-}
+}   
