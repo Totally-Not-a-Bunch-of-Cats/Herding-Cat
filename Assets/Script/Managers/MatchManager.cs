@@ -58,6 +58,7 @@ public class MatchManager : MonoBehaviour
             ItemsUsed = 0;
             CurrentLevel = currentLevel;
 
+            GameObject HelpGUI = GameObject.Find("initial Help Text");
 
             BoardTileMap = GameObject.Find("Tilemap").GetComponent<Tilemap>();
             GameObject.Find("OutlineSquare").transform.localScale = new Vector3(BoardSize.x, BoardSize.y, 1);
@@ -120,6 +121,12 @@ public class MatchManager : MonoBehaviour
             }
             GameManager.Instance._uiManager.GetUI();
             ActiveMatch = true;
+
+            if(currentLevel.NewThingIntroduced == true)
+            {
+                HelpGUI.transform.GetChild(0).gameObject.SetActive(true);
+            }
+
             return true;
         }
         return false;

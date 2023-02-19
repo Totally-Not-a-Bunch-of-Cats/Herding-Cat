@@ -15,6 +15,7 @@ MonoBehaviour:
   Dimensions: {x: 4, y: 1}
   TargetRounds: 1
   TargetItems: 1
+  NewThingIntroduced: 1
   BackgroundTile: {fileID: 11400000, guid: d756be87d23ee174f869fab071be06bf, type: 2}
   Tiles:
   - Position: {x: 3, y: 0}
