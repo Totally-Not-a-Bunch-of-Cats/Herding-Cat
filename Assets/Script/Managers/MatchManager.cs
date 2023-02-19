@@ -110,8 +110,8 @@ public class MatchManager : MonoBehaviour
                 Item item = currentLevel.GetPossibleItems()[i];
                 Transform EndturnButton = GameObject.Find("End Turn Button").transform;
                 GameObject button = Instantiate(item.ButtonPrefab, new Vector3(0, 0, 4) ,Quaternion.identity, GameObject.Find("GUI").transform);
-                button.transform.localPosition = EndturnButton.localPosition;
-                //button.transform.localPosition = new Vector3(EndturnButton.localPosition.x, EndturnButton.transform.position.y, 0);
+                //button.transform.localPosition = EndturnButton.localPosition;
+                button.transform.localPosition = new Vector3(EndturnButton.localPosition.x, EndturnButton.transform.position.y, 0);
                 button.transform.localPosition += new Vector3(0, 145 * (i + 1), 0);
                 button.GetComponent<RectTransform>().anchorMax = new Vector2(1, 0);
                 button.GetComponent<RectTransform>().anchorMin = new Vector2(1, 0);
