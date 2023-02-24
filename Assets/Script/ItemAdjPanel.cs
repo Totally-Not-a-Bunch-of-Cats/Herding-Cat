@@ -15,7 +15,7 @@ public class ItemAdjPanel : MonoBehaviour
     public int num;
 
     /// <summary>
-    /// 
+    /// Adds listeners and sets up script
     /// </summary>
     private void Start()
     {
@@ -46,9 +46,11 @@ public class ItemAdjPanel : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// calls highlight if num is valid
+    /// </summary>
     public void HighlightItem()
     {
-        //PosObject CurrentSelectedItem = GameManager.Instance._uiManager.CurrentSelectedItem;
         if (num >= 0 && num <= GameManager.Instance._matchManager.GameBoard.Items.Count)
         {
             GameManager.Instance._uiManager.HighlightItem(num);
