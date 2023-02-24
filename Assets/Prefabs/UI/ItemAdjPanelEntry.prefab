@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 3404416110560719114}
   - component: {fileID: 8942253796293772717}
   - component: {fileID: 4320872120768020720}
+  - component: {fileID: 2925487252752304305}
   m_Layer: 0
   m_Name: ItemAdjPanelEntry
   m_TagString: Untagged
@@ -173,6 +174,19 @@ MonoBehaviour:
   DeleteButton: {fileID: 6644862066956517605}
   HighlightButton: {fileID: 1233568746208501573}
   num: 0
+--- !u!65 &2925487252752304305
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4897113919975755801}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 185.59424, y: 110.52075, z: 1}
+  m_Center: {x: -0.9223633, y: 2.7009888, z: 0}
 --- !u!1 &5698944647860014930
 GameObject:
   m_ObjectHideFlags: 0

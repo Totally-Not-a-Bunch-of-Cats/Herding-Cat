@@ -42,9 +42,11 @@ public class MovingButton : MonoBehaviour
         {
             if (Dragging)
             {
+                Debug.Log("we drag");
                 if (Input.GetMouseButtonDown(0))
                 {
                     // Drop
+                    Debug.Log("drag");
                     Dragging = false;
                     return;
                 }
@@ -52,9 +54,11 @@ public class MovingButton : MonoBehaviour
 
            if (Input.GetMouseButton(0))
            {
+                Debug.Log("drop");
                 Vector3 mousePos = Input.mousePosition;
                 ScreenPos = new Vector2(mousePos.x, mousePos.y);
-            } else
+           } 
+           else
            {
                 return;
            }
@@ -66,12 +70,15 @@ public class MovingButton : MonoBehaviour
                 //Drag
                 LastDragged.transform.position = new Vector2(WorldPos.x, WorldPos.y);
                 Debug.Log(LastDragged);
-            } 
+           } 
            else
            {
+                Debug.Log("not dragging");
                 RaycastHit2D hit = Physics2D.Raycast(WorldPos, Vector2.zero);
+                Debug.Log(hit.collider);
                 if (hit.collider != null)
                 {
+                    Debug.Log("really not dragging");
                     Debug.Log(hit.transform.gameObject.name);
                     ItemAdjPanel ItemAdj = hit.transform.gameObject.GetComponent<ItemAdjPanel>();
                     if (ItemAdj != null)

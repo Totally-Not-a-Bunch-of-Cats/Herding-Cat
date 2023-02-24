@@ -32,7 +32,15 @@ public class ScreenResizeManager : MonoBehaviour
     /// </summary>
     public void ScaleBoard()
     {
-        float OrthoSize = (GameManager.Instance._matchManager.BoardSize[1] + 1.5f) * 0.5f;
+        float OrthoSize;
+        if (GameManager.Instance._matchManager.BoardSize[1] > GameManager.Instance._matchManager.BoardSize[0])
+        {
+            OrthoSize = (GameManager.Instance._matchManager.BoardSize[1] + .05f) * 0.5f;
+        }
+        else
+        {
+            OrthoSize = (GameManager.Instance._matchManager.BoardSize[0] + 1.5f) * 0.5f;
+        }
         Camera.main.orthographicSize = OrthoSize;
 
         //ScreenScale = (float)Screen.height / 1000;
