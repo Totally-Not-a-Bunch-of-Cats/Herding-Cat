@@ -125,7 +125,8 @@ public class LevelCreationTool : MonoBehaviour
             GenerateExistingBoard();
             //then turn on buttons with items
             ItemBoardButtons.SetActive(true);
-        } else
+        } 
+        else
         {
             //error that level does not exist
             GameObject.Find("Error").GetComponent<TextMeshProUGUI>().text = $"* {LevelName}: Level Does not Exist";

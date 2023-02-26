@@ -30,7 +30,7 @@ public class MatchManager : MonoBehaviour
     [Space]
     [SerializeField] private int TargetRounds = 10;
     [SerializeField] private int TargetItems = 10;
-    public int RoundsPlayed = 0;
+    [SerializeField] public int RoundsPlayed = 0;
     [SerializeField] public int ItemsUsed = 0;
 
     [SerializeField] public Tilemap BoardTileMap;

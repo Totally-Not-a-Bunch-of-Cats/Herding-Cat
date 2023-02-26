@@ -120,6 +120,8 @@ public class UIManager : MonoBehaviour
         GameObject.Find("End Turn Button").GetComponent<Button>().onClick.AddListener(() => EndRound());
         //get the restart button and make an event 
         GameObject.Find("Restart Button").GetComponent<Button>().onClick.AddListener(() => Restart());
+        //rewind button and make an event
+        GameObject.Find("Rewind Button").GetComponent<Button>().onClick.AddListener(() => Rewind());
     }
 
     /// <summary>
@@ -140,7 +142,14 @@ public class UIManager : MonoBehaviour
         SelectedItem = null;
         StartCoroutine(GameManager.Instance.StartMatch(GameManager.Instance._matchManager.CurrentLevel.name));
     }
-    
+
+    public void Rewind()
+    {
+        SelectedItem = null;
+        Debug.Log("we rewinding");
+        GameManager.Instance._ReWindManager.Revert();
+    }
+
     /// <summary>
     /// Calls the end of round
     /// </summary>
@@ -148,6 +157,7 @@ public class UIManager : MonoBehaviour
     {
         Override = false;
         //lock you out fron pressing buttons
+        GameManager.Instance._ReWindManager.SaveRewind(GameManager.Instance._matchManager.GameBoard, GameManager.Instance._matchManager.GameBoard.Cats, GameManager.Instance._matchManager.RoundsPlayed ,GameManager.Instance._matchManager.ItemsUsed);
         GameManager.Instance._matchManager.RoundsPlayed++;
         StartCoroutine(GameManager.Instance._matchManager.EndRound());
     }

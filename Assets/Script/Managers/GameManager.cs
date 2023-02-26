@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public MatchManager _matchManager;
     public UIManager _uiManager;
     public ScreenResizeManager _screenResizeManager;
+    public ReWindManager _ReWindManager;
     //list of all level data
     //public static List<LevelData> Levels;
     public List<LevelData> Levels = new List<LevelData>();

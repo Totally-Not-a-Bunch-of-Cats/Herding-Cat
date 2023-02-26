@@ -83,6 +83,17 @@ public class Board
             }
         }
     }
+    public Board(Board BoarbToCopy)
+    {
+        this._width = BoarbToCopy._width;
+        this._height = BoarbToCopy._height;
+        _cells = BoarbToCopy._cells;
+        Cats = BoarbToCopy.Cats;
+        Items = BoarbToCopy.Items;
+        CatPenLocation = BoarbToCopy.CatPenLocation;
+        NumCatinPen = BoarbToCopy.NumCatinPen;
+        NumberofCats = BoarbToCopy.NumberofCats;
+    }
 
     /// <summary>
     /// Get a specific cell on the <see cref="Board"/> from a <see cref="Vector2Int"/>
@@ -192,7 +203,6 @@ public class Board
                         {
                             //if the destination has something the cat cant be on, make sure it does step on it
                             Destination.y = y + 1;
-                            Debug.Log(_cells[Destination.x, y].name + "name of cell");
                             if (_cells[Destination.x, y].name == "Post")
                             {
                                 Destination.y = y;
@@ -239,7 +249,6 @@ public class Board
                         {
                             //if the destination has something the cat cant be on, make sure it does step on it
                             Destination.y = y - 1;
-                            Debug.Log(_cells[Destination.x, y].name + "name of cell");
                             if(_cells[Destination.x, y].name == "Post")
                             {
                                 Destination.y = y;
@@ -290,7 +299,6 @@ public class Board
                         {
                             //if the destination has something the cat cant be on, make sure it does step on it
                             Destination.x = x + 1;
-                            Debug.Log(_cells[x, Destination.y].name + "name of cell");
                             if (_cells[x, Destination.y].name == "Post")
                             {
                                 Destination.x = x;
@@ -337,7 +345,6 @@ public class Board
                         {
                             //if the destination has something the cat cant be on, make sure it does step on it
                             Destination.x = x - 1;
-                            Debug.Log(_cells[x, Destination.y].name + "name of cell");
                             if (_cells[x, Destination.y].name == "Post")
                             {
                                 Destination.x = x;
