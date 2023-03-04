@@ -12,9 +12,7 @@ public class PosObject
     [SerializeField] public Vector2Int Position;
     [SerializeField] public Transform Object;
     [SerializeField] public ItemAdjPanel ItemAdjObject;
-   // [SerializeField] public GameObject ItemAdjObject;
     [SerializeField] public bool Sleeping = false;
-
 
     /// <summary>
     /// Creates new PosObject to relate a postion on board to Object transform
@@ -31,6 +29,12 @@ public class PosObject
             Object = Obj;
         }
     }
-
+    public PosObject(Vector2Int oldPosObjectV2, Transform oldPosObjectTrans, ItemAdjPanel oldPosObjectPannel, string oldPosObjectName)
+    {
+        Position = oldPosObjectV2;
+        Object = oldPosObjectTrans;
+        ItemAdjObject = oldPosObjectPannel;
+        Name = oldPosObjectName;
+    }
 
 }

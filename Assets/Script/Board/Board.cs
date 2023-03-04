@@ -83,16 +83,16 @@ public class Board
             }
         }
     }
-    public Board(Board BoarbToCopy)
+    public Board(Board BoardToCopy)
     {
-        this._width = BoarbToCopy._width;
-        this._height = BoarbToCopy._height;
-        _cells = BoarbToCopy._cells;
-        Cats = BoarbToCopy.Cats;
-        Items = BoarbToCopy.Items;
-        CatPenLocation = BoarbToCopy.CatPenLocation;
-        NumCatinPen = BoarbToCopy.NumCatinPen;
-        NumberofCats = BoarbToCopy.NumberofCats;
+        this._width = BoardToCopy._width;
+        this._height = BoardToCopy._height;
+        _cells = BoardToCopy._cells;
+        Cats = BoardToCopy.Cats;
+        Items = BoardToCopy.Items;
+        CatPenLocation = BoardToCopy.CatPenLocation;
+        NumCatinPen = BoardToCopy.NumCatinPen;
+        NumberofCats = BoardToCopy.NumberofCats;
     }
 
     /// <summary>
