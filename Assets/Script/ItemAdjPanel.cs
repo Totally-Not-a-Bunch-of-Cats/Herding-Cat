@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// Holds reference to children of gameobject and sets up buttons for the adjustment object
 /// </summary>
-public class ItemAdjPanel : MonoBehaviour, IDragHandler
+public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler
 {
     public GameObject HighLightObject;
     public Image ItemImage;
@@ -15,6 +15,7 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler
     public Button HighlightButton;
     public int num;
     public Canvas Canvas;
+    [SerializeField] Transform Parent;
 
     /// <summary>
     /// Adds listeners and sets up script
@@ -26,7 +27,7 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler
         DeleteButton.onClick.AddListener(() => DeleteItem());
         HighlightButton.onClick.AddListener(() => HighlightItem());
         Canvas = GameObject.Find("GUI").GetComponent<Canvas>();
-
+        Parent = transform.parent;
     }
 
     /// <summary>
@@ -65,10 +66,40 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler
         }
     }
 
-    public void OnDrag(PointerEventData data)
+    public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log(Canvas.scaleFactor);
-        transform.localPosition += new Vector3(0, data.delta.y/Canvas.scaleFactor, 0);
+        //transform.SetSiblingIndex(Parent.childCount);
     }
 
+    public void OnDrag(PointerEventData data)
+    {
+        transform.localPosition += new Vector3(0, data.delta.y/Canvas.scaleFactor, 0);
+    }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        Snap();
+    }
+    public void Snap()
+    {
+        float Ycheck;
+        int Yfinial;
+        int SiblingNum = transform.GetSiblingIndex();
+        Ycheck = transform.localPosition.y / 125;
+        Yfinial = (int)Mathf.Round(-Ycheck);
+        if(Yfinial == 0)
+        {
+            Debug.Log("updated order for 0" + Yfinial);
+            transform.SetSiblingIndex(Yfinial);
+        }
+        else
+        {
+            Debug.Log("updated order" + Yfinial);
+            transform.SetSiblingIndex(Yfinial - 1);
+        }
+        if(transform.GetSiblingIndex() == SiblingNum)
+        {
+            Debug.Log("didnt move");
+            transform.localPosition = new Vector3(transform.localPosition.x, -60 + (SiblingNum * -125), transform.localPosition.z);
+        }
+    }
 }

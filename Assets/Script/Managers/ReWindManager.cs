@@ -12,11 +12,10 @@ public class ReWindManager : MonoBehaviour
     [SerializeField] List<Transform> Object;
     [SerializeField] List<ItemAdjPanel> ItemAdjObject;
     [SerializeField] List<string> Name;
-    string bing = "chilling";
     public void SaveRewind(Board currentBoard, List<PosObject> currentCatLoc, int currentRoundsPlayed, int currentItemsUsed)
     {
         Debug.Log("we saving");
-        PreviousCatsLocations.Clear();
+        PreviousCatsLocations.Clear(); //whipes the cats off of the board
         PreviousGameBoard = new Board(currentBoard);
         foreach(PosObject i in currentCatLoc)
         {
@@ -40,7 +39,8 @@ public class ReWindManager : MonoBehaviour
             if (PreviousCatsLocations[j].Position != GameManager.Instance._matchManager.GameBoard.Cats[j].Position)
             {
                 Debug.Log("we moving a cat");
-                GameManager.Instance._matchManager.GameBoard.Set(PreviousCatsLocations[j].Position, GameManager.Instance._matchManager.GameBoard.At(GameManager.Instance._matchManager.GameBoard.Cats[j].Position));
+                GameManager.Instance._matchManager.GameBoard.Set(PreviousCatsLocations[j].Position, 
+                    GameManager.Instance._matchManager.GameBoard.At(GameManager.Instance._matchManager.GameBoard.Cats[j].Position));
                 GameManager.Instance._matchManager.GameBoard.Set(GameManager.Instance._matchManager.GameBoard.Cats[j].Position, null);
             }
             else
