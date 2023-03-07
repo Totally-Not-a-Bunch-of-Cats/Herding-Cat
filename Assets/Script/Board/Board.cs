@@ -88,7 +88,13 @@ public class Board
         this._width = BoardToCopy._width;
         this._height = BoardToCopy._height;
         _cells = BoardToCopy._cells;
-        Cats = BoardToCopy.Cats;
+        Cats = new List<PosObject>();
+        //Debug.Log(Cats.Count + BoardToCopy.Cats.Count);
+        //generate new cats *important and put them into a list. They should be pointing at new cats so they should be good from our issue
+        for(int i = 0; i < BoardToCopy.Cats.Count; i++)
+        {
+            Cats.Add(new PosObject(BoardToCopy.Cats[i].Position, BoardToCopy.Cats[i].Object, BoardToCopy.Cats[i].ItemAdjObject, BoardToCopy.Cats[i].Name));
+        }
         Items = BoardToCopy.Items;
         CatPenLocation = BoardToCopy.CatPenLocation;
         NumCatinPen = BoardToCopy.NumCatinPen;
@@ -97,7 +103,7 @@ public class Board
 
     /// <summary>
     /// Get a specific cell on the <see cref="Board"/> from a <see cref="Vector2Int"/>
-    /// </summary>
+    /// </summary>  
     /// <param name="_pos">A position on the board</param>
     /// <returns><see cref="BoardCell"/> of the specified location</returns>
     /// <exception cref="ArgumentOutOfRangeException">
