@@ -19,7 +19,7 @@ public class Board
     public List<PosObject> Items;
     public List<Vector2Int> CatPenLocation;
     public int NumCatinPen = 0;
-
+    private object currentLevel;
     private readonly int _width;
     private readonly int _height;
 
@@ -83,17 +83,36 @@ public class Board
             }
         }
     }
-    public Board(Board BoardToCopy)
+    /// <summary>
+    /// a deep copy constructor that copies the tiles and puts them into a different board 
+    /// </summary>
+    /// <param name="BoardToCopy">passes current board to board constructor</param>
+    /// <param name="Tiles"> takes in an array of tiles to loopp through from the level data </param>
+    public Board(Board BoardToCopy, PosTile[] Tiles = null)
     {
         this._width = BoardToCopy._width;
         this._height = BoardToCopy._height;
-        _cells = BoardToCopy._cells;
+        CatPenLocation = new List<Vector2Int>();
         Cats = new List<PosObject>();
-        //Debug.Log(Cats.Count + BoardToCopy.Cats.Count);
-        //generate new cats *important and put them into a list. They should be pointing at new cats so they should be good from our issue
-        for(int i = 0; i < BoardToCopy.Cats.Count; i++)
+        _cells = new Tile[_width, _height];
+        int i = 0;
+        //loops through all non null tiles to update 
+        if (Tiles != null)
         {
-            Cats.Add(new PosObject(BoardToCopy.Cats[i].Position, BoardToCopy.Cats[i].Object, BoardToCopy.Cats[i].ItemAdjObject, BoardToCopy.Cats[i].Name));
+            foreach (PosTile tile in Tiles)
+            {
+                _cells[tile.Position.x, tile.Position.y] = tile.Slate;
+                if (tile.Slate.Is<Cat>())
+                {
+                    //updates the cats position with each new board 
+                    Cats.Add(new PosObject(BoardToCopy.Cats[i].Position, BoardToCopy.Cats[i].Object, BoardToCopy.Cats[i].ItemAdjObject, tile.Slate.name));
+                    i++;
+                }
+                if (tile.Slate.Is<CatPen>())
+                {
+                    CatPenLocation.Add(tile.Position);
+                }
+            }
         }
         Items = BoardToCopy.Items;
         CatPenLocation = BoardToCopy.CatPenLocation;

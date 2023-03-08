@@ -255,9 +255,12 @@ public class MatchManager : MonoBehaviour
                 }
                 //turns the item game object off and sets its position to null/empty
                 GameBoard.Items[i].Object.gameObject.SetActive(false);
-                if(GameBoard.At(GameBoard.Items[i].Position).Is<Item>())
+                if(GameBoard.At(GameBoard.Items[i].Position) != null)
                 {
-                    GameBoard.Set(GameBoard.Items[i].Position, null);
+                    if (GameBoard.At(GameBoard.Items[i].Position).Is<Item>())
+                    {
+                        GameBoard.Set(GameBoard.Items[i].Position, null);
+                    }
                 }
             }
         }
@@ -479,9 +482,12 @@ public class MatchManager : MonoBehaviour
             yield return null;
         }
         GameBoard.Cats[ListPos].Object.localPosition = target;
-        if (GameBoard.At(FinalDestination).Is<CatPen>())
+        if(GameBoard.At(FinalDestination) != null)
         {
-            GameBoard.Cats[ListPos] = null;
+            if (GameBoard.At(FinalDestination).Is<CatPen>())
+            {
+                GameBoard.Cats[ListPos] = null;
+            }
         }
         CatMoving = false;
     }
