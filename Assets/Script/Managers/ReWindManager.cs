@@ -17,6 +17,7 @@ public class ReWindManager : MonoBehaviour
     public void SaveRewind(Board currentBoard, int currentRoundsPlayed, int currentItemsUsed, PosTile[] CurrentLevelTiles)
     {
         PreviousGameBoard = new Board(currentBoard, CurrentLevelTiles);
+        Debug.Log(PreviousGameBoard.Cats.Count);
         PreviousRoundsPlayed = currentRoundsPlayed;
         PreviousItemsUsed = currentItemsUsed;
     }
@@ -29,9 +30,12 @@ public class ReWindManager : MonoBehaviour
         //moves the cats objects on the board
         for (int i = 0; i < PreviousGameBoard.Cats.Count; i++)
         {
-            int TempDifferenceX = GameManager.Instance._matchManager.GameBoard.Cats[i].Position.x - PreviousGameBoard.Cats[i].Position.x;
-            int TempDifferenceY = GameManager.Instance._matchManager.GameBoard.Cats[i].Position.y - PreviousGameBoard.Cats[i].Position.y;
-            GameManager.Instance._matchManager.GameBoard.Cats[i].Object.localPosition -= new Vector3(TempDifferenceX, TempDifferenceY, 0);
+            if (GameManager.Instance._matchManager.GameBoard.Cats[i] != null && PreviousGameBoard.Cats[i] != null)
+            {
+                int TempDifferenceX = GameManager.Instance._matchManager.GameBoard.Cats[i].Position.x - PreviousGameBoard.Cats[i].Position.x;
+                int TempDifferenceY = GameManager.Instance._matchManager.GameBoard.Cats[i].Position.y - PreviousGameBoard.Cats[i].Position.y;
+                GameManager.Instance._matchManager.GameBoard.Cats[i].Object.localPosition -= new Vector3(TempDifferenceX, TempDifferenceY, 0);
+            }
         }
         GameManager.Instance._matchManager.GameBoard = PreviousGameBoard;
         GameManager.Instance._matchManager.RoundsPlayed = PreviousRoundsPlayed;

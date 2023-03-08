@@ -101,16 +101,34 @@ public class Board
         {
             foreach (PosTile tile in Tiles)
             {
-                _cells[tile.Position.x, tile.Position.y] = tile.Slate;
+                //_cells[tile.Position.x, tile.Position.y] = tile.Slate;
                 if (tile.Slate.Is<Cat>())
                 {
-                    //updates the cats position with each new board 
-                    Cats.Add(new PosObject(BoardToCopy.Cats[i].Position, BoardToCopy.Cats[i].Object, BoardToCopy.Cats[i].ItemAdjObject, tile.Slate.name));
-                    i++;
+                    if(BoardToCopy.Cats[i] != null)
+                    {
+                        //updates the cats position with each new board 
+                        Cats.Add(new PosObject(BoardToCopy.Cats[i].Position, BoardToCopy.Cats[i].Object, BoardToCopy.Cats[i].ItemAdjObject, tile.Slate.name));
+                        Debug.Log(At(BoardToCopy.Cats[i].Position));
+                        _cells[tile.Position.x, tile.Position.y] = tile.Slate;
+                        i++;
+                    }
+                    else if(false)
+                    {
+                        //add edge case for reverting a cat that just went into the cage 
+                    }
+                    else
+                    {
+                        Cats.Add(null);
+                    }
                 }
                 if (tile.Slate.Is<CatPen>())
                 {
                     CatPenLocation.Add(tile.Position);
+                    _cells[tile.Position.x, tile.Position.y] = tile.Slate;
+                }
+                if (tile.Slate.Is<Trap>())
+                {
+                    _cells[tile.Position.x, tile.Position.y] = tile.Slate;
                 }
             }
         }

@@ -37,7 +37,6 @@ public class MatchManager : MonoBehaviour
     [SerializeField] private GameObject ItemButtonPrefab;
     [SerializeField] public LevelData CurrentLevel;
     [SerializeField] public GameObject GameWonUI;
-    [SerializeField] public LevelData ActiveLevel;
 
     /// <summary>
     /// Initialize the <see cref="Board"/> and all scene <see cref="GameObject"/>s for the match
@@ -48,7 +47,6 @@ public class MatchManager : MonoBehaviour
     {
         if (currentLevel != null && currentLevel.Valid())
         {
-            ActiveLevel = currentLevel;
             BoardSize = currentLevel.GetDimensions();
             TargetRounds = currentLevel.GetTargetRounds();
             TargetItems = currentLevel.GetTargetItems();

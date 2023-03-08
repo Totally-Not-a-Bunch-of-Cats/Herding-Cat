@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// Holds reference to children of gameobject and sets up buttons for the adjustment object
 /// </summary>
-public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler
+public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     public GameObject HighLightObject;
     public Image ItemImage;
@@ -66,11 +66,6 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler, IBegin
         }
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        //transform.SetSiblingIndex(Parent.childCount);
-    }
-
     public void OnDrag(PointerEventData data)
     {
         transform.localPosition += new Vector3(0, data.delta.y/Canvas.scaleFactor, 0);
@@ -100,6 +95,27 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler, IBegin
         {
             Debug.Log("didnt move");
             transform.localPosition = new Vector3(transform.localPosition.x, -60 + (SiblingNum * -125), transform.localPosition.z);
+        }
+        ReorderItems();
+    }
+
+    void ReorderItems()
+    {
+        List<PosObject> OldItems = new List<PosObject>();
+        for (int i = 0; i < Parent.childCount; i++)
+        {
+            if(i < transform.GetSiblingIndex())
+            {
+                OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[i]);
+            }
+            else if(i == transform.GetSiblingIndex())
+            {
+                OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[num]);
+            }    
+            else
+            {
+                OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[i + 1]);
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ public class ItemIndicator : MonoBehaviour
 
     private void Start()
     {
-        if(GameManager.Instance._matchManager.ActiveLevel.name == "1-1" || GameManager.Instance._matchManager.ActiveLevel.name == "1-6")
+        if(GameManager.Instance._matchManager.CurrentLevel.name == "1-1" || GameManager.Instance._matchManager.CurrentLevel.name == "1-6")
         {
             ActivateIndicators();
         }
