@@ -104,18 +104,54 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler
         List<PosObject> OldItems = new List<PosObject>();
         for (int i = 0; i < Parent.childCount; i++)
         {
-            if(i < transform.GetSiblingIndex())
+            if(num > transform.GetSiblingIndex())
             {
-                OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[i]);
+                if (i < transform.GetSiblingIndex())
+                {
+                    // dont move the ones above the ones we moved
+                    OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[i]);
+                }
+                else if (i == transform.GetSiblingIndex())
+                {
+                    //placing the one we moved where it should go
+                    OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[num]);
+                }
+                else
+                {
+                    //checks to see ifthe number actually moved
+                    if (i == Parent.childCount)
+                    {
+                        OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[i]);
+                    }
+                    else
+                    {
+                        OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[i - 1]);
+                    }
+                }
             }
-            else if(i == transform.GetSiblingIndex())
-            {
-                OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[num]);
-            }    
             else
             {
-                OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[i + 1]);
+                if (i < num || i > transform.GetSiblingIndex())
+                {
+                    // dont move the ones above the ones we moved
+                    OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[i]);
+                }
+                else if (i == transform.GetSiblingIndex())
+                {
+                    //placing the one we moved where it should go
+                    OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[num]);
+                }
+                else
+                {
+                    OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[i + 1]);
+                }
             }
         }
+        //updating num for every change
+        for (int i = 0; i < Parent.childCount; i++)
+        {
+                OldItems[i].ItemAdjObject.num = i;
+        }
+        GameManager.Instance._matchManager.GameBoard.Items = OldItems;
     }
 }

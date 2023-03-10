@@ -98,6 +98,10 @@ public class UIManager : MonoBehaviour
                         // Adds Item to the list to delete/adjust order of items
                         GameObject NewItemEntry = Instantiate(ItemAdjPrefab, new Vector3(0, 0, 0), Quaternion.identity, ItemAdjPanel.transform.GetChild(0).GetChild(0));
                         NewItemEntry.GetComponent<ItemAdjPanel>().ItemImage.sprite = temp.GetComponent<SpriteRenderer>().sprite;
+                        if(GameManager.Instance._matchManager.GameBoard.Items.Count % 2 == 0)
+                        {
+                            NewItemEntry.GetComponent<Image>().color = new Color(.8f, .8f, .8f);
+                        }
                         GameManager.Instance._matchManager.GameBoard.Items[GameManager.Instance._matchManager.GameBoard.Items.Count - 1].ItemAdjObject = NewItemEntry.GetComponent<ItemAdjPanel>();
                         }
                     CanPlaceItem = false;
