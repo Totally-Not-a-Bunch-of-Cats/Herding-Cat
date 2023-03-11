@@ -162,7 +162,7 @@ public class UIManager : MonoBehaviour
         Override = false;
         //lock you out fron pressing buttons
         GameManager.Instance._ReWindManager.SaveRewind(GameManager.Instance._matchManager.GameBoard, GameManager.Instance._matchManager.RoundsPlayed, 
-            GameManager.Instance._matchManager.ItemsUsed, GameManager.Instance._matchManager.CurrentLevel.GetTiles());
+            GameManager.Instance._matchManager.ItemsUsed, GameManager.Instance._matchManager.CurrentLevel.GetTiles(), GameManager.Instance._matchManager.CatJustinCage);
         GameManager.Instance._matchManager.RoundsPlayed++;
         StartCoroutine(GameManager.Instance._matchManager.EndRound());
     }

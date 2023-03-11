@@ -14,9 +14,9 @@ public class ReWindManager : MonoBehaviour
     /// <param name="currentRoundsPlayed">current rounds played before the round was processed</param>
     /// <param name="currentItemsUsed">current items used before the round was processed</param>
     /// <param name="CurrentLevelTiles">current level data </param>
-    public void SaveRewind(Board currentBoard, int currentRoundsPlayed, int currentItemsUsed, PosTile[] CurrentLevelTiles)
+    public void SaveRewind(Board currentBoard, int currentRoundsPlayed, int currentItemsUsed, PosTile[] CurrentLevelTiles, bool CatInCageThisRound)
     {
-        PreviousGameBoard = new Board(currentBoard, CurrentLevelTiles);
+        PreviousGameBoard = new Board(currentBoard, false, CurrentLevelTiles);
         Debug.Log(PreviousGameBoard.Cats.Count);
         PreviousRoundsPlayed = currentRoundsPlayed;
         PreviousItemsUsed = currentItemsUsed;

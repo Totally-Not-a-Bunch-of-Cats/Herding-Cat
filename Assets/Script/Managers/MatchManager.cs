@@ -24,6 +24,7 @@ public class MatchManager : MonoBehaviour
     public bool ActiveMatch = false;
     private bool CatMoving = false;
     public Vector3 BoardOffset;
+    [SerializeField] public bool CatJustinCage = false;
 
     //stores the items used, rounds passed, and targets for starts gained
     [Header("Gameplay Info")]
@@ -484,6 +485,8 @@ public class MatchManager : MonoBehaviour
         {
             if (GameBoard.At(FinalDestination).Is<CatPen>())
             {
+                Debug.Log(GameBoard.Cats[ListPos].Position);
+                //GameBoard.SecondCatList.Add(GameBoard.Cats[ListPos]);
                 GameBoard.Cats[ListPos] = null;
             }
         }

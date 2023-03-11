@@ -15,6 +15,8 @@ public class Board
     [SerializeField]
     private Tile[,] _cells;
     public List<PosObject> Cats;
+    //used to hold data on cats that just went into the pen for purpose of rewinding them
+    public List<PosObject> SecondCatList;
     public int NumberofCats = 0;
     public List<PosObject> Items;
     public List<Vector2Int> CatPenLocation;
@@ -88,11 +90,12 @@ public class Board
     /// </summary>
     /// <param name="BoardToCopy">passes current board to board constructor</param>
     /// <param name="Tiles"> takes in an array of tiles to loopp through from the level data </param>
-    public Board(Board BoardToCopy, PosTile[] Tiles = null)
+    public Board(Board BoardToCopy, bool CatJustinCage, PosTile[] Tiles = null)
     {
         this._width = BoardToCopy._width;
         this._height = BoardToCopy._height;
         CatPenLocation = new List<Vector2Int>();
+        SecondCatList = new List<PosObject>();
         Cats = new List<PosObject>();
         _cells = new Tile[_width, _height];
         int i = 0;
@@ -112,7 +115,7 @@ public class Board
                         _cells[tile.Position.x, tile.Position.y] = tile.Slate;
                         i++;
                     }
-                    else if(false)
+                    else if(CatJustinCage)
                     {
                         //add edge case for reverting a cat that just went into the cage 
                     }
