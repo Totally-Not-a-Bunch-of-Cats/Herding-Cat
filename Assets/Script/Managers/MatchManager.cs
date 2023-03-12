@@ -444,6 +444,8 @@ public class MatchManager : MonoBehaviour
             //adds cats to the pen count when they move in
             if (GameBoard.At(FinalDestination).Is<CatPen>())
             {
+                CatJustinCage = true;
+                GameBoard.SecondCatList.Add(new PosObject(GameBoard.Cats[ListPos].Position, GameBoard.Cats[ListPos].Object, GameBoard.Cats[ListPos].ItemAdjObject, GameBoard.Cats[ListPos].Name));
                 GameBoard.Set(CatPos, null);
                 GameBoard.NumCatinPen++;
             }
@@ -485,8 +487,7 @@ public class MatchManager : MonoBehaviour
         {
             if (GameBoard.At(FinalDestination).Is<CatPen>())
             {
-                Debug.Log(GameBoard.Cats[ListPos].Position);
-                //GameBoard.SecondCatList.Add(GameBoard.Cats[ListPos]);
+                
                 GameBoard.Cats[ListPos] = null;
             }
         }

@@ -21,6 +21,7 @@ public class Board
     public List<PosObject> Items;
     public List<Vector2Int> CatPenLocation;
     public int NumCatinPen = 0;
+    public List<int> SecondCatPos;
     private object currentLevel;
     private readonly int _width;
     private readonly int _height;
@@ -36,6 +37,7 @@ public class Board
         this._width = Width;
         _cells = new Tile[this._width, this._height];
         Cats = new List<PosObject>();
+        SecondCatList = new List<PosObject>();
         Items = new List<PosObject>();
         CatPenLocation = new List<Vector2Int>();
         if (Tiles != null)
@@ -66,6 +68,7 @@ public class Board
         this._height = dimensions.y;
         _cells = new Tile[this._width, this._height];
         Cats = new List<PosObject>();
+        SecondCatList = new List<PosObject>();
         Items = new List<PosObject>();
         CatPenLocation = new List<Vector2Int>();
         if (Tiles != null)
@@ -90,15 +93,17 @@ public class Board
     /// </summary>
     /// <param name="BoardToCopy">passes current board to board constructor</param>
     /// <param name="Tiles"> takes in an array of tiles to loopp through from the level data </param>
-    public Board(Board BoardToCopy, bool CatJustinCage, PosTile[] Tiles = null)
+    public Board(Board BoardToCopy, PosTile[] Tiles = null)
     {
         this._width = BoardToCopy._width;
         this._height = BoardToCopy._height;
         CatPenLocation = new List<Vector2Int>();
+        SecondCatPos = new List<int>();
         SecondCatList = new List<PosObject>();
         Cats = new List<PosObject>();
         _cells = new Tile[_width, _height];
         int i = 0;
+        int j = 0;
         //loops through all non null tiles to update 
         if (Tiles != null)
         {
@@ -107,17 +112,22 @@ public class Board
                 //_cells[tile.Position.x, tile.Position.y] = tile.Slate;
                 if (tile.Slate.Is<Cat>())
                 {
+                    Debug.Log(GameManager.Instance._matchManager.CatJustinCage);
                     if(BoardToCopy.Cats[i] != null)
                     {
                         //updates the cats position with each new board 
                         Cats.Add(new PosObject(BoardToCopy.Cats[i].Position, BoardToCopy.Cats[i].Object, BoardToCopy.Cats[i].ItemAdjObject, tile.Slate.name));
-                        Debug.Log(At(BoardToCopy.Cats[i].Position));
-                        _cells[tile.Position.x, tile.Position.y] = tile.Slate;
+                        _cells[BoardToCopy.Cats[i].Position.x, BoardToCopy.Cats[i].Position.y] = tile.Slate;
                         i++;
                     }
-                    else if(CatJustinCage)
+                    else if(GameManager.Instance._matchManager.GameBoard.SecondCatList.Count > 0)
                     {
                         //add edge case for reverting a cat that just went into the cage 
+                        Debug.Log("we added one");
+                        Cats.Add(new PosObject(BoardToCopy.Cats[i].Position, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Object, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].ItemAdjObject, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Name));
+                        SecondCatPos.Add(i+j);
+                        _cells[tile.Position.x, tile.Position.y] = tile.Slate;
+                        j++;
                     }
                     else
                     {
