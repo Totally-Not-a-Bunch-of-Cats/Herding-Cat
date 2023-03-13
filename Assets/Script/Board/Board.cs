@@ -15,6 +15,7 @@ public class Board
     [SerializeField]
     private Tile[,] _cells;
     public List<PosObject> Cats;
+    public List<Vector2Int> CatVec2;
     //used to hold data on cats that just went into the pen for purpose of rewinding them
     public List<PosObject> SecondCatList;
     public int NumberofCats = 0;
@@ -99,6 +100,7 @@ public class Board
         this._height = BoardToCopy._height;
         CatPenLocation = new List<Vector2Int>();
         SecondCatPos = new List<int>();
+        CatVec2 = new List<Vector2Int>();
         SecondCatList = new List<PosObject>();
         Cats = new List<PosObject>();
         _cells = new Tile[_width, _height];
@@ -111,15 +113,16 @@ public class Board
             {
                 //_cells[tile.Position.x, tile.Position.y] = tile.Slate;
                 if (tile.Slate.Is<Cat>())
-                {
-                    Debug.Log(GameManager.Instance._matchManager.CatJustinCage);
-                    if(BoardToCopy.Cats[i] != null)
+                { 
+                    if (BoardToCopy.Cats[i] != null)
                     {
                         //updates the cats position with each new board 
                         Cats.Add(new PosObject(BoardToCopy.Cats[i].Position, BoardToCopy.Cats[i].Object, BoardToCopy.Cats[i].ItemAdjObject, tile.Slate.name));
                         _cells[BoardToCopy.Cats[i].Position.x, BoardToCopy.Cats[i].Position.y] = tile.Slate;
+                        CatVec2.Add(BoardToCopy.Cats[i].Position);
                         i++;
                     }
+                    //this will never be called
                     else if(GameManager.Instance._matchManager.GameBoard.SecondCatList.Count > 0)
                     {
                         //add edge case for reverting a cat that just went into the cage 
@@ -131,6 +134,7 @@ public class Board
                     }
                     else
                     {
+                        //CatVec2.Add(BoardToCopy.Cats[i].Position);
                         Cats.Add(null);
                     }
                 }
