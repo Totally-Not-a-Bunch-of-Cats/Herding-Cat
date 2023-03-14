@@ -103,7 +103,7 @@ public class UIManager : MonoBehaviour
                             NewItemEntry.GetComponent<Image>().color = new Color(.8f, .8f, .8f);
                         }
                         GameManager.Instance._matchManager.GameBoard.Items[GameManager.Instance._matchManager.GameBoard.Items.Count - 1].ItemAdjObject = NewItemEntry.GetComponent<ItemAdjPanel>();
-                        }
+                    }
                     CanPlaceItem = false;
                 }
             }

@@ -17,9 +17,9 @@ public class PosObject
     /// <summary>
     /// Creates new PosObject to relate a postion on board to Object transform
     /// </summary>
-    /// <param name="NewPos">Position on <see cref="Board"/> of the object</param>
+    /// <param name="NewPos">Position on Board<see cref="Board"/> of the object</param>
     /// <param name="NewName">Name of the object that is being stored</param>
-    /// <param name="Obj">Transform of the object on the <see cref="Board"/></param>
+    /// <param name="Obj">Transform of the object<see cref="Board"/></param>
     public PosObject(Vector2Int NewPos, string NewName, Transform Obj = null)
     {
         Name = NewName;
@@ -29,11 +29,19 @@ public class PosObject
             Object = Obj;
         }
     }
-    public PosObject(Vector2Int oldPosObjectV2, Transform oldPosObjectTrans, ItemAdjPanel oldPosObjectPannel, string oldPosObjectName)
+
+    /// <summary>
+    /// Creates new PosObject to relate a postion on board to Object transform
+    /// </summary>
+    /// <param name="oldPosObjectV2">Position on Board</param>
+    /// <param name="oldPosObjectTrans">Transform of the object</param>
+    /// <param name="oldPosObjectPanel">Refrence of Item Panel Object</param>
+    /// <param name="oldPosObjectName">Name of the object that is being stored</param>
+    public PosObject(Vector2Int oldPosObjectV2, Transform oldPosObjectTrans, ItemAdjPanel oldPosObjectPanel, string oldPosObjectName)
     {
         Position = oldPosObjectV2;
         Object = oldPosObjectTrans;
-        ItemAdjObject = oldPosObjectPannel;
+        ItemAdjObject = oldPosObjectPanel;
         Name = oldPosObjectName;
     }
 

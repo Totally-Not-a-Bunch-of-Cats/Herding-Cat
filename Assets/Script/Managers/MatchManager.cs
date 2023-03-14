@@ -147,7 +147,7 @@ public class MatchManager : MonoBehaviour
         for (int i = 0; i < GameBoard.Items.Count; i++)
         {
             //makes sure the item slot isnt null, we make it null to delete it, unity bad
-            if(GameBoard.Items[i] != null)
+            if (GameBoard.Items[i] != null)
             {
                 yield return new WaitWhile(() => CatMoving);
                 Item CurrentItem = GameBoard.At(GameBoard.Items[i].Position) as Item;
@@ -248,7 +248,7 @@ public class MatchManager : MonoBehaviour
                 {
                     for (int c = 0; c < CatMoveInfo.Count; c++)
                     {
-                        GameBoard.CheckMovement(CurrentItem.MoveDistance, (Vector2Int)CatMoveInfo[c].Destination, CatMoveInfo[c].Index);
+                        GameBoard.CheckMovement(CurrentItem.MoveDistance, (Vector2Int)CatMoveInfo[c].Destination, CatMoveInfo[c].Index, GameBoard.Items[i].Name);
                     }
                     CatMoveInfo.Clear();
                 }
@@ -493,6 +493,11 @@ public class MatchManager : MonoBehaviour
         }
         CatMoving = false;
     }
+
+    /// <summary>
+    /// Waits till cats are finished moving to load Game won UI
+    /// </summary>
+    /// <returns></returns>
     IEnumerator VictoryPause()
     {
         yield return new WaitWhile(() => CatMoving);
@@ -500,6 +505,10 @@ public class MatchManager : MonoBehaviour
         GameWonUI.SetActive(true);
         ActivateStars();
     }
+
+    /// <summary>
+    /// Sets the stars on the Win UI to the won amount
+    /// </summary>
     void ActivateStars()
     {
         //get references to stars and activate them
