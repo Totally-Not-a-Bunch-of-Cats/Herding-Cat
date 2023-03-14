@@ -121,9 +121,13 @@ public class MatchManager : MonoBehaviour
             GameManager.Instance._uiManager.GetUI();
             ActiveMatch = true;
 
-            if(currentLevel.NewThingIntroduced == true)
+            if(currentLevel.NewThingIntroduced == true && currentLevel.name == "1-1")
             {
                 HelpGUI.transform.GetChild(0).gameObject.SetActive(true);
+            }
+            if (currentLevel.NewThingIntroduced == true && currentLevel.name == "1-6")
+            {
+                HelpGUI.transform.GetChild(1).gameObject.SetActive(true);
             }
 
             return true;

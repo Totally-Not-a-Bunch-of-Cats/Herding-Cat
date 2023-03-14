@@ -22,10 +22,22 @@ public class ItemIndicator : MonoBehaviour
     {
         for(int i = 0; i < SizeofLists; i++)
         {
-            IndicatorsWest[i].SetActive(true);
-            IndicatorsNorth[i].SetActive(true);
-            IndicatorsEast[i].SetActive(true);
-            IndicatorsSouth[i].SetActive(true);
+            if(i < IndicatorsWest.Count)
+            {
+                IndicatorsWest[i].SetActive(true);
+            }
+            if (i < IndicatorsNorth.Count)
+            {
+                IndicatorsNorth[i].SetActive(true);
+            }
+            if (i < IndicatorsEast.Count)
+            {
+                IndicatorsEast[i].SetActive(true);
+            }
+            if (i < IndicatorsSouth.Count)
+            {
+                IndicatorsSouth[i].SetActive(true);
+            }
         }
     }
 

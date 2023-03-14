@@ -696,14 +696,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SizeofLists: 2
   IndicatorsSouth:
-  - {fileID: 5241275778821704208}
-  - {fileID: 4128250208072186042}
+  - {fileID: 1703688997575876844}
   IndicatorsNorth:
-  - {fileID: 9135097873325325629}
-  - {fileID: 5539960593932667372}
+  - {fileID: 3752581324792707611}
   IndicatorsEast:
-  - {fileID: 5112769473695826216}
-  - {fileID: 7185480759289713841}
+  - {fileID: 1703688997575876844}
   IndicatorsWest:
   - {fileID: 1703688997575876844}
   - {fileID: 3752581324792707611}
