@@ -107,12 +107,14 @@ public class MatchManager : MonoBehaviour
             //places items 
             for (int i = 0; i < currentLevel.GetPossibleItems().Length; i++)
             {
+                //Screen.height
+                int buffer = 85;
                 Item item = currentLevel.GetPossibleItems()[i];
                 Transform EndturnButton = GameObject.Find("End Turn Button").transform;
                 GameObject button = Instantiate(item.ButtonPrefab, new Vector3(0, 0, 4) ,Quaternion.identity, GameObject.Find("GUI").transform);
                 //button.transform.localPosition = EndturnButton.localPosition;
-                button.transform.localPosition = new Vector3(EndturnButton.localPosition.x, EndturnButton.transform.position.y, 0);
-                button.transform.localPosition += new Vector3(0, 145 * (i + 1), 0);
+                button.transform.localPosition = new Vector3(EndturnButton.localPosition.x, 0, 0);
+                button.transform.localPosition += new Vector3(0, buffer + 145 * (i + 1), 0);
                 button.GetComponent<RectTransform>().anchorMax = new Vector2(1, 0);
                 button.GetComponent<RectTransform>().anchorMin = new Vector2(1, 0);
                 button.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._uiManager.PlaceItem(item));
