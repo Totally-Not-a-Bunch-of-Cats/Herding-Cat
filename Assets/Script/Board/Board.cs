@@ -241,7 +241,7 @@ public class Board
     /// <param name="ItemMoveDistance">Number of tiles the Item moves on the <see cref="Board"/></param>
     /// <param name="Destination">Farthest Location on the <see cref="Board"/> that the cat will move</param>
     /// <param name="ListPos">Position in the list that the moving cat is</param>
-    public void CheckMovement(int ItemMoveDistance, Vector2Int Destination, int ListPos, String ItemName)
+    public void CheckMovement(int ItemMoveDistance, Vector2Int Destination, int ListPos, PosObject Item)
     {
         Vector2Int Cat = Cats[ListPos].Position;
         if (Cat.x == Destination.x)
@@ -274,7 +274,7 @@ public class Board
                                 Cats[ListPos].Sleeping = true;
                                 break;
                             }
-                            if (_cells[Destination.x, y].name == "Toy" && ItemName == "Toy")
+                            if (_cells[Destination.x, y].name == "Toy" && Item.Position == new Vector2Int(Destination.x, y))
                             {
                                 //allows cat to move on cat pen
                                 Destination.y = y;
@@ -320,7 +320,7 @@ public class Board
                                 Cats[ListPos].Sleeping = true;
                                 break;
                             }
-                            if (_cells[Destination.x, y].name == "Toy" && ItemName == "Toy")
+                            if (_cells[Destination.x, y].name == "Toy" && Item.Position == new Vector2Int(Destination.x, y))
                             {
                                 //allows cat to move on cat pen
                                 Destination.y = y;
@@ -370,7 +370,7 @@ public class Board
                                 Cats[ListPos].Sleeping = true;
                                 break;
                             }
-                            if (_cells[x, Destination.y].name == "Toy" && ItemName == "Toy")
+                            if (_cells[x, Destination.y].name == "Toy" && Item.Position == new Vector2Int(x, Destination.y))
                             {
                                 //allows cat to move on cat pen
                                 Destination.x = x;
@@ -416,7 +416,7 @@ public class Board
                                 Cats[ListPos].Sleeping = true;
                                 break;
                             }
-                            if (_cells[x, Destination.y].name == "Toy")
+                            if (_cells[x, Destination.y].name == "Toy" && Item.Position == new Vector2Int(x, Destination.y))
                             {
                                 //allows cat to move on cat pen
                                 Destination.x = x;

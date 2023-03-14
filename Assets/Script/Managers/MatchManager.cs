@@ -151,7 +151,7 @@ public class MatchManager : MonoBehaviour
             {
                 yield return new WaitWhile(() => CatMoving);
                 Item CurrentItem = GameBoard.At(GameBoard.Items[i].Position) as Item;
-                int ClosestDistance = -1;
+                //int ClosestDistance = -1;
                 List<CatMovementInfo> CatMoveInfo = new List<CatMovementInfo>();
 
                 // loops through cats to find the closest one to the item to move
@@ -177,26 +177,36 @@ public class MatchManager : MonoBehaviour
                         }
                         else
                         {
+                            CatMoveInfo.Add(new CatMovementInfo(j));
+                            Vector2Int test = DestinationList(deltaX, deltaY, CurrentItem, j);
+                            if (test != new Vector2Int(-100, -100))
+                            {
+                                CatMoveInfo[CatMoveInfo.Count - 1].Destination = test;
+                            }
+                            else
+                            {
+                                CatMoveInfo.RemoveAt(CatMoveInfo.Count - 1);
+                            }
                             //find if the cat is in range and if so moves said cat
                             // Checks if cat is closer than current cat and within radius
-                            if (Dist <= ClosestDistance && (deltaY == 0 || deltaX == 0) || ClosestDistance < 0 
-                                && Dist <= CurrentItem.Radius && (deltaY == 0 || deltaX == 0))
-                            {
-                                if (ClosestDistance != Dist)
-                                {
-                                    // Clears the lists of the farther cat information and adds the new one
-                                    CatMoveInfo.Clear();
-                                }
+                            //if (Dist <= ClosestDistance && (deltaY == 0 || deltaX == 0) || ClosestDistance < 0 
+                            //    && Dist <= CurrentItem.Radius && (deltaY == 0 || deltaX == 0))
+                            //{
+                                //if (ClosestDistance != Dist)
+                                //{
+                                //    // Clears the lists of the farther cat information and adds the new one
+                                //    CatMoveInfo.Clear();
+                                //}
 
-                                CatMoveInfo.Add(new CatMovementInfo(j));
-                                Vector2Int test = DestinationList(deltaX, deltaY, CurrentItem, j);
-                                if (test != new Vector2Int(-100, -100))
-                                {
-                                    CatMoveInfo[CatMoveInfo.Count - 1].Destination = test;
-                                }
+                                //CatMoveInfo.Add(new CatMovementInfo(j));
+                                //Vector2Int test = DestinationList(deltaX, deltaY, CurrentItem, j);
+                                //if (test != new Vector2Int(-100, -100))
+                                //{
+                                //    CatMoveInfo[CatMoveInfo.Count - 1].Destination = test;
+                                //}
                                 
-                                ClosestDistance = Dist;
-                            }
+                                //ClosestDistance = Dist;
+                            //}
                         }
                     }
                 }
@@ -205,31 +215,31 @@ public class MatchManager : MonoBehaviour
                 {
                     List<CatMovementInfo> Temps = new List<CatMovementInfo>();
                     //loops through all cats
-                    for (int zz = 0; zz < CatMoveInfo.Count; zz++)
+                    for (int j = 0; j < CatMoveInfo.Count; j++)
                     {
                         int small = 100;
                         int smallIndex = 0;
-                        for (int y = 0; y < CatMoveInfo.Count; y++)
+                        for (int k = 0; k < CatMoveInfo.Count; k++)
                         {
                             //checks to see if the cats is actually in range  
-                            if (CatMoveInfo[y] != null && CurrentItem.Radius >= CatMoveInfo[y].Distance && CatMoveInfo[y].Used == false)
+                            if (CatMoveInfo[k] != null && CurrentItem.Radius >= CatMoveInfo[k].Distance && CatMoveInfo[k].Used == false)
                             {
                                 //says there are cats with in range
-                                ClosestDistance = 1;
-                                if (zz != 0)
+                                //ClosestDistance = 1;
+                                if (j != 0)
                                 {
-                                    if (small >= CatMoveInfo[y].Distance && Temps[zz - 1].Distance <= CatMoveInfo[y].Distance)
+                                    if (small >= CatMoveInfo[k].Distance && Temps[j - 1].Distance <= CatMoveInfo[k].Distance)
                                     {
-                                        small = CatMoveInfo[y].Distance;
-                                        smallIndex = y;
+                                        small = CatMoveInfo[k].Distance;
+                                        smallIndex = k;
                                     }
                                 }
                                 else
                                 {
-                                    if (small >= CatMoveInfo[y].Distance)
+                                    if (small >= CatMoveInfo[k].Distance)
                                     {
-                                        small = CatMoveInfo[y].Distance;
-                                        smallIndex = y;
+                                        small = CatMoveInfo[k].Distance;
+                                        smallIndex = k;
                                     }
                                 }
                             }
@@ -243,12 +253,56 @@ public class MatchManager : MonoBehaviour
                     }
                     CatMoveInfo = Temps;
                 }
+                else //reorder list of cats effected by other type of items
+                {
+                    List<CatMovementInfo> Temps = new List<CatMovementInfo>();
+                    //loops through all cats
+                    for (int j = 0; j < CatMoveInfo.Count; j++)
+                    {
+                        int small = 100;
+                        int smallIndex = 0;
+                        for (int k = 0; k < CatMoveInfo.Count; k++)
+                        {
+                            //checks to see if the cats is actually in range  
+                            if (CatMoveInfo[k] != null && CurrentItem.Radius >= CatMoveInfo[k].Distance && CatMoveInfo[k].Used == false)
+                            {
+                                //says there are cats with in range
+                                //ClosestDistance = 1;
+                                if (j != 0)
+                                {
+                                    if (small >= CatMoveInfo[k].Distance && Temps[j - 1].Distance <= CatMoveInfo[k].Distance)
+                                    {
+                                        small = CatMoveInfo[k].Distance;
+                                        smallIndex = k;
+                                    }
+                                }
+                                else
+                                {
+                                    if (small >= CatMoveInfo[k].Distance)
+                                    {
+                                        small = CatMoveInfo[k].Distance;
+                                        smallIndex = k;
+                                    }
+                                }
+                            }
+                        }
+                        if (CurrentItem.Radius < small)
+                        {
+                            break;
+                        }
+                        CatMoveInfo[smallIndex].Used = true;
+                        Temps.Add(CatMoveInfo[smallIndex]);
+                    }
+                    CatMoveInfo = Temps;
+                    Debug.Log(CatMoveInfo.Count);
+                }
                 // Checks to see if a cat is actually in range
-                if (ClosestDistance > -1)
+                if (CatMoveInfo.Count > 0)
                 {
                     for (int c = 0; c < CatMoveInfo.Count; c++)
                     {
-                        GameBoard.CheckMovement(CurrentItem.MoveDistance, (Vector2Int)CatMoveInfo[c].Destination, CatMoveInfo[c].Index, GameBoard.Items[i].Name);
+                        Debug.Log(c);
+                        GameBoard.CheckMovement(CurrentItem.MoveDistance, (Vector2Int)CatMoveInfo[c].Destination, CatMoveInfo[c].Index, GameBoard.Items[i]);
                     }
                     CatMoveInfo.Clear();
                 }
@@ -346,23 +400,28 @@ public class MatchManager : MonoBehaviour
         // Gets the farthest that the cat will move of item (Right)
         if (deltaX <= CurrentItem.Radius && deltaX > 0 && deltaY == 0)
         {
+            Debug.Log("right" + deltaX);
             return GameBoard.Cats[index].Position + new Vector2Int(CurrentItem.MoveDistance, 0);
         }
         // Gets the farthest that the cat will move of item (Left)
         if (deltaX >= -CurrentItem.Radius && deltaX < 0 && deltaY == 0)
         {
+            Debug.Log("Left" + deltaX);
             return GameBoard.Cats[index].Position + new Vector2Int(-CurrentItem.MoveDistance, 0);
         }
         // Gets the farthest that the cat will move of item (Up)
         if (deltaY <= CurrentItem.Radius && deltaY > 0 && deltaX == 0)
         {
+            Debug.Log("UP" + deltaY);
             return GameBoard.Cats[index].Position + new Vector2Int(0, CurrentItem.MoveDistance);
         }
         // Gets the farthest that the cat will move of item (Down)
         if (deltaY >= -CurrentItem.Radius && deltaY < 0 && deltaX == 0)
         {
+            Debug.Log("Down" + deltaY);
             return GameBoard.Cats[index].Position + new Vector2Int(0, -CurrentItem.MoveDistance);
         }
+        Debug.Log(" I made it out");
         return new Vector2Int(-100, -100);
     }
 
