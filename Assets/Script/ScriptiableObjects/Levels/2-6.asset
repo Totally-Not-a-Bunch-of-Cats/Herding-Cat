@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Dimensions: {x: 6, y: 6}
   TargetRounds: 1
-  TargetItems: 1
+  TargetItems: 11
   NewThingIntroduced: 0
   BackgroundTile: {fileID: 11400000, guid: d756be87d23ee174f869fab071be06bf, type: 2}
   Tiles:

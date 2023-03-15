@@ -13,16 +13,14 @@ MonoBehaviour:
   m_Name: 2-8
   m_EditorClassIdentifier: 
   Dimensions: {x: 8, y: 8}
-  TargetRounds: 1
-  TargetItems: 1
+  TargetRounds: 8
+  TargetItems: 30
   NewThingIntroduced: 0
   BackgroundTile: {fileID: 11400000, guid: d756be87d23ee174f869fab071be06bf, type: 2}
   Tiles:
-  - Position: {x: 1, y: 1}
+  - Position: {x: 2, y: 1}
     Slate: {fileID: 11400000, guid: e9d6189f63d821045ab761e537a50a9c, type: 2}
   - Position: {x: 1, y: 2}
-    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
-  - Position: {x: 2, y: 1}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
   - Position: {x: 2, y: 2}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
