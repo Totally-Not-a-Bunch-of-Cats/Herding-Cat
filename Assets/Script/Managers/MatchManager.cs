@@ -381,7 +381,7 @@ public class MatchManager : MonoBehaviour
             if (GameManager.Instance.UpdateLevelData == true)
             {
                 // Updates level data info for current/next level
-                GameManager.Instance.Levels.Find(level => level.name == NextLevelName).SetUnlocked(true);
+                //GameManager.Instance.Levels.Find(level => level.name == NextLevelName).SetUnlocked(true);
             } 
             else
             {
