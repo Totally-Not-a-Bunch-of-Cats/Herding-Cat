@@ -6,7 +6,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using TMPro;
 using UnityEngine.UI;
 using System;
 
@@ -122,8 +121,7 @@ public class MatchManager : MonoBehaviour
             }
             GameManager.Instance._uiManager.GetUI();
             ActiveMatch = true;
-
-            if(currentLevel.NewThingIntroduced == true && currentLevel.name == "1-1")
+            if (currentLevel.NewThingIntroduced == true && currentLevel.name == "1-1")
             {
                 HelpGUI.transform.GetChild(0).gameObject.SetActive(true);
             }
