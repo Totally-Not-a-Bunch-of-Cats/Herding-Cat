@@ -15,7 +15,8 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler
     public Button HighlightButton;
     public int num;
     public Canvas Canvas;
-    [SerializeField] Transform Parent;
+    [SerializeField] private Transform Parent;
+    [SerializeField] private GameObject HoverObject;
 
     /// <summary>
     /// Adds listeners and sets up script
@@ -28,6 +29,7 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler
         HighlightButton.onClick.AddListener(() => HighlightItem());
         Canvas = GameObject.Find("GUI").GetComponent<Canvas>();
         Parent = transform.parent;
+        HoverObject = Parent.parent.GetChild(1).gameObject;
     }
 
     /// <summary>
@@ -66,12 +68,22 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler
         }
     }
 
+
+
     public void OnDrag(PointerEventData data)
     {
+        if (!HoverObject.activeSelf)
+        {
+            HoverObject.SetActive(true);
+            HoverObject.transform.GetChild(1).GetComponent<Image>().sprite = ItemImage.sprite;
+        }
+
         transform.localPosition += new Vector3(0, data.delta.y/Canvas.scaleFactor, 0);
+        HoverObject.transform.localPosition = transform.localPosition;
     }
     public void OnEndDrag(PointerEventData eventData)
     {
+        HoverObject.SetActive(false);
         Snap();
     }
     public void Snap()
@@ -83,17 +95,17 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler
         Yfinial = (int)Mathf.Round(-Ycheck);
         if(Yfinial == 0)
         {
-            Debug.Log("updated order for 0" + Yfinial);
+            //Debug.Log("updated order for 0" + Yfinial);
             transform.SetSiblingIndex(Yfinial);
         }
         else
         {
-            Debug.Log("updated order" + Yfinial);
+            //Debug.Log("updated order" + Yfinial);
             transform.SetSiblingIndex(Yfinial - 1);
         }
         if(transform.GetSiblingIndex() == SiblingNum)
         {
-            Debug.Log("didnt move");
+            //Debug.Log("didnt move");
             transform.localPosition = new Vector3(transform.localPosition.x, -60 + (SiblingNum * -125), transform.localPosition.z);
         }
         ReorderItems();

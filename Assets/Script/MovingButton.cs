@@ -8,7 +8,7 @@ using UnityEngine;
 public class MovingButton : MonoBehaviour
 {
     public GameObject Image;
-    bool Fliped = false;
+    private bool Fliped = false;
     bool Dragging = false;
     Vector3 WorldPos;
     Vector2 ScreenPos;
