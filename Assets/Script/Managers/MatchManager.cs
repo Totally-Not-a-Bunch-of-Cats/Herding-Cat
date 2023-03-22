@@ -121,6 +121,7 @@ public class MatchManager : MonoBehaviour
                 //GameManager.Instance._screenResizeManager.RescaleItem(button);
             }
             GameManager.Instance._uiManager.GetUI();
+            GameManager.Instance._uiManager.Override = true;
             ActiveMatch = true;
             LevNameUpdator.NameUpdate();
             if (currentLevel.NewThingIntroduced == true && currentLevel.name == "1-1")
