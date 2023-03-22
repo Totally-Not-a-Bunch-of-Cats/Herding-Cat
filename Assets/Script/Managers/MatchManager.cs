@@ -32,6 +32,7 @@ public class MatchManager : MonoBehaviour
     [SerializeField] private int TargetItems = 10;
     [SerializeField] public int RoundsPlayed = 0;
     [SerializeField] public int ItemsUsed = 0;
+    [SerializeField] public LevelNameUpdator LevNameUpdator;
 
     [SerializeField] public Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
@@ -121,6 +122,7 @@ public class MatchManager : MonoBehaviour
             }
             GameManager.Instance._uiManager.GetUI();
             ActiveMatch = true;
+            LevNameUpdator.NameUpdate();
             if (currentLevel.NewThingIntroduced == true && currentLevel.name == "1-1")
             {
                 HelpGUI.transform.GetChild(0).gameObject.SetActive(true);

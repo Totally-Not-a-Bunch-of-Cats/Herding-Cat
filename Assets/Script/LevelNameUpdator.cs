@@ -10,9 +10,6 @@ public class LevelNameUpdator : MonoBehaviour
     // Start is called before the first frame update
     public void NameUpdate()
     {
-        //Debug.Log("Level" + GameManager.Instance._matchManager.CurrentLevel.name);
-        //Text.text = "Level" + GameManager.Instance._matchManager.CurrentLevel.name;
-        //gameObject.GetComponent<TMP_Text>() = mText.text;
-        Debug.Log("i happened");
+        Text.text = "Level " + GameManager.Instance._matchManager.CurrentLevel.name;
     }
 }
