@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class ScreenResizeManager : MonoBehaviour
 {
-    
     public enum Rotation {Landscape, Portrait }
     float ScreenScale;
     // Rotation of the device
@@ -33,13 +32,21 @@ public class ScreenResizeManager : MonoBehaviour
     /// </summary>
     public void ScaleBoard()
     {
-        float OrthoSize = (GameManager.Instance._matchManager.BoardSize[1] + 1f) * 0.5f;
+        float OrthoSize;
+        if (GameManager.Instance._matchManager.BoardSize[1] > GameManager.Instance._matchManager.BoardSize[0])
+        {
+            OrthoSize = (GameManager.Instance._matchManager.BoardSize[1] + .05f) * 0.5f;
+        }
+        else
+        {
+            OrthoSize = (GameManager.Instance._matchManager.BoardSize[0] + 1.5f) * 0.5f;
+        }
         Camera.main.orthographicSize = OrthoSize;
 
-        ScreenScale = (float)Screen.height / 1000;
-        GameObject.Find("End Turn Button").transform.localScale *= ScreenScale;
-        GameObject.Find("Restart Button").transform.localScale *= ScreenScale;
-        GameObject.Find("Pause Button").transform.localScale *= ScreenScale;
+        //ScreenScale = (float)Screen.height / 1000;
+        //GameObject.Find("End Turn Button").transform.localScale *= ScreenScale;
+        //GameObject.Find("Restart Button").transform.localScale *= ScreenScale;
+        //GameObject.Find("Pause Button").transform.localScale *= ScreenScale;
     }
 
     public void RescaleItem(GameObject button)

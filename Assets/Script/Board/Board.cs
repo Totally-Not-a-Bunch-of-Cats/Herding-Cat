@@ -15,11 +15,15 @@ public class Board
     [SerializeField]
     private Tile[,] _cells;
     public List<PosObject> Cats;
+    public List<Vector2Int> CatVec2;
+    //used to hold data on cats that just went into the pen for purpose of rewinding them
+    public List<PosObject> SecondCatList;
     public int NumberofCats = 0;
     public List<PosObject> Items;
     public List<Vector2Int> CatPenLocation;
     public int NumCatinPen = 0;
-
+    public List<int> SecondCatPos;
+    private object currentLevel;
     private readonly int _width;
     private readonly int _height;
 
@@ -34,6 +38,7 @@ public class Board
         this._width = Width;
         _cells = new Tile[this._width, this._height];
         Cats = new List<PosObject>();
+        SecondCatList = new List<PosObject>();
         Items = new List<PosObject>();
         CatPenLocation = new List<Vector2Int>();
         if (Tiles != null)
@@ -64,6 +69,7 @@ public class Board
         this._height = dimensions.y;
         _cells = new Tile[this._width, this._height];
         Cats = new List<PosObject>();
+        SecondCatList = new List<PosObject>();
         Items = new List<PosObject>();
         CatPenLocation = new List<Vector2Int>();
         if (Tiles != null)
@@ -83,10 +89,75 @@ public class Board
             }
         }
     }
+    /// <summary>
+    /// a deep copy constructor that copies the tiles and puts them into a different board 
+    /// </summary>
+    /// <param name="BoardToCopy">passes current board to board constructor</param>
+    /// <param name="Tiles"> takes in an array of tiles to loopp through from the level data </param>
+    public Board(Board BoardToCopy, PosTile[] Tiles = null)
+    {
+        this._width = BoardToCopy._width;
+        this._height = BoardToCopy._height;
+        CatPenLocation = new List<Vector2Int>();
+        SecondCatPos = new List<int>();
+        CatVec2 = new List<Vector2Int>();
+        SecondCatList = new List<PosObject>();
+        Cats = new List<PosObject>();
+        _cells = new Tile[_width, _height];
+        int i = 0;
+        int j = 0;
+        //loops through all non null tiles to update 
+        if (Tiles != null)
+        {
+            foreach (PosTile tile in Tiles)
+            {
+                //_cells[tile.Position.x, tile.Position.y] = tile.Slate;
+                if (tile.Slate.Is<Cat>())
+                { 
+                    if (BoardToCopy.Cats[i] != null)
+                    {
+                        //updates the cats position with each new board 
+                        Cats.Add(new PosObject(BoardToCopy.Cats[i].Position, BoardToCopy.Cats[i].Object, BoardToCopy.Cats[i].ItemAdjObject, tile.Slate.name));
+                        _cells[BoardToCopy.Cats[i].Position.x, BoardToCopy.Cats[i].Position.y] = tile.Slate;
+                        CatVec2.Add(BoardToCopy.Cats[i].Position);
+                        i++;
+                    }
+                    //this will never be called
+                    else if(GameManager.Instance._matchManager.GameBoard.SecondCatList.Count > 0)
+                    {
+                        //add edge case for reverting a cat that just went into the cage 
+                        Debug.Log("we added one");
+                        Cats.Add(new PosObject(BoardToCopy.Cats[i].Position, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Object, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].ItemAdjObject, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Name));
+                        SecondCatPos.Add(i+j);
+                        _cells[tile.Position.x, tile.Position.y] = tile.Slate;
+                        j++;
+                    }
+                    else
+                    {
+                        //CatVec2.Add(BoardToCopy.Cats[i].Position);
+                        Cats.Add(null);
+                    }
+                }
+                if (tile.Slate.Is<CatPen>())
+                {
+                    CatPenLocation.Add(tile.Position);
+                    _cells[tile.Position.x, tile.Position.y] = tile.Slate;
+                }
+                if (tile.Slate.Is<Trap>())
+                {
+                    _cells[tile.Position.x, tile.Position.y] = tile.Slate;
+                }
+            }
+        }
+        Items = BoardToCopy.Items;
+        CatPenLocation = BoardToCopy.CatPenLocation;
+        NumCatinPen = BoardToCopy.NumCatinPen;
+        NumberofCats = BoardToCopy.NumberofCats;
+    }
 
     /// <summary>
     /// Get a specific cell on the <see cref="Board"/> from a <see cref="Vector2Int"/>
-    /// </summary>
+    /// </summary>  
     /// <param name="_pos">A position on the board</param>
     /// <returns><see cref="BoardCell"/> of the specified location</returns>
     /// <exception cref="ArgumentOutOfRangeException">
@@ -170,12 +241,12 @@ public class Board
     /// <param name="ItemMoveDistance">Number of tiles the Item moves on the <see cref="Board"/></param>
     /// <param name="Destination">Farthest Location on the <see cref="Board"/> that the cat will move</param>
     /// <param name="ListPos">Position in the list that the moving cat is</param>
-    public void CheckMovement(int ItemMoveDistance, Vector2Int Destination, int ListPos)
+    public void CheckMovement(int ItemMoveDistance, Vector2Int Destination, int ListPos, PosObject Item)
     {
         Vector2Int Cat = Cats[ListPos].Position;
         if (Cat.x == Destination.x)
         {
-            if(Cat.y > Destination.y)
+            if (Cat.y > Destination.y)
             {
                 // Moves down
                 if (Destination.y < 0)
@@ -192,6 +263,23 @@ public class Board
                         {
                             //if the destination has something the cat cant be on, make sure it does step on it
                             Destination.y = y + 1;
+                            if (_cells[Destination.x, y].name == "Post")
+                            {
+                                Destination.y = y;
+                                break;
+                            }
+                            if (_cells[Destination.x, y].name == "Bed")
+                            {
+                                Destination.y = y;
+                                Cats[ListPos].Sleeping = true;
+                                break;
+                            }
+                            if (_cells[Destination.x, y].name == "Toy" && Item.Position == new Vector2Int(Destination.x, y))
+                            {
+                                //allows cat to move on cat pen
+                                Destination.y = y;
+                                break;
+                            }
                             break;
                         }
                         else if (_cells[Destination.x, y].Is<CatPen>())
@@ -221,6 +309,23 @@ public class Board
                         {
                             //if the destination has something the cat cant be on, make sure it does step on it
                             Destination.y = y - 1;
+                            if(_cells[Destination.x, y].name == "Post")
+                            {
+                                Destination.y = y;
+                                break;
+                            }
+                            if (_cells[Destination.x, y].name == "Bed")
+                            {
+                                Destination.y = y;
+                                Cats[ListPos].Sleeping = true;
+                                break;
+                            }
+                            if (_cells[Destination.x, y].name == "Toy" && Item.Position == new Vector2Int(Destination.x, y))
+                            {
+                                //allows cat to move on cat pen
+                                Destination.y = y;
+                                break;
+                            }
                             break;
                         }
                         else if (_cells[Destination.x, y].Is<CatPen>())
@@ -254,6 +359,23 @@ public class Board
                         {
                             //if the destination has something the cat cant be on, make sure it does step on it
                             Destination.x = x + 1;
+                            if (_cells[x, Destination.y].name == "Post")
+                            {
+                                Destination.x = x;
+                                break;
+                            }
+                            if (_cells[x, Destination.y].name == "Bed")
+                            {
+                                Destination.x = x;
+                                Cats[ListPos].Sleeping = true;
+                                break;
+                            }
+                            if (_cells[x, Destination.y].name == "Toy" && Item.Position == new Vector2Int(x, Destination.y))
+                            {
+                                //allows cat to move on cat pen
+                                Destination.x = x;
+                                break;
+                            }
                             break;
                         }
                         else if (_cells[x, Destination.y].Is<CatPen>())
@@ -283,6 +405,23 @@ public class Board
                         {
                             //if the destination has something the cat cant be on, make sure it does step on it
                             Destination.x = x - 1;
+                            if (_cells[x, Destination.y].name == "Post")
+                            {
+                                Destination.x = x;
+                                break;
+                            }
+                            if (_cells[x, Destination.y].name == "Bed")
+                            {
+                                Destination.x = x;
+                                Cats[ListPos].Sleeping = true;
+                                break;
+                            }
+                            if (_cells[x, Destination.y].name == "Toy" && Item.Position == new Vector2Int(x, Destination.y))
+                            {
+                                //allows cat to move on cat pen
+                                Destination.x = x;
+                                break;
+                            }
                             break;
                         }
                         else if(_cells[x, Destination.y].Is<CatPen>())

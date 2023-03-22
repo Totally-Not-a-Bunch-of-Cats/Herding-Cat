@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: 1839284877676352582, guid: d8985717b5252f14ea2a388b2d88be12, type: 3}
   EndsTurn: 0
-  Skipped: 0
+  Skipped: 1
   Direction: -1

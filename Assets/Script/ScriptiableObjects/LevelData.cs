@@ -14,6 +14,7 @@ public class LevelData: ScriptableObject
     [SerializeField] public Vector2Int Dimensions;
     [SerializeField] public int TargetRounds;
     [SerializeField] public int TargetItems;
+    [SerializeField] public bool NewThingIntroduced = false;
 
     [Header("Tile Data")]
     // Tile that is set for the backgound of play area
@@ -124,5 +125,35 @@ public class LevelData: ScriptableObject
     public bool GetUnlocked()
     {
         return Unlocked;
+    }
+
+    /// <summary>
+    /// Calculates star count earned from level(1 for finshing, 1 for items used, 1 for rounds)
+    /// </summary>
+    /// <param name="roundCount">Number of rounds to complete level</param>
+    /// <param name="itemCount">Number of Items to complete level</param>
+    /// <param name="AdjustStarCount">If should change the level data</param>
+    public void CalculateStars(int roundCount = 0, int itemCount = 0, bool AdjustStarCount = false)
+    {
+        int NewStarsEarned = 1;
+        // checking/adding star for items used
+        if (TargetItems >= itemCount)
+        {
+            NewStarsEarned++;
+        }
+        // Checking/Adding star for round count
+        if (TargetRounds >= roundCount)
+        {
+            NewStarsEarned++;
+        }
+
+        // Checks if should be updating level data (Log in console if not)
+        if (AdjustStarCount)
+        {
+            StarsEarned = NewStarsEarned;
+        } else
+        {
+            Debug.Log($"Level {name}: {NewStarsEarned}");
+        }
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 590294061082041625}
   - component: {fileID: 7126871971944188214}
   - component: {fileID: 3686397751258903135}
+  - component: {fileID: 8661864018276491431}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -68,7 +69,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 70861889a4e9b6242972cffc98dd2a42, type: 2}
   - {fileID: 11400000, guid: c8fef117fb396744cbeb19e5ce29dbe8, type: 2}
   - {fileID: 11400000, guid: 52208975bafc6e24fa6e7398efcbb7c4, type: 2}
+  GamelevelList: {fileID: 0}
   LevelPosition: 0
+  ActivateItemIndicators: 0
   UpdateLevelData: 0
 --- !u!114 &590294061082041625
 MonoBehaviour:
@@ -101,6 +104,12 @@ MonoBehaviour:
   GUI: {fileID: 0}
   ItemAdjPrefab: {fileID: 4897113919975755801, guid: 3efadeb619f8cb14992fc7c06b7793d9, type: 3}
   ItemAdjPanel: {fileID: 0}
+  CurrentSelectedItem:
+    Name: 
+    Position: {x: 0, y: 0}
+    Object: {fileID: 0}
+    ItemAdjObject: {fileID: 0}
+    Sleeping: 0
 --- !u!114 &3686397751258903135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,3 +123,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentRotation: 0
+--- !u!114 &8661864018276491431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590294061082041624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35afa44b67f3e004a8f0b14a684a9f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PreviousGameBoard:
+    Cats: []
+    NumberofCats: 0
+    Items: []
+    CatPenLocation: []
+    NumCatinPen: 0
+  PreviousRoundsPlayed: 0
+  PreviousItemsUsed: 0

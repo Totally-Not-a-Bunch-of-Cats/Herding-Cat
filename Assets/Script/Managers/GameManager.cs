@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public MatchManager _matchManager;
     public UIManager _uiManager;
     public ScreenResizeManager _screenResizeManager;
+    public ReWindManager _ReWindManager;
     //list of all level data
     //public static List<LevelData> Levels;
     public List<LevelData> Levels = new List<LevelData>();
@@ -27,7 +28,8 @@ public class GameManager : MonoBehaviour
     private static bool m_ShuttingDown = false;
     private static object m_Lock = new object();
     private static GameManager m_Instance;
-    public int LevelPosition = 1;
+    public int LevelPosition = 0;
+    public bool ActivateItemIndicators = false;
 
 
     // Used for testing to determine if star count for a level should be changed or outputed in console.
@@ -111,7 +113,7 @@ public class GameManager : MonoBehaviour
 
     public void ButtonOfSelectedNum(int buttonPressed)
     {
-        Instance.LevelPosition = buttonPressed + 1;
+        Instance.LevelPosition = buttonPressed;
     }
 
     /// <summary>
@@ -144,8 +146,18 @@ public class GameManager : MonoBehaviour
         if (_board != null)
         {
             Instance._matchManager = _board.GetComponent<MatchManager>();
-            LevelData _currentLevel = Levels.Find(level => level.name == level_name);
-            LevelPosition = Levels.IndexOf(_currentLevel) + 1;
+            LevelData _currentLevel = null;
+            //LevelData _currentLevel = Levels.Find(level => level.name == level_name);
+            for (int i =0; i < Instance.Levels.Count; i++)
+            {
+                if(level_name == Instance.Levels[i].name)
+                {
+                    _currentLevel = Instance.Levels[i];
+                    break;
+                }
+            }
+
+            //LevelPosition = Instance.Levels.IndexOf(_currentLevel) + 1;
             // Init round manager / match
             if (Instance._matchManager.InitMatch(_currentLevel))
             {
