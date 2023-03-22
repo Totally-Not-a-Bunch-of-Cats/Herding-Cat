@@ -67,11 +67,13 @@ public class LevelSelectGeneration : MonoBehaviour
             // Creates the action on the button that will load the level associated with the button
             int currentLevel = i + 1;
             levelButtonTransform.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.LevelSelected(CurrentWorld + "-" + currentLevel));
+            // Creates the action that updates the current level position to fit with what level you are on
+            levelButtonTransform.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.ButtonOfSelectedNum(currentLevel + ((CurrentWorld - 1) * 10)));
 
             // Colors the stars according to starts earned on the level by the player
             for (int j = 0; j < 3; j++)
             {
-                if (GameManager.Instance.Levels[i * CurrentWorld].StarsEarned > j)
+                if (GameManager.Instance.Levels[i + ((CurrentWorld - 1) * 10)].StarsEarned > j)
                 {
                     levelButtonTransform.GetChild(1).GetChild(j).GetComponent<Image>().color = Color.yellow;
                 }
