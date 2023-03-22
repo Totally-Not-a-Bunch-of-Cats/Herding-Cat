@@ -121,6 +121,7 @@ public class MatchManager : MonoBehaviour
                 //GameManager.Instance._screenResizeManager.RescaleItem(button);
             }
             GameManager.Instance._uiManager.GetUI();
+            GameManager.Instance._uiManager.Override = true;
             ActiveMatch = true;
             LevNameUpdator.NameUpdate();
             if (currentLevel.NewThingIntroduced == true && currentLevel.name == "1-1")
@@ -381,7 +382,7 @@ public class MatchManager : MonoBehaviour
             if (GameManager.Instance.UpdateLevelData == true)
             {
                 // Updates level data info for current/next level
-                //GameManager.Instance.Levels.Find(level => level.name == NextLevelName).SetUnlocked(true);
+                GameManager.Instance.Levels.Find(level => level.name == NextLevelName).SetUnlocked(true);
             } 
             else
             {
