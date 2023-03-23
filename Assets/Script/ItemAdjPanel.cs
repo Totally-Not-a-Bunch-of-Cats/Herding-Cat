@@ -113,7 +113,6 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler
 
     void ReorderItems()
     {
-        Debug.Log(Parent.childCount);
         List<PosObject> OldItems = new List<PosObject>();
         for (int i = 0; i < Parent.childCount; i++)
         {
