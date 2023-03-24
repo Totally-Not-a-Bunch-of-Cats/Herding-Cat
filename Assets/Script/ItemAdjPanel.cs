@@ -42,15 +42,22 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler
             Destroy(GameManager.Instance._matchManager.GameBoard.Items[num].Object.gameObject);
             Destroy(GameManager.Instance._matchManager.GameBoard.Items[num].ItemAdjObject.gameObject);
             GameManager.Instance._matchManager.GameBoard.Set(GameManager.Instance._matchManager.GameBoard.Items[num].Position, null);
-            GameManager.Instance._matchManager.GameBoard.Items[num] = null;
+            GameManager.Instance._matchManager.GameBoard.Items.RemoveAt(num);
             GameManager.Instance._matchManager.ItemsUsed -= 1;
+
+            for(int i = 0; i < Parent.childCount -1; i++)
+            {
+                GameManager.Instance._matchManager.GameBoard.Items[i].ItemAdjObject.num = i;
+            }
         }
         else
         {
-            Debug.LogError($"Index must be between 0 and ({GameManager.Instance._matchManager.GameBoard.Items.Count}");
-            throw new System.ArgumentOutOfRangeException($"Index must be between 0 and ({GameManager.Instance._matchManager.GameBoard.Items.Count}");
+            Debug.LogError($"Index must be between 0 and {GameManager.Instance._matchManager.GameBoard.Items.Count}");
+            throw new System.ArgumentOutOfRangeException($"Index must be between 0 and {GameManager.Instance._matchManager.GameBoard.Items.Count}");
         }
     }
+
+    
 
     /// <summary>
     /// calls highlight if num is valid
@@ -114,7 +121,7 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler
     void ReorderItems()
     {
         List<PosObject> OldItems = new List<PosObject>();
-        for (int i = 0; i < Parent.childCount; i++)
+        for (int i = 0; i < GameManager.Instance._matchManager.GameBoard.Items.Count; i++)
         {
             if(num > transform.GetSiblingIndex())
             {
@@ -122,22 +129,33 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler
                 {
                     // dont move the ones above the ones we moved
                     OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[i]);
+                    Debug.Log(OldItems[OldItems.Count -1].ItemAdjObject.num + " " + i);
                 }
                 else if (i == transform.GetSiblingIndex())
                 {
                     //placing the one we moved where it should go
                     OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[num]);
+                    Debug.Log(OldItems[OldItems.Count - 1].ItemAdjObject.num + " " + i);
                 }
                 else
                 {
-                    //checks to see ifthe number actually moved
-                    if (i == Parent.childCount)
+                    //&& GameManager.Instance._matchManager.GameBoard.Items[i].ItemAdjObject.num == Parent.childCount - 1
+                    //this one catches if the last one is diff
+                    if (i == Parent.childCount -1 && GameManager.Instance._matchManager.GameBoard.Items[i].ItemAdjObject.num != num)
                     {
                         OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[i]);
+                        Debug.Log(OldItems[OldItems.Count - 1].ItemAdjObject.num + " " + i);
+                    }
+                    //this one catches if the second to last one was moved and the last one is the same last one
+                    else if (i > num)
+                    {
+                        OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[i]);
+                        Debug.Log(OldItems[OldItems.Count - 1].ItemAdjObject.num + " " + i);
                     }
                     else
                     {
                         OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[i - 1]);
+                        Debug.Log(OldItems[OldItems.Count - 1].ItemAdjObject.num + " " + i);
                     }
                 }
             }
@@ -147,23 +165,36 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler
                 {
                     // dont move the ones above the ones we moved
                     OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[i]);
+                    Debug.Log(OldItems[OldItems.Count - 1].ItemAdjObject.num + " " + i);
                 }
                 else if (i == transform.GetSiblingIndex())
                 {
                     //placing the one we moved where it should go
                     OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[num]);
+                    Debug.Log(OldItems[OldItems.Count - 1].ItemAdjObject.num + " " + i);
                 }
                 else
                 {
                     OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[i + 1]);
+                    Debug.Log(OldItems[OldItems.Count - 1].ItemAdjObject.num + " " + i);
                 }
             }
         }
         //updating num for every change
-        for (int i = 0; i < Parent.childCount; i++)
-        {
-                OldItems[i].ItemAdjObject.num = i;
-        }
+        //for (int i = 0; i < Parent.childCount; i++)
+        //{
+        //    Debug.Log(OldItems[i].ItemAdjObject.num + " old Num");
+        //    OldItems[i].ItemAdjObject.num = i;
+        //    Debug.Log(i + "new num");
+        //    //Debug.Log(OldItems.Count + " Olditem count");
+        //}
         GameManager.Instance._matchManager.GameBoard.Items = OldItems;
+        for(int i = 0; i < GameManager.Instance._matchManager.GameBoard.Items.Count; i++)
+        {
+            if(GameManager.Instance._matchManager.GameBoard.Items[i] != null)
+            {
+                GameManager.Instance._matchManager.GameBoard.Items[i].ItemAdjObject.num = i;
+            }
+        }
     }
 }
