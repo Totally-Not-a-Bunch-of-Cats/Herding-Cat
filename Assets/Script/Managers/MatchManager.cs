@@ -194,26 +194,6 @@ public class MatchManager : MonoBehaviour
                             {
                                 CatMoveInfo.RemoveAt(CatMoveInfo.Count - 1);
                             }
-                            //find if the cat is in range and if so moves said cat
-                            // Checks if cat is closer than current cat and within radius
-                            //if (Dist <= ClosestDistance && (deltaY == 0 || deltaX == 0) || ClosestDistance < 0 
-                            //    && Dist <= CurrentItem.Radius && (deltaY == 0 || deltaX == 0))
-                            //{
-                                //if (ClosestDistance != Dist)
-                                //{
-                                //    // Clears the lists of the farther cat information and adds the new one
-                                //    CatMoveInfo.Clear();
-                                //}
-
-                                //CatMoveInfo.Add(new CatMovementInfo(j));
-                                //Vector2Int test = DestinationList(deltaX, deltaY, CurrentItem, j);
-                                //if (test != new Vector2Int(-100, -100))
-                                //{
-                                //    CatMoveInfo[CatMoveInfo.Count - 1].Destination = test;
-                                //}
-                                
-                                //ClosestDistance = Dist;
-                            //}
                         }
                     }
                 }
@@ -232,7 +212,6 @@ public class MatchManager : MonoBehaviour
                             if (CatMoveInfo[k] != null && CurrentItem.Radius >= CatMoveInfo[k].Distance && CatMoveInfo[k].Used == false)
                             {
                                 //says there are cats with in range
-                                //ClosestDistance = 1;
                                 if (j != 0)
                                 {
                                     if (small >= CatMoveInfo[k].Distance && Temps[j - 1].Distance <= CatMoveInfo[k].Distance)

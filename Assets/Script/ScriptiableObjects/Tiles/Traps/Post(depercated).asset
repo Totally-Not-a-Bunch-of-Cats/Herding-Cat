@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5eb1c1d9a7271884fb975b9f9fd10576, type: 3}
-  m_Name: Post
+  m_Name: Post(depercated)
   m_EditorClassIdentifier: 
   Prefab: {fileID: 1839284877676352582, guid: d8985717b5252f14ea2a388b2d88be12, type: 3}
   EndsTurn: 0

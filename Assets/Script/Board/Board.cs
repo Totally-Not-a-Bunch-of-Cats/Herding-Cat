@@ -126,7 +126,6 @@ public class Board
                     else if(GameManager.Instance._matchManager.GameBoard.SecondCatList.Count > 0)
                     {
                         //add edge case for reverting a cat that just went into the cage 
-                        Debug.Log("we added one");
                         Cats.Add(new PosObject(BoardToCopy.Cats[i].Position, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Object, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].ItemAdjObject, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Name));
                         SecondCatPos.Add(i+j);
                         _cells[tile.Position.x, tile.Position.y] = tile.Slate;
@@ -265,8 +264,20 @@ public class Board
                             Destination.y = y + 1;
                             if (_cells[Destination.x, y].name == "Post")
                             {
-                                Destination.y = y;
-                                break;
+                                //Destination.y = y;
+                                //break;
+                            }
+                            if (_cells[Destination.x, y].name == "Cat Tree")
+                            {
+                                
+                            }
+                            if (_cells[Destination.x, y].name == "Cat Tube")
+                            {
+                                
+                            }
+                            if (_cells[Destination.x, y].name == "Redirection Pad")
+                            {
+                                
                             }
                             if (_cells[Destination.x, y].name == "Bed")
                             {
@@ -311,8 +322,8 @@ public class Board
                             Destination.y = y - 1;
                             if(_cells[Destination.x, y].name == "Post")
                             {
-                                Destination.y = y;
-                                break;
+                                //Destination.y = y;
+                                //break;
                             }
                             if (_cells[Destination.x, y].name == "Bed")
                             {
@@ -361,8 +372,8 @@ public class Board
                             Destination.x = x + 1;
                             if (_cells[x, Destination.y].name == "Post")
                             {
-                                Destination.x = x;
-                                break;
+                                //Destination.x = x;
+                                //break;
                             }
                             if (_cells[x, Destination.y].name == "Bed")
                             {
@@ -407,8 +418,8 @@ public class Board
                             Destination.x = x - 1;
                             if (_cells[x, Destination.y].name == "Post")
                             {
-                                Destination.x = x;
-                                break;
+                                //Destination.x = x;
+                                //break;
                             }
                             if (_cells[x, Destination.y].name == "Bed")
                             {
