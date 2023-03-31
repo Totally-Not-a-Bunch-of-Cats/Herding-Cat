@@ -264,20 +264,38 @@ public class Board
                             Destination.y = y + 1;
                             if (_cells[Destination.x, y].name == "Post")
                             {
-                                //Destination.y = y;
+                                //TODO
+                                //Destination.y = y; on ice right now (could lure a cat one tile closer)
                                 //break;
                             }
                             if (_cells[Destination.x, y].name == "Cat Tree")
                             {
-                                
+                                if (_cells[Destination.x, y - 2] == null || _cells[Destination.x, y - 2].Is<CatPen>() || _cells[Destination.x, y - 2].name == "Bed")
+                                {
+                                    //|| _cells[Destination.x, y].name == "Redirection Pad" maybe think about handeling this exception
+                                    //handles bed execption
+                                    if (_cells[Destination.x, y - 2] != null)
+                                    {
+                                        if (_cells[Destination.x, y - 2].name == "Bed")
+                                        {
+                                            Destination.y = y - 2;
+                                            Cats[ListPos].Sleeping = true;
+                                            break;
+                                        }
+                                    }
+                                    Destination.y = y - 2;
+                                    break;
+                                }
+                                Destination.y = y;
+                                break;
                             }
                             if (_cells[Destination.x, y].name == "Cat Tube")
                             {
-                                
+                                break;
                             }
                             if (_cells[Destination.x, y].name == "Redirection Pad")
                             {
-                                
+                                break;
                             }
                             if (_cells[Destination.x, y].name == "Bed")
                             {
@@ -324,6 +342,27 @@ public class Board
                             {
                                 //Destination.y = y;
                                 //break;
+                            }
+                            if (_cells[Destination.x, y].name == "Cat Tree")
+                            {
+                                if (_cells[Destination.x, y + 2] == null || _cells[Destination.x, y + 2].Is<CatPen>() || _cells[Destination.x, y + 2].name == "Bed")
+                                {
+                                    //|| _cells[Destination.x, y - 2].name == "Redirection Pad" maybe think about handeling this exception
+                                    //handles bed execption
+                                    if (_cells[Destination.x, y + 2] != null)
+                                    {
+                                        if (_cells[Destination.x, y + 2].name == "Bed")
+                                        {
+                                            Destination.y = y + 2;
+                                            Cats[ListPos].Sleeping = true;
+                                            break;
+                                        }
+                                    }
+                                    Destination.y = y + 2;
+                                    break;
+                                }
+                                Destination.y = y;
+                                break;
                             }
                             if (_cells[Destination.x, y].name == "Bed")
                             {
@@ -375,6 +414,27 @@ public class Board
                                 //Destination.x = x;
                                 //break;
                             }
+                            if (_cells[x, Destination.y].name == "Cat Tree")
+                            {
+                                if (_cells[x - 2, Destination.y] == null || _cells[x - 2, Destination.y].Is<CatPen>() || _cells[x - 2, Destination.y].name == "Bed")
+                                {
+                                    //|| _cells[x + 2, Destination.y].name == "Redirection Pad" maybe think about handeling this exception
+                                    //handles bed execption
+                                    if (_cells[x - 2, Destination.y] != null)
+                                    {
+                                        if (_cells[x - 2, Destination.y].name == "Bed")
+                                        {
+                                            Destination.x = x - 2;
+                                            Cats[ListPos].Sleeping = true;
+                                            break;
+                                        }
+                                    }
+                                    Destination.x = x - 2;
+                                    break;
+                                }
+                                Destination.x = x;
+                                break;
+                            }
                             if (_cells[x, Destination.y].name == "Bed")
                             {
                                 Destination.x = x;
@@ -420,6 +480,28 @@ public class Board
                             {
                                 //Destination.x = x;
                                 //break;
+                            }
+                            if (_cells[x, Destination.y].name == "Cat Tree")
+                            {
+                                //Debug.Log(_cells[x + 2, Destination.y].name);
+                                if (_cells[x + 2, Destination.y] == null || _cells[x + 2, Destination.y].Is<CatPen>() || _cells[x + 2, Destination.y].name == "Bed")
+                                {
+                                    //|| _cells[x + 2, Destination.y].name == "Redirection Pad" maybe think about handeling this exception
+                                    //handles bed execption
+                                    if(_cells[x + 2, Destination.y] != null)
+                                    {
+                                        if (_cells[x + 2, Destination.y].name == "Bed")
+                                        {
+                                            Destination.x = x + 2;
+                                            Cats[ListPos].Sleeping = true;
+                                            break;
+                                        }
+                                    }
+                                    Destination.x = x + 2;
+                                    break;
+                                }
+                                Destination.x = x;
+                                break;
                             }
                             if (_cells[x, Destination.y].name == "Bed")
                             {

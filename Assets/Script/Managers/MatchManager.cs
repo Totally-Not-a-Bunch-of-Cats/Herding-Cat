@@ -280,14 +280,12 @@ public class MatchManager : MonoBehaviour
                         Temps.Add(CatMoveInfo[smallIndex]);
                     }
                     CatMoveInfo = Temps;
-                    Debug.Log(CatMoveInfo.Count);
                 }
                 // Checks to see if a cat is actually in range
                 if (CatMoveInfo.Count > 0)
                 {
                     for (int c = 0; c < CatMoveInfo.Count; c++)
                     {
-                        Debug.Log(c);
                         GameBoard.CheckMovement(CurrentItem.MoveDistance, (Vector2Int)CatMoveInfo[c].Destination, CatMoveInfo[c].Index, GameBoard.Items[i]);
                     }
                     CatMoveInfo.Clear();
@@ -386,28 +384,23 @@ public class MatchManager : MonoBehaviour
         // Gets the farthest that the cat will move of item (Right)
         if (deltaX <= CurrentItem.Radius && deltaX > 0 && deltaY == 0)
         {
-            Debug.Log("right" + deltaX);
             return GameBoard.Cats[index].Position + new Vector2Int(CurrentItem.MoveDistance, 0);
         }
         // Gets the farthest that the cat will move of item (Left)
         if (deltaX >= -CurrentItem.Radius && deltaX < 0 && deltaY == 0)
         {
-            Debug.Log("Left" + deltaX);
             return GameBoard.Cats[index].Position + new Vector2Int(-CurrentItem.MoveDistance, 0);
         }
         // Gets the farthest that the cat will move of item (Up)
         if (deltaY <= CurrentItem.Radius && deltaY > 0 && deltaX == 0)
         {
-            Debug.Log("UP" + deltaY);
             return GameBoard.Cats[index].Position + new Vector2Int(0, CurrentItem.MoveDistance);
         }
         // Gets the farthest that the cat will move of item (Down)
         if (deltaY >= -CurrentItem.Radius && deltaY < 0 && deltaX == 0)
         {
-            Debug.Log("Down" + deltaY);
             return GameBoard.Cats[index].Position + new Vector2Int(0, -CurrentItem.MoveDistance);
         }
-        Debug.Log(" I made it out");
         return new Vector2Int(-100, -100);
     }
 
@@ -495,6 +488,11 @@ public class MatchManager : MonoBehaviour
                 GameBoard.NumCatinPen++;
             }
             if (GameBoard.At(FinalDestination).name == "Toy")
+            {
+                GameBoard.Set(CatPos, null);
+                GameBoard.Set(FinalDestination, Cat);
+            }
+            if (GameBoard.At(FinalDestination).name == "Cat Tree")
             {
                 GameBoard.Set(CatPos, null);
                 GameBoard.Set(FinalDestination, Cat);
