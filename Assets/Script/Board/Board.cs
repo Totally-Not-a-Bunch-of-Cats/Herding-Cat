@@ -22,6 +22,8 @@ public class Board
     public List<PosObject> Items;
     public List<Vector2Int> CatPenLocation;
     public int NumCatinPen = 0;
+    public List<PosTile> SavedTiles;
+    public List<PosTile> Tubes;
     public List<int> SecondCatPos;
     private object currentLevel;
     private readonly int _width;
@@ -38,6 +40,8 @@ public class Board
         this._width = Width;
         _cells = new Tile[this._width, this._height];
         Cats = new List<PosObject>();
+        SavedTiles = new List<PosTile>();
+        Tubes = new List<PosTile>();
         SecondCatList = new List<PosObject>();
         Items = new List<PosObject>();
         CatPenLocation = new List<Vector2Int>();
@@ -69,6 +73,8 @@ public class Board
         this._height = dimensions.y;
         _cells = new Tile[this._width, this._height];
         Cats = new List<PosObject>();
+        Tubes = new List<PosTile>();
+        SavedTiles = new List<PosTile>();
         SecondCatList = new List<PosObject>();
         Items = new List<PosObject>();
         CatPenLocation = new List<Vector2Int>();
@@ -99,6 +105,9 @@ public class Board
         this._width = BoardToCopy._width;
         this._height = BoardToCopy._height;
         CatPenLocation = new List<Vector2Int>();
+        SavedTiles = new List<PosTile>();
+        //SavedTiles = BoardToCopy.SavedTiles; //prob creates  pointer issues (dont think we need this)
+        Tubes = new List<PosTile>();
         SecondCatPos = new List<int>();
         CatVec2 = new List<Vector2Int>();
         SecondCatList = new List<PosObject>();
@@ -152,6 +161,7 @@ public class Board
         CatPenLocation = BoardToCopy.CatPenLocation;
         NumCatinPen = BoardToCopy.NumCatinPen;
         NumberofCats = BoardToCopy.NumberofCats;
+        Tubes = BoardToCopy.Tubes; //pretty sure it breaks with rewind 
     }
 
     /// <summary>
@@ -233,6 +243,10 @@ public class Board
             throw new ArgumentOutOfRangeException($"Position must be between (0, 0) and ({this._width}, {this._height})");
         }
     }
+    public void SaveTile(Vector2Int _pos, Tile _tile)
+    {
+        SavedTiles.Add(new PosTile(_pos, _tile));
+    }
 
     /// <summary>
     /// Moves a spcific cat to the farthest empty spot inbetween Destination and cats location
@@ -291,6 +305,7 @@ public class Board
                             }
                             if (_cells[Destination.x, y].name == "Cat Tube")
                             {
+                                Destination.y = y;
                                 break;
                             }
                             if (_cells[Destination.x, y].name == "Redirection Pad")
@@ -361,6 +376,11 @@ public class Board
                                     Destination.y = y + 2;
                                     break;
                                 }
+                                Destination.y = y;
+                                break;
+                            }
+                            if (_cells[Destination.x, y].name == "Cat Tube")
+                            {
                                 Destination.y = y;
                                 break;
                             }
@@ -435,6 +455,11 @@ public class Board
                                 Destination.x = x;
                                 break;
                             }
+                            if (_cells[x, Destination.y].name == "Cat Tube")
+                            {
+                                Destination.x = x;
+                                break;
+                            }
                             if (_cells[x, Destination.y].name == "Bed")
                             {
                                 Destination.x = x;
@@ -503,6 +528,11 @@ public class Board
                                 Destination.x = x;
                                 break;
                             }
+                            if (_cells[x, Destination.y].name == "Cat Tube")
+                            {
+                                Destination.x = x;
+                                break;
+                            }
                             if (_cells[x, Destination.y].name == "Bed")
                             {
                                 Destination.x = x;
@@ -533,7 +563,6 @@ public class Board
             Cats[ListPos].Position = Destination;
         }
     }
-
  
 
     /// <summary>

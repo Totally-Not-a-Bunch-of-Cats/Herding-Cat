@@ -495,6 +495,19 @@ public class MatchManager : MonoBehaviour
             if (GameBoard.At(FinalDestination).name == "Cat Tree")
             {
                 GameBoard.Set(CatPos, null);
+                GameBoard.SaveTile(FinalDestination, GameBoard.At(FinalDestination));
+                GameBoard.Set(FinalDestination, Cat);
+            }
+            if (GameBoard.At(FinalDestination).name == "Bed")
+            {
+                GameBoard.Set(CatPos, null);
+                GameBoard.SaveTile(FinalDestination, GameBoard.At(FinalDestination));
+                GameBoard.Set(FinalDestination, Cat);
+            }
+            if (GameBoard.At(FinalDestination).name == "Cat Tube")
+            {
+                GameBoard.Set(CatPos, null);
+                GameBoard.SaveTile(FinalDestination, GameBoard.At(FinalDestination));
                 GameBoard.Set(FinalDestination, Cat);
             }
         }
@@ -503,6 +516,14 @@ public class MatchManager : MonoBehaviour
             //moves the cat to the new position in the board data
             GameBoard.Set(CatPos, null);
             GameBoard.Set(FinalDestination, Cat);
+        }
+        //loops through the saved tiles to check if they are no longer occupied by a cat 
+        for(int i = 0; i < GameBoard.SavedTiles.Count; i++)
+        {
+            if(GameBoard.At(GameBoard.SavedTiles[i].Position) == null)
+            {
+                GameBoard.Set(GameBoard.SavedTiles[i].Position, GameBoard.SavedTiles[i].Slate);
+            }
         }
     }
 
@@ -530,11 +551,29 @@ public class MatchManager : MonoBehaviour
         {
             if (GameBoard.At(FinalDestination).Is<CatPen>())
             {
-                
                 GameBoard.Cats[ListPos] = null;
+            }
+            if (GameBoard.At(FinalDestination).name == "Cat Tube")
+            {
+                TileCatMove(GameBoard.Cats[ListPos]);
             }
         }
         CatMoving = false;
+    }
+    /// <summary>
+    /// handles the movement of cats that occure becuse they are on tiles, like the redirection 
+    /// </summary>
+    public void TileCatMove(PosObject cat)
+    {
+        for(int i = 0; i < GameBoard.Tubes.Count; i++)
+        {
+            if(GameBoard.Tubes[i].Position == cat.Position && GameBoard.At(GameBoard.Tubes[i].TubeDestination).name == "Cat Tube")
+            {
+                //this is wrong update the tube destination and stuff
+                Vector2Int TubeDestination = cat.Position - GameBoard.Tubes[i].TubeDestination;
+                GameBoard.Set(TubeDestination, GameBoard.At(cat.Position));
+            }
+        }
     }
 
     /// <summary>
