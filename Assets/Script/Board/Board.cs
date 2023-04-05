@@ -92,6 +92,10 @@ public class Board
                 {
                     CatPenLocation.Add(tile.Position);
                 }
+                if (tile.Slate.name == "Cat Tube")
+                {
+                    Tubes.Add(tile);
+                }
             }
         }
     }
@@ -558,7 +562,7 @@ public class Board
                 GameManager.Instance._matchManager.MoveCat(Vector2Int.right, At(Cat), Destination, ListPos);
             }
         }
-        if(Cats[ListPos] != null)
+        if (Cats[ListPos] != null)
         {
             Cats[ListPos].Position = Destination;
         }

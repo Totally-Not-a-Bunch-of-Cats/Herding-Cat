@@ -508,7 +508,7 @@ public class MatchManager : MonoBehaviour
             {
                 GameBoard.Set(CatPos, null);
                 GameBoard.SaveTile(FinalDestination, GameBoard.At(FinalDestination));
-                GameBoard.Set(FinalDestination, Cat);
+                //GameBoard.Set(FinalDestination, Cat);
             }
         }
         else
@@ -555,7 +555,9 @@ public class MatchManager : MonoBehaviour
             }
             if (GameBoard.At(FinalDestination).name == "Cat Tube")
             {
-                TileCatMove(GameBoard.Cats[ListPos]);
+                TileCatMove(GameBoard.Cats[ListPos], GameBoard.At(GameBoard.Cats[ListPos].Position));
+                GameBoard.SaveTile(FinalDestination, GameBoard.At(FinalDestination));
+                //GameBoard.Set(FinalDestination, GameBoard.Cats[ListPos].);
             }
         }
         CatMoving = false;
@@ -563,15 +565,19 @@ public class MatchManager : MonoBehaviour
     /// <summary>
     /// handles the movement of cats that occure becuse they are on tiles, like the redirection 
     /// </summary>
-    public void TileCatMove(PosObject cat)
+    public void TileCatMove(PosObject cat, Tile CatTile)
     {
-        for(int i = 0; i < GameBoard.Tubes.Count; i++)
+        for (int i = 0; i < GameBoard.Tubes.Count; i++)
         {
+            Debug.Log("i: " + i);
             if(GameBoard.Tubes[i].Position == cat.Position && GameBoard.At(GameBoard.Tubes[i].TubeDestination).name == "Cat Tube")
             {
                 //this is wrong update the tube destination and stuff
-                Vector2Int TubeDestination = cat.Position - GameBoard.Tubes[i].TubeDestination;
-                GameBoard.Set(TubeDestination, GameBoard.At(cat.Position));
+                Vector2Int TubeDestination = cat.Position - GameBoard.Tubes[i].TubeDestination; // Math is incorrect
+                cat.Object.localPosition = new Vector3(cat.Object.localPosition.x + TubeDestination.x,
+                    cat.Object.localPosition.y + TubeDestination.y, cat.Object.localPosition.z);
+                Debug.Log(GameBoard.Tubes[i].TubeDestination);
+                GameBoard.Set(GameBoard.Tubes[i].TubeDestination, CatTile);
             }
         }
     }
