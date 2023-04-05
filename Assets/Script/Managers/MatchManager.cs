@@ -483,7 +483,7 @@ public class MatchManager : MonoBehaviour
             if (GameBoard.At(FinalDestination).Is<CatPen>())
             {
                 CatJustinCage = true;
-                GameBoard.SecondCatList.Add(new PosObject(GameBoard.Cats[ListPos].Position, GameBoard.Cats[ListPos].Object, GameBoard.Cats[ListPos].ItemAdjObject, GameBoard.Cats[ListPos].Name));
+                GameBoard.SecondCatList.Add(new PosObject(GameBoard.Cats[ListPos].Position, GameBoard.Cats[ListPos].Object, GameBoard.Cats[ListPos].ItemAdjObject, GameBoard.Cats[ListPos].Name, GameBoard.Cats[ListPos].Tile));
                 GameBoard.Set(CatPos, null);
                 GameBoard.NumCatinPen++;
             }
@@ -507,6 +507,7 @@ public class MatchManager : MonoBehaviour
             if (GameBoard.At(FinalDestination).name == "Cat Tube")
             {
                 GameBoard.Set(CatPos, null);
+                Debug.Log("Cat in tube");
                 GameBoard.SaveTile(FinalDestination, GameBoard.At(FinalDestination));
                 //GameBoard.Set(FinalDestination, Cat);
             }
@@ -520,8 +521,9 @@ public class MatchManager : MonoBehaviour
         //loops through the saved tiles to check if they are no longer occupied by a cat 
         for(int i = 0; i < GameBoard.SavedTiles.Count; i++)
         {
-            if(GameBoard.At(GameBoard.SavedTiles[i].Position) == null)
+            if (GameBoard.At(GameBoard.SavedTiles[i].Position) == null)
             {
+                Debug.Log("turing null into tubes");
                 GameBoard.Set(GameBoard.SavedTiles[i].Position, GameBoard.SavedTiles[i].Slate);
             }
         }
@@ -555,9 +557,8 @@ public class MatchManager : MonoBehaviour
             }
             if (GameBoard.At(FinalDestination).name == "Cat Tube")
             {
-                TileCatMove(GameBoard.Cats[ListPos], GameBoard.At(GameBoard.Cats[ListPos].Position));
+                TileCatMove(GameBoard.Cats[ListPos], ListPos);
                 GameBoard.SaveTile(FinalDestination, GameBoard.At(FinalDestination));
-                //GameBoard.Set(FinalDestination, GameBoard.Cats[ListPos].);
             }
         }
         CatMoving = false;
@@ -565,19 +566,22 @@ public class MatchManager : MonoBehaviour
     /// <summary>
     /// handles the movement of cats that occure becuse they are on tiles, like the redirection 
     /// </summary>
-    public void TileCatMove(PosObject cat, Tile CatTile)
+    public void TileCatMove(PosObject cat, int ListPos)
     {
         for (int i = 0; i < GameBoard.Tubes.Count; i++)
         {
             Debug.Log("i: " + i);
             if(GameBoard.Tubes[i].Position == cat.Position && GameBoard.At(GameBoard.Tubes[i].TubeDestination).name == "Cat Tube")
             {
-                //this is wrong update the tube destination and stuff
+                //this is wrong update the tube destination and stuff this moves the cat game object
                 Vector2Int TubeDestination = cat.Position - GameBoard.Tubes[i].TubeDestination; // Math is incorrect
-                cat.Object.localPosition = new Vector3(cat.Object.localPosition.x + TubeDestination.x,
+                cat.Object.localPosition = new Vector3(cat.Object.localPosition.x - TubeDestination.x,
                     cat.Object.localPosition.y + TubeDestination.y, cat.Object.localPosition.z);
-                Debug.Log(GameBoard.Tubes[i].TubeDestination);
-                GameBoard.Set(GameBoard.Tubes[i].TubeDestination, CatTile);
+
+                GameBoard.SaveTile(GameBoard.Tubes[i].TubeDestination, GameBoard.At(GameBoard.Tubes[i].TubeDestination));
+                GameBoard.Cats[ListPos].Position = GameBoard.Tubes[i].TubeDestination;
+                GameBoard.Set(GameBoard.Tubes[i].TubeDestination, cat.Tile);
+                break;
             }
         }
     }

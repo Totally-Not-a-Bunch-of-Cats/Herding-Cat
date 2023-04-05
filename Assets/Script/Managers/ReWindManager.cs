@@ -37,7 +37,7 @@ public class ReWindManager : MonoBehaviour
                 {
                     SecondCatPos.Add(i);
                     PreviousGameBoard.Cats[i] = (new PosObject(PreviousGameBoard.CatVec2[i], GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Object, 
-                        GameManager.Instance._matchManager.GameBoard.SecondCatList[j].ItemAdjObject, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Name));
+                        GameManager.Instance._matchManager.GameBoard.SecondCatList[j].ItemAdjObject, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Name, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Tile));
                     PreviousGameBoard.Set(PreviousGameBoard.CatVec2[i], GameManager.Instance._matchManager.GameBoard.At(GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Position));
                     j++;
                 }

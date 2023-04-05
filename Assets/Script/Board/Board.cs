@@ -52,7 +52,7 @@ public class Board
                 Set(tile.Position, tile.Slate);
                 if (tile.Slate.Is<Cat>())
                 {
-                    Cats.Add(new PosObject(tile.Position, tile.Slate.name));
+                    Cats.Add(new PosObject(tile.Position, tile.Slate.name, tile.Slate));
                     NumberofCats++;
                 }
                 if (tile.Slate.Is<CatPen>())
@@ -85,7 +85,7 @@ public class Board
                 _cells[tile.Position.x, tile.Position.y] = tile.Slate;
                 if (tile.Slate.Is<Cat>())
                 {
-                    Cats.Add(new PosObject(tile.Position, tile.Slate.name));
+                    Cats.Add(new PosObject(tile.Position, tile.Slate.name, tile.Slate));
                     NumberofCats++;
                 }
                 if (tile.Slate.Is<CatPen>())
@@ -130,7 +130,7 @@ public class Board
                     if (BoardToCopy.Cats[i] != null)
                     {
                         //updates the cats position with each new board 
-                        Cats.Add(new PosObject(BoardToCopy.Cats[i].Position, BoardToCopy.Cats[i].Object, BoardToCopy.Cats[i].ItemAdjObject, tile.Slate.name));
+                        Cats.Add(new PosObject(BoardToCopy.Cats[i].Position, BoardToCopy.Cats[i].Object, BoardToCopy.Cats[i].ItemAdjObject, tile.Slate.name, tile.Slate));
                         _cells[BoardToCopy.Cats[i].Position.x, BoardToCopy.Cats[i].Position.y] = tile.Slate;
                         CatVec2.Add(BoardToCopy.Cats[i].Position);
                         i++;
@@ -139,7 +139,7 @@ public class Board
                     else if(GameManager.Instance._matchManager.GameBoard.SecondCatList.Count > 0)
                     {
                         //add edge case for reverting a cat that just went into the cage 
-                        Cats.Add(new PosObject(BoardToCopy.Cats[i].Position, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Object, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].ItemAdjObject, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Name));
+                        Cats.Add(new PosObject(BoardToCopy.Cats[i].Position, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Object, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].ItemAdjObject, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Name, tile.Slate));
                         SecondCatPos.Add(i+j);
                         _cells[tile.Position.x, tile.Position.y] = tile.Slate;
                         j++;
