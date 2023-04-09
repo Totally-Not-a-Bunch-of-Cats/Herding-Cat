@@ -144,14 +144,18 @@ public class UIManager : MonoBehaviour
     public void Restart()
     {
         SelectedItem = null;
+        GameManager.Instance._ReWindManager.Clear();
         StartCoroutine(GameManager.Instance.StartMatch(GameManager.Instance._matchManager.CurrentLevel.name));
     }
 
     public void Rewind()
     {
-        SelectedItem = null;
-        Debug.Log("we rewinding");
-        GameManager.Instance._ReWindManager.Revert();
+        if(GameManager.Instance._ReWindManager.PreviousRoundsPlayed != -1)
+        {
+            SelectedItem = null;
+            Debug.Log("we rewinding");
+            GameManager.Instance._ReWindManager.Revert();
+        }
     }
 
     /// <summary>

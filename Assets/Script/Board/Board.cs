@@ -59,6 +59,10 @@ public class Board
                 {
                     CatPenLocation.Add(tile.Position);
                 }
+                if (tile.Slate.name == "Cat Tube")
+                {
+                    Tubes.Add(tile);
+                }
             }
         }
     }
@@ -110,7 +114,6 @@ public class Board
         this._height = BoardToCopy._height;
         CatPenLocation = new List<Vector2Int>();
         SavedTiles = new List<PosTile>();
-        //SavedTiles = BoardToCopy.SavedTiles; //prob creates  pointer issues (dont think we need this)
         Tubes = new List<PosTile>();
         SecondCatPos = new List<int>();
         CatVec2 = new List<Vector2Int>();
@@ -165,7 +168,8 @@ public class Board
         CatPenLocation = BoardToCopy.CatPenLocation;
         NumCatinPen = BoardToCopy.NumCatinPen;
         NumberofCats = BoardToCopy.NumberofCats;
-        Tubes = BoardToCopy.Tubes; //pretty sure it breaks with rewind 
+        SavedTiles = BoardToCopy.SavedTiles;
+        Tubes = BoardToCopy.Tubes;
     }
 
     /// <summary>
@@ -249,6 +253,13 @@ public class Board
     }
     public void SaveTile(Vector2Int _pos, Tile _tile)
     {
+        for(int i = 0; i < SavedTiles.Count; i++)
+        {
+            if (_pos == SavedTiles[i].Position)
+            {
+                return;
+            }
+        }
         SavedTiles.Add(new PosTile(_pos, _tile));
     }
 

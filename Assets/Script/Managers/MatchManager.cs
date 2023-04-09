@@ -507,8 +507,7 @@ public class MatchManager : MonoBehaviour
             if (GameBoard.At(FinalDestination).name == "Cat Tube")
             {
                 GameBoard.Set(CatPos, null);
-                GameBoard.SaveTile(FinalDestination, GameBoard.At(FinalDestination));
-                //GameBoard.Set(FinalDestination, Cat);
+                //GameBoard.SaveTile(FinalDestination, GameBoard.At(FinalDestination));
             }
         }
         else
@@ -525,10 +524,10 @@ public class MatchManager : MonoBehaviour
             {
                 GameBoard.Set(GameBoard.SavedTiles[i].Position, GameBoard.SavedTiles[i].Slate);
                 Debug.Log(GameBoard.At(GameBoard.SavedTiles[i].Position));
+                Debug.Log(GameBoard.SavedTiles[i].Slate);
+                GameBoard.SavedTiles.RemoveAt(i);
             }
         }
-
-        GameBoard.SavedTiles.Clear();
     }
 
     /// <summary>
@@ -560,7 +559,6 @@ public class MatchManager : MonoBehaviour
             if (GameBoard.At(FinalDestination).name == "Cat Tube")
             {
                 TileCatMove(GameBoard.Cats[ListPos], ListPos);
-                GameBoard.SaveTile(FinalDestination, GameBoard.At(FinalDestination));
             }
         }
         CatMoving = false;
@@ -573,16 +571,23 @@ public class MatchManager : MonoBehaviour
     {
         for (int i = 0; i < GameBoard.Tubes.Count; i++)
         {
+            Debug.Log(GameBoard.At(GameBoard.Tubes[i].TubeDestination));
+            Debug.Log(GameBoard.Tubes[i].Position);
             if (GameBoard.Tubes[i].Position == cat.Position && GameBoard.At(GameBoard.Tubes[i].TubeDestination).name == "Cat Tube")
             {
-                //this is wrong update the tube destination and stuff this moves the cat game object
-                Vector2Int TubeDestination = cat.Position - GameBoard.Tubes[i].TubeDestination; // Math is incorrect
+                Vector2Int TubeDestination = cat.Position - GameBoard.Tubes[i].TubeDestination; 
                 cat.Object.localPosition = new Vector3(cat.Object.localPosition.x - TubeDestination.x,
-                    cat.Object.localPosition.y + TubeDestination.y, cat.Object.localPosition.z);
+                    cat.Object.localPosition.y - TubeDestination.y, cat.Object.localPosition.z);
 
                 GameBoard.SaveTile(GameBoard.Tubes[i].TubeDestination, GameBoard.At(GameBoard.Tubes[i].TubeDestination));
                 GameBoard.Cats[ListPos].Position = GameBoard.Tubes[i].TubeDestination;
                 GameBoard.Set(GameBoard.Tubes[i].TubeDestination, cat.Tile);
+                break;
+            }
+            if(GameBoard.Tubes[i].Position == cat.Position)
+            {
+                GameBoard.SaveTile(GameBoard.Tubes[i].Position, GameBoard.At(GameBoard.Tubes[i].Position));
+                GameBoard.Set(GameBoard.Tubes[i].Position, cat.Tile);
                 break;
             }
         }
