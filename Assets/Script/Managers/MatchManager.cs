@@ -507,7 +507,6 @@ public class MatchManager : MonoBehaviour
             if (GameBoard.At(FinalDestination).name == "Cat Tube")
             {
                 GameBoard.Set(CatPos, null);
-                Debug.Log("Cat in tube");
                 GameBoard.SaveTile(FinalDestination, GameBoard.At(FinalDestination));
                 //GameBoard.Set(FinalDestination, Cat);
             }
@@ -518,15 +517,18 @@ public class MatchManager : MonoBehaviour
             GameBoard.Set(CatPos, null);
             GameBoard.Set(FinalDestination, Cat);
         }
+
         //loops through the saved tiles to check if they are no longer occupied by a cat 
         for(int i = 0; i < GameBoard.SavedTiles.Count; i++)
         {
             if (GameBoard.At(GameBoard.SavedTiles[i].Position) == null)
             {
-                Debug.Log("turing null into tubes");
                 GameBoard.Set(GameBoard.SavedTiles[i].Position, GameBoard.SavedTiles[i].Slate);
+                Debug.Log(GameBoard.At(GameBoard.SavedTiles[i].Position));
             }
         }
+
+        GameBoard.SavedTiles.Clear();
     }
 
     /// <summary>
@@ -563,6 +565,7 @@ public class MatchManager : MonoBehaviour
         }
         CatMoving = false;
     }
+
     /// <summary>
     /// handles the movement of cats that occure becuse they are on tiles, like the redirection 
     /// </summary>
@@ -570,8 +573,7 @@ public class MatchManager : MonoBehaviour
     {
         for (int i = 0; i < GameBoard.Tubes.Count; i++)
         {
-            Debug.Log("i: " + i);
-            if(GameBoard.Tubes[i].Position == cat.Position && GameBoard.At(GameBoard.Tubes[i].TubeDestination).name == "Cat Tube")
+            if (GameBoard.Tubes[i].Position == cat.Position && GameBoard.At(GameBoard.Tubes[i].TubeDestination).name == "Cat Tube")
             {
                 //this is wrong update the tube destination and stuff this moves the cat game object
                 Vector2Int TubeDestination = cat.Position - GameBoard.Tubes[i].TubeDestination; // Math is incorrect
@@ -601,7 +603,7 @@ public class MatchManager : MonoBehaviour
     /// <summary>
     /// Sets the stars on the Win UI to the won amount
     /// </summary>
-    void ActivateStars()
+    private void ActivateStars()
     {
         //get references to stars and activate them
         List<Image> Stars = new List<Image>();

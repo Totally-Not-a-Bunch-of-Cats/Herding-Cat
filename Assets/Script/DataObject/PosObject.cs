@@ -1,7 +1,6 @@
 /** @Author Damian Link */
 using UnityEngine;
 
-
 /// <summary>
 /// Object holding reference of a position on the board and the transform that relates to the object
 /// </summary>
