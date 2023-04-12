@@ -24,6 +24,7 @@ public class Board
     public int NumCatinPen = 0;
     public List<PosTile> SavedTiles;
     public List<PosTile> Tubes;
+    public List<PosTile> RedirectionPads;
     public List<int> SecondCatPos;
     private object currentLevel;
     private readonly int _width;
@@ -42,6 +43,7 @@ public class Board
         Cats = new List<PosObject>();
         SavedTiles = new List<PosTile>();
         Tubes = new List<PosTile>();
+        RedirectionPads = new List<PosTile>();
         SecondCatList = new List<PosObject>();
         Items = new List<PosObject>();
         CatPenLocation = new List<Vector2Int>();
@@ -63,6 +65,10 @@ public class Board
                 {
                     Tubes.Add(tile);
                 }
+                if (tile.Slate.name == "Redirection Pad")
+                {
+                    RedirectionPads.Add(tile);
+                }
             }
         }
     }
@@ -78,6 +84,7 @@ public class Board
         _cells = new Tile[this._width, this._height];
         Cats = new List<PosObject>();
         Tubes = new List<PosTile>();
+        RedirectionPads = new List<PosTile>();
         SavedTiles = new List<PosTile>();
         SecondCatList = new List<PosObject>();
         Items = new List<PosObject>();
@@ -100,6 +107,10 @@ public class Board
                 {
                     Tubes.Add(tile);
                 }
+                if (tile.Slate.name == "Redirection Pad")
+                {
+                    RedirectionPads.Add(tile);
+                }
             }
         }
     }
@@ -115,6 +126,7 @@ public class Board
         CatPenLocation = new List<Vector2Int>();
         SavedTiles = new List<PosTile>();
         Tubes = new List<PosTile>();
+        RedirectionPads = new List<PosTile>();
         SecondCatPos = new List<int>();
         CatVec2 = new List<Vector2Int>();
         SecondCatList = new List<PosObject>();
@@ -170,6 +182,7 @@ public class Board
         NumberofCats = BoardToCopy.NumberofCats;
         SavedTiles = BoardToCopy.SavedTiles;
         Tubes = BoardToCopy.Tubes;
+        RedirectionPads = BoardToCopy.RedirectionPads;
     }
 
     /// <summary>
@@ -271,6 +284,7 @@ public class Board
     /// <param name="ListPos">Position in the list that the moving cat is</param>
     public void CheckMovement(int ItemMoveDistance, Vector2Int Destination, int ListPos, PosObject Item)
     {
+        Debug.Log("ive been awakened");
         Vector2Int Cat = Cats[ListPos].Position;
         if (Cat.x == Destination.x)
         {
@@ -325,6 +339,7 @@ public class Board
                             }
                             if (_cells[Destination.x, y].name == "Redirection Pad")
                             {
+                                Destination.y = y;
                                 break;
                             }
                             if (_cells[Destination.x, y].name == "Bed")
@@ -395,6 +410,11 @@ public class Board
                                 break;
                             }
                             if (_cells[Destination.x, y].name == "Cat Tube")
+                            {
+                                Destination.y = y;
+                                break;
+                            }
+                            if (_cells[Destination.x, y].name == "Redirection Pad")
                             {
                                 Destination.y = y;
                                 break;
@@ -475,6 +495,11 @@ public class Board
                                 Destination.x = x;
                                 break;
                             }
+                            if (_cells[x, Destination.y].name == "Redirection Pad")
+                            {
+                                Destination.x = x;
+                                break;
+                            }
                             if (_cells[x, Destination.y].name == "Bed")
                             {
                                 Destination.x = x;
@@ -544,6 +569,11 @@ public class Board
                                 break;
                             }
                             if (_cells[x, Destination.y].name == "Cat Tube")
+                            {
+                                Destination.x = x;
+                                break;
+                            }
+                            if (_cells[x, Destination.y].name == "Redirection Pad")
                             {
                                 Destination.x = x;
                                 break;

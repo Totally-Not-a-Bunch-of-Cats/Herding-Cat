@@ -509,12 +509,19 @@ public class MatchManager : MonoBehaviour
                 GameBoard.Set(CatPos, null);
                 //GameBoard.SaveTile(FinalDestination, GameBoard.At(FinalDestination));
             }
+            if (GameBoard.At(FinalDestination).name == "Redirection Pad")
+            {
+                //GameBoard.Set(CatPos, null);
+                GameBoard.SaveTile(FinalDestination, GameBoard.At(FinalDestination));
+            }
         }
         else
         {
             //moves the cat to the new position in the board data
             GameBoard.Set(CatPos, null);
+            Debug.Log(Cat);
             GameBoard.Set(FinalDestination, Cat);
+            Debug.Log(GameBoard.At(FinalDestination));
         }
 
         //loops through the saved tiles to check if they are no longer occupied by a cat 
@@ -523,7 +530,7 @@ public class MatchManager : MonoBehaviour
             if (GameBoard.At(GameBoard.SavedTiles[i].Position) == null)
             {
                 GameBoard.Set(GameBoard.SavedTiles[i].Position, GameBoard.SavedTiles[i].Slate);
-                Debug.Log(GameBoard.At(GameBoard.SavedTiles[i].Position));
+                Debug.Log(GameBoard.SavedTiles[i].Redirection);
                 Debug.Log(GameBoard.SavedTiles[i].Slate);
                 GameBoard.SavedTiles.RemoveAt(i);
             }
@@ -558,7 +565,12 @@ public class MatchManager : MonoBehaviour
             }
             if (GameBoard.At(FinalDestination).name == "Cat Tube")
             {
-                TileCatMove(GameBoard.Cats[ListPos], ListPos);
+                TileCatTubeMove(GameBoard.Cats[ListPos], ListPos);
+            }
+            if (GameBoard.At(FinalDestination).name == "Redirection Pad")
+            {
+                Debug.Log("we redirecting");
+                TileCatRedirection(GameBoard.Cats[ListPos], ListPos);
             }
         }
         CatMoving = false;
@@ -567,12 +579,10 @@ public class MatchManager : MonoBehaviour
     /// <summary>
     /// handles the movement of cats that occure becuse they are on tiles, like the redirection 
     /// </summary>
-    public void TileCatMove(PosObject cat, int ListPos)
+    public void TileCatTubeMove(PosObject cat, int ListPos)
     {
         for (int i = 0; i < GameBoard.Tubes.Count; i++)
         {
-            Debug.Log(GameBoard.At(GameBoard.Tubes[i].TubeDestination));
-            Debug.Log(GameBoard.Tubes[i].Position);
             if (GameBoard.Tubes[i].Position == cat.Position && GameBoard.At(GameBoard.Tubes[i].TubeDestination).name == "Cat Tube")
             {
                 Vector2Int TubeDestination = cat.Position - GameBoard.Tubes[i].TubeDestination; 
@@ -591,6 +601,26 @@ public class MatchManager : MonoBehaviour
                 break;
             }
         }
+    }
+    public void TileCatRedirection(PosObject cat, int ListPos)
+    {
+        GameBoard.Set(GameBoard.Cats[ListPos].Position, null);
+        Vector2Int Destination;
+        Vector2Int addition = Vector2Int.zero;
+        for (int i = 0; i < GameBoard.RedirectionPads.Count; i++)
+        {
+            Debug.Log("we spinning");
+            if (GameBoard.RedirectionPads[i].Position == cat.Position)
+            {
+                Debug.Log(GameBoard.RedirectionPads[i].Redirection);
+                addition = GameBoard.RedirectionPads[i].Redirection;
+                break;
+            }
+        }
+        Debug.Log(cat.Position);
+        Destination = cat.Position + addition;
+        Debug.Log(Destination);
+        GameBoard.CheckMovement(1, Destination, ListPos, null);
     }
 
     /// <summary>
