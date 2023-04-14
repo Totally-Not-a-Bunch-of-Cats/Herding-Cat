@@ -511,14 +511,16 @@ public class MatchManager : MonoBehaviour
             }
             if (GameBoard.At(FinalDestination).name == "Redirection Pad")
             {
-                //GameBoard.Set(CatPos, null);
+                GameBoard.Set(CatPos, null);
                 GameBoard.SaveTile(FinalDestination, GameBoard.At(FinalDestination));
             }
         }
         else
         {
             //moves the cat to the new position in the board data
+            Debug.Log(GameBoard.At(CatPos));
             GameBoard.Set(CatPos, null);
+            Debug.Log(FinalDestination);
             Debug.Log(Cat);
             GameBoard.Set(FinalDestination, Cat);
             Debug.Log(GameBoard.At(FinalDestination));
@@ -532,7 +534,7 @@ public class MatchManager : MonoBehaviour
                 GameBoard.Set(GameBoard.SavedTiles[i].Position, GameBoard.SavedTiles[i].Slate);
                 Debug.Log(GameBoard.SavedTiles[i].Redirection);
                 Debug.Log(GameBoard.SavedTiles[i].Slate);
-                GameBoard.SavedTiles.RemoveAt(i);
+                //GameBoard.SavedTiles.RemoveAt(i);
             }
         }
     }
@@ -612,14 +614,12 @@ public class MatchManager : MonoBehaviour
             Debug.Log("we spinning");
             if (GameBoard.RedirectionPads[i].Position == cat.Position)
             {
-                Debug.Log(GameBoard.RedirectionPads[i].Redirection);
                 addition = GameBoard.RedirectionPads[i].Redirection;
                 break;
             }
         }
-        Debug.Log(cat.Position);
         Destination = cat.Position + addition;
-        Debug.Log(Destination);
+        GameBoard.Set(cat.Position, cat.Tile);
         GameBoard.CheckMovement(1, Destination, ListPos, null);
     }
 

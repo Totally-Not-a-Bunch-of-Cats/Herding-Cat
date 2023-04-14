@@ -284,7 +284,6 @@ public class Board
     /// <param name="ListPos">Position in the list that the moving cat is</param>
     public void CheckMovement(int ItemMoveDistance, Vector2Int Destination, int ListPos, PosObject Item)
     {
-        Debug.Log("ive been awakened");
         Vector2Int Cat = Cats[ListPos].Position;
         if (Cat.x == Destination.x)
         {
@@ -522,7 +521,7 @@ public class Board
                         }
                     }
                 }
-               GameManager.Instance._matchManager.MoveCat(Vector2Int.left, At(Cat), Destination, ListPos);
+                GameManager.Instance._matchManager.MoveCat(Vector2Int.left, At(Cat), Destination, ListPos);
             }
             else 
             {
@@ -605,6 +604,7 @@ public class Board
         }
         if (Cats[ListPos] != null)
         {
+            Debug.Log("we are here");
             Cats[ListPos].Position = Destination;
         }
     }
