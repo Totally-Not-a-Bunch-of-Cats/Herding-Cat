@@ -8174,6 +8174,7 @@ MonoBehaviour:
     NumCatinPen: 0
     SavedTiles: []
     Tubes: []
+    RedirectionPads: []
     SecondCatPos: 
   BoardSize: {x: 0, y: 0}
   ActiveMatch: 0
@@ -10275,7 +10276,7 @@ PrefabInstance:
     - target: {fileID: 2902379855506823756, guid: bbf76fabd4a78054ca34c918f6d927b3, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: ea194f6e0abb84f93887d90e9d53273c, type: 3}
+      objectReference: {fileID: 21300000, guid: 9be338601f2df46fdb4de32cda440c67, type: 3}
     - target: {fileID: 7992114167247847449, guid: bbf76fabd4a78054ca34c918f6d927b3, type: 3}
       propertyPath: m_Name
       value: redirection pad Button
