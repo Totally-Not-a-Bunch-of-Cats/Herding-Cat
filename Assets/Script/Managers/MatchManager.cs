@@ -194,26 +194,6 @@ public class MatchManager : MonoBehaviour
                             {
                                 CatMoveInfo.RemoveAt(CatMoveInfo.Count - 1);
                             }
-                            //find if the cat is in range and if so moves said cat
-                            // Checks if cat is closer than current cat and within radius
-                            //if (Dist <= ClosestDistance && (deltaY == 0 || deltaX == 0) || ClosestDistance < 0 
-                            //    && Dist <= CurrentItem.Radius && (deltaY == 0 || deltaX == 0))
-                            //{
-                                //if (ClosestDistance != Dist)
-                                //{
-                                //    // Clears the lists of the farther cat information and adds the new one
-                                //    CatMoveInfo.Clear();
-                                //}
-
-                                //CatMoveInfo.Add(new CatMovementInfo(j));
-                                //Vector2Int test = DestinationList(deltaX, deltaY, CurrentItem, j);
-                                //if (test != new Vector2Int(-100, -100))
-                                //{
-                                //    CatMoveInfo[CatMoveInfo.Count - 1].Destination = test;
-                                //}
-                                
-                                //ClosestDistance = Dist;
-                            //}
                         }
                     }
                 }
@@ -232,7 +212,6 @@ public class MatchManager : MonoBehaviour
                             if (CatMoveInfo[k] != null && CurrentItem.Radius >= CatMoveInfo[k].Distance && CatMoveInfo[k].Used == false)
                             {
                                 //says there are cats with in range
-                                //ClosestDistance = 1;
                                 if (j != 0)
                                 {
                                     if (small >= CatMoveInfo[k].Distance && Temps[j - 1].Distance <= CatMoveInfo[k].Distance)
@@ -301,14 +280,12 @@ public class MatchManager : MonoBehaviour
                         Temps.Add(CatMoveInfo[smallIndex]);
                     }
                     CatMoveInfo = Temps;
-                    Debug.Log(CatMoveInfo.Count);
                 }
                 // Checks to see if a cat is actually in range
                 if (CatMoveInfo.Count > 0)
                 {
                     for (int c = 0; c < CatMoveInfo.Count; c++)
                     {
-                        Debug.Log(c);
                         GameBoard.CheckMovement(CurrentItem.MoveDistance, (Vector2Int)CatMoveInfo[c].Destination, CatMoveInfo[c].Index, GameBoard.Items[i]);
                     }
                     CatMoveInfo.Clear();
@@ -407,28 +384,23 @@ public class MatchManager : MonoBehaviour
         // Gets the farthest that the cat will move of item (Right)
         if (deltaX <= CurrentItem.Radius && deltaX > 0 && deltaY == 0)
         {
-            Debug.Log("right" + deltaX);
             return GameBoard.Cats[index].Position + new Vector2Int(CurrentItem.MoveDistance, 0);
         }
         // Gets the farthest that the cat will move of item (Left)
         if (deltaX >= -CurrentItem.Radius && deltaX < 0 && deltaY == 0)
         {
-            Debug.Log("Left" + deltaX);
             return GameBoard.Cats[index].Position + new Vector2Int(-CurrentItem.MoveDistance, 0);
         }
         // Gets the farthest that the cat will move of item (Up)
         if (deltaY <= CurrentItem.Radius && deltaY > 0 && deltaX == 0)
         {
-            Debug.Log("UP" + deltaY);
             return GameBoard.Cats[index].Position + new Vector2Int(0, CurrentItem.MoveDistance);
         }
         // Gets the farthest that the cat will move of item (Down)
         if (deltaY >= -CurrentItem.Radius && deltaY < 0 && deltaX == 0)
         {
-            Debug.Log("Down" + deltaY);
             return GameBoard.Cats[index].Position + new Vector2Int(0, -CurrentItem.MoveDistance);
         }
-        Debug.Log(" I made it out");
         return new Vector2Int(-100, -100);
     }
 
@@ -511,7 +483,7 @@ public class MatchManager : MonoBehaviour
             if (GameBoard.At(FinalDestination).Is<CatPen>())
             {
                 CatJustinCage = true;
-                GameBoard.SecondCatList.Add(new PosObject(GameBoard.Cats[ListPos].Position, GameBoard.Cats[ListPos].Object, GameBoard.Cats[ListPos].ItemAdjObject, GameBoard.Cats[ListPos].Name));
+                GameBoard.SecondCatList.Add(new PosObject(GameBoard.Cats[ListPos].Position, GameBoard.Cats[ListPos].Object, GameBoard.Cats[ListPos].ItemAdjObject, GameBoard.Cats[ListPos].Name, GameBoard.Cats[ListPos].Tile));
                 GameBoard.Set(CatPos, null);
                 GameBoard.NumCatinPen++;
             }
@@ -520,12 +492,50 @@ public class MatchManager : MonoBehaviour
                 GameBoard.Set(CatPos, null);
                 GameBoard.Set(FinalDestination, Cat);
             }
+            if (GameBoard.At(FinalDestination).name == "Cat Tree")
+            {
+                GameBoard.Set(CatPos, null);
+                GameBoard.SaveTile(FinalDestination, GameBoard.At(FinalDestination));
+                GameBoard.Set(FinalDestination, Cat);
+            }
+            if (GameBoard.At(FinalDestination).name == "Bed")
+            {
+                GameBoard.Set(CatPos, null);
+                GameBoard.SaveTile(FinalDestination, GameBoard.At(FinalDestination));
+                GameBoard.Set(FinalDestination, Cat);
+            }
+            if (GameBoard.At(FinalDestination).name == "Cat Tube")
+            {
+                GameBoard.Set(CatPos, null);
+                //GameBoard.SaveTile(FinalDestination, GameBoard.At(FinalDestination));
+            }
+            if (GameBoard.At(FinalDestination).name == "Redirection Pad")
+            {
+                GameBoard.Set(CatPos, null);
+                GameBoard.SaveTile(FinalDestination, GameBoard.At(FinalDestination));
+            }
         }
         else
         {
             //moves the cat to the new position in the board data
+            Debug.Log(GameBoard.At(CatPos));
             GameBoard.Set(CatPos, null);
+            Debug.Log(FinalDestination);
+            Debug.Log(Cat);
             GameBoard.Set(FinalDestination, Cat);
+            Debug.Log(GameBoard.At(FinalDestination));
+        }
+
+        //loops through the saved tiles to check if they are no longer occupied by a cat 
+        for(int i = 0; i < GameBoard.SavedTiles.Count; i++)
+        {
+            if (GameBoard.At(GameBoard.SavedTiles[i].Position) == null)
+            {
+                GameBoard.Set(GameBoard.SavedTiles[i].Position, GameBoard.SavedTiles[i].Slate);
+                Debug.Log(GameBoard.SavedTiles[i].Redirection);
+                Debug.Log(GameBoard.SavedTiles[i].Slate);
+                //GameBoard.SavedTiles.RemoveAt(i);
+            }
         }
     }
 
@@ -553,11 +563,64 @@ public class MatchManager : MonoBehaviour
         {
             if (GameBoard.At(FinalDestination).Is<CatPen>())
             {
-                
                 GameBoard.Cats[ListPos] = null;
+            }
+            if (GameBoard.At(FinalDestination).name == "Cat Tube")
+            {
+                TileCatTubeMove(GameBoard.Cats[ListPos], ListPos);
+            }
+            if (GameBoard.At(FinalDestination).name == "Redirection Pad")
+            {
+                Debug.Log("we redirecting");
+                TileCatRedirection(GameBoard.Cats[ListPos], ListPos);
             }
         }
         CatMoving = false;
+    }
+
+    /// <summary>
+    /// handles the movement of cats that occure becuse they are on tiles, like the redirection 
+    /// </summary>
+    public void TileCatTubeMove(PosObject cat, int ListPos)
+    {
+        for (int i = 0; i < GameBoard.Tubes.Count; i++)
+        {
+            if (GameBoard.Tubes[i].Position == cat.Position && GameBoard.At(GameBoard.Tubes[i].TubeDestination).name == "Cat Tube")
+            {
+                Vector2Int TubeDestination = cat.Position - GameBoard.Tubes[i].TubeDestination; 
+                cat.Object.localPosition = new Vector3(cat.Object.localPosition.x - TubeDestination.x,
+                    cat.Object.localPosition.y - TubeDestination.y, cat.Object.localPosition.z);
+
+                GameBoard.SaveTile(GameBoard.Tubes[i].TubeDestination, GameBoard.At(GameBoard.Tubes[i].TubeDestination));
+                GameBoard.Cats[ListPos].Position = GameBoard.Tubes[i].TubeDestination;
+                GameBoard.Set(GameBoard.Tubes[i].TubeDestination, cat.Tile);
+                break;
+            }
+            if(GameBoard.Tubes[i].Position == cat.Position)
+            {
+                GameBoard.SaveTile(GameBoard.Tubes[i].Position, GameBoard.At(GameBoard.Tubes[i].Position));
+                GameBoard.Set(GameBoard.Tubes[i].Position, cat.Tile);
+                break;
+            }
+        }
+    }
+    public void TileCatRedirection(PosObject cat, int ListPos)
+    {
+        GameBoard.Set(GameBoard.Cats[ListPos].Position, null);
+        Vector2Int Destination;
+        Vector2Int addition = Vector2Int.zero;
+        for (int i = 0; i < GameBoard.RedirectionPads.Count; i++)
+        {
+            Debug.Log("we spinning");
+            if (GameBoard.RedirectionPads[i].Position == cat.Position)
+            {
+                addition = GameBoard.RedirectionPads[i].Redirection;
+                break;
+            }
+        }
+        Destination = cat.Position + addition;
+        GameBoard.Set(cat.Position, cat.Tile);
+        GameBoard.CheckMovement(1, Destination, ListPos, null);
     }
 
     /// <summary>
@@ -575,7 +638,7 @@ public class MatchManager : MonoBehaviour
     /// <summary>
     /// Sets the stars on the Win UI to the won amount
     /// </summary>
-    void ActivateStars()
+    private void ActivateStars()
     {
         //get references to stars and activate them
         List<Image> Stars = new List<Image>();

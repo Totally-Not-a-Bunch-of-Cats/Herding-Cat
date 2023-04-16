@@ -5,7 +5,7 @@ using UnityEngine;
 public class ReWindManager : MonoBehaviour
 {
     [SerializeField] Board PreviousGameBoard;
-    [SerializeField] int PreviousRoundsPlayed;
+    [SerializeField] public int PreviousRoundsPlayed;
     [SerializeField] int PreviousItemsUsed;
     [SerializeField] List<int> SecondCatPos;
     /// <summary>
@@ -37,7 +37,7 @@ public class ReWindManager : MonoBehaviour
                 {
                     SecondCatPos.Add(i);
                     PreviousGameBoard.Cats[i] = (new PosObject(PreviousGameBoard.CatVec2[i], GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Object, 
-                        GameManager.Instance._matchManager.GameBoard.SecondCatList[j].ItemAdjObject, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Name));
+                        GameManager.Instance._matchManager.GameBoard.SecondCatList[j].ItemAdjObject, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Name, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Tile));
                     PreviousGameBoard.Set(PreviousGameBoard.CatVec2[i], GameManager.Instance._matchManager.GameBoard.At(GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Position));
                     j++;
                 }
@@ -66,5 +66,12 @@ public class ReWindManager : MonoBehaviour
         GameManager.Instance._matchManager.GameBoard = PreviousGameBoard;
         GameManager.Instance._matchManager.RoundsPlayed = PreviousRoundsPlayed;
         GameManager.Instance._matchManager.ItemsUsed = PreviousItemsUsed;
+    }
+    public void Clear()
+    {
+        PreviousGameBoard = null;
+        PreviousRoundsPlayed = -1;
+        PreviousItemsUsed = -1;
+        SecondCatPos.Clear();
     }
 }

@@ -20,19 +20,26 @@ MonoBehaviour:
   Tiles:
   - Position: {x: 1, y: 1}
     Slate: {fileID: 11400000, guid: e9d6189f63d821045ab761e537a50a9c, type: 2}
+    TubeDestination: {x: 0, y: 0}
   - Position: {x: 0, y: 2}
     Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
+    TubeDestination: {x: 0, y: 0}
   - Position: {x: 0, y: 1}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
   - Position: {x: 2, y: 1}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
   - Position: {x: 2, y: 0}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
   - Position: {x: 0, y: 0}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
   - Position: {x: 2, y: 2}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
   PossibleItems:
   - {fileID: 11400000, guid: 089f360dd355a504085896f04d3eb986, type: 2}
-  StarsEarned: 0
-  Unlocked: 0
+  StarsEarned: 3
+  Unlocked: 1

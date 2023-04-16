@@ -22,6 +22,9 @@ public class Board
     public List<PosObject> Items;
     public List<Vector2Int> CatPenLocation;
     public int NumCatinPen = 0;
+    public List<PosTile> SavedTiles;
+    public List<PosTile> Tubes;
+    public List<PosTile> RedirectionPads;
     public List<int> SecondCatPos;
     private object currentLevel;
     private readonly int _width;
@@ -38,6 +41,9 @@ public class Board
         this._width = Width;
         _cells = new Tile[this._width, this._height];
         Cats = new List<PosObject>();
+        SavedTiles = new List<PosTile>();
+        Tubes = new List<PosTile>();
+        RedirectionPads = new List<PosTile>();
         SecondCatList = new List<PosObject>();
         Items = new List<PosObject>();
         CatPenLocation = new List<Vector2Int>();
@@ -48,12 +54,20 @@ public class Board
                 Set(tile.Position, tile.Slate);
                 if (tile.Slate.Is<Cat>())
                 {
-                    Cats.Add(new PosObject(tile.Position, tile.Slate.name));
+                    Cats.Add(new PosObject(tile.Position, tile.Slate.name, tile.Slate));
                     NumberofCats++;
                 }
                 if (tile.Slate.Is<CatPen>())
                 {
                     CatPenLocation.Add(tile.Position);
+                }
+                if (tile.Slate.name == "Cat Tube")
+                {
+                    Tubes.Add(tile);
+                }
+                if (tile.Slate.name == "Redirection Pad")
+                {
+                    RedirectionPads.Add(tile);
                 }
             }
         }
@@ -69,6 +83,9 @@ public class Board
         this._height = dimensions.y;
         _cells = new Tile[this._width, this._height];
         Cats = new List<PosObject>();
+        Tubes = new List<PosTile>();
+        RedirectionPads = new List<PosTile>();
+        SavedTiles = new List<PosTile>();
         SecondCatList = new List<PosObject>();
         Items = new List<PosObject>();
         CatPenLocation = new List<Vector2Int>();
@@ -79,12 +96,20 @@ public class Board
                 _cells[tile.Position.x, tile.Position.y] = tile.Slate;
                 if (tile.Slate.Is<Cat>())
                 {
-                    Cats.Add(new PosObject(tile.Position, tile.Slate.name));
+                    Cats.Add(new PosObject(tile.Position, tile.Slate.name, tile.Slate));
                     NumberofCats++;
                 }
                 if (tile.Slate.Is<CatPen>())
                 {
                     CatPenLocation.Add(tile.Position);
+                }
+                if (tile.Slate.name == "Cat Tube")
+                {
+                    Tubes.Add(tile);
+                }
+                if (tile.Slate.name == "Redirection Pad")
+                {
+                    RedirectionPads.Add(tile);
                 }
             }
         }
@@ -99,6 +124,9 @@ public class Board
         this._width = BoardToCopy._width;
         this._height = BoardToCopy._height;
         CatPenLocation = new List<Vector2Int>();
+        SavedTiles = new List<PosTile>();
+        Tubes = new List<PosTile>();
+        RedirectionPads = new List<PosTile>();
         SecondCatPos = new List<int>();
         CatVec2 = new List<Vector2Int>();
         SecondCatList = new List<PosObject>();
@@ -117,7 +145,7 @@ public class Board
                     if (BoardToCopy.Cats[i] != null)
                     {
                         //updates the cats position with each new board 
-                        Cats.Add(new PosObject(BoardToCopy.Cats[i].Position, BoardToCopy.Cats[i].Object, BoardToCopy.Cats[i].ItemAdjObject, tile.Slate.name));
+                        Cats.Add(new PosObject(BoardToCopy.Cats[i].Position, BoardToCopy.Cats[i].Object, BoardToCopy.Cats[i].ItemAdjObject, tile.Slate.name, tile.Slate));
                         _cells[BoardToCopy.Cats[i].Position.x, BoardToCopy.Cats[i].Position.y] = tile.Slate;
                         CatVec2.Add(BoardToCopy.Cats[i].Position);
                         i++;
@@ -126,8 +154,7 @@ public class Board
                     else if(GameManager.Instance._matchManager.GameBoard.SecondCatList.Count > 0)
                     {
                         //add edge case for reverting a cat that just went into the cage 
-                        Debug.Log("we added one");
-                        Cats.Add(new PosObject(BoardToCopy.Cats[i].Position, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Object, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].ItemAdjObject, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Name));
+                        Cats.Add(new PosObject(BoardToCopy.Cats[i].Position, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Object, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].ItemAdjObject, GameManager.Instance._matchManager.GameBoard.SecondCatList[j].Name, tile.Slate));
                         SecondCatPos.Add(i+j);
                         _cells[tile.Position.x, tile.Position.y] = tile.Slate;
                         j++;
@@ -153,6 +180,9 @@ public class Board
         CatPenLocation = BoardToCopy.CatPenLocation;
         NumCatinPen = BoardToCopy.NumCatinPen;
         NumberofCats = BoardToCopy.NumberofCats;
+        SavedTiles = BoardToCopy.SavedTiles;
+        Tubes = BoardToCopy.Tubes;
+        RedirectionPads = BoardToCopy.RedirectionPads;
     }
 
     /// <summary>
@@ -234,6 +264,17 @@ public class Board
             throw new ArgumentOutOfRangeException($"Position must be between (0, 0) and ({this._width}, {this._height})");
         }
     }
+    public void SaveTile(Vector2Int _pos, Tile _tile)
+    {
+        for(int i = 0; i < SavedTiles.Count; i++)
+        {
+            if (_pos == SavedTiles[i].Position)
+            {
+                return;
+            }
+        }
+        SavedTiles.Add(new PosTile(_pos, _tile));
+    }
 
     /// <summary>
     /// Moves a spcific cat to the farthest empty spot inbetween Destination and cats location
@@ -264,6 +305,38 @@ public class Board
                             //if the destination has something the cat cant be on, make sure it does step on it
                             Destination.y = y + 1;
                             if (_cells[Destination.x, y].name == "Post")
+                            {
+                                //TODO
+                                //Destination.y = y; on ice right now (could lure a cat one tile closer)
+                                //break;
+                            }
+                            if (_cells[Destination.x, y].name == "Cat Tree")
+                            {
+                                if (_cells[Destination.x, y - 2] == null || _cells[Destination.x, y - 2].Is<CatPen>() || _cells[Destination.x, y - 2].name == "Bed")
+                                {
+                                    //|| _cells[Destination.x, y].name == "Redirection Pad" maybe think about handeling this exception
+                                    //handles bed execption
+                                    if (_cells[Destination.x, y - 2] != null)
+                                    {
+                                        if (_cells[Destination.x, y - 2].name == "Bed")
+                                        {
+                                            Destination.y = y - 2;
+                                            Cats[ListPos].Sleeping = true;
+                                            break;
+                                        }
+                                    }
+                                    Destination.y = y - 2;
+                                    break;
+                                }
+                                Destination.y = y;
+                                break;
+                            }
+                            if (_cells[Destination.x, y].name == "Cat Tube")
+                            {
+                                Destination.y = y;
+                                break;
+                            }
+                            if (_cells[Destination.x, y].name == "Redirection Pad")
                             {
                                 Destination.y = y;
                                 break;
@@ -310,6 +383,37 @@ public class Board
                             //if the destination has something the cat cant be on, make sure it does step on it
                             Destination.y = y - 1;
                             if(_cells[Destination.x, y].name == "Post")
+                            {
+                                //Destination.y = y;
+                                //break;
+                            }
+                            if (_cells[Destination.x, y].name == "Cat Tree")
+                            {
+                                if (_cells[Destination.x, y + 2] == null || _cells[Destination.x, y + 2].Is<CatPen>() || _cells[Destination.x, y + 2].name == "Bed")
+                                {
+                                    //|| _cells[Destination.x, y - 2].name == "Redirection Pad" maybe think about handeling this exception
+                                    //handles bed execption
+                                    if (_cells[Destination.x, y + 2] != null)
+                                    {
+                                        if (_cells[Destination.x, y + 2].name == "Bed")
+                                        {
+                                            Destination.y = y + 2;
+                                            Cats[ListPos].Sleeping = true;
+                                            break;
+                                        }
+                                    }
+                                    Destination.y = y + 2;
+                                    break;
+                                }
+                                Destination.y = y;
+                                break;
+                            }
+                            if (_cells[Destination.x, y].name == "Cat Tube")
+                            {
+                                Destination.y = y;
+                                break;
+                            }
+                            if (_cells[Destination.x, y].name == "Redirection Pad")
                             {
                                 Destination.y = y;
                                 break;
@@ -361,6 +465,37 @@ public class Board
                             Destination.x = x + 1;
                             if (_cells[x, Destination.y].name == "Post")
                             {
+                                //Destination.x = x;
+                                //break;
+                            }
+                            if (_cells[x, Destination.y].name == "Cat Tree")
+                            {
+                                if (_cells[x - 2, Destination.y] == null || _cells[x - 2, Destination.y].Is<CatPen>() || _cells[x - 2, Destination.y].name == "Bed")
+                                {
+                                    //|| _cells[x + 2, Destination.y].name == "Redirection Pad" maybe think about handeling this exception
+                                    //handles bed execption
+                                    if (_cells[x - 2, Destination.y] != null)
+                                    {
+                                        if (_cells[x - 2, Destination.y].name == "Bed")
+                                        {
+                                            Destination.x = x - 2;
+                                            Cats[ListPos].Sleeping = true;
+                                            break;
+                                        }
+                                    }
+                                    Destination.x = x - 2;
+                                    break;
+                                }
+                                Destination.x = x;
+                                break;
+                            }
+                            if (_cells[x, Destination.y].name == "Cat Tube")
+                            {
+                                Destination.x = x;
+                                break;
+                            }
+                            if (_cells[x, Destination.y].name == "Redirection Pad")
+                            {
                                 Destination.x = x;
                                 break;
                             }
@@ -386,7 +521,7 @@ public class Board
                         }
                     }
                 }
-               GameManager.Instance._matchManager.MoveCat(Vector2Int.left, At(Cat), Destination, ListPos);
+                GameManager.Instance._matchManager.MoveCat(Vector2Int.left, At(Cat), Destination, ListPos);
             }
             else 
             {
@@ -406,6 +541,38 @@ public class Board
                             //if the destination has something the cat cant be on, make sure it does step on it
                             Destination.x = x - 1;
                             if (_cells[x, Destination.y].name == "Post")
+                            {
+                                //Destination.x = x;
+                                //break;
+                            }
+                            if (_cells[x, Destination.y].name == "Cat Tree")
+                            {
+                                //Debug.Log(_cells[x + 2, Destination.y].name);
+                                if (_cells[x + 2, Destination.y] == null || _cells[x + 2, Destination.y].Is<CatPen>() || _cells[x + 2, Destination.y].name == "Bed")
+                                {
+                                    //|| _cells[x + 2, Destination.y].name == "Redirection Pad" maybe think about handeling this exception
+                                    //handles bed execption
+                                    if(_cells[x + 2, Destination.y] != null)
+                                    {
+                                        if (_cells[x + 2, Destination.y].name == "Bed")
+                                        {
+                                            Destination.x = x + 2;
+                                            Cats[ListPos].Sleeping = true;
+                                            break;
+                                        }
+                                    }
+                                    Destination.x = x + 2;
+                                    break;
+                                }
+                                Destination.x = x;
+                                break;
+                            }
+                            if (_cells[x, Destination.y].name == "Cat Tube")
+                            {
+                                Destination.x = x;
+                                break;
+                            }
+                            if (_cells[x, Destination.y].name == "Redirection Pad")
                             {
                                 Destination.x = x;
                                 break;
@@ -435,12 +602,12 @@ public class Board
                 GameManager.Instance._matchManager.MoveCat(Vector2Int.right, At(Cat), Destination, ListPos);
             }
         }
-        if(Cats[ListPos] != null)
+        if (Cats[ListPos] != null)
         {
+            Debug.Log("we are here");
             Cats[ListPos].Position = Destination;
         }
     }
-
  
 
     /// <summary>
