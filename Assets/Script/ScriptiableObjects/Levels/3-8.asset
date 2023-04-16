@@ -42,14 +42,6 @@ MonoBehaviour:
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 4, y: 4}
-    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
-    TubeDestination: {x: 0, y: 0}
-    Redirection: {x: 0, y: 0}
-  - Position: {x: 3, y: 4}
-    Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
-    TubeDestination: {x: 0, y: 0}
-    Redirection: {x: 0, y: 0}
   - Position: {x: 3, y: 5}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
@@ -64,7 +56,7 @@ MonoBehaviour:
     Redirection: {x: 0, y: 0}
   - Position: {x: 6, y: 6}
     Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
-    TubeDestination: {x: 0, y: 0}
+    TubeDestination: {x: 6, y: 1}
     Redirection: {x: 0, y: 0}
   - Position: {x: 4, y: 6}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
@@ -98,13 +90,13 @@ MonoBehaviour:
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 0, y: 3}
+  - Position: {x: 1, y: 3}
     Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
-    TubeDestination: {x: 0, y: 0}
+    TubeDestination: {x: 0, y: 1}
     Redirection: {x: 0, y: 0}
   - Position: {x: 6, y: 1}
     Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
-    TubeDestination: {x: 0, y: 0}
+    TubeDestination: {x: 6, y: 6}
     Redirection: {x: 0, y: 0}
   - Position: {x: 3, y: 1}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
@@ -114,13 +106,9 @@ MonoBehaviour:
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 0, y: 0}
+  - Position: {x: 0, y: 1}
     Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
-    TubeDestination: {x: 0, y: 0}
-    Redirection: {x: 0, y: 0}
-  - Position: {x: 5, y: 4}
-    Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
-    TubeDestination: {x: 0, y: 0}
+    TubeDestination: {x: 1, y: 3}
     Redirection: {x: 0, y: 0}
   - Position: {x: 6, y: 2}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
@@ -130,8 +118,16 @@ MonoBehaviour:
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
+  - Position: {x: 2, y: 0}
+    Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
+    TubeDestination: {x: 4, y: 0}
+    Redirection: {x: 0, y: 0}
+  - Position: {x: 4, y: 0}
+    Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
+    TubeDestination: {x: 2, y: 0}
+    Redirection: {x: 0, y: 0}
   PossibleItems:
   - {fileID: 11400000, guid: 089f360dd355a504085896f04d3eb986, type: 2}
   - {fileID: 11400000, guid: a58def140dd3b74468a5da712b3041fa, type: 2}
   StarsEarned: 0
-  Unlocked: 0
+  Unlocked: 1
