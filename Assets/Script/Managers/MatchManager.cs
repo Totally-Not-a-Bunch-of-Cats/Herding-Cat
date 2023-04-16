@@ -534,7 +534,7 @@ public class MatchManager : MonoBehaviour
                 GameBoard.Set(GameBoard.SavedTiles[i].Position, GameBoard.SavedTiles[i].Slate);
                 Debug.Log(GameBoard.SavedTiles[i].Redirection);
                 Debug.Log(GameBoard.SavedTiles[i].Slate);
-                //GameBoard.SavedTiles.RemoveAt(i);
+                GameBoard.SavedTiles.RemoveAt(i);
             }
         }
     }
