@@ -103,7 +103,7 @@ public class LevelSelectGeneration : MonoBehaviour
         CreateWorldButtons(WorldNumber);
 
         // Check to see if the user is on the last world
-        double NumberOfWorlds = GameManager.Instance.Levels.Count / 10;
+        double NumberOfWorlds = (double)(GameManager.Instance.Levels.Count) / 10;
         if (WorldNumber >= Math.Ceiling(NumberOfWorlds))
         {
             NextWorldButton.gameObject.SetActive(false);
