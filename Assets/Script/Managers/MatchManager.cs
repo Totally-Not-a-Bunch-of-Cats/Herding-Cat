@@ -96,6 +96,22 @@ public class MatchManager : MonoBehaviour
                 Vector3 pos = new Vector3(currentLevel.GetTiles()[i].Position.x - tempx + 0.5f - BoardOffset.x,
                     currentLevel.GetTiles()[i].Position.y - tempy + 0.5f - BoardOffset.y, 5);
                 Transform temp = Instantiate(currentLevel.GetTiles()[i].Slate.GetPrefab(), pos, Quaternion.identity, transform).transform;
+                // Faces arrow towards direction that being redirected to
+                if (currentLevel.GetTiles()[i].Slate.name == "Redirection Pad")
+                {
+                    if (currentLevel.GetTiles()[i].Redirection == Vector2Int.down)
+                    {
+                        temp.localRotation *= Quaternion.Euler(0, 0, 90f);
+                    }
+                    else if (currentLevel.GetTiles()[i].Redirection == Vector2Int.up)
+                    {
+                        temp.localRotation *= Quaternion.Euler(0, 0, -90f);
+                    }
+                    else if (currentLevel.GetTiles()[i].Redirection == Vector2Int.right)
+                    {
+                        temp.localRotation *= Quaternion.Euler(0, 0, 180f);
+                    }
+                }
                 temp.gameObject.name = currentLevel.GetTiles()[i].Slate.name + $" ({currentLevel.GetTiles()[i].Position.x}, {currentLevel.GetTiles()[i].Position.y})";
                 if (currentLevel.GetTiles()[i].Slate.Is<Cat>())
                 {
