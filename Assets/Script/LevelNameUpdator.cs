@@ -6,10 +6,15 @@ using UnityEngine;
 
 public class LevelNameUpdator : MonoBehaviour
 {
-    public TMP_Text Text;
+    public TMP_Text LevelName;
+    public TMP_Text TargetRounds;
+    public TMP_Text TargetItems;
     // Start is called before the first frame update
     public void NameUpdate()
     {
-        Text.text = "Level " + GameManager.Instance._matchManager.CurrentLevel.name;
+        LevelName.text = "Level " + GameManager.Instance._matchManager.CurrentLevel.name;
+        TargetRounds.text = "Target Rounds:  " + GameManager.Instance._matchManager.CurrentLevel.TargetRounds;
+        TargetItems.text = "Target Items:  " + GameManager.Instance._matchManager.CurrentLevel.TargetItems;
     }
+
 }

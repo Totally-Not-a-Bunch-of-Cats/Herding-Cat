@@ -133,8 +133,7 @@ public class MatchManager : MonoBehaviour
                 button.transform.localPosition += new Vector3(0, buffer + 145 * (i + 1), 0);
                 button.GetComponent<RectTransform>().anchorMax = new Vector2(1, 0);
                 button.GetComponent<RectTransform>().anchorMin = new Vector2(1, 0);
-                button.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._uiManager.PlaceItem(item));
-                //GameManager.Instance._screenResizeManager.RescaleItem(button);
+                button.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._uiManager.PlaceItem(item, button));
             }
             GameManager.Instance._uiManager.GetUI();
             GameManager.Instance._uiManager.Override = true;
@@ -534,12 +533,8 @@ public class MatchManager : MonoBehaviour
         else
         {
             //moves the cat to the new position in the board data
-            Debug.Log(GameBoard.At(CatPos));
             GameBoard.Set(CatPos, null);
-            Debug.Log(FinalDestination);
-            Debug.Log(Cat);
             GameBoard.Set(FinalDestination, Cat);
-            Debug.Log(GameBoard.At(FinalDestination));
         }
 
         //loops through the saved tiles to check if they are no longer occupied by a cat 
@@ -548,8 +543,6 @@ public class MatchManager : MonoBehaviour
             if (GameBoard.At(GameBoard.SavedTiles[i].Position) == null)
             {
                 GameBoard.Set(GameBoard.SavedTiles[i].Position, GameBoard.SavedTiles[i].Slate);
-                Debug.Log(GameBoard.SavedTiles[i].Redirection);
-                Debug.Log(GameBoard.SavedTiles[i].Slate);
                 GameBoard.SavedTiles.RemoveAt(i);
             }
         }
@@ -587,7 +580,6 @@ public class MatchManager : MonoBehaviour
             }
             if (GameBoard.At(FinalDestination).name == "Redirection Pad")
             {
-                Debug.Log("we redirecting");
                 TileCatRedirection(GameBoard.Cats[ListPos], ListPos);
             }
         }
@@ -627,7 +619,6 @@ public class MatchManager : MonoBehaviour
         Vector2Int addition = Vector2Int.zero;
         for (int i = 0; i < GameBoard.RedirectionPads.Count; i++)
         {
-            Debug.Log("we spinning");
             if (GameBoard.RedirectionPads[i].Position == cat.Position)
             {
                 addition = GameBoard.RedirectionPads[i].Redirection;

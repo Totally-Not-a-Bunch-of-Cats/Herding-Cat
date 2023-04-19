@@ -15,7 +15,7 @@ MonoBehaviour:
   Dimensions: {x: 5, y: 1}
   TargetRounds: 1
   TargetItems: 1
-  NewThingIntroduced: 0
+  NewThingIntroduced: 1
   BackgroundTile: {fileID: 11400000, guid: 76fd22e01f2468b4792085d395c67cd9, type: 2}
   Tiles:
   - Position: {x: 3, y: 0}
@@ -37,4 +37,4 @@ MonoBehaviour:
   PossibleItems:
   - {fileID: 11400000, guid: a58def140dd3b74468a5da712b3041fa, type: 2}
   StarsEarned: 3
-  Unlocked: 1
+  Unlocked: 0

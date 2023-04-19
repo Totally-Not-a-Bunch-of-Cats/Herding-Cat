@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
     public GameObject ItemAdjPrefab;
     public GameObject ItemAdjPanel;
     public PosObject CurrentSelectedItem;
+    public GameObject SelectedButton;
 
     /// <summary>
     /// finds the Board game object and GUI object
@@ -132,8 +133,14 @@ public class UIManager : MonoBehaviour
     /// allows an item to be placed and is handed which item to place
     /// </summary>
     /// <param name="item"><see cref="Item"/> that will be placed when clicked on board</param>
-    public void PlaceItem(Item item)
+    public void PlaceItem(Item item, GameObject selectedButton)
     {
+        if (SelectedButton != null)
+        {
+            SelectedButton.GetComponent<Image>().color = new Color(.5f, .5f, .5f, 1);
+        }
+        SelectedButton = selectedButton;
+        SelectedButton.GetComponent<Image>().color = Color.white;
         SelectedItem = item;
         CanPlaceItem = true;
     }
@@ -153,6 +160,10 @@ public class UIManager : MonoBehaviour
         if(GameManager.Instance._ReWindManager.PreviousRoundsPlayed != -1)
         {
             SelectedItem = null;
+            if (SelectedButton != null)
+            {
+                SelectedButton.GetComponent<Image>().color = new Color(.5f, .5f, .5f, 1);
+            }
             Debug.Log("we rewinding");
             GameManager.Instance._ReWindManager.Revert();
         }
