@@ -518,12 +518,8 @@ public class MatchManager : MonoBehaviour
         else
         {
             //moves the cat to the new position in the board data
-            Debug.Log(GameBoard.At(CatPos));
             GameBoard.Set(CatPos, null);
-            Debug.Log(FinalDestination);
-            Debug.Log(Cat);
             GameBoard.Set(FinalDestination, Cat);
-            Debug.Log(GameBoard.At(FinalDestination));
         }
 
         //loops through the saved tiles to check if they are no longer occupied by a cat 
