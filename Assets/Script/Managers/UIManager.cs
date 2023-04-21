@@ -105,6 +105,20 @@ public class UIManager : MonoBehaviour
                         }
                         GameManager.Instance._matchManager.GameBoard.Items[GameManager.Instance._matchManager.GameBoard.Items.Count - 1].ItemAdjObject = NewItemEntry.GetComponent<ItemAdjPanel>();
                     }
+                    else if(WorldPosition.x >= -clickableX && WorldPosition.x < clickableX &&
+                        (WorldPosition.y >= -clickableY && WorldPosition.y < clickableY)
+                        && GameManager.Instance._matchManager.GameBoard.At(itemLocation).Is<Item>())
+                    {
+                        if(GameManager.Instance._matchManager.GameBoard.At(itemLocation) == SelectedItem)
+                        {
+                            //delete item sets item location to null, then remove item adj panel location and thenn
+                            //remvoe the actual physical item
+                        }
+                        else
+                        {
+                            //replace item
+                        }
+                    }
                     CanPlaceItem = false;
                 }
             }
@@ -228,6 +242,7 @@ public class UIManager : MonoBehaviour
         if (CurrentSelectedItem.ItemAdjObject != null)
         {
             CurrentSelectedItem.ItemAdjObject.HighLightObject.SetActive(false);
+            CurrentSelectedItem.ItemAdjObject.DeleteButton.gameObject.SetActive(false);
             CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.9166545f, 1, 0, 0.5254902f);
         }
         CurrentSelectedItem = GameManager.Instance._matchManager.GameBoard.Items[Index];
@@ -236,5 +251,6 @@ public class UIManager : MonoBehaviour
 
         // Highlight item circle
         CurrentSelectedItem.ItemAdjObject.HighLightObject.SetActive(true);
+        CurrentSelectedItem.ItemAdjObject.DeleteButton.gameObject.SetActive(true);
     }
 }   

@@ -16,7 +16,7 @@ MonoBehaviour:
   TargetRounds: 1
   TargetItems: 8
   NewThingIntroduced: 0
-  BackgroundTile: {fileID: 11400000, guid: 76cbab4e70ed36846808f77c6f9b14f9, type: 2}
+  BackgroundTile: {fileID: 11400000, guid: 103593486162c964aa10539a0ed04a9e, type: 2}
   Tiles:
   - Position: {x: 3, y: 4}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}

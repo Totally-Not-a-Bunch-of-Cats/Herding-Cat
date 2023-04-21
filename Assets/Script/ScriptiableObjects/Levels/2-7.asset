@@ -16,7 +16,7 @@ MonoBehaviour:
   TargetRounds: 7
   TargetItems: 10
   NewThingIntroduced: 0
-  BackgroundTile: {fileID: 11400000, guid: 76fd22e01f2468b4792085d395c67cd9, type: 2}
+  BackgroundTile: {fileID: 11400000, guid: 103593486162c964aa10539a0ed04a9e, type: 2}
   Tiles:
   - Position: {x: 1, y: 1}
     Slate: {fileID: 11400000, guid: e9d6189f63d821045ab761e537a50a9c, type: 2}
@@ -145,5 +145,5 @@ MonoBehaviour:
   PossibleItems:
   - {fileID: 11400000, guid: 089f360dd355a504085896f04d3eb986, type: 2}
   - {fileID: 11400000, guid: 03a6e1d0183e6fe40b890a4610ea706a, type: 2}
-  StarsEarned: 0
-  Unlocked: 0
+  StarsEarned: 3
+  Unlocked: 1
