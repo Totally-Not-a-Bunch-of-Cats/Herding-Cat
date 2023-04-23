@@ -74,4 +74,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 089f360dd355a504085896f04d3eb986, type: 2}
   - {fileID: 11400000, guid: a58def140dd3b74468a5da712b3041fa, type: 2}
   StarsEarned: 0
-  Unlocked: 0
+  Unlocked: 1

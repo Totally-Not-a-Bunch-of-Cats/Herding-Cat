@@ -111,12 +111,39 @@ public class UIManager : MonoBehaviour
                     {
                         if(GameManager.Instance._matchManager.GameBoard.At(itemLocation) == SelectedItem)
                         {
-                            //delete item sets item location to null, then remove item adj panel location and thenn
-                            //remvoe the actual physical item
+                            //delete item sets item location to null, then remove item adj panel location and then
+                            for(int i = 0; i< GameManager.Instance._matchManager.GameBoard.Items.Count; i++)
+                            {
+                                if(GameManager.Instance._matchManager.GameBoard.Items[i] != null)
+                                {
+                                    if (itemLocation == GameManager.Instance._matchManager.GameBoard.Items[i].Position)
+                                    {
+                                        GameManager.Instance._matchManager.GameBoard.Items[i].ItemAdjObject.DeleteItem();
+                                        break;
+                                    }
+                                }
+                            }
+
                         }
                         else
                         {
-                            //replace item
+                            for (int i = 0; i < GameManager.Instance._matchManager.GameBoard.Items.Count; i++)
+                            {
+                                if (GameManager.Instance._matchManager.GameBoard.Items[i] != null)
+                                {
+                                    if (itemLocation == GameManager.Instance._matchManager.GameBoard.Items[i].Position)
+                                    {
+                                        GameManager.Instance._matchManager.GameBoard.Items[i].ItemAdjObject.ItemImage.sprite = SelectedItem.Picture;
+                                        GameManager.Instance._matchManager.GameBoard.Items[i].Object.gameObject.SetActive(false);
+                                        GameObject temp2 = Instantiate(SelectedItem.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);
+                                        GameManager.Instance._matchManager.GameBoard.Items[i].Object = temp2.transform;
+                                        GameManager.Instance._matchManager.GameBoard.Items[i].Name = SelectedItem.name;
+                                        GameManager.Instance._matchManager.GameBoard.Items[i].Tile = SelectedItem;
+                                        GameManager.Instance._matchManager.GameBoard.Set(itemLocation, SelectedItem);
+                                        break;
+                                    }
+                                }
+                            }
                         }
                     }
                     CanPlaceItem = false;

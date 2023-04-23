@@ -347,11 +347,14 @@ public class Board
                                 Cats[ListPos].Sleeping = true;
                                 break;
                             }
-                            if (_cells[Destination.x, y].name == "Toy" && Item.Position == new Vector2Int(Destination.x, y))
+                            if(Item != null)
                             {
-                                //allows cat to move on cat pen
-                                Destination.y = y;
-                                break;
+                                if (_cells[Destination.x, y].name == "Toy" && Item.Position == new Vector2Int(Destination.x, y))
+                                {
+                                    //allows cat to move on cat pen
+                                    Destination.y = y;
+                                    break;
+                                }
                             }
                             break;
                         }
@@ -424,11 +427,14 @@ public class Board
                                 Cats[ListPos].Sleeping = true;
                                 break;
                             }
-                            if (_cells[Destination.x, y].name == "Toy" && Item.Position == new Vector2Int(Destination.x, y))
+                            if (Item != null)
                             {
-                                //allows cat to move on cat pen
-                                Destination.y = y;
-                                break;
+                                if (_cells[Destination.x, y].name == "Toy" && Item.Position == new Vector2Int(Destination.x, y))
+                                {
+                                    //allows cat to move on cat pen
+                                    Destination.y = y;
+                                    break;
+                                }
                             }
                             break;
                         }
@@ -505,11 +511,14 @@ public class Board
                                 Cats[ListPos].Sleeping = true;
                                 break;
                             }
-                            if (_cells[x, Destination.y].name == "Toy" && Item.Position == new Vector2Int(x, Destination.y))
+                            if (Item != null)
                             {
-                                //allows cat to move on cat pen
-                                Destination.x = x;
-                                break;
+                                if (_cells[x, Destination.y].name == "Toy" && Item.Position == new Vector2Int(x, Destination.y))
+                                {
+                                    //allows cat to move on cat pen
+                                    Destination.x = x;
+                                    break;
+                                }
                             }
                             break;
                         }
@@ -583,11 +592,14 @@ public class Board
                                 Cats[ListPos].Sleeping = true;
                                 break;
                             }
-                            if (_cells[x, Destination.y].name == "Toy" && Item.Position == new Vector2Int(x, Destination.y))
+                            if (Item != null)
                             {
-                                //allows cat to move on cat pen
-                                Destination.x = x;
-                                break;
+                                if (_cells[x, Destination.y].name == "Toy" && Item.Position == new Vector2Int(x, Destination.y))
+                                {
+                                    //allows cat to move on cat pen
+                                    Destination.x = x;
+                                    break;
+                                }
                             }
                             break;
                         }

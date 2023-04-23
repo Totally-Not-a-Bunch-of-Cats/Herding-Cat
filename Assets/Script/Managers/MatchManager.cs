@@ -621,12 +621,15 @@ public class MatchManager : MonoBehaviour
         {
             if (GameBoard.RedirectionPads[i].Position == cat.Position)
             {
+                CatMoving = true;
                 addition = GameBoard.RedirectionPads[i].Redirection;
                 break;
             }
         }
+        CatMoving = true;
         Destination = cat.Position + addition;
         GameBoard.Set(cat.Position, cat.Tile);
+        CatMoving = true;
         GameBoard.CheckMovement(1, Destination, ListPos, null);
     }
 
