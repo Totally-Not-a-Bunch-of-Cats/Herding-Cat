@@ -24,6 +24,8 @@ public class UIManager : MonoBehaviour
     public GameObject ItemAdjPanel;
     public PosObject CurrentSelectedItem;
     public GameObject SelectedButton;
+    public Sprite SelectedBoxSprite;
+    public Sprite BoxSprite;
 
     /// <summary>
     /// finds the Board game object and GUI object
@@ -178,10 +180,10 @@ public class UIManager : MonoBehaviour
     {
         if (SelectedButton != null)
         {
-            SelectedButton.GetComponent<Image>().color = new Color(.5f, .5f, .5f, 1);
+            SelectedButton.GetComponent<Image>().sprite = BoxSprite;
         }
         SelectedButton = selectedButton;
-        SelectedButton.GetComponent<Image>().color = Color.white;
+        SelectedButton.GetComponent<Image>().sprite = SelectedBoxSprite;
         SelectedItem = item;
         CanPlaceItem = true;
     }

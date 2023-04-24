@@ -591,19 +591,23 @@ public class MatchManager : MonoBehaviour
     /// </summary>
     public void TileCatTubeMove(PosObject cat, int ListPos)
     {
+        //cycles through all of the tubes looking for the right one to move the cat tube
         for (int i = 0; i < GameBoard.Tubes.Count; i++)
         {
+            //checks to see if there is room for the cat to move before movings
             if (GameBoard.Tubes[i].Position == cat.Position && GameBoard.At(GameBoard.Tubes[i].TubeDestination).name == "Cat Tube")
             {
+                //moves the cat game object in world.
                 Vector2Int TubeDestination = cat.Position - GameBoard.Tubes[i].TubeDestination; 
                 cat.Object.localPosition = new Vector3(cat.Object.localPosition.x - TubeDestination.x,
                     cat.Object.localPosition.y - TubeDestination.y, cat.Object.localPosition.z);
-
+                //adds the tube to the save tile list to be changed back to a tube and sets the new position of the cat
                 GameBoard.SaveTile(GameBoard.Tubes[i].TubeDestination, GameBoard.At(GameBoard.Tubes[i].TubeDestination));
                 GameBoard.Cats[ListPos].Position = GameBoard.Tubes[i].TubeDestination;
                 GameBoard.Set(GameBoard.Tubes[i].TubeDestination, cat.Tile);
                 break;
             }
+            //handles if that cat cant mvoe through the tube due to a traffic jam
             if(GameBoard.Tubes[i].Position == cat.Position)
             {
                 GameBoard.SaveTile(GameBoard.Tubes[i].Position, GameBoard.At(GameBoard.Tubes[i].Position));
@@ -612,6 +616,11 @@ public class MatchManager : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// handles the cat redirection pad 
+    /// </summary>
+    /// <param name="cat"></param>
+    /// <param name="ListPos"></param>
     public void TileCatRedirection(PosObject cat, int ListPos)
     {
         GameBoard.Set(GameBoard.Cats[ListPos].Position, null);
