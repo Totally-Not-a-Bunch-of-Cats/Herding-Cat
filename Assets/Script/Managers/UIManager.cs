@@ -125,7 +125,6 @@ public class UIManager : MonoBehaviour
                                     }
                                 }
                             }
-
                         }
                         else
                         {
@@ -158,7 +157,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    
     /// <summary>
     /// Adds the Listeners to the End round, Restart, and Main Menu Buttons, generated at ui start
     /// </summary>
@@ -173,7 +171,7 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// allows an item to be placed and is handed which item to place
+    /// Allows an item to be placed and is handed which item to place
     /// </summary>
     /// <param name="item"><see cref="Item"/> that will be placed when clicked on board</param>
     public void PlaceItem(Item item, GameObject selectedButton)
@@ -198,6 +196,9 @@ public class UIManager : MonoBehaviour
         StartCoroutine(GameManager.Instance.StartMatch(GameManager.Instance._matchManager.CurrentLevel.name));
     }
 
+    /// <summary>
+    /// Rewinds the board
+    /// </summary>
     public void Rewind()
     {
         if(GameManager.Instance._ReWindManager.PreviousRoundsPlayed != -1)
@@ -207,7 +208,6 @@ public class UIManager : MonoBehaviour
             {
                 SelectedButton.GetComponent<Image>().color = new Color(.5f, .5f, .5f, 1);
             }
-            Debug.Log("we rewinding");
             GameManager.Instance._ReWindManager.Revert();
         }
     }
@@ -268,18 +268,28 @@ public class UIManager : MonoBehaviour
     /// <param name="Index">Index of item that is selected</param>
     public void HighlightItem(int Index)
     {
-        if (CurrentSelectedItem.ItemAdjObject != null)
+        if (CurrentSelectedItem != null)
         {
-            CurrentSelectedItem.ItemAdjObject.HighLightObject.SetActive(false);
-            CurrentSelectedItem.ItemAdjObject.DeleteButton.gameObject.SetActive(false);
-            CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.9166545f, 1, 0, 0.5254902f);
+            if (CurrentSelectedItem.ItemAdjObject != null)
+            {
+                CurrentSelectedItem.ItemAdjObject.HighLightObject.SetActive(false);
+                CurrentSelectedItem.ItemAdjObject.DeleteButton.gameObject.SetActive(false);
+                CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.9166545f, 1, 0, 0.5254902f);
+            }
         }
-        CurrentSelectedItem = GameManager.Instance._matchManager.GameBoard.Items[Index];
-        SpriteRenderer temp = CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>();
-        CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, .9f);
+        if (CurrentSelectedItem != GameManager.Instance._matchManager.GameBoard.Items[Index])
+        {
+            CurrentSelectedItem = GameManager.Instance._matchManager.GameBoard.Items[Index];
+            SpriteRenderer temp = CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>();
+            CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, .9f);
 
-        // Highlight item circle
-        CurrentSelectedItem.ItemAdjObject.HighLightObject.SetActive(true);
-        CurrentSelectedItem.ItemAdjObject.DeleteButton.gameObject.SetActive(true);
+            // Highlight item circle
+            CurrentSelectedItem.ItemAdjObject.HighLightObject.SetActive(true);
+            CurrentSelectedItem.ItemAdjObject.DeleteButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            CurrentSelectedItem = null;
+        }
     }
 }   

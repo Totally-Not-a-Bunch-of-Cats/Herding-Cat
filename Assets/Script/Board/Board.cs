@@ -616,7 +616,6 @@ public class Board
         }
         if (Cats[ListPos] != null)
         {
-            Debug.Log("we are here");
             Cats[ListPos].Position = Destination;
         }
     }

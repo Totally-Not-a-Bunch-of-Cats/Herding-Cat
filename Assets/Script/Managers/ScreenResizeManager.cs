@@ -35,7 +35,7 @@ public class ScreenResizeManager : MonoBehaviour
         float OrthoSize;
         if (GameManager.Instance._matchManager.BoardSize[1] > GameManager.Instance._matchManager.BoardSize[0])
         {
-            OrthoSize = (GameManager.Instance._matchManager.BoardSize[1] + .05f) * 0.5f;
+            OrthoSize = (GameManager.Instance._matchManager.BoardSize[1] + 1.05f) * 0.5f;
         }
         else
         {

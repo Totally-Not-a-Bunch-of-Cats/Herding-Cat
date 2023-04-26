@@ -581,14 +581,20 @@ public class MatchManager : MonoBehaviour
             if (GameBoard.At(FinalDestination).name == "Redirection Pad")
             {
                 TileCatRedirection(GameBoard.Cats[ListPos], ListPos);
+                Debug.Log("Redirection Done " + FinalDestination);
             }
         }
-        CatMoving = false;
+        if (GameBoard.At(FinalDestination).name != "Redirection Pad")
+        {
+            CatMoving = false;
+        }
     }
 
     /// <summary>
     /// handles the movement of cats that occure becuse they are on tiles, like the redirection 
     /// </summary>
+    /// <param name="cat"></param>
+    /// <param name="ListPos"></param>
     public void TileCatTubeMove(PosObject cat, int ListPos)
     {
         //cycles through all of the tubes looking for the right one to move the cat tube
@@ -616,6 +622,7 @@ public class MatchManager : MonoBehaviour
             }
         }
     }
+
     /// <summary>
     /// handles the cat redirection pad 
     /// </summary>
@@ -630,15 +637,12 @@ public class MatchManager : MonoBehaviour
         {
             if (GameBoard.RedirectionPads[i].Position == cat.Position)
             {
-                CatMoving = true;
                 addition = GameBoard.RedirectionPads[i].Redirection;
                 break;
             }
         }
-        CatMoving = true;
         Destination = cat.Position + addition;
         GameBoard.Set(cat.Position, cat.Tile);
-        CatMoving = true;
         GameBoard.CheckMovement(1, Destination, ListPos, null);
     }
 
