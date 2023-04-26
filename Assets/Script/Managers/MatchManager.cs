@@ -335,6 +335,7 @@ public class MatchManager : MonoBehaviour
         }
         GameBoard.Items.Clear();
         // Determines if level has been won
+        yield return new WaitWhile(() => CatMoving);
         if (GameBoard.NumberofCats == GameBoard.NumCatinPen)
         {
             ActiveMatch = false;

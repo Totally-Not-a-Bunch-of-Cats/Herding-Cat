@@ -40,5 +40,5 @@ MonoBehaviour:
     Redirection: {x: 0, y: 0}
   PossibleItems:
   - {fileID: 11400000, guid: a58def140dd3b74468a5da712b3041fa, type: 2}
-  StarsEarned: 0
+  StarsEarned: 1
   Unlocked: 1
