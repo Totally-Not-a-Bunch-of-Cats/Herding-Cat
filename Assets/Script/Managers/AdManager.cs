@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Advertisements;
-
 public class AdManager : MonoBehaviour
 {
 #if UNITY_IOS
@@ -8,7 +7,6 @@ public class AdManager : MonoBehaviour
 #elif UNITY_ANDROID
     string GameID = "5257935";
 #endif
-    [SerializeField] bool _testMode = true;
     void Start()
     {
         InitializeAds();
@@ -17,10 +15,10 @@ public class AdManager : MonoBehaviour
     public void InitializeAds()
     {
 #if UNITY_IOS || UNITY_ANDROID
-        if (!Advertisement.isInitialized && Advertisement.isSupported)
-        {
-            Advertisement.Initialize(GameID, _testMode, this);
-        }
+        //if (!Advertisement.isInitialized && Advertisement.isSupported)
+        //{
+        //    Advertisement.Initialize(GameID);
+        //}
 #endif
     }
 }
