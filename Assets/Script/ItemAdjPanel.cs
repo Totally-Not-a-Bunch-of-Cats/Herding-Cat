@@ -79,7 +79,7 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler
         }
 
         transform.localPosition += new Vector3(0, data.delta.y/Canvas.scaleFactor, 0);
-        HoverObject.transform.localPosition = transform.localPosition;
+        HoverObject.transform.position = transform.position;
     }
     public void OnEndDrag(PointerEventData eventData)
     {
@@ -113,11 +113,10 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler
 
     void ReorderItems()
     {
-        Debug.Log(Parent.childCount);
         List<PosObject> OldItems = new List<PosObject>();
-        for (int i = 0; i < Parent.childCount; i++)
+        for (int i = 0; i < GameManager.Instance._matchManager.GameBoard.Items.Count; i++)
         {
-            if(num > transform.GetSiblingIndex())
+            if (num > transform.GetSiblingIndex())
             {
                 if (i < transform.GetSiblingIndex())
                 {
@@ -131,8 +130,13 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler
                 }
                 else
                 {
-                    //checks to see ifthe number actually moved
-                    if (i == Parent.childCount)
+                    //this one catches if the last one is diff
+                    if (i == Parent.childCount - 1 && GameManager.Instance._matchManager.GameBoard.Items[i].ItemAdjObject.num != num)
+                    {
+                        OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[i]);
+                    }
+                    //this one catches if the second to last one was moved and the last one is the same last one
+                    else if (i > num)
                     {
                         OldItems.Add(GameManager.Instance._matchManager.GameBoard.Items[i]);
                     }
@@ -160,11 +164,13 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler
                 }
             }
         }
-        //updating num for every change
-        for (int i = 0; i < Parent.childCount; i++)
-        {
-                OldItems[i].ItemAdjObject.num = i;
-        }
         GameManager.Instance._matchManager.GameBoard.Items = OldItems;
+        for (int i = 0; i < GameManager.Instance._matchManager.GameBoard.Items.Count; i++)
+        {
+            if (GameManager.Instance._matchManager.GameBoard.Items[i] != null)
+            {
+                GameManager.Instance._matchManager.GameBoard.Items[i].ItemAdjObject.num = i;
+            }
+        }
     }
 }
