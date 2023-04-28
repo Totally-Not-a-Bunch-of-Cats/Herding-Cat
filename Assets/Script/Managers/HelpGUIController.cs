@@ -10,8 +10,8 @@ using TMPro;
 public class HelpGUIController : MonoBehaviour
 {
 
-    [System.Serializable] public enum HelpOption { None, Item, General, Trap }
-    [SerializeField] private HelpOption SelectedOption = HelpOption.None;
+    //None = 0, Item = 1, General = 2, Trap = 3
+    [SerializeField] private int SelectedOption = 0;
     [SerializeField] private List<HelpInfo> SelectedList;
 
     [Header("Help Information")]
@@ -24,6 +24,7 @@ public class HelpGUIController : MonoBehaviour
     [Space]
     [SerializeField] private GameObject HelpOptionParent;
     [SerializeField] private GameObject HelpInfo;
+    [SerializeField] private Transform HelpButtonsParent;
     [SerializeField] private Transform DefaultBackground;
     [SerializeField] private TMP_Text HelpText;
     [SerializeField] private RawImage GIFImage;
@@ -32,8 +33,12 @@ public class HelpGUIController : MonoBehaviour
     /// <summary>
     /// Selects the Category of help wanted
     /// </summary>
-    public void SelectHelpCategory(HelpOption helpOption)
+    public void SelectHelpCategory(int helpOption)
     {
+        if (helpOption < 0 || helpOption > 3)
+        {
+            Debug.LogWarning("Help Button Not in range: " + helpOption);
+        }
         SelectedOption = helpOption;
         // Shows the Default background/help text and video of the info section
         DefaultBackground.gameObject.SetActive(true);
@@ -42,41 +47,67 @@ public class HelpGUIController : MonoBehaviour
 
         // Show Buttons of selected Category
         SelectedList = new List<HelpInfo>();
-        for (int i = 0; i < SelectedList.Count; i++)
+        for (int i = 0; i < HelpButtonsParent.childCount; i++)
         {
             // Destroy old Buttons
+            Destroy(HelpButtonsParent.GetChild(i).gameObject);
         }
+
+        //None = 0, Item = 1, General = 2, Trap = 3
         switch (helpOption)
         {
-            case HelpOption.General:
+            case 2:
                 SelectedList = GeneralHelpList;
                 break;
-            case HelpOption.Item:
+            case 1:
                 SelectedList = ItemHelpList;
                 break;
-            case HelpOption.Trap:
+            case 3:
                 SelectedList = TrapHelpList;
                 break;
         }
+
         for (int i = 0; i < SelectedList.Count; i++)
         {
             // Creates button
-            GameObject temp = Instantiate(ButtonPrefab, Vector3.zero, Quaternion.identity, transform);
+            GameObject temp = Instantiate(ButtonPrefab, Vector3.zero, Quaternion.identity, HelpButtonsParent);
+            // Places the icon of the button
+            temp.transform.GetChild(0).GetComponent<Image>().sprite = SelectedList[i].Icon;
+            //temp.name = SelectedList[i].name + " Button";
             // Sets Listener
-
+            
+            string test = SelectedList[i].name;
+            Debug.Log(test);
+            temp.GetComponent<Button>().onClick.AddListener(() => SetHelpInfo(test));
         }
     }
 
     /// <summary>
     /// Sets the 
     /// </summary>
-    public void SetHelpInfo (int i)
+    public void SetHelpInfo (string TileName)
     {
-        DefaultBackground.gameObject.SetActive(false);
-        // Set Help text
-        HelpText.text = SelectedList[i].Description;
-        // Set Help Gif
-        GIFImage.texture = SelectedList[i].Video;
+        int pos = -1;
+        for (int i = 0; i < SelectedList.Count; i++)
+        {
+            if (SelectedList[i].name == TileName)
+            {
+                pos = i;
+                break;
+            }
+        }
+        
+        if (pos != -1)
+        {
+            DefaultBackground.gameObject.SetActive(false);
+            HelpText.gameObject.SetActive(true);
+            GIFImage.gameObject.SetActive(true);
+            // Set Help text
+            HelpText.text = SelectedList[pos].Description;
+            // Set Help Gif
+            GIFImage.texture = SelectedList[pos].Video;
+        }
+        
     }
 
 }

@@ -180,10 +180,18 @@ public class UIManager : MonoBehaviour
         {
             SelectedButton.GetComponent<Image>().sprite = BoxSprite;
         }
-        SelectedButton = selectedButton;
-        SelectedButton.GetComponent<Image>().sprite = SelectedBoxSprite;
-        SelectedItem = item;
-        CanPlaceItem = true;
+        if (SelectedItem != item)
+        {
+            SelectedButton = selectedButton;
+            SelectedButton.GetComponent<Image>().sprite = SelectedBoxSprite;
+            SelectedItem = item;
+            CanPlaceItem = true;
+        }
+        else
+        {
+            SelectedItem = null;
+        }
+
     }
 
     /// <summary>
@@ -229,7 +237,6 @@ public class UIManager : MonoBehaviour
             StartCoroutine(GameManager.Instance._matchManager.EndRound());
         }
     }
-
 
     /// <summary>
     /// Sanitizes the items location to line up on the cell by getting our vec3 ready to be changed to a vec2int

@@ -334,8 +334,9 @@ public class MatchManager : MonoBehaviour
             }
         }
         GameBoard.Items.Clear();
-        // Determines if level has been won
         yield return new WaitWhile(() => CatMoving);
+
+        // Determines if level has been won
         if (GameBoard.NumberofCats == GameBoard.NumCatinPen)
         {
             ActiveMatch = false;
@@ -494,10 +495,10 @@ public class MatchManager : MonoBehaviour
         //move cat in data structure all at once
         if (GameBoard.At(FinalDestination) != null)
         {
-            
             //adds cats to the pen count when they move in
             if (GameBoard.At(FinalDestination).Is<CatPen>())
-            {
+            {   
+                Debug.Log("Is Pen");
                 CatJustinCage = true;
                 GameBoard.SecondCatList.Add(new PosObject(GameBoard.Cats[ListPos].Position, GameBoard.Cats[ListPos].Object, GameBoard.Cats[ListPos].ItemAdjObject, GameBoard.Cats[ListPos].Name, GameBoard.Cats[ListPos].Tile));
                 GameBoard.Set(CatPos, null);
