@@ -30,6 +30,15 @@ public class HelpGUIController : MonoBehaviour
     [SerializeField] private RawImage GIFImage;
     [SerializeField] private GameObject ButtonPrefab;
 
+
+    private void OnEnable()
+    {
+        // Shows the Default background/help text and video of the info section
+        HelpText.gameObject.SetActive(false);
+        GIFImage.gameObject.SetActive(false);
+        DefaultBackground.gameObject.SetActive(true);
+    }
+
     /// <summary>
     /// Selects the Category of help wanted
     /// </summary>
@@ -40,10 +49,6 @@ public class HelpGUIController : MonoBehaviour
             Debug.LogWarning("Help Button Not in range: " + helpOption);
         }
         SelectedOption = helpOption;
-        // Shows the Default background/help text and video of the info section
-        DefaultBackground.gameObject.SetActive(true);
-        HelpText.gameObject.SetActive(false);
-        GIFImage.gameObject.SetActive(false);
 
         // Show Buttons of selected Category
         SelectedList = new List<HelpInfo>();
@@ -103,7 +108,7 @@ public class HelpGUIController : MonoBehaviour
             HelpText.gameObject.SetActive(true);
             GIFImage.gameObject.SetActive(true);
             // Set Help text
-            HelpText.text = SelectedList[pos].Description;
+            HelpText.text = SelectedList[pos].Description.Replace("%", "\n");
             // Set Help Gif
             GIFImage.texture = SelectedList[pos].Video;
         }

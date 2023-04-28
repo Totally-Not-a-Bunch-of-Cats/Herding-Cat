@@ -3993,7 +3993,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SelectedOption: 0
   SelectedList: []
-  GeneralHelpList: []
+  GeneralHelpList:
+  - name: Deleting
+    Description: 'You can delete a placed item by clicking on the tile the item inhabits
+      while the item selected is the same item that you want to delete. '
+    Video: {fileID: 0}
+    Icon: {fileID: 21300000, guid: 8a34905290cbb491a8b6e37adc6b2a96, type: 3}
+  - name: Replacing
+    Description: You can replace an item with another item by clikcing on the tile
+      of the item you wish to replace when a different item is selected
+    Video: {fileID: 0}
+    Icon: {fileID: 21300000, guid: 6d6088174bb906b49ad8428526ee337b, type: 3}
+  - name: Re-Ordering
+    Description: You can change the excution order of the items by moving the items
+      in the side pannel up or down. % If you are confused about which item is which
+      click on the icon to activate the indicator.
+    Video: {fileID: 0}
+    Icon: {fileID: 21300000, guid: d04b5fd68437e4faba7a160858d7b6a6, type: 3}
+  - name: Blocking Cats with items
+    Description: Cats will generally not move into occupied tiles, a toy luring a
+      cat on its tile is a exception.
+    Video: {fileID: 0}
+    Icon: {fileID: 21300000, guid: f26474d143dc84587bc9514d14d0674f, type: 3}
   ItemHelpList:
   - name: Toy
     Description: The Toy moves the Cat 1 tile closer to itself.  It can even lure
@@ -4014,7 +4035,27 @@ MonoBehaviour:
     Description: Air Horn Help Description
     Video: {fileID: 8400000, guid: 3ee372d3d9330bc4ebf7a5a7ce2a9b2d, type: 2}
     Icon: {fileID: 21300000, guid: 7f73b3ce6d151754394dc84e1d8e4a9c, type: 3}
-  TrapHelpList: []
+  TrapHelpList:
+  - name: Cat Bed
+    Description: If a cat enters the tile of a cat bed it falls asleep and doesnt
+      respond to items for the rest of the round.
+    Video: {fileID: 0}
+    Icon: {fileID: 21300000, guid: c0e3a80b607c74c468311b14a90f603c, type: 3}
+  - name: Cat Tree
+    Description: If a cat enters the tile of cat tree it jumpts over the next tile
+      in the direction it was going.
+    Video: {fileID: 0}
+    Icon: {fileID: 21300000, guid: 563ca0f21bfce408b86459e92e3deaa1, type: 3}
+  - name: Cat Tube
+    Description: When a cat enters the tile of a cat tube it journies to the adjoined
+      cat tube
+    Video: {fileID: 0}
+    Icon: {fileID: 21300000, guid: 915e4eea686046b48b85e5176cb20c27, type: 3}
+  - name: Redirection Pad
+    Description: 'When a cat enters a tile of a redicrection pad it will be moved
+      in the direction indicated. '
+    Video: {fileID: 0}
+    Icon: {fileID: 21300000, guid: 0bca651f898f1479c957ebcc1fa23f88, type: 3}
   HelpOptionParent: {fileID: 168292240}
   HelpInfo: {fileID: 1019513904}
   HelpButtonsParent: {fileID: 698304515}
@@ -10119,7 +10160,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 896329900}
   m_HandleRect: {fileID: 896329899}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -11909,8 +11950,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 130, y: -10}
-  m_SizeDelta: {x: 200.6115, y: -12}
+  m_AnchoredPosition: {x: 130, y: 2.137207}
+  m_SizeDelta: {x: 200.6115, y: -15.788}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1814370820
 MonoBehaviour:
