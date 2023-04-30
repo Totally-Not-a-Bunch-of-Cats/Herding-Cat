@@ -322,6 +322,7 @@ public class Board
                                         {
                                             Destination.y = y - 2;
                                             Cats[ListPos].Sleeping = true;
+                                            Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
                                             break;
                                         }
                                     }
@@ -345,6 +346,7 @@ public class Board
                             {
                                 Destination.y = y;
                                 Cats[ListPos].Sleeping = true;
+                                Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
                                 break;
                             }
                             if(Item != null)
@@ -402,6 +404,7 @@ public class Board
                                         {
                                             Destination.y = y + 2;
                                             Cats[ListPos].Sleeping = true;
+                                            Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
                                             break;
                                         }
                                     }
@@ -425,6 +428,7 @@ public class Board
                             {
                                 Destination.y = y;
                                 Cats[ListPos].Sleeping = true;
+                                Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
                                 break;
                             }
                             if (Item != null)
@@ -486,6 +490,7 @@ public class Board
                                         {
                                             Destination.x = x - 2;
                                             Cats[ListPos].Sleeping = true;
+                                            Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
                                             break;
                                         }
                                     }
@@ -509,6 +514,7 @@ public class Board
                             {
                                 Destination.x = x;
                                 Cats[ListPos].Sleeping = true;
+                                Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
                                 break;
                             }
                             if (Item != null)
@@ -567,6 +573,7 @@ public class Board
                                         {
                                             Destination.x = x + 2;
                                             Cats[ListPos].Sleeping = true;
+                                            Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
                                             break;
                                         }
                                     }
@@ -590,6 +597,8 @@ public class Board
                             {
                                 Destination.x = x;
                                 Cats[ListPos].Sleeping = true;
+                                Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                                
                                 break;
                             }
                             if (Item != null)

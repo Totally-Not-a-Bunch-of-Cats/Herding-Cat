@@ -330,6 +330,10 @@ public class MatchManager : MonoBehaviour
         {
             if(GameBoard.Cats[i] != null)
             {
+                if(GameBoard.Cats[i].Sleeping == true)
+                {
+                    StartCoroutine(DecaySleep(i));
+                }
                 GameBoard.Cats[i].Sleeping = false;
             }
         }
@@ -675,5 +679,19 @@ public class MatchManager : MonoBehaviour
         {
             Stars[i].color = Color.white;
         }
+    }
+    public IEnumerator DecaySleep(int i)
+    {
+        Color FullAlpha = GameBoard.Cats[i].Object.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>().color;
+        FullAlpha.a = 1;
+        Color itemColor = GameBoard.Cats[i].Object.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>().color;
+        while (GameBoard.Cats[i].Object.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>().color.a > .4)
+        {
+            yield return new WaitForSeconds(.2f);
+            itemColor.a -= 0.1f;
+            GameBoard.Cats[i].Object.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = itemColor;
+        }
+        GameBoard.Cats[i].Object.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = FullAlpha;
+        GameBoard.Cats[i].Object.GetChild(0).GetChild(0).gameObject.SetActive(false);
     }
 }

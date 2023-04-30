@@ -214,7 +214,7 @@ public class UIManager : MonoBehaviour
             SelectedItem = null;
             if (SelectedButton != null)
             {
-                SelectedButton.GetComponent<Image>().color = new Color(.5f, .5f, .5f, 1);
+                SelectedButton.GetComponent<Image>().sprite = BoxSprite;
             }
             GameManager.Instance._ReWindManager.Revert();
         }
