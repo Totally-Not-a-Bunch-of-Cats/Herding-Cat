@@ -174,8 +174,6 @@ public class HelpGUIController : MonoBehaviour
             VideoPlayer.clip = SelectedList[pos].Video;
         }
     }
-<<<<<<< Updated upstream
-
     public void ScrollUp ()
     {
         CurrentPage--;
@@ -209,6 +207,4 @@ public class HelpGUIController : MonoBehaviour
         // Turn on 
         // 
     }
-=======
->>>>>>> Stashed changes
 }

@@ -4456,7 +4456,6 @@ MonoBehaviour:
       cat on its tile is a exception.
     Video: {fileID: 32900000, guid: ff09b68a444cb4148be715fe1c8f7251, type: 3}
     Icon: {fileID: 21300000, guid: f26474d143dc84587bc9514d14d0674f, type: 3}
-<<<<<<< Updated upstream
     IconScale: {x: 0, y: 0, z: 0}
   - name: Blocking Cats with items
     Description: Cats will generally not move into occupied tiles, a toy luring a
@@ -4470,13 +4469,11 @@ MonoBehaviour:
     Video: {fileID: 0}
     Icon: {fileID: 21300000, guid: f26474d143dc84587bc9514d14d0674f, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
-=======
   - name: Rewind
     Description: You can revert to the last round at any time by hitting the rewind
       button.
     Video: {fileID: 32900000, guid: 01aff6cd7586edc4b80985b5b2aa8dbd, type: 3}
     Icon: {fileID: 21300000, guid: 3c211ed28a1254ad5be923faa2874f0e, type: 3}
->>>>>>> Stashed changes
   ItemHelpList:
   - name: Toy
     Description: The Toy moves the Cat 1 tile closer to itself.  It can even lure
@@ -4490,7 +4487,6 @@ MonoBehaviour:
       effects Cats 1 tile from itself and doesn't work diagonally.
     Video: {fileID: 32900000, guid: 66274e9e097ee9148a1700a37bc25eca, type: 3}
     Icon: {fileID: 21300000, guid: ddad149a4a2d376429689cc6824af54a, type: 3}
-<<<<<<< Updated upstream
     IconScale: {x: 0, y: 0, z: 0}
   - name: Treat
     Description: Treat Help Description
@@ -4502,35 +4498,10 @@ MonoBehaviour:
     Video: {fileID: 8400000, guid: 3ee372d3d9330bc4ebf7a5a7ce2a9b2d, type: 2}
     Icon: {fileID: 21300000, guid: 7f73b3ce6d151754394dc84e1d8e4a9c, type: 3}
     IconScale: {x: 0.6, y: 1, z: 0}
-=======
->>>>>>> Stashed changes
   TrapHelpList:
   - name: Cat Bed
     Description: If a cat enters the tile of a cat bed it falls asleep and doesnt
       respond to items for the rest of the round.
-<<<<<<< Updated upstream
-    Video: {fileID: 0}
-    Icon: {fileID: 21300000, guid: 8bebb7f836e4fc84f8e8ab51822695ad, type: 3}
-    IconScale: {x: 1, y: 0.75, z: 0}
-  - name: Cat Tree
-    Description: If a cat enters the tile of cat tree it jumpts over the next tile
-      in the direction it was going.
-    Video: {fileID: 0}
-    Icon: {fileID: 21300000, guid: af8552716c77bd94b8a1b01fb1f8e8ca, type: 3}
-    IconScale: {x: 0.9, y: 0.9, z: 0}
-  - name: Cat Tube
-    Description: When a cat enters the tile of a cat tube it journies to the adjoined
-      cat tube
-    Video: {fileID: 0}
-    Icon: {fileID: 21300000, guid: 0bdb3af61a58fa34980e7ea90f01efd4, type: 3}
-    IconScale: {x: 0.75, y: 0.75, z: 0}
-  - name: Redirection Pad
-    Description: 'When a cat enters a tile of a redicrection pad it will be moved
-      in the direction indicated. '
-    Video: {fileID: 0}
-    Icon: {fileID: 21300000, guid: cf5aa3c6046982d4b9b2d668c6bc3923, type: 3}
-    IconScale: {x: 0.9, y: 0.9, z: 0}
-=======
     Video: {fileID: 32900000, guid: b99885257708b5a4d95e61f1e263cdfe, type: 3}
     Icon: {fileID: 21300000, guid: c0e3a80b607c74c468311b14a90f603c, type: 3}
   - name: Cat Tree
@@ -4554,22 +4525,18 @@ MonoBehaviour:
   - {fileID: 1372099256}
   - {fileID: 1710906856}
   ActivePort: 0
->>>>>>> Stashed changes
   HelpOptionParent: {fileID: 168292240}
   HelpInfo: {fileID: 1019513904}
   DefaultBackground: {fileID: 1576055975}
   HelpText: {fileID: 1814370820}
   GIFImage: {fileID: 601071832}
   ButtonPrefab: {fileID: 2504633237516500913, guid: faf197cd55d0e2b439d6048c86e98ec4, type: 3}
-<<<<<<< Updated upstream
   DownButtonObject: {fileID: 511488751}
   UpButtonObject: {fileID: 197382695}
   HelpButtonsParent: {fileID: 1404190663}
   Content: {fileID: 1926271840}
-=======
   ScreenWidth: 0
   ScreenHight: 0
->>>>>>> Stashed changes
 --- !u!1 &601071830
 GameObject:
   m_ObjectHideFlags: 0
