@@ -127,10 +127,10 @@ public class MatchManager : MonoBehaviour
                 int buffer = 85;
                 Item item = currentLevel.GetPossibleItems()[i];
                 Transform EndturnButton = GameObject.Find("End Turn Button").transform;
-                GameObject button = Instantiate(item.ButtonPrefab, new Vector3(0, 0, 4) ,Quaternion.identity, GameObject.Find("GUI").transform);
+                GameObject button = Instantiate(item.ButtonPrefab, new Vector3(0, 0, 4), Quaternion.identity, GameObject.Find("GUI").transform);
                 //button.transform.localPosition = EndturnButton.localPosition;
                 button.transform.localPosition = new Vector3(EndturnButton.localPosition.x, 0, 0);
-                button.transform.localPosition += new Vector3(0, buffer + 145 * (i + 1), 0);
+                button.transform.localPosition += new Vector3(0, buffer + (145 * (i + 1)), 0);
                 button.GetComponent<RectTransform>().anchorMax = new Vector2(1, 0);
                 button.GetComponent<RectTransform>().anchorMin = new Vector2(1, 0);
                 button.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._uiManager.PlaceItem(item, button));
@@ -469,32 +469,43 @@ public class MatchManager : MonoBehaviour
         Vector2Int CatPos = GameBoard.Cats[ListPos].Position;
         //moves the cat the correct the direction
         if (Direction.x > 0)
-        {                                                       
-            Vector3 Goalpos = new Vector3(((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x))), 0f, 0f);
-            Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
+        {
+            if (GameBoard.Cats[ListPos].Position.x != FinalDestination.x)
+            {
+                Vector3 Goalpos = new Vector3(((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x))), 0f, 0f);
+                Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
-            StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination,  .5f,  ListPos,  FinalDestination));
+                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos,  FinalDestination));
+            }
         }
         else if (Direction.y > 0)
         {
             Vector3 Goalpos = new Vector3(0f, ((Math.Abs(GameBoard.Cats[ListPos].Position.y - FinalDestination.y))), 0f);
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
-
-            StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
+            if (TempDestination != GameBoard.Cats[ListPos].Object.localPosition)
+            {
+                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
+            }
         }
         else if (Direction.x < 0)
         {
-            Vector3 Goalpos = new Vector3(((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x))), 0f, 0f);
-            Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
+            if (GameBoard.Cats[ListPos].Position.x != FinalDestination.x)
+            {
+                Vector3 Goalpos = new Vector3((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x)), 0f, 0f);
+                Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
-            StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
+                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
+            }
         }
         else
         {
             Vector3 Goalpos = new Vector3(0f, ((Math.Abs(GameBoard.Cats[ListPos].Position.y - FinalDestination.y))), 0f);
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
-            StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
+            if (TempDestination != GameBoard.Cats[ListPos].Object.localPosition)
+            {
+                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
+            }
         }
         //move cat in data structure all at once
         if (GameBoard.At(FinalDestination) != null)
@@ -573,6 +584,7 @@ public class MatchManager : MonoBehaviour
 
             yield return null;
         }
+        Debug.Log(target + " " + ListPos);
         GameBoard.Cats[ListPos].Object.localPosition = target;
         if(GameBoard.At(FinalDestination) != null)
         {

@@ -14,6 +14,10 @@ public class HelpGUIController : MonoBehaviour
     [SerializeField] private int SelectedOption = 0;
     [SerializeField] private List<HelpInfo> SelectedList;
 
+    [SerializeField] private int HelpPages = 0;
+    [SerializeField] private int ButtonsPerPage = 0;
+    [SerializeField] private int CurrentPage = 0;
+
     [Header("Help Information")]
     [Space]
     public List<HelpInfo> GeneralHelpList;
@@ -24,12 +28,16 @@ public class HelpGUIController : MonoBehaviour
     [Space]
     [SerializeField] private GameObject HelpOptionParent;
     [SerializeField] private GameObject HelpInfo;
-    [SerializeField] private Transform HelpButtonsParent;
     [SerializeField] private Transform DefaultBackground;
     [SerializeField] private TMP_Text HelpText;
     [SerializeField] private RawImage GIFImage;
     [SerializeField] private GameObject ButtonPrefab;
 
+    [Header("Object Button selection")]
+    [SerializeField] private GameObject DownButtonObject;
+    [SerializeField] private GameObject UpButtonObject;
+    [SerializeField] private Transform HelpButtonsParent;
+    [SerializeField] private GameObject Content;
 
     private void OnEnable()
     {
@@ -38,7 +46,7 @@ public class HelpGUIController : MonoBehaviour
         GIFImage.gameObject.SetActive(false);
         DefaultBackground.gameObject.SetActive(true);
     }
-
+    
     /// <summary>
     /// Selects the Category of help wanted
     /// </summary>
@@ -52,10 +60,10 @@ public class HelpGUIController : MonoBehaviour
 
         // Show Buttons of selected Category
         SelectedList = new List<HelpInfo>();
-        for (int i = 0; i < HelpButtonsParent.childCount; i++)
+        for (int i = 0; i < Content.transform.childCount; i++)
         {
             // Destroy old Buttons
-            Destroy(HelpButtonsParent.GetChild(i).gameObject);
+            Destroy(Content.transform.GetChild(i).gameObject);
         }
 
         //None = 0, Item = 1, General = 2, Trap = 3
@@ -72,19 +80,42 @@ public class HelpGUIController : MonoBehaviour
                 break;
         }
 
+        ButtonsPerPage = (int)((HelpButtonsParent.GetComponent<RectTransform>().rect.height - 30) / (90 + 15));
+        CurrentPage = 1;
+        
+        // Creates Buttons of the selected Category
         for (int i = 0; i < SelectedList.Count; i++)
         {
             // Creates button
-            GameObject temp = Instantiate(ButtonPrefab, Vector3.zero, Quaternion.identity, HelpButtonsParent);
+            /*if (i % ButtonsPerPage == 0 && i != 0)
+            {
+                Transform NewBlankObject = new GameObject().transform;
+                NewBlankObject.SetParent(Content.transform);
+                NewBlankObject.gameObject.AddComponent<Image>().enabled = false;
+            }*/
+            GameObject temp = Instantiate(ButtonPrefab, Vector3.zero, Quaternion.identity, Content.transform);
             // Places the icon of the button
             temp.transform.GetChild(0).GetComponent<Image>().sprite = SelectedList[i].Icon;
-            //temp.name = SelectedList[i].name + " Button";
+            if (SelectedList[i].IconScale != Vector3.zero)
+            {
+                temp.transform.GetChild(0).localScale = SelectedList[i].IconScale;
+            }
+            temp.name = SelectedList[i].name + " Button";
             // Sets Listener
             
             string test = SelectedList[i].name;
-            Debug.Log(test);
             temp.GetComponent<Button>().onClick.AddListener(() => SetHelpInfo(test));
         }
+
+        HelpPages = SelectedList.Count / ButtonsPerPage;
+        if (SelectedList.Count % ButtonsPerPage != 0)
+        {
+            HelpPages++;
+        }
+
+        DownButtonObject.SetActive(HelpPages != 1);
+        UpButtonObject.SetActive(false);
+        Content.transform.localPosition = Vector3.zero;
     }
 
     /// <summary>
@@ -115,4 +146,37 @@ public class HelpGUIController : MonoBehaviour
         
     }
 
+    public void ScrollUp ()
+    {
+        CurrentPage--;
+        DownButtonObject.SetActive(true);
+        float ContentY = Content.transform.localPosition.y - ButtonsPerPage * 105;
+        Content.transform.localPosition = new Vector3(Content.transform.localPosition.x,
+           ContentY, Content.transform.localPosition.z);
+        if (CurrentPage == 1)
+        {
+            UpButtonObject.SetActive(false);
+        }
+    }
+
+    public void ScrollDown ()
+    {
+        CurrentPage++;
+        UpButtonObject.SetActive(true);
+        float ContentY = Content.transform.localPosition.y + ButtonsPerPage  * 105;
+        Content.transform.localPosition = new Vector3(Content.transform.localPosition.x,
+            ContentY, Content.transform.localPosition.z);
+        if (CurrentPage == HelpPages)
+        {
+            DownButtonObject.SetActive(false);
+        }
+    }
+
+    public void JumpToHelpScreen ()
+    {
+        // Turn on Help GUI
+        // Set Catagry
+        // Turn on 
+        // 
+    }
 }

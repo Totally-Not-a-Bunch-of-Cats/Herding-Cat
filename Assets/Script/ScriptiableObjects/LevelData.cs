@@ -38,7 +38,6 @@ public class LevelData: ScriptableObject
                 numCats++;
             }
         }
-        Debug.Log(numCats);
         return Dimensions != Vector2Int.zero
             && TargetRounds > 0
             && TargetItems > 0

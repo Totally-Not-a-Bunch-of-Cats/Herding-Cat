@@ -12,4 +12,5 @@ public class HelpInfo
     public string Description = "";
     public Texture Video;
     public Sprite Icon;
+    public Vector3 IconScale;
 }
