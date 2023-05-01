@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Video;
 
 /// <summary>
 /// Controls the Help GUI
@@ -26,12 +27,17 @@ public class HelpGUIController : MonoBehaviour
 
     [Header("Objects for Control")]
     [Space]
+    [SerializeField] public VideoPlayer VideoPlayer;
+    public List<GameObject> ViewPorts;
+    [SerializeField] private int ActivePort;
     [SerializeField] private GameObject HelpOptionParent;
     [SerializeField] private GameObject HelpInfo;
     [SerializeField] private Transform DefaultBackground;
     [SerializeField] private TMP_Text HelpText;
     [SerializeField] private RawImage GIFImage;
     [SerializeField] private GameObject ButtonPrefab;
+    [SerializeField] private int ScreenWidth;
+    [SerializeField] private int ScreenHight;
 
     [Header("Object Button selection")]
     [SerializeField] private GameObject DownButtonObject;
@@ -45,6 +51,28 @@ public class HelpGUIController : MonoBehaviour
         HelpText.gameObject.SetActive(false);
         GIFImage.gameObject.SetActive(false);
         DefaultBackground.gameObject.SetActive(true);
+        DetermineScrenSize();
+    }
+
+    private void DetermineScrenSize()
+    {
+        ScreenWidth = Screen.width;
+        ScreenHight = Screen.height;
+        if(ScreenHight / ScreenWidth < 2)
+        {
+            Debug.Log(ActivePort);
+            ActivePort = 1;
+        }
+        if (ScreenHight / ScreenWidth < 1)
+        {
+            Debug.Log(ActivePort);
+            ActivePort = 0;
+        }
+        else
+        {
+            Debug.Log(ActivePort);
+            ActivePort = 2;
+        }
     }
     
     /// <summary>
@@ -138,13 +166,15 @@ public class HelpGUIController : MonoBehaviour
             DefaultBackground.gameObject.SetActive(false);
             HelpText.gameObject.SetActive(true);
             GIFImage.gameObject.SetActive(true);
+            ViewPorts[ActivePort].SetActive(true);
+            VideoPlayer.targetTexture = (RenderTexture)ViewPorts[ActivePort].GetComponent<RawImage>().texture;
             // Set Help text
             HelpText.text = SelectedList[pos].Description.Replace("%", "\n");
             // Set Help Gif
-            GIFImage.texture = SelectedList[pos].Video;
+            VideoPlayer.clip = SelectedList[pos].Video;
         }
-        
     }
+<<<<<<< Updated upstream
 
     public void ScrollUp ()
     {
@@ -179,4 +209,6 @@ public class HelpGUIController : MonoBehaviour
         // Turn on 
         // 
     }
+=======
+>>>>>>> Stashed changes
 }
