@@ -141,13 +141,12 @@ public class MatchManager : MonoBehaviour
             LevNameUpdator.NameUpdate();
             if (currentLevel.NewThingIntroduced == true && currentLevel.name == "1-1")
             {
-                HelpGUI.transform.GetChild(0).gameObject.SetActive(true);
+                //HelpGUI.transform.GetChild(0).gameObject.SetActive(true);
             }
             if (currentLevel.NewThingIntroduced == true && currentLevel.name == "1-6")
             {
-                HelpGUI.transform.GetChild(1).gameObject.SetActive(true);
+                //HelpGUI.transform.GetChild(1).gameObject.SetActive(true);
             }
-
             return true;
         }
         return false;
