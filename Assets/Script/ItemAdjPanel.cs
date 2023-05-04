@@ -68,8 +68,10 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler
         }
     }
 
-
-
+    /// <summary>
+    /// Drags of the item adjust panel entry
+    /// </summary>
+    /// <param name="data"></param>
     public void OnDrag(PointerEventData data)
     {
         if (!HoverObject.activeSelf)
@@ -81,11 +83,20 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler
         transform.localPosition += new Vector3(0, data.delta.y/Canvas.scaleFactor, 0);
         HoverObject.transform.position = transform.position;
     }
+
+    /// <summary>
+    /// Stops the dragging of the item adjust panel entry
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnEndDrag(PointerEventData eventData)
     {
         HoverObject.SetActive(false);
         Snap();
     }
+
+    /// <summary>
+    /// Snaps the item adjust panel entry into its new place
+    /// </summary>
     public void Snap()
     {
         float Ycheck;
@@ -111,6 +122,9 @@ public class ItemAdjPanel : MonoBehaviour, IDragHandler, IEndDragHandler
         ReorderItems();
     }
 
+    /// <summary>
+    /// Reorders the item list to match the changed item adjust panel entries
+    /// </summary>
     void ReorderItems()
     {
         List<PosObject> OldItems = new List<PosObject>();

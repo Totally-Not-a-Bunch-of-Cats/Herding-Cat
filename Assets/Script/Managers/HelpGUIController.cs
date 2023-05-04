@@ -18,6 +18,7 @@ public class HelpGUIController : MonoBehaviour
     [SerializeField] private int HelpPages = 0;
     [SerializeField] private int ButtonsPerPage = 0;
     [SerializeField] private int CurrentPage = 0;
+    private bool IsDirect = false;
 
     [Header("Help Information")]
     [Space]
@@ -45,12 +46,21 @@ public class HelpGUIController : MonoBehaviour
     [SerializeField] private Transform HelpButtonsParent;
     [SerializeField] private GameObject Content;
 
+    /// <summary>
+    /// Turns off old info if not direct
+    /// </summary>
     private void OnEnable()
     {
         // Shows the Default background/help text and video of the info section
-        HelpText.gameObject.SetActive(false);
-        GIFImage.gameObject.SetActive(false);
-        DefaultBackground.gameObject.SetActive(true);
+        if (!IsDirect)
+        {
+            HelpText.gameObject.SetActive(false);
+            GIFImage.gameObject.SetActive(false);
+            DefaultBackground.gameObject.SetActive(true);
+        } else
+        {
+            IsDirect = false;
+        }
         DetermineScrenSize();
     }
 
@@ -115,12 +125,6 @@ public class HelpGUIController : MonoBehaviour
         for (int i = 0; i < SelectedList.Count; i++)
         {
             // Creates button
-            /*if (i % ButtonsPerPage == 0 && i != 0)
-            {
-                Transform NewBlankObject = new GameObject().transform;
-                NewBlankObject.SetParent(Content.transform);
-                NewBlankObject.gameObject.AddComponent<Image>().enabled = false;
-            }*/
             GameObject temp = Instantiate(ButtonPrefab, Vector3.zero, Quaternion.identity, Content.transform);
             // Places the icon of the button
             temp.transform.GetChild(0).GetComponent<Image>().sprite = SelectedList[i].Icon;
@@ -129,8 +133,8 @@ public class HelpGUIController : MonoBehaviour
                 temp.transform.GetChild(0).localScale = SelectedList[i].IconScale;
             }
             temp.name = SelectedList[i].name + " Button";
+
             // Sets Listener
-            
             string test = SelectedList[i].name;
             temp.GetComponent<Button>().onClick.AddListener(() => SetHelpInfo(test));
         }
@@ -146,9 +150,11 @@ public class HelpGUIController : MonoBehaviour
         Content.transform.localPosition = Vector3.zero;
     }
 
+
     /// <summary>
-    /// Sets the 
+    /// Sets the Help info to the object of the given name
     /// </summary>
+    /// <param name="TileName">Name of object to give info about</param>
     public void SetHelpInfo (string TileName)
     {
         int pos = -1;
@@ -174,6 +180,10 @@ public class HelpGUIController : MonoBehaviour
             VideoPlayer.clip = SelectedList[pos].Video;
         }
     }
+
+    /// <summary>
+    /// Shifts to the next page up on button option
+    /// </summary>
     public void ScrollUp ()
     {
         CurrentPage--;
@@ -187,6 +197,9 @@ public class HelpGUIController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Shifts to the next page down on button option
+    /// </summary>
     public void ScrollDown ()
     {
         CurrentPage++;
@@ -200,11 +213,20 @@ public class HelpGUIController : MonoBehaviour
         }
     }
 
-    public void JumpToHelpScreen ()
+    /// <summary>
+    /// Loads the help screen to the selected catagory and object
+    /// </summary>
+    /// <param name="Cat">Catagory of the help entryparam>
+    /// <param name="TileName">Entry to load on help screen</param>
+    public void JumpToHelpScreen (int Cat, string TileName)
     {
+        IsDirect = true;
         // Turn on Help GUI
+        gameObject.SetActive(true);
+        transform.Find("GUI").gameObject.SetActive(false);
         // Set Catagry
-        // Turn on 
-        // 
+        SelectHelpCategory(Cat);
+        // Turn on help screen entry
+        SetHelpInfo(TileName);
     }
 }
