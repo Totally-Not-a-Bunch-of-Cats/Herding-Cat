@@ -33,6 +33,7 @@ public class MatchManager : MonoBehaviour
     [SerializeField] public int RoundsPlayed = 0;
     [SerializeField] public int ItemsUsed = 0;
     [SerializeField] public LevelNameUpdator LevNameUpdator;
+    [SerializeField] private float SpeedAdjustment = 1;
 
     [SerializeField] public Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
@@ -583,7 +584,6 @@ public class MatchManager : MonoBehaviour
 
             yield return null;
         }
-        Debug.Log(target + " " + ListPos);
         GameBoard.Cats[ListPos].Object.localPosition = target;
         if(GameBoard.At(FinalDestination) != null)
         {
