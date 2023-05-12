@@ -130,6 +130,7 @@ public class Board
         SecondCatPos = new List<int>();
         CatVec2 = new List<Vector2Int>();
         SecondCatList = new List<PosObject>();
+        Items = new List<PosObject>();
         Cats = new List<PosObject>();
         _cells = new Tile[_width, _height];
         int i = 0;
@@ -176,7 +177,7 @@ public class Board
                 }
             }
         }
-        Items = BoardToCopy.Items;
+        //Items = BoardToCopy.Items;
         CatPenLocation = BoardToCopy.CatPenLocation;
         NumCatinPen = BoardToCopy.NumCatinPen;
         NumberofCats = BoardToCopy.NumberofCats;
