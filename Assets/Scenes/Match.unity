@@ -3685,12 +3685,12 @@ GameObject:
   - component: {fileID: 589505569}
   - component: {fileID: 589505573}
   m_Layer: 5
-  m_Name: Help GUI (1)
+  m_Name: Help GUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &589505569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9342,7 +9342,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 896329900}
   m_HandleRect: {fileID: 896329899}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
