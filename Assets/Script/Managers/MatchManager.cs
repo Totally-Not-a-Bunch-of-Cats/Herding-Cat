@@ -24,6 +24,7 @@ public class MatchManager : MonoBehaviour
     private bool CatMoving = false;
     public Vector3 BoardOffset;
     [SerializeField] public bool CatJustinCage = false;
+    public HelpGUIController HGC;
 
     //stores the items used, rounds passed, and targets for starts gained
     [Header("Gameplay Info")]
@@ -57,8 +58,6 @@ public class MatchManager : MonoBehaviour
             RoundsPlayed = 0;
             ItemsUsed = 0;
             CurrentLevel = currentLevel;
-
-            GameObject HelpGUI = GameObject.Find("initial Help Text");
 
             BoardTileMap = GameObject.Find("Tilemap").GetComponent<Tilemap>();
             GameObject.Find("OutlineSquare").transform.localScale = new Vector3(BoardSize.x, BoardSize.y, 1);
@@ -135,18 +134,18 @@ public class MatchManager : MonoBehaviour
                 button.GetComponent<RectTransform>().anchorMax = new Vector2(1, 0);
                 button.GetComponent<RectTransform>().anchorMin = new Vector2(1, 0);
                 button.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._uiManager.PlaceItem(item, button));
+                if(i == 0)
+                {
+                    GameManager.Instance._uiManager.PlaceItem(item, button);
+                }
             }
             GameManager.Instance._uiManager.GetUI();
             GameManager.Instance._uiManager.Override = true;
             ActiveMatch = true;
             LevNameUpdator.NameUpdate();
-            if (currentLevel.NewThingIntroduced == true && currentLevel.name == "1-1")
+            if (currentLevel.NewThingIntroduced == true)
             {
-                //HelpGUI.transform.GetChild(0).gameObject.SetActive(true);
-            }
-            if (currentLevel.NewThingIntroduced == true && currentLevel.name == "1-6")
-            {
-                //HelpGUI.transform.GetChild(1).gameObject.SetActive(true);
+                HGC.GetComponent<HelpGUIController>().JumpToHelpScreen(currentLevel.Category, currentLevel.TileName);
             }
             return true;
         }

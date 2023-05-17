@@ -11,7 +11,7 @@ using UnityEngine.Video;
 public class HelpGUIController : MonoBehaviour
 {
 
-    //None = 0, Item = 1, General = 2, Trap = 3
+    //None = 0, General = 1, Item = 2, Trap = 3
     [SerializeField] private int SelectedOption = 0;
     [SerializeField] private List<HelpInfo> SelectedList;
 
@@ -35,7 +35,6 @@ public class HelpGUIController : MonoBehaviour
     [SerializeField] private GameObject HelpInfo;
     [SerializeField] private Transform DefaultBackground;
     [SerializeField] private TMP_Text HelpText;
-    [SerializeField] private RawImage GIFImage;
     [SerializeField] private GameObject ButtonPrefab;
     [SerializeField] private int ScreenWidth;
     [SerializeField] private int ScreenHight;
@@ -55,7 +54,7 @@ public class HelpGUIController : MonoBehaviour
         if (!IsDirect)
         {
             HelpText.gameObject.SetActive(false);
-            GIFImage.gameObject.SetActive(false);
+            ViewPorts[ActivePort].SetActive(false);
             DefaultBackground.gameObject.SetActive(true);
         } else
         {
@@ -66,22 +65,23 @@ public class HelpGUIController : MonoBehaviour
 
     private void DetermineScrenSize()
     {
-        ScreenWidth = Screen.width;
-        ScreenHight = Screen.height;
-        if(ScreenHight / ScreenWidth < 2)
+        float ScreenWidth = Screen.width;
+        float ScreenHight = Screen.height;
+        float ScreenDiv = ScreenWidth / ScreenHight;
+        if(ScreenDiv > 2)
         {
-            Debug.Log(ActivePort);
             ActivePort = 1;
+            Debug.Log(ActivePort + " active port " + 1);
         }
-        if (ScreenHight / ScreenWidth < 1)
+        else if (ScreenDiv > 1.59f)
         {
-            Debug.Log(ActivePort);
             ActivePort = 0;
+            Debug.Log(ActivePort + " active port " + 0);
         }
         else
         {
-            Debug.Log(ActivePort);
             ActivePort = 2;
+            Debug.Log(ActivePort + " active port " + 2);
         }
     }
     
@@ -104,13 +104,13 @@ public class HelpGUIController : MonoBehaviour
             Destroy(Content.transform.GetChild(i).gameObject);
         }
 
-        //None = 0, Item = 1, General = 2, Trap = 3
+        //None = 0, General = 1, Item = 2, Trap = 3
         switch (helpOption)
         {
-            case 2:
+            case 1:
                 SelectedList = GeneralHelpList;
                 break;
-            case 1:
+            case 2:
                 SelectedList = ItemHelpList;
                 break;
             case 3:
@@ -171,7 +171,6 @@ public class HelpGUIController : MonoBehaviour
         {
             DefaultBackground.gameObject.SetActive(false);
             HelpText.gameObject.SetActive(true);
-            GIFImage.gameObject.SetActive(true);
             ViewPorts[ActivePort].SetActive(true);
             VideoPlayer.targetTexture = (RenderTexture)ViewPorts[ActivePort].GetComponent<RawImage>().texture;
             // Set Help text
@@ -223,7 +222,8 @@ public class HelpGUIController : MonoBehaviour
         IsDirect = true;
         // Turn on Help GUI
         gameObject.SetActive(true);
-        transform.Find("GUI").gameObject.SetActive(false);
+        Debug.Log(GameObject.Find("GUI"));
+        GameObject.Find("GUI").SetActive(false);
         // Set Catagry
         SelectHelpCategory(Cat);
         // Turn on help screen entry

@@ -2685,7 +2685,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3816,18 +3816,6 @@ MonoBehaviour:
     Video: {fileID: 32900000, guid: ff09b68a444cb4148be715fe1c8f7251, type: 3}
     Icon: {fileID: 21300000, guid: f26474d143dc84587bc9514d14d0674f, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
-  - name: Blocking Cats with items
-    Description: Cats will generally not move into occupied tiles, a toy luring a
-      cat on its tile is a exception.
-    Video: {fileID: 0}
-    Icon: {fileID: 21300000, guid: f26474d143dc84587bc9514d14d0674f, type: 3}
-    IconScale: {x: 0, y: 0, z: 0}
-  - name: Blocking Cats with items
-    Description: Cats will generally not move into occupied tiles, a toy luring a
-      cat on its tile is a exception.
-    Video: {fileID: 0}
-    Icon: {fileID: 21300000, guid: f26474d143dc84587bc9514d14d0674f, type: 3}
-    IconScale: {x: 0, y: 0, z: 0}
   - name: Rewind
     Description: You can revert to the last round at any time by hitting the rewind
       button.
@@ -3893,7 +3881,6 @@ MonoBehaviour:
   HelpInfo: {fileID: 1019513904}
   DefaultBackground: {fileID: 1576055975}
   HelpText: {fileID: 1814370820}
-  GIFImage: {fileID: 601071832}
   ButtonPrefab: {fileID: 2504633237516500913, guid: faf197cd55d0e2b439d6048c86e98ec4, type: 3}
   ScreenWidth: 0
   ScreenHight: 0
@@ -3936,8 +3923,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -340, y: -12}
-  m_SizeDelta: {x: 506, y: -16}
+  m_AnchoredPosition: {x: -303.84357, y: -12}
+  m_SizeDelta: {x: 578.313, y: -16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &601071832
 MonoBehaviour:
@@ -9046,6 +9033,7 @@ MonoBehaviour:
   ActiveMatch: 0
   BoardOffset: {x: 0, y: 0, z: 0}
   CatJustinCage: 0
+  HGC: {fileID: 589505573}
   TargetRounds: 10
   TargetItems: 10
   RoundsPlayed: 0
@@ -9555,7 +9543,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
