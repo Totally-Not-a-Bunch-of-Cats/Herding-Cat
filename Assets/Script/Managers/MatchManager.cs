@@ -35,9 +35,9 @@ public class MatchManager : MonoBehaviour
     [SerializeField] public LevelNameUpdator LevNameUpdator;
     [SerializeField] private float SpeedAdjustment = 1;
 
-    [SerializeField] public Tilemap BoardTileMap;
+    public Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
-    [SerializeField] public LevelData CurrentLevel;
+    public LevelData CurrentLevel;
     [SerializeField] public GameObject GameWonUI;
 
     /// <summary>
@@ -574,18 +574,18 @@ public class MatchManager : MonoBehaviour
     /// <param name="ListPos">Index that cat is in the cats list</param>
     /// <param name="FinalDestination">Final Destination of cat on Board</param>
     /// <returns></returns>
-    IEnumerator MoveObject(Vector3 source, Vector3 target, float overTime, int ListPos, Vector2Int FinalDestination)
+    private IEnumerator MoveObject(Vector3 source, Vector3 target, float overTime, int ListPos, Vector2Int FinalDestination)
     {
         CatMoving = true;
         float startTime = Time.time;
-        while (Time.time < startTime + overTime)
+        while (Time.time < startTime + (overTime / SpeedAdjustment))
         {
             GameBoard.Cats[ListPos].Object.localPosition = Vector3.Lerp(source, target, (Time.time - startTime) / overTime);
 
             yield return null;
         }
         GameBoard.Cats[ListPos].Object.localPosition = target;
-        if(GameBoard.At(FinalDestination) != null)
+        if (GameBoard.At(FinalDestination) != null)
         {
             if (GameBoard.At(FinalDestination).Is<CatPen>())
             {
