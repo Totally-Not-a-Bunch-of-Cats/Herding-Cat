@@ -18,7 +18,7 @@ public class AdManager : MonoBehaviour
 #if UNITY_IOS || UNITY_ANDROID
         if (!Advertisement.isInitialized && Advertisement.isSupported)
         {
-            Advertisement.Initialize(GameID, _testMode, this);
+            Advertisement.Initialize(GameID, _testMode);
         }
 #endif
     }

@@ -15,7 +15,9 @@ MonoBehaviour:
   Dimensions: {x: 6, y: 3}
   TargetRounds: 2
   TargetItems: 3
-  NewThingIntroduced: 0
+  NewThingIntroduced: 1
+  Category: 3
+  TileName: Cat Tube
   BackgroundTile: {fileID: 11400000, guid: 103593486162c964aa10539a0ed04a9e, type: 2}
   Tiles:
   - Position: {x: 0, y: 1}
@@ -81,5 +83,5 @@ MonoBehaviour:
   PossibleItems:
   - {fileID: 11400000, guid: 089f360dd355a504085896f04d3eb986, type: 2}
   - {fileID: 11400000, guid: a58def140dd3b74468a5da712b3041fa, type: 2}
-  StarsEarned: 3
+  StarsEarned: 0
   Unlocked: 1

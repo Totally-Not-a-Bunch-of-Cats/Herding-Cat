@@ -15,7 +15,9 @@ MonoBehaviour:
   Dimensions: {x: 5, y: 5}
   TargetRounds: 2
   TargetItems: 4
-  NewThingIntroduced: 0
+  NewThingIntroduced: 1
+  Category: 3
+  TileName: Blocking Cats with items
   BackgroundTile: {fileID: 11400000, guid: 76cbab4e70ed36846808f77c6f9b14f9, type: 2}
   Tiles:
   - Position: {x: 1, y: 3}
