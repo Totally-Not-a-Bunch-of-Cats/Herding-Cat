@@ -34,7 +34,6 @@ public class MatchManager : MonoBehaviour
     [SerializeField] public int RoundsPlayed = 0;
     [SerializeField] public int ItemsUsed = 0;
     [SerializeField] public LevelNameUpdator LevNameUpdator;
-    [SerializeField] private float SpeedAdjustment = 1;
 
     public Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
@@ -577,7 +576,7 @@ public class MatchManager : MonoBehaviour
     {
         CatMoving = true;
         float startTime = Time.time;
-        while (Time.time < startTime + (overTime / SpeedAdjustment))
+        while (Time.time < startTime + (overTime / GameManager.Instance.SpeedAdjustment))
         {
             GameBoard.Cats[ListPos].Object.localPosition = Vector3.Lerp(source, target, (Time.time - startTime) / overTime);
 

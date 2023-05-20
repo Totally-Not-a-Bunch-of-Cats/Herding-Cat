@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     private static GameManager m_Instance;
     public int LevelPosition = 0;
     public bool ActivateItemIndicators = false;
+    public float SpeedAdjustment = 1;
 
 
     // Used for testing to determine if star count for a level should be changed or outputed in console.
