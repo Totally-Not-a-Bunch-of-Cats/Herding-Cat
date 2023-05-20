@@ -34,6 +34,7 @@ public class MatchManager : MonoBehaviour
     [SerializeField] public int RoundsPlayed = 0;
     [SerializeField] public int ItemsUsed = 0;
     [SerializeField] public LevelNameUpdator LevNameUpdator;
+    [SerializeField] public float CatSpeed = 0.5f;
 
     public Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
@@ -473,7 +474,7 @@ public class MatchManager : MonoBehaviour
                 Vector3 Goalpos = new Vector3(((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x))), 0f, 0f);
                 Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
-                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos,  FinalDestination));
+                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, CatSpeed, ListPos,  FinalDestination));
             }
         }
         else if (Direction.y > 0)
@@ -482,7 +483,7 @@ public class MatchManager : MonoBehaviour
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
             if (TempDestination != GameBoard.Cats[ListPos].Object.localPosition)
             {
-                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
+                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, CatSpeed, ListPos, FinalDestination));
             }
         }
         else if (Direction.x < 0)
@@ -492,7 +493,7 @@ public class MatchManager : MonoBehaviour
                 Vector3 Goalpos = new Vector3((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x)), 0f, 0f);
                 Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
-                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
+                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, CatSpeed, ListPos, FinalDestination));
             }
         }
         else
@@ -502,7 +503,7 @@ public class MatchManager : MonoBehaviour
 
             if (TempDestination != GameBoard.Cats[ListPos].Object.localPosition)
             {
-                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
+                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, CatSpeed, ListPos, FinalDestination));
             }
         }
         //move cat in data structure all at once

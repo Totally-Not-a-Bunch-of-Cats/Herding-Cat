@@ -221,9 +221,29 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8661864018276491431, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
   m_PrefabInstance: {fileID: 918842530}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 918842532}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35afa44b67f3e004a8f0b14a684a9f92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &918842532 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 590294061082041624, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
+  m_PrefabInstance: {fileID: 918842530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &918842533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918842532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3143f1bab35b6da4ea62556bdce85b81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _androidGameId: 5257935
+  _iOSGameId: 5257934
+  _testMode: 1
