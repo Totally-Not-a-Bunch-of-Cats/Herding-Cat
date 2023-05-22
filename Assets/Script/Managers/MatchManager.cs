@@ -34,7 +34,7 @@ public class MatchManager : MonoBehaviour
     [SerializeField] public int RoundsPlayed = 0;
     [SerializeField] public int ItemsUsed = 0;
     [SerializeField] public LevelNameUpdator LevNameUpdator;
-    [SerializeField] public float CatSpeed = 0.5f;
+    [SerializeField] public GameObject indicator;
 
     public Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
@@ -146,6 +146,15 @@ public class MatchManager : MonoBehaviour
             if (currentLevel.NewThingIntroduced == true)
             {
                 HGC.GetComponent<HelpGUIController>().JumpToHelpScreen(currentLevel.Category, currentLevel.TileName);
+            }
+            if (currentLevel.name == "1-1")
+            {
+                Debug.Log("making lights");
+                //Instantiate(indicator, new Vector3(0, 0, 0), Quaternion.identity, transform);
+            }
+            if (currentLevel.name == "1-2")
+            {
+
             }
             return true;
         }
@@ -474,7 +483,7 @@ public class MatchManager : MonoBehaviour
                 Vector3 Goalpos = new Vector3(((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x))), 0f, 0f);
                 Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
-                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, CatSpeed, ListPos,  FinalDestination));
+                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos,  FinalDestination));
             }
         }
         else if (Direction.y > 0)
@@ -483,7 +492,7 @@ public class MatchManager : MonoBehaviour
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
             if (TempDestination != GameBoard.Cats[ListPos].Object.localPosition)
             {
-                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, CatSpeed, ListPos, FinalDestination));
+                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
             }
         }
         else if (Direction.x < 0)
@@ -493,7 +502,7 @@ public class MatchManager : MonoBehaviour
                 Vector3 Goalpos = new Vector3((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x)), 0f, 0f);
                 Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
-                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, CatSpeed, ListPos, FinalDestination));
+                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
             }
         }
         else
@@ -503,7 +512,7 @@ public class MatchManager : MonoBehaviour
 
             if (TempDestination != GameBoard.Cats[ListPos].Object.localPosition)
             {
-                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, CatSpeed, ListPos, FinalDestination));
+                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
             }
         }
         //move cat in data structure all at once

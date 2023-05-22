@@ -9,13 +9,19 @@ public class AdReward : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListe
     [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
     string adUnitId = null; // This will remain null for unsupported platforms
 
-    private void Start()
+    private void OnEnable()
     {
 #if UNITY_IOS
     adUnitId = _iOSAdUnitId;
 #elif UNITY_ANDROID
     adUnitId = _androidAdUnitId;
 #endif
+        _showAdButton.interactable = false;
+        Debug.Log("enabled");
+        if(Advertisement.isInitialized == true)
+        {
+            LoadAd();
+        }
     }
     // Call this public method when you want to get an ad ready to show.
     public void LoadAd()
@@ -42,6 +48,7 @@ public class AdReward : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListe
     // Implement a method to execute when the user clicks the button:
     public void ShowAd()
     {
+        Debug.Log("button pushed");
         // Disable the button:
         _showAdButton.interactable = false;
         // Then show the ad:

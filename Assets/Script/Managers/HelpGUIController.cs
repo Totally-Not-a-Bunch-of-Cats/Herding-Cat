@@ -71,17 +71,14 @@ public class HelpGUIController : MonoBehaviour
         if(ScreenDiv > 2)
         {
             ActivePort = 1;
-            Debug.Log(ActivePort + " active port " + 1);
         }
         else if (ScreenDiv > 1.59f)
         {
             ActivePort = 0;
-            Debug.Log(ActivePort + " active port " + 0);
         }
         else
         {
             ActivePort = 2;
-            Debug.Log(ActivePort + " active port " + 2);
         }
     }
     
@@ -222,7 +219,6 @@ public class HelpGUIController : MonoBehaviour
         IsDirect = true;
         // Turn on Help GUI
         gameObject.SetActive(true);
-        Debug.Log(GameObject.Find("GUI"));
         GameObject.Find("GUI").SetActive(false);
         // Set Catagry
         SelectHelpCategory(Cat);

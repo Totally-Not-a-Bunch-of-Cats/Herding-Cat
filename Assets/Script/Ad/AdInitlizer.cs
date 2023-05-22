@@ -20,10 +20,12 @@ public class AdInitlizer : MonoBehaviour, IUnityAdsInitializationListener
 #elif UNITY_ANDROID
             gameId = _androidGameId;
 #endif
+#if UNITY_IOS || UNITY_ANDROID
         if (!Advertisement.isInitialized && Advertisement.isSupported)
         {
             Advertisement.Initialize(gameId, _testMode, this);
         }
+#endif
     }
 
 

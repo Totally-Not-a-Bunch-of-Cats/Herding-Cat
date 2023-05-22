@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     public int LevelPosition = 0;
     public bool ActivateItemIndicators = false;
     public float SpeedAdjustment = 1;
-    public int GamesTillRewardAd = 3;
+    public int GamesTillRewardAd = 4;
     public int GamesTillMandatoryAd = 10;
 
 
