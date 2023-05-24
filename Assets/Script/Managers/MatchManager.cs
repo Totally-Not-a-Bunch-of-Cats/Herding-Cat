@@ -34,7 +34,8 @@ public class MatchManager : MonoBehaviour
     [SerializeField] public int RoundsPlayed = 0;
     [SerializeField] public int ItemsUsed = 0;
     [SerializeField] public LevelNameUpdator LevNameUpdator;
-    [SerializeField] public GameObject indicator;
+    [SerializeField] public GameObject Indicator;
+    [SerializeField] public GameObject EndTurnIndicator;
 
     public Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
@@ -149,12 +150,18 @@ public class MatchManager : MonoBehaviour
             }
             if (currentLevel.name == "1-1")
             {
-                Debug.Log("making lights");
-                //Instantiate(indicator, new Vector3(0, 0, 0), Quaternion.identity, transform);
+                Instantiate(Indicator, new Vector3(1, 0, 0), Quaternion.identity, transform);
+                EndTurnIndicator.SetActive(true);
             }
             if (currentLevel.name == "1-2")
             {
-
+                Debug.Log("making lights");
+                Instantiate(Indicator, new Vector3(0, 1, 0), Quaternion.identity, transform);
+                ParticleSystem ps = Indicator.GetComponent<ParticleSystem>();
+                ParticleSystem.MainModule psmain = ps.main;
+                psmain.startColor = new Color(1, 0.75f, 0);
+                Instantiate(Indicator, new Vector3(0, -1, 0), Quaternion.identity, transform);
+                EndTurnIndicator.SetActive(true);
             }
             return true;
         }
@@ -353,8 +360,12 @@ public class MatchManager : MonoBehaviour
         {
             ActiveMatch = false;
             CurrentLevel.CalculateStars(RoundsPlayed, ItemsUsed, GameManager.Instance.UpdateLevelData);
-
-            // Finds next level name 
+            //prevent player spam
+            if(CurrentLevel.NewThingIntroduced == true && GameManager.Instance.ClearStartHelpScreen == true)
+            {
+                CurrentLevel.NewThingIntroduced = false;
+            }
+            //Finds next level name
             string[] LevelNameParts = CurrentLevel.name.Split('-');
             string NextLevelName = LevelNameParts[0] + "-";
             try
@@ -389,7 +400,7 @@ public class MatchManager : MonoBehaviour
             {
                 // Updates level data info for current/next level
                 GameManager.Instance.Levels.Find(level => level.name == NextLevelName).SetUnlocked(true);
-            } 
+            }
             else
             {
                 // Logs in console that next level would be unlocked and value that current levels star count would be set to

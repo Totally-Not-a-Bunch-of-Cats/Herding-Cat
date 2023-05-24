@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     public float SpeedAdjustment = 1;
     public int GamesTillRewardAd = 4;
     public int GamesTillMandatoryAd = 10;
+    public bool ClearStartHelpScreen = false;
 
 
     // Used for testing to determine if star count for a level should be changed or outputed in console.
