@@ -180,17 +180,11 @@ public class UIManager : MonoBehaviour
         {
             SelectedButton.GetComponent<Image>().sprite = BoxSprite;
         }
-        if (SelectedItem != item)
-        {
-            SelectedButton = selectedButton;
-            SelectedButton.GetComponent<Image>().sprite = SelectedBoxSprite;
-            SelectedItem = item;
-            CanPlaceItem = true;
-        }
-        else
-        {
-            SelectedItem = null;
-        }
+
+        SelectedButton = selectedButton;
+        SelectedButton.GetComponent<Image>().sprite = SelectedBoxSprite;
+        SelectedItem = item;
+        CanPlaceItem = true;
 
     }
 
@@ -214,7 +208,7 @@ public class UIManager : MonoBehaviour
             SelectedItem = null;
             if (SelectedButton != null)
             {
-                SelectedButton.GetComponent<Image>().color = new Color(.5f, .5f, .5f, 1);
+                SelectedButton.GetComponent<Image>().sprite = BoxSprite;
             }
             GameManager.Instance._ReWindManager.Revert();
         }

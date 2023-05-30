@@ -16,6 +16,8 @@ MonoBehaviour:
   TargetRounds: 1
   TargetItems: 1
   NewThingIntroduced: 1
+  Category: 3
+  TileName: Cat Tree
   BackgroundTile: {fileID: 11400000, guid: 103593486162c964aa10539a0ed04a9e, type: 2}
   Tiles:
   - Position: {x: 3, y: 0}
@@ -36,5 +38,5 @@ MonoBehaviour:
     Redirection: {x: 0, y: 0}
   PossibleItems:
   - {fileID: 11400000, guid: a58def140dd3b74468a5da712b3041fa, type: 2}
-  StarsEarned: 3
-  Unlocked: 0
+  StarsEarned: 0
+  Unlocked: 1

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 /// <summary>
 /// Holds info related to the Help screen entry
@@ -10,6 +11,7 @@ public class HelpInfo
 {
     public string name = "";
     public string Description = "";
-    public Texture Video;
+    public VideoClip Video;
     public Sprite Icon;
+    public Vector3 IconScale;
 }
