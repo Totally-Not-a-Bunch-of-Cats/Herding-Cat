@@ -17,7 +17,6 @@ public class AdReward : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListe
     adUnitId = _androidAdUnitId;
 #endif
         _showAdButton.interactable = false;
-        Debug.Log("enabled");
         if(Advertisement.isInitialized == true)
         {
             LoadAd();
@@ -27,15 +26,12 @@ public class AdReward : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListe
     public void LoadAd()
     {
         // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
-        Debug.Log("Loading Ad: " + adUnitId);
         Advertisement.Load(adUnitId, this);
     }
 
     // If the ad successfully loads, add a listener to the button and enable it:
     public void OnUnityAdsAdLoaded(string adUnitId)
     {
-        Debug.Log("Ad Loaded: " + adUnitId);
-
         if (adUnitId.Equals(adUnitId))
         {
             // Configure the button to call the ShowAd() method when clicked:
@@ -48,11 +44,11 @@ public class AdReward : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListe
     // Implement a method to execute when the user clicks the button:
     public void ShowAd()
     {
-        Debug.Log("button pushed");
         // Disable the button:
         _showAdButton.interactable = false;
         // Then show the ad:
         Advertisement.Show(adUnitId, this);
+        GameManager.Instance.GamesTillRewardAd = 4;
     }
 
     // Implement the Show Listener's OnUnityAdsShowComplete callback method to determine if the user gets a reward:
@@ -60,7 +56,6 @@ public class AdReward : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListe
     {
         if (adUnitId.Equals(adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
-            Debug.Log("Unity Ads Rewarded Ad Completed");
             // Grant a reward.
         }
     }

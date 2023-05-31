@@ -35,7 +35,10 @@ public class MatchManager : MonoBehaviour
     [SerializeField] public int ItemsUsed = 0;
     [SerializeField] public LevelNameUpdator LevNameUpdator;
     [SerializeField] public GameObject Indicator;
-    [SerializeField] public GameObject EndTurnIndicator;
+    [SerializeField] public GameObject SavedIndicator;
+    [SerializeField] public GameObject SavedIndicator2;
+    [SerializeField] public GameObject RewardAD;
+    [SerializeField] public GameObject ForcedAD;
 
     public Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
@@ -150,18 +153,11 @@ public class MatchManager : MonoBehaviour
             }
             if (currentLevel.name == "1-1")
             {
-                Instantiate(Indicator, new Vector3(1, 0, 0), Quaternion.identity, transform);
-                EndTurnIndicator.SetActive(true);
+                SavedIndicator = Instantiate(Indicator, new Vector3(1, 0, 0), Quaternion.identity, transform);
             }
             if (currentLevel.name == "1-2")
             {
-                Debug.Log("making lights");
-                Instantiate(Indicator, new Vector3(0, 1, 0), Quaternion.identity, transform);
-                ParticleSystem ps = Indicator.GetComponent<ParticleSystem>();
-                ParticleSystem.MainModule psmain = ps.main;
-                psmain.startColor = new Color(1, 0.75f, 0);
-                Instantiate(Indicator, new Vector3(0, -1, 0), Quaternion.identity, transform);
-                EndTurnIndicator.SetActive(true);
+                SavedIndicator = Instantiate(Indicator, new Vector3(0, 1, 0), Quaternion.identity, transform);
             }
             return true;
         }
@@ -688,6 +684,17 @@ public class MatchManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator VictoryPause()
     {
+        GameManager.Instance.GamesTillRewardAd -= 1;
+        GameManager.Instance.GamesTillMandatoryAd -= 1;
+        if(GameManager.Instance.GamesTillRewardAd == 0)
+        {
+            RewardAD.SetActive(true);
+        }
+        if (GameManager.Instance.GamesTillMandatoryAd == 0)
+        {
+            ForcedAD.SetActive(true);
+            GameManager.Instance.GamesTillMandatoryAd = 10;
+        }
         yield return new WaitWhile(() => CatMoving);
         yield return new WaitForSeconds(.15f);
         GameWonUI.SetActive(true);
