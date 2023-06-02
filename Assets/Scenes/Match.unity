@@ -15977,6 +15977,8 @@ MonoBehaviour:
   ItemsUsed: 0
   LevNameUpdator: {fileID: 1800982998}
   Indicator: {fileID: 1173179164}
+  SavedIndicator: {fileID: 0}
+  SavedIndicator2: {fileID: 0}
   RewardAD: {fileID: 1097365776}
   ForcedAD: {fileID: 1988917680}
   BoardTileMap: {fileID: 0}

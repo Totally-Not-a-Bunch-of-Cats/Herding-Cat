@@ -39,6 +39,7 @@ public class MatchManager : MonoBehaviour
     [SerializeField] public GameObject SavedIndicator2;
     [SerializeField] public GameObject RewardAD;
     [SerializeField] public GameObject ForcedAD;
+    [SerializeField] public Animator Animator;
 
     public Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
@@ -481,6 +482,7 @@ public class MatchManager : MonoBehaviour
     /// <param name="ListPos">Location in list that cat is stored</param>
     public void MoveCat(Vector2Int Direction, Tile Cat, Vector2Int FinalDestination, int ListPos)
     {
+        Animator = GameBoard.Cats[ListPos].Object.GetComponentInChildren<Animator>();
         Vector2Int CatPos = GameBoard.Cats[ListPos].Position;
         //moves the cat the correct the direction
         if (Direction.x > 0)
@@ -489,7 +491,8 @@ public class MatchManager : MonoBehaviour
             {
                 Vector3 Goalpos = new Vector3(((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x))), 0f, 0f);
                 Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
-
+                Animator.SetBool("Idle", false);
+                Animator.SetBool("Walk", true);
                 StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos,  FinalDestination));
             }
         }
@@ -499,6 +502,8 @@ public class MatchManager : MonoBehaviour
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
             if (TempDestination != GameBoard.Cats[ListPos].Object.localPosition)
             {
+                Animator.SetBool("Idle", false);
+                Animator.SetBool("Walk", true);
                 StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
             }
         }
@@ -508,7 +513,8 @@ public class MatchManager : MonoBehaviour
             {
                 Vector3 Goalpos = new Vector3((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x)), 0f, 0f);
                 Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
-
+                Animator.SetBool("Idle", false);
+                Animator.SetBool("Walk", true);
                 StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
             }
         }
@@ -519,6 +525,8 @@ public class MatchManager : MonoBehaviour
 
             if (TempDestination != GameBoard.Cats[ListPos].Object.localPosition)
             {
+                Animator.SetBool("Idle", false);
+                Animator.SetBool("Walk", true);
                 StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
             }
         }
@@ -528,7 +536,6 @@ public class MatchManager : MonoBehaviour
             //adds cats to the pen count when they move in
             if (GameBoard.At(FinalDestination).Is<CatPen>())
             {   
-                Debug.Log("Is Pen");
                 CatJustinCage = true;
                 GameBoard.SecondCatList.Add(new PosObject(GameBoard.Cats[ListPos].Position, GameBoard.Cats[ListPos].Object, GameBoard.Cats[ListPos].ItemAdjObject, GameBoard.Cats[ListPos].Name, GameBoard.Cats[ListPos].Tile));
                 GameBoard.Set(CatPos, null);
@@ -593,12 +600,15 @@ public class MatchManager : MonoBehaviour
     {
         CatMoving = true;
         float startTime = Time.time;
+
         while (Time.time < startTime + (overTime / GameManager.Instance.SpeedAdjustment))
         {
             GameBoard.Cats[ListPos].Object.localPosition = Vector3.Lerp(source, target, (Time.time - startTime) / overTime);
-
+         
             yield return null;
         }
+        Animator.SetBool("Walk", false);
+        Animator.SetBool("Idle", true);
         GameBoard.Cats[ListPos].Object.localPosition = target;
         if (GameBoard.At(FinalDestination) != null)
         {
