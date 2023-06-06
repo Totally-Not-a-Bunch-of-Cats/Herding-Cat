@@ -148,7 +148,7 @@ public class UIManager : MonoBehaviour
                             }
                         }
                     }
-                    if(GameManager.Instance._matchManager.GameBoard.Items.Count != 0)
+                    if (GameManager.Instance._matchManager.GameBoard.Items.Count != 0)
                     {
                         if (GameManager.Instance._matchManager.CurrentLevel.name == "1-1" && GameManager.Instance._matchManager.GameBoard.Items[0].Position == new Vector2(2, 0))
                         {

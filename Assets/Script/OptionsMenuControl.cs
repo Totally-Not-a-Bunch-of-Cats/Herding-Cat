@@ -11,6 +11,7 @@ public class OptionsMenuControl : MonoBehaviour
 {
     public Slider SpeedAdjustSlider;
     public TMP_Text SpeedAdjustText;
+    public Button[] ItemAffectButtons;
 
     private readonly string SpeedAdjustWording = "Cat Speed Augment: ";
 
@@ -25,4 +26,20 @@ public class OptionsMenuControl : MonoBehaviour
         SpeedAdjustText.text = SpeedAdjustWording + AgmentAmount;
     }
 
+    public void AffectToggle(bool ItemAffect)
+    {
+        //GameManager.Instance.ShowAffects = ItemAffect;
+        if (ItemAffect)//true(1)
+        {
+            //0: true, 1: false
+            ItemAffectButtons[1].interactable = !ItemAffect;
+            ItemAffectButtons[0].interactable = ItemAffect;
+        }
+        else
+        {
+            //0: false, 1: true
+            ItemAffectButtons[0].interactable = ItemAffect;
+            ItemAffectButtons[1].interactable = !ItemAffect;
+        }
+    }
 }
