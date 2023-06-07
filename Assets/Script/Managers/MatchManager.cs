@@ -35,6 +35,7 @@ public class MatchManager : MonoBehaviour
     [SerializeField] public int ItemsUsed = 0;
     [SerializeField] public LevelNameUpdator LevNameUpdator;
     [SerializeField] public GameObject Indicator;
+    [SerializeField] public GameObject UIIndicator;
     [SerializeField] public GameObject SavedIndicator;
     [SerializeField] public GameObject SavedIndicator2;
     [SerializeField] public GameObject RewardAD;
@@ -493,6 +494,7 @@ public class MatchManager : MonoBehaviour
                 Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
                 Animator.SetBool("Idle", false);
                 Animator.SetBool("Walk", true);
+                GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0,180,0,0);
                 StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos,  FinalDestination));
             }
         }
@@ -504,6 +506,7 @@ public class MatchManager : MonoBehaviour
             {
                 Animator.SetBool("Idle", false);
                 Animator.SetBool("Walk", true);
+                GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 0, 0, -90);
                 StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
             }
         }
@@ -515,6 +518,7 @@ public class MatchManager : MonoBehaviour
                 Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
                 Animator.SetBool("Idle", false);
                 Animator.SetBool("Walk", true);
+                GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 0, 0, 0);
                 StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
             }
         }
@@ -527,6 +531,7 @@ public class MatchManager : MonoBehaviour
             {
                 Animator.SetBool("Idle", false);
                 Animator.SetBool("Walk", true);
+                GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 0, 0, 90);
                 StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
             }
         }

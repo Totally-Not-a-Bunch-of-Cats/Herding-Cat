@@ -153,7 +153,7 @@ public class UIManager : MonoBehaviour
                         if (GameManager.Instance._matchManager.CurrentLevel.name == "1-1" && GameManager.Instance._matchManager.GameBoard.Items[0].Position == new Vector2(2, 0))
                         {
                             GameManager.Instance._matchManager.SavedIndicator.SetActive(false);
-                            Instantiate(GameManager.Instance._matchManager.Indicator, new Vector3(3.38f, -1.62f, 0), Quaternion.identity, Board.transform);
+                            Instantiate(GameManager.Instance._matchManager.UIIndicator, GameObject.Find("End Turn Button").transform.position, Quaternion.identity, GUI.transform);
                         }
                         if (GameManager.Instance._matchManager.CurrentLevel.name == "1-2" && GameManager.Instance._matchManager.GameBoard.Items[0].Position == new Vector2(1, 2) && NextIndicator)
                         {
@@ -167,7 +167,7 @@ public class UIManager : MonoBehaviour
                         if (GameManager.Instance._matchManager.CurrentLevel.name == "1-2" && GameManager.Instance._matchManager.GameBoard.Items[1].Position == new Vector2(1, 0))
                         {
                             GameManager.Instance._matchManager.SavedIndicator2.SetActive(false);
-                            Instantiate(GameManager.Instance._matchManager.Indicator, new Vector3(3.38f, -1.62f, 0), Quaternion.identity, Board.transform);
+                            Instantiate(GameManager.Instance._matchManager.UIIndicator, GameObject.Find("End Turn Button").transform.position, Quaternion.identity, GUI.transform);
                         }
                     }
                     CanPlaceItem = false;
