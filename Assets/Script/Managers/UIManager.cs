@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
     public Sprite SelectedBoxSprite;
     public Sprite BoxSprite;
     public bool NextIndicator = true;
+    public GameObject PauseMenu;
 
     /// <summary>
     /// finds the Board game object and GUI object
