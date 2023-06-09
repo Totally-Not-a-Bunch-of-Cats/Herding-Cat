@@ -13,7 +13,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     // Number of stars that the player has
-    private int CurrentStars = 0;
+    public int CurrentStars = 0;
 
     //Holds references to the other managers
     public MatchManager _matchManager;

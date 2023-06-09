@@ -1951,7 +1951,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &266214300
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2363,6 +2363,7 @@ GameObject:
   - component: {fileID: 326395017}
   - component: {fileID: 326395016}
   - component: {fileID: 326395015}
+  - component: {fileID: 326395018}
   m_Layer: 5
   m_Name: Puchase Button
   m_TagString: Untagged
@@ -2473,6 +2474,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 326395013}
   m_CullTransparentMesh: 0
+--- !u!114 &326395018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326395013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b79b5624d944058bd39aad2b90fb275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productId: corralling_cats.medium_star_bundle
+  buttonType: 0
+  consumePurchase: 1
+  onTransactionsRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 573573433}
+        m_TargetAssemblyTypeName: AddStars, Scripts
+        m_MethodName: AddStar
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2500
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  onProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  button: {fileID: 0}
 --- !u!1 &346846793
 GameObject:
   m_ObjectHideFlags: 0
@@ -3349,6 +3390,7 @@ GameObject:
   - component: {fileID: 469066734}
   - component: {fileID: 469066733}
   - component: {fileID: 469066732}
+  - component: {fileID: 469066735}
   m_Layer: 5
   m_Name: Puchase Button
   m_TagString: Untagged
@@ -3459,6 +3501,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 469066730}
   m_CullTransparentMesh: 0
+--- !u!114 &469066735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469066730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b79b5624d944058bd39aad2b90fb275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productId: corralling_cats.small_star_bundle
+  buttonType: 0
+  consumePurchase: 1
+  onTransactionsRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 573573433}
+        m_TargetAssemblyTypeName: AddStars, Scripts
+        m_MethodName: AddStar
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 500
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  onProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  button: {fileID: 469066732}
 --- !u!1 &491002154
 GameObject:
   m_ObjectHideFlags: 0
@@ -8821,6 +8903,7 @@ GameObject:
   - component: {fileID: 573573430}
   - component: {fileID: 573573429}
   - component: {fileID: 573573432}
+  - component: {fileID: 573573433}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -8927,6 +9010,18 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &573573433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573573428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 134a7f318d5ebb645aaeee07526427cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &590710135
 GameObject:
   m_ObjectHideFlags: 0
@@ -10986,6 +11081,7 @@ GameObject:
   - component: {fileID: 861908385}
   - component: {fileID: 861908384}
   - component: {fileID: 861908383}
+  - component: {fileID: 861908386}
   m_Layer: 5
   m_Name: Puchase Button
   m_TagString: Untagged
@@ -11096,6 +11192,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 861908381}
   m_CullTransparentMesh: 0
+--- !u!114 &861908386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861908381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b79b5624d944058bd39aad2b90fb275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productId: corralling_cats.mega_star_bundle
+  buttonType: 0
+  consumePurchase: 1
+  onTransactionsRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 573573433}
+        m_TargetAssemblyTypeName: AddStars, Scripts
+        m_MethodName: AddStar
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5000
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  onProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  button: {fileID: 0}
 --- !u!1 &862749608
 GameObject:
   m_ObjectHideFlags: 0
@@ -17901,7 +18037,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1828687404
 RectTransform:
   m_ObjectHideFlags: 0
