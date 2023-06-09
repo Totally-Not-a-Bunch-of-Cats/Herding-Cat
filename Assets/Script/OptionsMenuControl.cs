@@ -18,6 +18,8 @@ public class OptionsMenuControl : MonoBehaviour
     private void Awake()
     {
         SpeedAdjustSlider.value = (GameManager.Instance.SpeedAdjustment - .75f) / .25f;
+        ItemAffectButtons[1].interactable = !GameManager.Instance.ShowAffects;
+        ItemAffectButtons[0].interactable = GameManager.Instance.ShowAffects;
     }
 
     public void SpeedChange()
@@ -28,16 +30,14 @@ public class OptionsMenuControl : MonoBehaviour
 
     public void AffectToggle(bool ItemAffect)
     {
-        //GameManager.Instance.ShowAffects = ItemAffect;
-        if (ItemAffect)//true(1)
+        GameManager.Instance.ShowAffects = ItemAffect;
+        if (ItemAffect)
         {
-            //0: true, 1: false
             ItemAffectButtons[1].interactable = !ItemAffect;
             ItemAffectButtons[0].interactable = ItemAffect;
         }
         else
         {
-            //0: false, 1: true
             ItemAffectButtons[0].interactable = ItemAffect;
             ItemAffectButtons[1].interactable = !ItemAffect;
         }

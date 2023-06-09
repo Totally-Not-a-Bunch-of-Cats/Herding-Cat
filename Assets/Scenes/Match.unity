@@ -3218,6 +3218,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1830980257293712753, guid: 01a0f943f87154d288a7ba9a4ca79cf1, type: 3}
   m_PrefabInstance: {fileID: 372479314}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &372479316 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1608512295484780026, guid: 01a0f943f87154d288a7ba9a4ca79cf1, type: 3}
+  m_PrefabInstance: {fileID: 372479314}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &403131785
 GameObject:
   m_ObjectHideFlags: 0
@@ -14777,6 +14788,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ee66fb6c2d26634f9e21b59e24bee4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PauseMenu: {fileID: 1234941266}
+  PauseButton: {fileID: 1289695382}
+  RestartButton: {fileID: 1370403330}
+  RewindButton: {fileID: 2074573724}
+  EndTurnButton: {fileID: 372479316}
 --- !u!1 &1241499779
 GameObject:
   m_ObjectHideFlags: 0
@@ -15347,20 +15363,24 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2190329774030321587, guid: 732cea236a696485a80ae3ce15e08b5c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2190329774030321587, guid: 732cea236a696485a80ae3ce15e08b5c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2190329774030321587, guid: 732cea236a696485a80ae3ce15e08b5c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2190329774030321587, guid: 732cea236a696485a80ae3ce15e08b5c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2190329774030321587, guid: 732cea236a696485a80ae3ce15e08b5c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1234941266}
+      objectReference: {fileID: 1800982998}
     - target: {fileID: 2190329774030321587, guid: 732cea236a696485a80ae3ce15e08b5c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -15374,8 +15394,12 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2190329774030321587, guid: 732cea236a696485a80ae3ce15e08b5c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2190329774030321587, guid: 732cea236a696485a80ae3ce15e08b5c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: PauseGame
       objectReference: {fileID: 0}
     - target: {fileID: 2190329774030321587, guid: 732cea236a696485a80ae3ce15e08b5c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -15383,15 +15407,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2190329774030321587, guid: 732cea236a696485a80ae3ce15e08b5c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: LevelNameUpdator, Scripts
       objectReference: {fileID: 0}
     - target: {fileID: 2190329774030321587, guid: 732cea236a696485a80ae3ce15e08b5c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2190329774030321587, guid: 732cea236a696485a80ae3ce15e08b5c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2190329774030321587, guid: 732cea236a696485a80ae3ce15e08b5c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2190329774030321587, guid: 732cea236a696485a80ae3ce15e08b5c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
@@ -15813,6 +15841,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2190329774030321598, guid: 5508fda544d6fe045b2e4d08aa3654f6, type: 3}
   m_PrefabInstance: {fileID: 456415374}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1370403330 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2190329774030321587, guid: 5508fda544d6fe045b2e4d08aa3654f6, type: 3}
+  m_PrefabInstance: {fileID: 456415374}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1372099256
 GameObject:
   m_ObjectHideFlags: 0
@@ -16505,6 +16544,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ee66fb6c2d26634f9e21b59e24bee4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PauseMenu: {fileID: 0}
+  PauseButton: {fileID: 0}
+  RestartButton: {fileID: 0}
+  RewindButton: {fileID: 0}
+  EndTurnButton: {fileID: 0}
 --- !u!114 &1453756898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18897,6 +18941,11 @@ MonoBehaviour:
   LevelName: {fileID: 1450613562}
   TargetRounds: {fileID: 1112352347}
   TargetItems: {fileID: 1005787393}
+  PauseMenu: {fileID: 1234941266}
+  PauseButton: {fileID: 1289695382}
+  RestartButton: {fileID: 1370403330}
+  RewindButton: {fileID: 2074573724}
+  EndTurnButton: {fileID: 372479316}
 --- !u!1 &1814370818
 GameObject:
   m_ObjectHideFlags: 0
@@ -19981,10 +20030,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1234941266}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1234941268}
+        m_TargetAssemblyTypeName: PauseMenuControl, Scripts
+        m_MethodName: ClosePauseMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -19992,18 +20041,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1289695382}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1964286552
 MonoBehaviour:
@@ -20921,6 +20958,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2073804420}
   m_CullTransparentMesh: 0
+--- !u!114 &2074573724 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1608512295484780026, guid: 01a0f943f87154d288a7ba9a4ca79cf1, type: 3}
+  m_PrefabInstance: {fileID: 8755788}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2121244893
 PrefabInstance:
   m_ObjectHideFlags: 0
