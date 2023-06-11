@@ -13,23 +13,17 @@ using UnityEngine;
 
 public class PlayerPrefsManager : MonoBehaviour
 {
-    public float sfxVolume;
-    public float musicVolume;
-    public int StarCount;
-    public string FurthestUnlockedLevel;
-    public float CatSpeed;
-    public bool ItemIndicators;
     /// <summary>
     /// loads important setting quick at game start
     /// </summary>
     public void LoadSettings()
     {
-        sfxVolume = PlayerPrefs.GetFloat("SfxVolume");
-        musicVolume = PlayerPrefs.GetFloat("MusicVolume");
-        StarCount = PlayerPrefs.GetInt("StarCount");
-        FurthestUnlockedLevel = PlayerPrefs.GetString("FurthestUnlockedLevel");
-        CatSpeed = PlayerPrefs.GetFloat("CatSpeed");
-        ItemIndicators = GetBool("ItemIndicators");
+        GameManager.Instance.sfxVolume = GetFloat("SfxVolume");
+        GameManager.Instance.musicVolume = GetFloat("MusicVolume");
+        GameManager.Instance.StarCount = GetInt("StarCount");
+        GameManager.Instance.CatSpeed = GetFloat("CatSpeed");
+        GameManager.Instance.ItemIndicators = GetBool("ItemIndicators");
+        GameManager.Instance.FurthestLevel = GetString("FurthestLevel");
     }
     /// <summary>
     /// goes through the levels on game launch to make sure the level data matches the playerprefs data
@@ -39,22 +33,21 @@ public class PlayerPrefsManager : MonoBehaviour
         //loop through all levels checking for saved data and making it match as well as unlocking all levels behind the FurthestUnlockedLevel
         for (int i = 0; i < GameManager.Instance.Levels.Count; i++)
         {
-            if(GetInt(GameManager.Instance.Levels[i].name) > 3)
+            if (GetInt(GameManager.Instance.Levels[i].name) > 3)
             {
                 SaveInt(GameManager.Instance.Levels[i].name, 0);
             }
-            else
+            else if(GameManager.Instance.FurthestLevel == GameManager.Instance.Levels[i].name)
             {
-                GameManager.Instance.Levels[i].StarsEarned = GetInt(GameManager.Instance.Levels[i].name);
-            }
-
-            if(GameManager.Instance.Levels[i].name == FurthestUnlockedLevel)
-            {
+                if(GetInt(GameManager.Instance.Levels[i].name) > 0)
+                {
+                    GameManager.Instance.Levels[i].StarsEarned = GetInt(GameManager.Instance.Levels[i].name);
+                }
                 break;
             }
             else
             {
-                GameManager.Instance.Levels[i].SetUnlocked(true);
+                GameManager.Instance.Levels[i].StarsEarned = GetInt(GameManager.Instance.Levels[i].name);
             }
         }
     }
@@ -69,7 +62,7 @@ public class PlayerPrefsManager : MonoBehaviour
     //gets float info with key
     public float GetFloat(string KeyName)
     {
-        return PlayerPrefs.GetFloat(KeyName);
+        return PlayerPrefs.GetFloat(KeyName , -1);
     }
 
 
@@ -82,7 +75,7 @@ public class PlayerPrefsManager : MonoBehaviour
     }
     public int GetInt(string KeyName)
     {
-        return PlayerPrefs.GetInt(KeyName);
+        return PlayerPrefs.GetInt(KeyName, -1);
     }
 
     //saves string
@@ -92,7 +85,7 @@ public class PlayerPrefsManager : MonoBehaviour
     }
     public string GetString(string KeyName)
     {
-        return PlayerPrefs.GetString(KeyName);
+        return PlayerPrefs.GetString(KeyName,"");
     }
 
 

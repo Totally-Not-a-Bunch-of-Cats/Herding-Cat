@@ -6,6 +6,7 @@ public class AddStars : MonoBehaviour
 {
   public void AddStar(int star)
     {
-        GameManager.Instance.CurrentStars += star;
+        GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", star);
+        GameManager.Instance.StarCount += star;
     }
 }

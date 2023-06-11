@@ -13,13 +13,14 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     // Number of stars that the player has
-    public int CurrentStars = 0;
+    public int StarCount;
 
     //Holds references to the other managers
     public MatchManager _matchManager;
     public UIManager _uiManager;
     public ScreenResizeManager _screenResizeManager;
     public ReWindManager _ReWindManager;
+    public PlayerPrefsManager _PlayerPrefsManager;
     //list of all level data
     //public static List<LevelData> Levels;
     public List<LevelData> Levels = new List<LevelData>();
@@ -33,13 +34,16 @@ public class GameManager : MonoBehaviour
     public int GamesTillRewardAd = 4;
     public int GamesTillMandatoryAd = 10;
     public bool ClearStartHelpScreen = false;
+    public string FurthestLevel;
     // Option Varables(Can be changed in options menu)
-    public float SpeedAdjustment = 1;
-    public bool ShowAffects = false;
+    public float CatSpeed = 1;
+    public bool ItemIndicators = false;
+    public float sfxVolume;
+    public float musicVolume;
 
     // Used for testing to determine if star count for a level should be changed or outputed in console.
-    [SerializeField] public bool UpdateLevelData = false;
-
+    public bool UpdateLevelData = false;
+    public bool PlayerPrefsTrue = false;
     public static GameManager Instance
     {
         get
@@ -71,26 +75,13 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
-    /// <summary>
-    /// Get all instances of scriptable objects with given type.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <returns></returns>
-    //public static List<T> GetAllInstances<T>() where T : ScriptableObject
-    //{
-    //    return AssetDatabase.FindAssets($"t: {typeof(T).Name}").ToList()
-    //                .Select(AssetDatabase.GUIDToAssetPath)
-    //                .Select(AssetDatabase.LoadAssetAtPath<T>)
-    //                .ToList();
-    //}
-
     /// <summary>
     /// Runs on start to start the first level
     /// </summary>
     private void Start()
     {
         Levels = GamelevelList.GameLevel;
+        _PlayerPrefsManager.LoadSettings();
         StartCoroutine(SwitchScene("Main Menu"));
     }
     public void ChangeScene(string Name)

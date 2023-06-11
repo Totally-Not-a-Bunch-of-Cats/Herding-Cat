@@ -397,6 +397,10 @@ public class MatchManager : MonoBehaviour
             if (GameManager.Instance.UpdateLevelData == true)
             {
                 // Updates level data info for current/next level
+                if(GameManager.Instance.PlayerPrefsTrue)
+                {
+                    GameManager.Instance._PlayerPrefsManager.SaveString("FurthestLevel", NextLevelName);
+                }
                 GameManager.Instance.Levels.Find(level => level.name == NextLevelName).SetUnlocked(true);
             }
             else
@@ -606,7 +610,7 @@ public class MatchManager : MonoBehaviour
         CatMoving = true;
         float startTime = Time.time;
 
-        while (Time.time < startTime + (overTime / GameManager.Instance.SpeedAdjustment))
+        while (Time.time < startTime + (overTime / GameManager.Instance.CatSpeed))
         {
             GameBoard.Cats[ListPos].Object.localPosition = Vector3.Lerp(source, target, (Time.time - startTime) / overTime);
          
@@ -712,6 +716,11 @@ public class MatchManager : MonoBehaviour
         }
         yield return new WaitWhile(() => CatMoving);
         yield return new WaitForSeconds(.15f);
+        if(GameManager.Instance.PlayerPrefsTrue)
+        {
+            GameManager.Instance._PlayerPrefsManager.SaveInt(CurrentLevel.name, CurrentLevel.StarsEarned);
+            GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", CurrentLevel.StarsEarned + GameManager.Instance.StarCount);
+        }
         GameWonUI.SetActive(true);
         ActivateStars();
     }

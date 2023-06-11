@@ -17,20 +17,21 @@ public class OptionsMenuControl : MonoBehaviour
 
     private void Awake()
     {
-        SpeedAdjustSlider.value = (GameManager.Instance.SpeedAdjustment - .75f) / .25f;
-        ItemAffectButtons[1].interactable = !GameManager.Instance.ShowAffects;
-        ItemAffectButtons[0].interactable = GameManager.Instance.ShowAffects;
+        SpeedAdjustSlider.value = (GameManager.Instance.CatSpeed - .75f) / .25f;
+        ItemAffectButtons[1].interactable = !GameManager.Instance.ItemIndicators;
+        ItemAffectButtons[0].interactable = GameManager.Instance.ItemIndicators;
     }
 
     public void SpeedChange()
     {
         float AgmentAmount = SpeedAdjustSlider.value + 1 - (.25f + (0.75f * SpeedAdjustSlider.value));
         SpeedAdjustText.text = SpeedAdjustWording + AgmentAmount;
+        GameManager.Instance._PlayerPrefsManager.SaveFloat("CatSpeed", AgmentAmount);
     }
-
+    
     public void AffectToggle(bool ItemAffect)
     {
-        GameManager.Instance.ShowAffects = ItemAffect;
+        GameManager.Instance.ItemIndicators = ItemAffect;
         if (ItemAffect)
         {
             ItemAffectButtons[1].interactable = !ItemAffect;
@@ -41,5 +42,6 @@ public class OptionsMenuControl : MonoBehaviour
             ItemAffectButtons[0].interactable = ItemAffect;
             ItemAffectButtons[1].interactable = !ItemAffect;
         }
+        GameManager.Instance._PlayerPrefsManager.SaveBool("ItemIndicators", ItemAffect);
     }
 }
