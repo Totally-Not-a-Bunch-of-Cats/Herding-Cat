@@ -81,7 +81,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Levels = GamelevelList.GameLevel;
-        _PlayerPrefsManager.LoadSettings();
+        if(PlayerPrefsTrue)
+        {
+            _PlayerPrefsManager.LoadSettings();
+        }
         StartCoroutine(SwitchScene("Main Menu"));
     }
     public void ChangeScene(string Name)
