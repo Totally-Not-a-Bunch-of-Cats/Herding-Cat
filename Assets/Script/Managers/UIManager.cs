@@ -100,6 +100,12 @@ public class UIManager : MonoBehaviour
                         GameObject temp = Instantiate(SelectedItem.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);
                         temp.name = SelectedItem.name + $" ({itemLocation.x}, {itemLocation.y})";
                         GameManager.Instance._matchManager.GameBoard.Items.Add(new PosObject(itemLocation, SelectedItem.name, SelectedItem, temp.transform));
+                        
+                        if (GameManager.Instance.ItemIndicators || GameManager.Instance._matchManager.CurrentLevel.NewItemIntroduced)
+                        {
+                            TurnOnIndicator(GameManager.Instance._matchManager.GameBoard.Items[GameManager.Instance._matchManager.GameBoard.Items.Count-1]);
+                        }
+                        
                         // Adds Item to the list to delete/adjust order of items
                         GameObject NewItemEntry = Instantiate(ItemAdjPrefab, new Vector3(0, 0, 0), Quaternion.identity, ItemAdjPanel.transform.GetChild(0).GetChild(0));
                         NewItemEntry.GetComponent<ItemAdjPanel>().ItemImage.sprite = temp.GetComponent<SpriteRenderer>().sprite;
@@ -317,4 +323,32 @@ public class UIManager : MonoBehaviour
             CurrentSelectedItem = null;
         }
     }
-}   
+
+    /// <summary>
+    /// Turns on valid item affect
+    /// </summary>
+    /// <param name="PlacedItem"></param>
+    public void TurnOnIndicator(PosObject PlacedItem)
+    {
+        AffectIndicator[] IndicatorList = PlacedItem.Object.GetComponentsInChildren<AffectIndicator>(true);
+        for (int i = 0; i < IndicatorList.Length; i++)
+        {
+            Vector2Int IndicatorSpot = PlacedItem.Position;
+            IndicatorSpot += IndicatorList[i].ItemAffectOffset;
+            if (!(IndicatorSpot.x < 0 || IndicatorSpot.x >= GameManager.Instance._matchManager.GameBoard.GetWidth()
+                || IndicatorSpot.y < 0 || IndicatorSpot.y >= GameManager.Instance._matchManager.GameBoard.GetHeight()))
+            {
+                if (GameManager.Instance._matchManager.GameBoard.At(IndicatorSpot) != null)
+                {
+                    if (GameManager.Instance._matchManager.GameBoard.At(IndicatorSpot).name != "Wall")
+                    {
+                        IndicatorList[i].gameObject.SetActive(true);
+                    }
+                } else
+                {
+                    IndicatorList[i].gameObject.SetActive(true);
+                }
+            }
+        }
+    }
+}

@@ -19,11 +19,11 @@ public class MatchManager : MonoBehaviour
     [Header("Board")]
     [Space]
     public Board GameBoard;
-    [SerializeField] public Vector2Int BoardSize;
+    public Vector2Int BoardSize;
     public bool ActiveMatch = false;
     private bool CatMoving = false;
     public Vector3 BoardOffset;
-    [SerializeField] public bool CatJustinCage = false;
+    public bool CatJustinCage = false;
     public HelpGUIController HGC;
 
     //stores the items used, rounds passed, and targets for starts gained
@@ -31,21 +31,21 @@ public class MatchManager : MonoBehaviour
     [Space]
     [SerializeField] private int TargetRounds = 10;
     [SerializeField] private int TargetItems = 10;
-    [SerializeField] public int RoundsPlayed = 0;
-    [SerializeField] public int ItemsUsed = 0;
-    [SerializeField] public LevelNameUpdator LevNameUpdator;
-    [SerializeField] public GameObject Indicator;
-    [SerializeField] public GameObject UIIndicator;
-    [SerializeField] public GameObject SavedIndicator;
-    [SerializeField] public GameObject SavedIndicator2;
-    [SerializeField] public GameObject RewardAD;
-    [SerializeField] public GameObject ForcedAD;
-    [SerializeField] public Animator Animator;
+    public int RoundsPlayed = 0;
+    public int ItemsUsed = 0;
+    public LevelNameUpdator LevNameUpdator;
+    public GameObject Indicator;
+    public GameObject UIIndicator;
+    public GameObject SavedIndicator;
+    public GameObject SavedIndicator2;
+    public GameObject RewardAD;
+    public GameObject ForcedAD;
+    public Animator Animator;
 
     public Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
     public LevelData CurrentLevel;
-    [SerializeField] public GameObject GameWonUI;
+    public GameObject GameWonUI;
 
     /// <summary>
     /// Initialize the <see cref="Board"/> and all scene <see cref="GameObject"/>s for the match
@@ -186,7 +186,6 @@ public class MatchManager : MonoBehaviour
             {
                 yield return new WaitWhile(() => CatMoving);
                 Item CurrentItem = GameBoard.At(GameBoard.Items[i].Position) as Item;
-                //int ClosestDistance = -1;
                 List<CatMovementInfo> CatMoveInfo = new List<CatMovementInfo>();
 
                 // loops through cats to find the closest one to the item to move
