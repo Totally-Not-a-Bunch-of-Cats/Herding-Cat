@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d50602962f0ea0e4b98a3b37784fa532, type: 3}
   m_Name: Rocky
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 7093649456058251314, guid: 9e79d78799b701e4082924dbc4b93a6b, type: 3}
+  Prefab: {fileID: 8240416316199233780, guid: 677c103203a90d443b64803242b7c882, type: 3}
   Distance: 0
   Skipped: 0
   Speed: 0
