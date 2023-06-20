@@ -585,10 +585,49 @@ public class MatchManager : MonoBehaviour
         }
 
         //loops through the saved tiles to check if they are no longer occupied by a cat 
-        for(int i = 0; i < GameBoard.SavedTiles.Count; i++)
+        if (GameBoard.SavedTiles.Count > 0)
+        {
+            SetSavedTiles();
+        }
+    }
+
+    /// <summary>
+    /// Loops through saved tiles, to check if cats are no longer on the tile
+    /// </summary>
+    public void SetSavedTiles()
+    {
+        for (int i = 0; i < GameBoard.SavedTiles.Count; i++)
         {
             if (GameBoard.At(GameBoard.SavedTiles[i].Position) == null)
             {
+                if (GameBoard.SavedTiles[i].Slate.name == "Cat Tube")
+                {
+                    for (int j = 0; j < GameBoard.Tubes.Count; j++)
+                    {
+                        if (GameBoard.SavedTiles[i].Position == GameBoard.Tubes[j].Position)
+                        {
+                            if (GameBoard.At(GameBoard.Tubes[j].TubeDestination).Is<Cat>())
+                            {
+                                for (int k = 0; k < GameBoard.Cats.Count; k++)
+                                {
+                                    if (GameBoard.Cats[k] != null)
+                                    {
+                                        if (GameBoard.Cats[k].Position == GameBoard.Tubes[j].TubeDestination)
+                                        {
+                                            GameBoard.Set(GameBoard.SavedTiles[i].Position, GameBoard.SavedTiles[i].Slate);
+                                            GameBoard.SavedTiles.RemoveAt(i);
+                                            TileCatTubeMove(GameBoard.Cats[k], k);
+                                            SetSavedTiles();
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        }
+                    }
+                }
+
                 GameBoard.Set(GameBoard.SavedTiles[i].Position, GameBoard.SavedTiles[i].Slate);
                 GameBoard.SavedTiles.RemoveAt(i);
             }
@@ -650,6 +689,7 @@ public class MatchManager : MonoBehaviour
         //cycles through all of the tubes looking for the right one to move the cat tube
         for (int i = 0; i < GameBoard.Tubes.Count; i++)
         {
+            Debug.Log(GameBoard.At(GameBoard.Tubes[i].TubeDestination));
             //checks to see if there is room for the cat to move before movings
             if (GameBoard.Tubes[i].Position == cat.Position && GameBoard.At(GameBoard.Tubes[i].TubeDestination).name == "Cat Tube")
             {
@@ -740,6 +780,12 @@ public class MatchManager : MonoBehaviour
             Stars[i].color = Color.white;
         }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="i">Index of cat in list that is falling asleep</param>
+    /// <returns></returns>
     public IEnumerator DecaySleep(int i)
     {
         Color FullAlpha = GameBoard.Cats[i].Object.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>().color;
