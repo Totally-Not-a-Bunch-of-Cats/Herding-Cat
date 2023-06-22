@@ -41,6 +41,7 @@ public class MatchManager : MonoBehaviour
     public GameObject RewardAD;
     public GameObject ForcedAD;
     public Animator Animator;
+    [SerializeField] Sprite[] TubeIcons;
 
     public Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
@@ -89,7 +90,7 @@ public class MatchManager : MonoBehaviour
             // setup background(tilemap)
             for (int x = (int)(-tempx - (0.5f + BoardOffset.x)); x < tempx; x++)
             {
-                for (int y = (int)(-tempy - (0.5f + BoardOffset.y)) ; y < tempy; y++)
+                for (int y = (int)(-tempy - (0.5f + BoardOffset.y)); y < tempy; y++)
                 {
                     BoardTileMap.SetTile(new Vector3Int(x, y, 0), currentLevel.GetBackgroundTile());
                 }
@@ -97,11 +98,24 @@ public class MatchManager : MonoBehaviour
 
             // place tiles(cat pens/cats/traps) associated to level
             int count = 0;
+            Transform[,] TubePairs = new Transform[GameBoard.Tubes.Count/2, 2];
             for (int i = 0; i < currentLevel.GetTiles().Length; i++)
             {
                 Vector3 pos = new Vector3(currentLevel.GetTiles()[i].Position.x - tempx + 0.5f - BoardOffset.x,
                     currentLevel.GetTiles()[i].Position.y - tempy + 0.5f - BoardOffset.y, 5);
                 Transform temp = Instantiate(currentLevel.GetTiles()[i].Slate.GetPrefab(), pos, Quaternion.identity, transform).transform;
+                if(currentLevel.GetTiles()[i].Slate.name == "Cat Tube")
+                {
+                    for(int j = 0; j < GameBoard.Tubes.Count/2; j++)
+                    {
+                        //sort the tube pairs as they come matching the tube pairs with each other.
+                        //sort by location and destination
+                        if (TubePairs[0, 0] == null)
+                        {
+                            TubePairs[0, 0] = temp;
+                        }
+                    }
+                }
                 // Faces arrow towards direction that being redirected to
                 if (currentLevel.GetTiles()[i].Slate.name == "Redirection Pad")
                 {
@@ -145,6 +159,7 @@ public class MatchManager : MonoBehaviour
                     GameManager.Instance._uiManager.PlaceItem(item, button);
                 }
             }
+            
             GameManager.Instance._uiManager.GetUI();
             GameManager.Instance._uiManager.Override = true;
             ActiveMatch = true;
@@ -166,6 +181,10 @@ public class MatchManager : MonoBehaviour
         return false;
     }
 
+    void MarkTubes()
+    {
+        int TubePairs = 0;
+    }
 
 
     /// <summary>
