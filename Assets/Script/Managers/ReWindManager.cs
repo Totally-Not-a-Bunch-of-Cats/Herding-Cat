@@ -5,7 +5,7 @@ using UnityEngine;
 public class ReWindManager : MonoBehaviour
 {
     [SerializeField] Board PreviousGameBoard;
-    [SerializeField] public int PreviousRoundsPlayed;
+    [SerializeField] public int PreviousRoundsPlayed = -1;
     [SerializeField] int PreviousItemsUsed;
     [SerializeField] List<int> SecondCatPos;
     /// <summary>
@@ -27,6 +27,10 @@ public class ReWindManager : MonoBehaviour
     /// </summary>
     public void Revert()
     {
+        for(int k = 0; k < GameManager.Instance._matchManager.GameBoard.Items.Count; k++)
+        {
+            GameManager.Instance._matchManager.GameBoard.Items[k].Object.gameObject.SetActive(false);
+        }
         SecondCatPos.Clear();
         int j = 0;
         if(GameManager.Instance._matchManager.CatJustinCage)

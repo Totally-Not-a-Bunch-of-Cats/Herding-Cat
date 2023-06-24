@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     //Holds references to the other managers
     public MatchManager _matchManager;
     public UIManager _uiManager;
+    public CatInfoManager _catInfoManager;
     public ScreenResizeManager _screenResizeManager;
     public ReWindManager _ReWindManager;
     //list of all level data
@@ -30,6 +31,10 @@ public class GameManager : MonoBehaviour
     private static GameManager m_Instance;
     public int LevelPosition = 0;
     public bool ActivateItemIndicators = false;
+    public float SpeedAdjustment = 1;
+    public int GamesTillRewardAd = 4;
+    public int GamesTillMandatoryAd = 10;
+    public bool ClearStartHelpScreen = false;
 
 
     // Used for testing to determine if star count for a level should be changed or outputed in console.

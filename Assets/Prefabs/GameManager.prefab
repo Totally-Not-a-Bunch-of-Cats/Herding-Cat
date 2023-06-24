@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 7126871971944188214}
   - component: {fileID: 3686397751258903135}
   - component: {fileID: 8661864018276491431}
+  - component: {fileID: 918842533}
+  - component: {fileID: 918842534}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -50,29 +52,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _matchManager: {fileID: 0}
   _uiManager: {fileID: 7126871971944188214}
+  _catInfoManager: {fileID: 918842534}
   _screenResizeManager: {fileID: 3686397751258903135}
-  Levels:
-  - {fileID: 11400000, guid: 4b5e58be8b5d392428f2660c046c36bd, type: 2}
-  - {fileID: 11400000, guid: 2c69fe15f16c5e148bb5f504dcbb8ca0, type: 2}
-  - {fileID: 11400000, guid: fd3e3e0bf7f31a2408b1a1428451e78e, type: 2}
-  - {fileID: 11400000, guid: 39580af3e25cb71489f6c117a4c28759, type: 2}
-  - {fileID: 11400000, guid: 99154c6651af4ed4f90a6d0533563c43, type: 2}
-  - {fileID: 11400000, guid: 39ee58e77b2a11643bd058adb69f8740, type: 2}
-  - {fileID: 11400000, guid: b2453c90dfcfafb4dbcd0420668d8f69, type: 2}
-  - {fileID: 11400000, guid: 47e3c83a5abae974dacc9b38b5ff78ea, type: 2}
-  - {fileID: 11400000, guid: 7df1f00ee9ead4143960b895b9f21aad, type: 2}
-  - {fileID: 11400000, guid: 5317104dc40e56942aa2599ce3865e22, type: 2}
-  - {fileID: 11400000, guid: 0e964405e9b6ecb4e932a5ebdf42645d, type: 2}
-  - {fileID: 11400000, guid: f39337b83411007418c3ed57b05299a5, type: 2}
-  - {fileID: 11400000, guid: 1d5e6ca3a6ca4f348a9eae15e1487eda, type: 2}
-  - {fileID: 11400000, guid: f5d5bd19159eb314c8567b304de4fd6a, type: 2}
-  - {fileID: 11400000, guid: 70861889a4e9b6242972cffc98dd2a42, type: 2}
-  - {fileID: 11400000, guid: c8fef117fb396744cbeb19e5ce29dbe8, type: 2}
-  - {fileID: 11400000, guid: 52208975bafc6e24fa6e7398efcbb7c4, type: 2}
-  GamelevelList: {fileID: 0}
+  _ReWindManager: {fileID: 8661864018276491431}
+  Levels: []
+  GamelevelList: {fileID: 11400000, guid: c8a95196aa4f1044ebf30b9017149d3b, type: 2}
   LevelPosition: 0
   ActivateItemIndicators: 0
-  UpdateLevelData: 0
+  SpeedAdjustment: 1
+  GamesTillRewardAd: 4
+  GamesTillMandatoryAd: 10
+  ClearStartHelpScreen: 0
+  UpdateLevelData: 1
 --- !u!114 &590294061082041625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +101,10 @@ MonoBehaviour:
     Object: {fileID: 0}
     ItemAdjObject: {fileID: 0}
     Sleeping: 0
+    Tile: {fileID: 0}
+  SelectedButton: {fileID: 0}
+  SelectedBoxSprite: {fileID: 21300000, guid: d87833b9fc4b24845a60e3d646ed79b8, type: 3}
+  BoxSprite: {fileID: 21300000, guid: 020dc191381a8284e854f98e51a53a43, type: 3}
 --- !u!114 &3686397751258903135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,9 +132,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PreviousGameBoard:
     Cats: []
+    CatVec2: []
+    SecondCatList: []
     NumberofCats: 0
     Items: []
     CatPenLocation: []
     NumCatinPen: 0
-  PreviousRoundsPlayed: 0
+    SavedTiles: []
+    Tubes: []
+    RedirectionPads: []
+    SecondCatPos: 
+  PreviousRoundsPlayed: -1
   PreviousItemsUsed: 0
+  SecondCatPos: 
+--- !u!114 &918842533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590294061082041624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3143f1bab35b6da4ea62556bdce85b81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _androidGameId: 5257935
+  _iOSGameId: 5257934
+  _testMode: 1
+--- !u!114 &918842534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590294061082041624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b41e952c99454d34285474a62ab06a01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CatSkins:
+  - {fileID: -1627665639, guid: 472c7d225e8258f45b6476cd815a11ba, type: 3}
+  - {fileID: 491702662, guid: b64767da626a28e4f80df8874671214e, type: 3}
+  - {fileID: -663478603, guid: 472c7d225e8258f45b6476cd815a11ba, type: 3}
+  - {fileID: 648247267, guid: b64767da626a28e4f80df8874671214e, type: 3}
+  Accessories:
+  - {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 21300000, guid: 9bebc916c94a16d45967c4427debcdc9, type: 3}
+  - {fileID: 21300000, guid: 0c09a9687b2bb334c901a2b5ebdd50d7, type: 3}
+  CatPrefabs:
+  - {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
+  - {fileID: 11400000, guid: b1b6c6f21d028124bbc63e252f176c41, type: 2}
+  - {fileID: 11400000, guid: e555ba895d5a24446bccda1cb968e5d7, type: 2}
+  - {fileID: 11400000, guid: 1874b8b6a361f564880fa4a3e13e85c5, type: 2}
+  - {fileID: 11400000, guid: bc652e92a1286f049be1245a488222d4, type: 2}
+  SelectCatPrefab: {fileID: 0}
+  CurrentSkin: {fileID: 0}
+  CurrentAccessory: {fileID: 0}
+  CurrentSelected: 0

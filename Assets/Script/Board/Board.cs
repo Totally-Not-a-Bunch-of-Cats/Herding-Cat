@@ -130,6 +130,7 @@ public class Board
         SecondCatPos = new List<int>();
         CatVec2 = new List<Vector2Int>();
         SecondCatList = new List<PosObject>();
+        Items = new List<PosObject>();
         Cats = new List<PosObject>();
         _cells = new Tile[_width, _height];
         int i = 0;
@@ -176,7 +177,7 @@ public class Board
                 }
             }
         }
-        Items = BoardToCopy.Items;
+        //Items = BoardToCopy.Items;
         CatPenLocation = BoardToCopy.CatPenLocation;
         NumCatinPen = BoardToCopy.NumCatinPen;
         NumberofCats = BoardToCopy.NumberofCats;
@@ -322,6 +323,7 @@ public class Board
                                         {
                                             Destination.y = y - 2;
                                             Cats[ListPos].Sleeping = true;
+                                            Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
                                             break;
                                         }
                                     }
@@ -345,13 +347,17 @@ public class Board
                             {
                                 Destination.y = y;
                                 Cats[ListPos].Sleeping = true;
+                                Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
                                 break;
                             }
-                            if (_cells[Destination.x, y].name == "Toy" && Item.Position == new Vector2Int(Destination.x, y))
+                            if(Item != null)
                             {
-                                //allows cat to move on cat pen
-                                Destination.y = y;
-                                break;
+                                if (_cells[Destination.x, y].name == "Toy" && Item.Position == new Vector2Int(Destination.x, y))
+                                {
+                                    //allows cat to move on cat pen
+                                    Destination.y = y;
+                                    break;
+                                }
                             }
                             break;
                         }
@@ -399,6 +405,7 @@ public class Board
                                         {
                                             Destination.y = y + 2;
                                             Cats[ListPos].Sleeping = true;
+                                            Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
                                             break;
                                         }
                                     }
@@ -422,13 +429,17 @@ public class Board
                             {
                                 Destination.y = y;
                                 Cats[ListPos].Sleeping = true;
+                                Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
                                 break;
                             }
-                            if (_cells[Destination.x, y].name == "Toy" && Item.Position == new Vector2Int(Destination.x, y))
+                            if (Item != null)
                             {
-                                //allows cat to move on cat pen
-                                Destination.y = y;
-                                break;
+                                if (_cells[Destination.x, y].name == "Toy" && Item.Position == new Vector2Int(Destination.x, y))
+                                {
+                                    //allows cat to move on cat pen
+                                    Destination.y = y;
+                                    break;
+                                }
                             }
                             break;
                         }
@@ -480,6 +491,7 @@ public class Board
                                         {
                                             Destination.x = x - 2;
                                             Cats[ListPos].Sleeping = true;
+                                            Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
                                             break;
                                         }
                                     }
@@ -503,13 +515,17 @@ public class Board
                             {
                                 Destination.x = x;
                                 Cats[ListPos].Sleeping = true;
+                                Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
                                 break;
                             }
-                            if (_cells[x, Destination.y].name == "Toy" && Item.Position == new Vector2Int(x, Destination.y))
+                            if (Item != null)
                             {
-                                //allows cat to move on cat pen
-                                Destination.x = x;
-                                break;
+                                if (_cells[x, Destination.y].name == "Toy" && Item.Position == new Vector2Int(x, Destination.y))
+                                {
+                                    //allows cat to move on cat pen
+                                    Destination.x = x;
+                                    break;
+                                }
                             }
                             break;
                         }
@@ -558,6 +574,7 @@ public class Board
                                         {
                                             Destination.x = x + 2;
                                             Cats[ListPos].Sleeping = true;
+                                            Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
                                             break;
                                         }
                                     }
@@ -581,13 +598,18 @@ public class Board
                             {
                                 Destination.x = x;
                                 Cats[ListPos].Sleeping = true;
+                                Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                                
                                 break;
                             }
-                            if (_cells[x, Destination.y].name == "Toy" && Item.Position == new Vector2Int(x, Destination.y))
+                            if (Item != null)
                             {
-                                //allows cat to move on cat pen
-                                Destination.x = x;
-                                break;
+                                if (_cells[x, Destination.y].name == "Toy" && Item.Position == new Vector2Int(x, Destination.y))
+                                {
+                                    //allows cat to move on cat pen
+                                    Destination.x = x;
+                                    break;
+                                }
                             }
                             break;
                         }
@@ -604,7 +626,6 @@ public class Board
         }
         if (Cats[ListPos] != null)
         {
-            Debug.Log("we are here");
             Cats[ListPos].Position = Destination;
         }
     }
