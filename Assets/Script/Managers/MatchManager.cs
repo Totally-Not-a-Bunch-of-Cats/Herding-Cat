@@ -24,7 +24,6 @@ public class MatchManager : MonoBehaviour
     private bool CatMoving = false;
     public Vector3 BoardOffset;
     [SerializeField] public bool CatJustinCage = false;
-    public HelpGUIController HGC;
 
     //stores the items used, rounds passed, and targets for starts gained
     [Header("Gameplay Info")]
@@ -34,12 +33,10 @@ public class MatchManager : MonoBehaviour
     [SerializeField] public int RoundsPlayed = 0;
     [SerializeField] public int ItemsUsed = 0;
     [SerializeField] public LevelNameUpdator LevNameUpdator;
-    [SerializeField] public GameObject Indicator;
-    [SerializeField] public GameObject EndTurnIndicator;
 
-    public Tilemap BoardTileMap;
+    [SerializeField] public Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
-    public LevelData CurrentLevel;
+    [SerializeField] public LevelData CurrentLevel;
     [SerializeField] public GameObject GameWonUI;
 
     /// <summary>
@@ -59,6 +56,8 @@ public class MatchManager : MonoBehaviour
             RoundsPlayed = 0;
             ItemsUsed = 0;
             CurrentLevel = currentLevel;
+
+            GameObject HelpGUI = GameObject.Find("initial Help Text");
 
             BoardTileMap = GameObject.Find("Tilemap").GetComponent<Tilemap>();
             GameObject.Find("OutlineSquare").transform.localScale = new Vector3(BoardSize.x, BoardSize.y, 1);
@@ -97,22 +96,6 @@ public class MatchManager : MonoBehaviour
                 Vector3 pos = new Vector3(currentLevel.GetTiles()[i].Position.x - tempx + 0.5f - BoardOffset.x,
                     currentLevel.GetTiles()[i].Position.y - tempy + 0.5f - BoardOffset.y, 5);
                 Transform temp = Instantiate(currentLevel.GetTiles()[i].Slate.GetPrefab(), pos, Quaternion.identity, transform).transform;
-                // Faces arrow towards direction that being redirected to
-                if (currentLevel.GetTiles()[i].Slate.name == "Redirection Pad")
-                {
-                    if (currentLevel.GetTiles()[i].Redirection == Vector2Int.down)
-                    {
-                        temp.localRotation *= Quaternion.Euler(0, 0, 90f);
-                    }
-                    else if (currentLevel.GetTiles()[i].Redirection == Vector2Int.up)
-                    {
-                        temp.localRotation *= Quaternion.Euler(0, 0, -90f);
-                    }
-                    else if (currentLevel.GetTiles()[i].Redirection == Vector2Int.right)
-                    {
-                        temp.localRotation *= Quaternion.Euler(0, 0, 180f);
-                    }
-                }
                 temp.gameObject.name = currentLevel.GetTiles()[i].Slate.name + $" ({currentLevel.GetTiles()[i].Position.x}, {currentLevel.GetTiles()[i].Position.y})";
                 if (currentLevel.GetTiles()[i].Slate.Is<Cat>())
                 {
@@ -128,41 +111,28 @@ public class MatchManager : MonoBehaviour
                 int buffer = 85;
                 Item item = currentLevel.GetPossibleItems()[i];
                 Transform EndturnButton = GameObject.Find("End Turn Button").transform;
-                GameObject button = Instantiate(item.ButtonPrefab, new Vector3(0, 0, 4), Quaternion.identity, GameObject.Find("GUI").transform);
+                GameObject button = Instantiate(item.ButtonPrefab, new Vector3(0, 0, 4) ,Quaternion.identity, GameObject.Find("GUI").transform);
                 //button.transform.localPosition = EndturnButton.localPosition;
                 button.transform.localPosition = new Vector3(EndturnButton.localPosition.x, 0, 0);
-                button.transform.localPosition += new Vector3(0, buffer + (145 * (i + 1)), 0);
+                button.transform.localPosition += new Vector3(0, buffer + 145 * (i + 1), 0);
                 button.GetComponent<RectTransform>().anchorMax = new Vector2(1, 0);
                 button.GetComponent<RectTransform>().anchorMin = new Vector2(1, 0);
-                button.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._uiManager.PlaceItem(item, button));
-                if(i == 0)
-                {
-                    GameManager.Instance._uiManager.PlaceItem(item, button);
-                }
+                button.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._uiManager.PlaceItem(item));
+                //GameManager.Instance._screenResizeManager.RescaleItem(button);
             }
             GameManager.Instance._uiManager.GetUI();
             GameManager.Instance._uiManager.Override = true;
             ActiveMatch = true;
             LevNameUpdator.NameUpdate();
-            if (currentLevel.NewThingIntroduced == true)
+            if (currentLevel.NewThingIntroduced == true && currentLevel.name == "1-1")
             {
-                HGC.GetComponent<HelpGUIController>().JumpToHelpScreen(currentLevel.Category, currentLevel.TileName);
+                HelpGUI.transform.GetChild(0).gameObject.SetActive(true);
             }
-            if (currentLevel.name == "1-1")
+            if (currentLevel.NewThingIntroduced == true && currentLevel.name == "1-6")
             {
-                Instantiate(Indicator, new Vector3(1, 0, 0), Quaternion.identity, transform);
-                EndTurnIndicator.SetActive(true);
+                HelpGUI.transform.GetChild(1).gameObject.SetActive(true);
             }
-            if (currentLevel.name == "1-2")
-            {
-                Debug.Log("making lights");
-                Instantiate(Indicator, new Vector3(0, 1, 0), Quaternion.identity, transform);
-                ParticleSystem ps = Indicator.GetComponent<ParticleSystem>();
-                ParticleSystem.MainModule psmain = ps.main;
-                psmain.startColor = new Color(1, 0.75f, 0);
-                Instantiate(Indicator, new Vector3(0, -1, 0), Quaternion.identity, transform);
-                EndTurnIndicator.SetActive(true);
-            }
+
             return true;
         }
         return false;
@@ -345,27 +315,17 @@ public class MatchManager : MonoBehaviour
         {
             if(GameBoard.Cats[i] != null)
             {
-                if(GameBoard.Cats[i].Sleeping == true)
-                {
-                    StartCoroutine(DecaySleep(i));
-                }
                 GameBoard.Cats[i].Sleeping = false;
             }
         }
         GameBoard.Items.Clear();
-        yield return new WaitWhile(() => CatMoving);
-
         // Determines if level has been won
         if (GameBoard.NumberofCats == GameBoard.NumCatinPen)
         {
             ActiveMatch = false;
             CurrentLevel.CalculateStars(RoundsPlayed, ItemsUsed, GameManager.Instance.UpdateLevelData);
-            //prevent player spam
-            if(CurrentLevel.NewThingIntroduced == true && GameManager.Instance.ClearStartHelpScreen == true)
-            {
-                CurrentLevel.NewThingIntroduced = false;
-            }
-            //Finds next level name
+
+            // Finds next level name 
             string[] LevelNameParts = CurrentLevel.name.Split('-');
             string NextLevelName = LevelNameParts[0] + "-";
             try
@@ -400,7 +360,7 @@ public class MatchManager : MonoBehaviour
             {
                 // Updates level data info for current/next level
                 GameManager.Instance.Levels.Find(level => level.name == NextLevelName).SetUnlocked(true);
-            }
+            } 
             else
             {
                 // Logs in console that next level would be unlocked and value that current levels star count would be set to
@@ -488,51 +448,40 @@ public class MatchManager : MonoBehaviour
         Vector2Int CatPos = GameBoard.Cats[ListPos].Position;
         //moves the cat the correct the direction
         if (Direction.x > 0)
-        {
-            if (GameBoard.Cats[ListPos].Position.x != FinalDestination.x)
-            {
-                Vector3 Goalpos = new Vector3(((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x))), 0f, 0f);
-                Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
+        {                                                       
+            Vector3 Goalpos = new Vector3(((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x))), 0f, 0f);
+            Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
-                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos,  FinalDestination));
-            }
+            StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination,  .5f,  ListPos,  FinalDestination));
         }
         else if (Direction.y > 0)
         {
             Vector3 Goalpos = new Vector3(0f, ((Math.Abs(GameBoard.Cats[ListPos].Position.y - FinalDestination.y))), 0f);
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
-            if (TempDestination != GameBoard.Cats[ListPos].Object.localPosition)
-            {
-                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
-            }
+
+            StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
         }
         else if (Direction.x < 0)
         {
-            if (GameBoard.Cats[ListPos].Position.x != FinalDestination.x)
-            {
-                Vector3 Goalpos = new Vector3((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x)), 0f, 0f);
-                Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
+            Vector3 Goalpos = new Vector3(((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x))), 0f, 0f);
+            Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
-                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
-            }
+            StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
         }
         else
         {
             Vector3 Goalpos = new Vector3(0f, ((Math.Abs(GameBoard.Cats[ListPos].Position.y - FinalDestination.y))), 0f);
             Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
 
-            if (TempDestination != GameBoard.Cats[ListPos].Object.localPosition)
-            {
-                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
-            }
+            StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, .5f, ListPos, FinalDestination));
         }
         //move cat in data structure all at once
         if (GameBoard.At(FinalDestination) != null)
         {
+            
             //adds cats to the pen count when they move in
             if (GameBoard.At(FinalDestination).Is<CatPen>())
-            {   
-                Debug.Log("Is Pen");
+            {
                 CatJustinCage = true;
                 GameBoard.SecondCatList.Add(new PosObject(GameBoard.Cats[ListPos].Position, GameBoard.Cats[ListPos].Object, GameBoard.Cats[ListPos].ItemAdjObject, GameBoard.Cats[ListPos].Name, GameBoard.Cats[ListPos].Tile));
                 GameBoard.Set(CatPos, null);
@@ -569,8 +518,12 @@ public class MatchManager : MonoBehaviour
         else
         {
             //moves the cat to the new position in the board data
+            Debug.Log(GameBoard.At(CatPos));
             GameBoard.Set(CatPos, null);
+            Debug.Log(FinalDestination);
+            Debug.Log(Cat);
             GameBoard.Set(FinalDestination, Cat);
+            Debug.Log(GameBoard.At(FinalDestination));
         }
 
         //loops through the saved tiles to check if they are no longer occupied by a cat 
@@ -579,7 +532,9 @@ public class MatchManager : MonoBehaviour
             if (GameBoard.At(GameBoard.SavedTiles[i].Position) == null)
             {
                 GameBoard.Set(GameBoard.SavedTiles[i].Position, GameBoard.SavedTiles[i].Slate);
-                GameBoard.SavedTiles.RemoveAt(i);
+                Debug.Log(GameBoard.SavedTiles[i].Redirection);
+                Debug.Log(GameBoard.SavedTiles[i].Slate);
+                //GameBoard.SavedTiles.RemoveAt(i);
             }
         }
     }
@@ -593,18 +548,18 @@ public class MatchManager : MonoBehaviour
     /// <param name="ListPos">Index that cat is in the cats list</param>
     /// <param name="FinalDestination">Final Destination of cat on Board</param>
     /// <returns></returns>
-    private IEnumerator MoveObject(Vector3 source, Vector3 target, float overTime, int ListPos, Vector2Int FinalDestination)
+    IEnumerator MoveObject(Vector3 source, Vector3 target, float overTime, int ListPos, Vector2Int FinalDestination)
     {
         CatMoving = true;
         float startTime = Time.time;
-        while (Time.time < startTime + (overTime / GameManager.Instance.SpeedAdjustment))
+        while (Time.time < startTime + overTime)
         {
             GameBoard.Cats[ListPos].Object.localPosition = Vector3.Lerp(source, target, (Time.time - startTime) / overTime);
 
             yield return null;
         }
         GameBoard.Cats[ListPos].Object.localPosition = target;
-        if (GameBoard.At(FinalDestination) != null)
+        if(GameBoard.At(FinalDestination) != null)
         {
             if (GameBoard.At(FinalDestination).Is<CatPen>())
             {
@@ -616,40 +571,31 @@ public class MatchManager : MonoBehaviour
             }
             if (GameBoard.At(FinalDestination).name == "Redirection Pad")
             {
+                Debug.Log("we redirecting");
                 TileCatRedirection(GameBoard.Cats[ListPos], ListPos);
-                Debug.Log("Redirection Done " + FinalDestination);
             }
         }
-        if (GameBoard.At(FinalDestination).name != "Redirection Pad")
-        {
-            CatMoving = false;
-        }
+        CatMoving = false;
     }
 
     /// <summary>
     /// handles the movement of cats that occure becuse they are on tiles, like the redirection 
     /// </summary>
-    /// <param name="cat"></param>
-    /// <param name="ListPos"></param>
     public void TileCatTubeMove(PosObject cat, int ListPos)
     {
-        //cycles through all of the tubes looking for the right one to move the cat tube
         for (int i = 0; i < GameBoard.Tubes.Count; i++)
         {
-            //checks to see if there is room for the cat to move before movings
             if (GameBoard.Tubes[i].Position == cat.Position && GameBoard.At(GameBoard.Tubes[i].TubeDestination).name == "Cat Tube")
             {
-                //moves the cat game object in world.
                 Vector2Int TubeDestination = cat.Position - GameBoard.Tubes[i].TubeDestination; 
                 cat.Object.localPosition = new Vector3(cat.Object.localPosition.x - TubeDestination.x,
                     cat.Object.localPosition.y - TubeDestination.y, cat.Object.localPosition.z);
-                //adds the tube to the save tile list to be changed back to a tube and sets the new position of the cat
+
                 GameBoard.SaveTile(GameBoard.Tubes[i].TubeDestination, GameBoard.At(GameBoard.Tubes[i].TubeDestination));
                 GameBoard.Cats[ListPos].Position = GameBoard.Tubes[i].TubeDestination;
                 GameBoard.Set(GameBoard.Tubes[i].TubeDestination, cat.Tile);
                 break;
             }
-            //handles if that cat cant mvoe through the tube due to a traffic jam
             if(GameBoard.Tubes[i].Position == cat.Position)
             {
                 GameBoard.SaveTile(GameBoard.Tubes[i].Position, GameBoard.At(GameBoard.Tubes[i].Position));
@@ -658,12 +604,6 @@ public class MatchManager : MonoBehaviour
             }
         }
     }
-
-    /// <summary>
-    /// handles the cat redirection pad 
-    /// </summary>
-    /// <param name="cat"></param>
-    /// <param name="ListPos"></param>
     public void TileCatRedirection(PosObject cat, int ListPos)
     {
         GameBoard.Set(GameBoard.Cats[ListPos].Position, null);
@@ -671,6 +611,7 @@ public class MatchManager : MonoBehaviour
         Vector2Int addition = Vector2Int.zero;
         for (int i = 0; i < GameBoard.RedirectionPads.Count; i++)
         {
+            Debug.Log("we spinning");
             if (GameBoard.RedirectionPads[i].Position == cat.Position)
             {
                 addition = GameBoard.RedirectionPads[i].Redirection;
@@ -709,19 +650,5 @@ public class MatchManager : MonoBehaviour
         {
             Stars[i].color = Color.white;
         }
-    }
-    public IEnumerator DecaySleep(int i)
-    {
-        Color FullAlpha = GameBoard.Cats[i].Object.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>().color;
-        FullAlpha.a = 1;
-        Color itemColor = GameBoard.Cats[i].Object.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>().color;
-        while (GameBoard.Cats[i].Object.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>().color.a > .4)
-        {
-            yield return new WaitForSeconds(.2f);
-            itemColor.a -= 0.1f;
-            GameBoard.Cats[i].Object.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = itemColor;
-        }
-        GameBoard.Cats[i].Object.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = FullAlpha;
-        GameBoard.Cats[i].Object.GetChild(0).GetChild(0).gameObject.SetActive(false);
     }
 }

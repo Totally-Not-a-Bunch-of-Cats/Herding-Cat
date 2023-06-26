@@ -7,6 +7,7 @@ public class GameLevels : ScriptableObject
 {
     public List<LevelData> GameLevel;
 
+
     public LevelData GetLevel(int level)
     {
         return GameLevel[level];
@@ -34,42 +35,5 @@ public class GameLevels : ScriptableObject
             }
         }
         return false;
-    }
-
-    public string GetNextLevelName(string CurrentName, List<LevelData> LevelList)
-    {
-        string[] LevelNameParts = CurrentName.Split('-');
-        string NextLevelName = LevelNameParts[0] + "-";
-        try
-        {
-            NextLevelName += int.Parse(LevelNameParts[1]) + 1;
-        }
-        catch (System.FormatException)
-        {
-            Debug.LogError($"Unable to parse '{LevelNameParts[1]}'");
-        }
-        if (!LevelList.Exists(level => level.name == NextLevelName))
-        {
-            NextLevelName = "";
-            try
-            {
-                NextLevelName += int.Parse(LevelNameParts[0]) + 1;
-            }
-            catch (System.FormatException)
-            {
-                Debug.LogError($"Unable to parse '{LevelNameParts[1]}'");
-            }
-            NextLevelName += "-1";
-            if (!LevelList.Exists(level => level.name == NextLevelName))
-            {
-                Debug.LogWarning("No Next Level");
-                return "";
-            }
-            return NextLevelName;
-        } else
-        {
-            return NextLevelName;
-        }
-        
     }
 }

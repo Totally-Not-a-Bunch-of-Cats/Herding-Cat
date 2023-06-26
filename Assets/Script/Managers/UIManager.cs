@@ -23,9 +23,6 @@ public class UIManager : MonoBehaviour
     public GameObject ItemAdjPrefab;
     public GameObject ItemAdjPanel;
     public PosObject CurrentSelectedItem;
-    public GameObject SelectedButton;
-    public Sprite SelectedBoxSprite;
-    public Sprite BoxSprite;
 
     /// <summary>
     /// finds the Board game object and GUI object
@@ -107,46 +104,6 @@ public class UIManager : MonoBehaviour
                         }
                         GameManager.Instance._matchManager.GameBoard.Items[GameManager.Instance._matchManager.GameBoard.Items.Count - 1].ItemAdjObject = NewItemEntry.GetComponent<ItemAdjPanel>();
                     }
-                    else if(WorldPosition.x >= -clickableX && WorldPosition.x < clickableX &&
-                        (WorldPosition.y >= -clickableY && WorldPosition.y < clickableY)
-                        && GameManager.Instance._matchManager.GameBoard.At(itemLocation).Is<Item>())
-                    {
-                        if(GameManager.Instance._matchManager.GameBoard.At(itemLocation) == SelectedItem)
-                        {
-                            //delete item sets item location to null, then remove item adj panel location and then
-                            for(int i = 0; i< GameManager.Instance._matchManager.GameBoard.Items.Count; i++)
-                            {
-                                if(GameManager.Instance._matchManager.GameBoard.Items[i] != null)
-                                {
-                                    if (itemLocation == GameManager.Instance._matchManager.GameBoard.Items[i].Position)
-                                    {
-                                        GameManager.Instance._matchManager.GameBoard.Items[i].ItemAdjObject.DeleteItem();
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            for (int i = 0; i < GameManager.Instance._matchManager.GameBoard.Items.Count; i++)
-                            {
-                                if (GameManager.Instance._matchManager.GameBoard.Items[i] != null)
-                                {
-                                    if (itemLocation == GameManager.Instance._matchManager.GameBoard.Items[i].Position)
-                                    {
-                                        GameManager.Instance._matchManager.GameBoard.Items[i].ItemAdjObject.ItemImage.sprite = SelectedItem.Picture;
-                                        GameManager.Instance._matchManager.GameBoard.Items[i].Object.gameObject.SetActive(false);
-                                        GameObject temp2 = Instantiate(SelectedItem.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);
-                                        GameManager.Instance._matchManager.GameBoard.Items[i].Object = temp2.transform;
-                                        GameManager.Instance._matchManager.GameBoard.Items[i].Name = SelectedItem.name;
-                                        GameManager.Instance._matchManager.GameBoard.Items[i].Tile = SelectedItem;
-                                        GameManager.Instance._matchManager.GameBoard.Set(itemLocation, SelectedItem);
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
                     CanPlaceItem = false;
                 }
             }
@@ -157,6 +114,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    
     /// <summary>
     /// Adds the Listeners to the End round, Restart, and Main Menu Buttons, generated at ui start
     /// </summary>
@@ -171,21 +129,13 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Allows an item to be placed and is handed which item to place
+    /// allows an item to be placed and is handed which item to place
     /// </summary>
     /// <param name="item"><see cref="Item"/> that will be placed when clicked on board</param>
-    public void PlaceItem(Item item, GameObject selectedButton)
+    public void PlaceItem(Item item)
     {
-        if (SelectedButton != null)
-        {
-            SelectedButton.GetComponent<Image>().sprite = BoxSprite;
-        }
-
-        SelectedButton = selectedButton;
-        SelectedButton.GetComponent<Image>().sprite = SelectedBoxSprite;
         SelectedItem = item;
         CanPlaceItem = true;
-
     }
 
     /// <summary>
@@ -198,18 +148,12 @@ public class UIManager : MonoBehaviour
         StartCoroutine(GameManager.Instance.StartMatch(GameManager.Instance._matchManager.CurrentLevel.name));
     }
 
-    /// <summary>
-    /// Rewinds the board
-    /// </summary>
     public void Rewind()
     {
         if(GameManager.Instance._ReWindManager.PreviousRoundsPlayed != -1)
         {
             SelectedItem = null;
-            if (SelectedButton != null)
-            {
-                SelectedButton.GetComponent<Image>().sprite = BoxSprite;
-            }
+            Debug.Log("we rewinding");
             GameManager.Instance._ReWindManager.Revert();
         }
     }
@@ -231,6 +175,7 @@ public class UIManager : MonoBehaviour
             StartCoroutine(GameManager.Instance._matchManager.EndRound());
         }
     }
+
 
     /// <summary>
     /// Sanitizes the items location to line up on the cell by getting our vec3 ready to be changed to a vec2int
@@ -269,28 +214,16 @@ public class UIManager : MonoBehaviour
     /// <param name="Index">Index of item that is selected</param>
     public void HighlightItem(int Index)
     {
-        if (CurrentSelectedItem != null)
+        if (CurrentSelectedItem.ItemAdjObject != null)
         {
-            if (CurrentSelectedItem.ItemAdjObject != null)
-            {
-                CurrentSelectedItem.ItemAdjObject.HighLightObject.SetActive(false);
-                CurrentSelectedItem.ItemAdjObject.DeleteButton.gameObject.SetActive(false);
-                CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.9166545f, 1, 0, 0.5254902f);
-            }
+            CurrentSelectedItem.ItemAdjObject.HighLightObject.SetActive(false);
+            CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.9166545f, 1, 0, 0.5254902f);
         }
-        if (CurrentSelectedItem != GameManager.Instance._matchManager.GameBoard.Items[Index])
-        {
-            CurrentSelectedItem = GameManager.Instance._matchManager.GameBoard.Items[Index];
-            SpriteRenderer temp = CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>();
-            CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, .9f);
+        CurrentSelectedItem = GameManager.Instance._matchManager.GameBoard.Items[Index];
+        SpriteRenderer temp = CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        CurrentSelectedItem.Object.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, .9f);
 
-            // Highlight item circle
-            CurrentSelectedItem.ItemAdjObject.HighLightObject.SetActive(true);
-            CurrentSelectedItem.ItemAdjObject.DeleteButton.gameObject.SetActive(true);
-        }
-        else
-        {
-            CurrentSelectedItem = null;
-        }
+        // Highlight item circle
+        CurrentSelectedItem.ItemAdjObject.HighLightObject.SetActive(true);
     }
 }   
