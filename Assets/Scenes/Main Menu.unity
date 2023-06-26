@@ -14293,7 +14293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 652b2f68d5066284d9319b4091fff8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CatPrefab: {fileID: 6593748991052650734, guid: 0ba61e6f50675394195f8992a1806aa4, type: 3}
+  CatPrefab: {fileID: 6593748991052650734, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
   Customizer: {fileID: 718107530}
 --- !u!114 &750303658
 MonoBehaviour:

@@ -130,6 +130,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 918842535, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
+      propertyPath: CatSkins.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 918842535, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
+      propertyPath: CatSkins.Array.data[2]
+      value: 
+      objectReference: {fileID: -354253076, guid: 76cb5d0bd2fce1a43a1b69b8991ba9b9, type: 3}
+    - target: {fileID: 918842535, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
+      propertyPath: CatSkins.Array.data[3]
+      value: 
+      objectReference: {fileID: -354253076, guid: 76cb5d0bd2fce1a43a1b69b8991ba9b9, type: 3}
+    - target: {fileID: 918842535, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
+      propertyPath: CatSkins.Array.data[4]
+      value: 
+      objectReference: {fileID: -354253076, guid: 76cb5d0bd2fce1a43a1b69b8991ba9b9, type: 3}
     - target: {fileID: 590294061082041607, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
       propertyPath: m_RootOrder
       value: 0
