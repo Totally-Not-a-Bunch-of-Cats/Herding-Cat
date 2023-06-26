@@ -11,20 +11,22 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LevelData", menuName = "ScriptableObjects/New LevelData", order = 1)]
 public class LevelData: ScriptableObject
 {
-    [SerializeField] public Vector2Int Dimensions;
-    [SerializeField] public int TargetRounds;
-    [SerializeField] public int TargetItems;
-    [SerializeField] public bool NewThingIntroduced = false;
-    [SerializeField] public int Category;
-    [SerializeField] public string TileName;
+    public Vector2Int Dimensions;
+    public int TargetRounds;
+    public int TargetItems;
+    public bool NewThingIntroduced = false;
+    public int Category;
+    public string TileName;
+    public int StarsEarned = 0;
+    [SerializeField] bool Unlocked = false;
+    public bool NewItemIntroduced = false;
 
     [Header("Tile Data")]
     // Tile that is set for the backgound of play area
     [SerializeField] public UnityEngine.Tilemaps.Tile BackgroundTile;
-    [SerializeField] public PosTile[] Tiles; // cats/traps(obsticles)
-    [SerializeField] public Item[] PossibleItems;
-    [SerializeField] public int StarsEarned = 0;
-    [SerializeField] bool Unlocked = false;
+    public PosTile[] Tiles; // cats/traps(obsticles)
+    public Item[] PossibleItems;
+
 
     /// <summary>
     /// Checks if Level Data has all valid information
