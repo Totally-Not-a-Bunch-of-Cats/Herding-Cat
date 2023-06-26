@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public ScreenResizeManager _screenResizeManager;
     public ReWindManager _ReWindManager;
     public PlayerPrefsManager _PlayerPrefsManager;
+    public CatInfoManager _catInfoManager;
     //list of all level data
     //public static List<LevelData> Levels;
     public List<LevelData> Levels = new List<LevelData>();

@@ -147,6 +147,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 590294061082041606, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
+      propertyPath: _catInfoManager
+      value: 
+      objectReference: {fileID: 918842535}
+    - target: {fileID: 590294061082041606, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
       propertyPath: Levels.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -263,9 +267,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cca4fe79c885ee4c8f635bb3f57fac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxVolume: 0
-  musicVolume: 0
-  StarCount: 0
-  FurthestUnlockedLevel: 
-  CatSpeed: 0
-  ItemIndicators: 0
+--- !u!114 &918842535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918842532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b41e952c99454d34285474a62ab06a01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CatSkins:
+  - {fileID: 989879375, guid: 1f9a8dced562bfd47889925a8f9821b8, type: 3}
+  - {fileID: -354253076, guid: 76cb5d0bd2fce1a43a1b69b8991ba9b9, type: 3}
+  Accessories:
+  - {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
+  - {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
+  CatPrefabs:
+  - {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
+  - {fileID: 11400000, guid: 1874b8b6a361f564880fa4a3e13e85c5, type: 2}
+  - {fileID: 11400000, guid: bc652e92a1286f049be1245a488222d4, type: 2}
+  - {fileID: 11400000, guid: b1b6c6f21d028124bbc63e252f176c41, type: 2}
+  - {fileID: 11400000, guid: e555ba895d5a24446bccda1cb968e5d7, type: 2}
+  SelectCatPrefab: {fileID: 0}
+  CurrentSkin: {fileID: 0}
+  CurrentAccessory: {fileID: 0}
+  CurrentSelected: 0
