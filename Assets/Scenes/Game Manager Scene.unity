@@ -206,18 +206,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 7126871971944188214, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: BoxSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 020dc191381a8284e854f98e51a53a43, type: 3}
-    - target: {fileID: 7126871971944188214, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: SelectedBoxSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: d87833b9fc4b24845a60e3d646ed79b8, type: 3}
-    - target: {fileID: 8661864018276491431, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: PreviousRoundsPlayed
-      value: -1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
 --- !u!114 &918842531 stripped

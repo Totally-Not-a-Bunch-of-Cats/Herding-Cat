@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     //Holds references to the other managers
     public MatchManager _matchManager;
     public UIManager _uiManager;
+    public CatInfoManager _catInfoManager;
     public ScreenResizeManager _screenResizeManager;
     public ReWindManager _ReWindManager;
     public PlayerPrefsManager _PlayerPrefsManager;
