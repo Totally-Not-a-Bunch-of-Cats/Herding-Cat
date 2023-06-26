@@ -5,23 +5,6 @@ using UnityEngine.UI;
 
 public class PauseMenuControl : MonoBehaviour
 {
-    public GameObject PauseMenu;
-    public GameObject PauseButton;
-    public Button RestartButton;
-    public Button RewindButton;
-    public Button EndTurnButton;
-
-    public void ClosePauseMenu()
-    {
-
-        PauseButton.SetActive(true);
-        RestartButton.interactable = true;
-        RewindButton.interactable = true;
-        EndTurnButton.interactable = true;
-
-        PauseMenu.SetActive(false);
-        GameManager.Instance._uiManager.Override = true;
-    }
 
     public void RestartLevel ()
     {

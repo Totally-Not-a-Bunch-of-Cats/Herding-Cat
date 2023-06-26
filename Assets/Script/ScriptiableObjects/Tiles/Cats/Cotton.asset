@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d50602962f0ea0e4b98a3b37784fa532, type: 3}
   m_Name: Cotton
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 8240416316199233780, guid: 32c50e9ad8cf632409c2fdeb2fe294c1, type: 3}
+  Prefab: {fileID: 7093649456058251314, guid: 24b4038fc0145d24aa6df11902c8a8b2, type: 3}
   Distance: 0
   Skipped: 0
   Speed: 0

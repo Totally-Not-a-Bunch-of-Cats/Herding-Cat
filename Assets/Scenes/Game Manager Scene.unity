@@ -130,34 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 590294061082041606, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: GamelevelList
-      value: 
-      objectReference: {fileID: 11400000, guid: c8a95196aa4f1044ebf30b9017149d3b, type: 2}
-    - target: {fileID: 590294061082041606, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: LevelPosition
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 590294061082041606, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: _ReWindManager
-      value: 
-      objectReference: {fileID: 918842531}
-    - target: {fileID: 590294061082041606, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: UpdateLevelData
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 590294061082041606, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: Levels.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 590294061082041606, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: _PlayerPrefsManager
-      value: 
-      objectReference: {fileID: 918842534}
-    - target: {fileID: 590294061082041606, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: Levels.Array.data[16]
-      value: 
-      objectReference: {fileID: 11400000, guid: 52208975bafc6e24fa6e7398efcbb7c4, type: 2}
     - target: {fileID: 590294061082041607, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -208,52 +180,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
---- !u!114 &918842531 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8661864018276491431, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-  m_PrefabInstance: {fileID: 918842530}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 918842532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35afa44b67f3e004a8f0b14a684a9f92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &918842532 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 590294061082041624, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-  m_PrefabInstance: {fileID: 918842530}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &918842533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 918842532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3143f1bab35b6da4ea62556bdce85b81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _androidGameId: 5257935
-  _iOSGameId: 5257934
-  _testMode: 1
---- !u!114 &918842534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 918842532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cca4fe79c885ee4c8f635bb3f57fac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sfxVolume: 0
-  musicVolume: 0
-  StarCount: 0
-  FurthestUnlockedLevel: 
-  CatSpeed: 0
-  ItemIndicators: 0

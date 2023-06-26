@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
 
 [CustomEditor(typeof(GameLevels))]
 
 public class GameLevelsEditor : Editor
 {
-    public bool ActiveEditor = false;
-
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
@@ -61,20 +56,6 @@ public class GameLevelsEditor : Editor
                     myScript.GameLevel[i].SetUnlocked(false);
                 }
             }
-        }
-
-        // Inspector Button to enter playmode on the level design GUI
-        if (GUILayout.Button("Level Design"))
-        {
-            //EditorApplication.EnterPlaymode();
-            //ActiveEditor = true;
-            if (EditorApplication.isPlaying)
-            {
-                SceneManager.LoadScene("Level Creation", LoadSceneMode.Single);
-            } else
-            {
-                Debug.LogWarning("Must be in play Mode");
-            }            
         }
     }
 
