@@ -15,8 +15,6 @@ public class LevelData: ScriptableObject
     [SerializeField] public int TargetRounds;
     [SerializeField] public int TargetItems;
     [SerializeField] public bool NewThingIntroduced = false;
-    [SerializeField] public int Category;
-    [SerializeField] public string TileName;
 
     [Header("Tile Data")]
     // Tile that is set for the backgound of play area
@@ -40,6 +38,7 @@ public class LevelData: ScriptableObject
                 numCats++;
             }
         }
+
         return Dimensions != Vector2Int.zero
             && TargetRounds > 0
             && TargetItems > 0
