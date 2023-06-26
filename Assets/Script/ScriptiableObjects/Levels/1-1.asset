@@ -18,9 +18,6 @@ MonoBehaviour:
   NewThingIntroduced: 1
   Category: 2
   TileName: Toy
-  StarsEarned: 3
-  Unlocked: 1
-  NewItemIntroduced: 1
   BackgroundTile: {fileID: 11400000, guid: d756be87d23ee174f869fab071be06bf, type: 2}
   Tiles:
   - Position: {x: 1, y: 0}
@@ -33,3 +30,5 @@ MonoBehaviour:
     Redirection: {x: 0, y: 0}
   PossibleItems:
   - {fileID: 11400000, guid: 089f360dd355a504085896f04d3eb986, type: 2}
+  StarsEarned: 3
+  Unlocked: 1

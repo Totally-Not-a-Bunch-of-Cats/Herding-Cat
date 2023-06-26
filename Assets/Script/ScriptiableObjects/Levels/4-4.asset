@@ -14,13 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Dimensions: {x: 9, y: 9}
   TargetRounds: 4
-  TargetItems: 22
+  TargetItems: 20
   NewThingIntroduced: 0
-  Category: 0
-  TileName: 
-  StarsEarned: 2
-  Unlocked: 1
-  NewItemIntroduced: 0
   BackgroundTile: {fileID: 11400000, guid: 103593486162c964aa10539a0ed04a9e, type: 2}
   Tiles:
   - Position: {x: 1, y: 1}
@@ -174,3 +169,5 @@ MonoBehaviour:
   PossibleItems:
   - {fileID: 11400000, guid: 089f360dd355a504085896f04d3eb986, type: 2}
   - {fileID: 11400000, guid: a58def140dd3b74468a5da712b3041fa, type: 2}
+  StarsEarned: 2
+  Unlocked: 1

@@ -115,7 +115,7 @@ public class HelpGUIController : MonoBehaviour
                 break;
         }
 
-        ButtonsPerPage = Mathf.FloorToInt((HelpButtonsParent.GetComponent<RectTransform>().rect.height - 30) / (90 + 15));
+        ButtonsPerPage = (int)((HelpButtonsParent.GetComponent<RectTransform>().rect.height - 30) / (90 + 15));
         CurrentPage = 1;
         
         // Creates Buttons of the selected Category
@@ -143,13 +143,7 @@ public class HelpGUIController : MonoBehaviour
         }
 
         DownButtonObject.SetActive(HelpPages != 1);
-        if (HelpPages != 1)
-        {
-            float Bottom = HelpButtonsParent.GetComponent<RectTransform>().rect.height - (90 + 15) * ButtonsPerPage;
-            Content.transform.parent.GetComponent<RectTransform>().offsetMin = new Vector2(0, Bottom);
-        }
         UpButtonObject.SetActive(false);
-        Content.transform.parent.GetComponent<RectTransform>().offsetMax = Vector2.zero;
         Content.transform.localPosition = Vector3.zero;
     }
 
@@ -193,13 +187,9 @@ public class HelpGUIController : MonoBehaviour
         float ContentY = Content.transform.localPosition.y - ButtonsPerPage * 105;
         Content.transform.localPosition = new Vector3(Content.transform.localPosition.x,
            ContentY, Content.transform.localPosition.z);
-        float Bottom = HelpButtonsParent.GetComponent<RectTransform>().rect.height - (90 + 15) * ButtonsPerPage;
-        Content.transform.parent.GetComponent<RectTransform>().offsetMin = new Vector2(0, Bottom - 50);
         if (CurrentPage == 1)
         {
             UpButtonObject.SetActive(false);
-            Content.transform.parent.GetComponent<RectTransform>().offsetMin = new Vector2(0, Bottom);
-            Content.transform.parent.GetComponent<RectTransform>().offsetMax = Vector2.zero;
         }
     }
 
@@ -213,13 +203,9 @@ public class HelpGUIController : MonoBehaviour
         float ContentY = Content.transform.localPosition.y + ButtonsPerPage  * 105;
         Content.transform.localPosition = new Vector3(Content.transform.localPosition.x,
             ContentY, Content.transform.localPosition.z);
-        float Bottom = HelpButtonsParent.GetComponent<RectTransform>().rect.height - (90 + 15) * ButtonsPerPage;
-        Content.transform.parent.GetComponent<RectTransform>().offsetMin = new Vector2(0, Bottom-50);
-        Content.transform.parent.GetComponent<RectTransform>().offsetMax = new Vector2(0, -50);
         if (CurrentPage == HelpPages)
         {
             DownButtonObject.SetActive(false);
-            Content.transform.parent.GetComponent<RectTransform>().offsetMin = Vector2.zero;
         }
     }
 
