@@ -16622,10 +16622,17 @@ MonoBehaviour:
   RewardAD: {fileID: 1097365776}
   ForcedAD: {fileID: 1988917680}
   Animator: {fileID: 0}
+  TubeIcons:
+  - {fileID: 21300000, guid: 2a395c4f5dd914dd2b50468e92772309, type: 3}
+  - {fileID: 21300000, guid: b7f3c32c855a846c5bb5d8c57de050fd, type: 3}
+  - {fileID: 21300000, guid: d6f2cb48e10724bfea4116c456799a2c, type: 3}
+  - {fileID: 21300000, guid: 05661abc1924045c89b0e56f76854e4d, type: 3}
+  - {fileID: 21300000, guid: 6d034811652a84633bc8c63d22ce5574, type: 3}
   BoardTileMap: {fileID: 0}
   ItemButtonPrefab: {fileID: 7992114167247847449, guid: 7826566737c5df942a89fcdf38ad2069, type: 3}
   CurrentLevel: {fileID: 0}
   GameWonUI: {fileID: 1453756895}
+  TubePairs: []
 --- !u!4 &1454511633
 Transform:
   m_ObjectHideFlags: 0
@@ -16912,7 +16919,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 896329900}
   m_HandleRect: {fileID: 896329899}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
