@@ -13,7 +13,7 @@ using TMPro;
 //* Creates the Cat Buttons dynamically
 public class CatChooseButtons : MonoBehaviour
 {
-    // Cat Prefab
+    //Cat Prefab
     [SerializeField] private Transform CatPrefab;
     [SerializeField] private GameObject Customizer;
     //[SerializeField] private List<GameObject> CatPrefabs;
@@ -25,9 +25,9 @@ public class CatChooseButtons : MonoBehaviour
     }
 
     /// <summary>
-    /// Creates the level select buttons according to the current world the player is on
+    /// 
     /// </summary>
-    /// <param name="CurrentWorld"> The current world that the player is going to </param>
+    /// <param name="CreateCatButtons"> The current world that the player is going to </param>
     public void CreateCatButtons()
     {
         // Destorying previous buttons that will no longer be used
