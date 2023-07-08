@@ -124,7 +124,10 @@ public class CatInfoManager : MonoBehaviour
         // Setting the visual in the customization to fit the new accessory, as well as adjusting the scriptable object to the new accessory
         CurrentAccessory = Accessories[CurrentAccessoryIndex].Acessory;
         CatPrefabs[CurrentSelected].GetPrefab().transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = CurrentAccessory;
-        Reference.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Image>().sprite = CurrentAccessory;
+        CatPrefabs[CurrentSelected].GetPrefab().transform.GetChild(1).position = Accessories[CurrentAccessoryIndex].CatPrefabLocation;
+        Transform ReferenceChild = Reference.transform.GetChild(1).GetChild(1).GetChild(1);
+        ReferenceChild.GetComponent<Image>().sprite = CurrentAccessory;
+        ReferenceChild.localPosition = Accessories[CurrentAccessoryIndex].CatButtonLocation;
     }
 
     // Goes to the previous accessory for the cat to wear

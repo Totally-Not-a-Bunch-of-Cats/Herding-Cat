@@ -203,9 +203,23 @@ MonoBehaviour:
   - Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
     CatPrefabLocation: {x: 0, y: 0, z: 0}
     CatButtonLocation: {x: 0, y: 0, z: 0}
+    MaxoffsetforCatButton: {x: 26, y: 0}
+    MinoffsetforCatButton: {x: 70, y: 100}
   - Acessory: {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
     CatPrefabLocation: {x: 0, y: 0, z: 0}
     CatButtonLocation: {x: 0, y: 0, z: 0}
+    MaxoffsetforCatButton: {x: 0, y: 0}
+    MinoffsetforCatButton: {x: 0, y: 0}
+  - Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
+    CatPrefabLocation: {x: 0, y: 0, z: 0}
+    CatButtonLocation: {x: 0, y: 0, z: 0}
+    MaxoffsetforCatButton: {x: 26, y: -15}
+    MinoffsetforCatButton: {x: 70, y: 100}
+  - Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
+    CatPrefabLocation: {x: 0, y: 0, z: 0}
+    CatButtonLocation: {x: 0, y: 0, z: 0}
+    MaxoffsetforCatButton: {x: 20, y: 5}
+    MinoffsetforCatButton: {x: 65, y: 100}
   CatPrefabs:
   - {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
   - {fileID: 11400000, guid: 1874b8b6a361f564880fa4a3e13e85c5, type: 2}
@@ -216,3 +230,5 @@ MonoBehaviour:
   CurrentSkin: {fileID: -354253076, guid: 76cb5d0bd2fce1a43a1b69b8991ba9b9, type: 3}
   CurrentAccessory: {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
   CurrentSelected: 0
+  CurrentSkinIndex: 0
+  CurrentAccessoryIndex: 0

@@ -46,9 +46,9 @@ public class CatChooseButtons : MonoBehaviour
             Transform CatButtonTransform = Instantiate(CatPrefab, this.transform);
             int CurrentButton = i;
             CatButtonTransform.GetChild(0).GetComponent<Image>().sprite = GameManager.Instance._catInfoManager.GetCatPrefab(CurrentButton).transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
-            CatButtonTransform.GetChild(1).GetComponent<Image>().sprite = GameManager.Instance._catInfoManager.GetCatPrefab(CurrentButton).transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
+            CatButtonTransform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = GameManager.Instance._catInfoManager.GetCatPrefab(CurrentButton).transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
             // Sets the text of the button to the respective level
-            CatButtonTransform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Cat: " + (i + 1);
+            CatButtonTransform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Cat: " + (i + 1);
             // Creates the action to go to the Customize Window
             CatButtonTransform.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._catInfoManager.GoToCustomize(CurrentButton, Customizer));
         }
