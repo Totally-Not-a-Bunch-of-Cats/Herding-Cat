@@ -41,6 +41,7 @@ public class LevelCreationTool : MonoBehaviour
     public List<Vector2Int> TileLocations;
     public List<GameObject> ItemReferences;
     public List<Item> PossibleItems;
+
     public enum Mode{Edit, Create};
     public Mode CurrentMode = Mode.Create;
 
@@ -457,6 +458,56 @@ public class LevelCreationTool : MonoBehaviour
                             temp.name = SelectedBoardTile.name + $" ({tileLocation.x}, {tileLocation.y})";
                             ItemReferences.Add(temp);
                             Tiles.Add(new PosTile(tileLocation, SelectedBoardTile));
+                            Tiles[Tiles.Count - 1].Redirection = Vector2Int.left;
+                        }
+                        else if (GameBoard.At(tileLocation).name == "Cat Tube")
+                        {
+                            Debug.Log("Cat Tube: " + tileLocation);
+                            /*for (int i = 0; i < Tiles.Count; i++)
+                            {
+                                if (Tiles[i].Position == tileLocation)
+                                {
+                                    // 
+                                }
+                            }*/
+                        }
+                        else if (GameBoard.At(tileLocation).name == "Redirection Pad")
+                        {
+                            // Click: Right -> Down -> Left -> Up
+                            // Shift/Click: Up -> Left -> Down -> Right: (TODO)
+                            for (int i = 0; i < Tiles.Count; i++)
+                            {
+                                if (Tiles[i].Position == tileLocation)
+                                {
+                                    Vector2Int dir = Tiles[i].Redirection;
+
+                                    // Normal Click
+                                    if (dir == Vector2Int.down)
+                                    {
+                                        Tiles[i].Redirection = Vector2Int.left;
+                                        ItemReferences[i].transform.localRotation *= Quaternion.Euler(0, 0, -90);
+                                        break;
+                                    }
+                                    else if (dir == Vector2Int.right)
+                                    {
+                                        Tiles[i].Redirection = Vector2Int.down;
+                                        ItemReferences[i].transform.localRotation *= Quaternion.Euler(0, 0, -90f);
+                                        break;
+                                    }
+                                    else if (dir == Vector2Int.left)
+                                    {
+                                        Tiles[i].Redirection = Vector2Int.up;
+                                        ItemReferences[i].transform.localRotation *= Quaternion.Euler(0, 0, -90f);
+                                        break;
+                                    }
+                                    else if (dir == Vector2Int.up)
+                                    {
+                                        Tiles[i].Redirection = Vector2Int.right;
+                                        ItemReferences[i].transform.localRotation *= Quaternion.Euler(0, 0, -90);
+                                        break;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
