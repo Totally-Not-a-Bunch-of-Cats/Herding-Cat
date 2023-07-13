@@ -546,6 +546,7 @@ public class MatchManager : MonoBehaviour
                 Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
                 Animator.SetBool("Idle", false);
                 Animator.SetBool("Walk", true);
+                //Animator.runtimeAnimatorController
                 GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0,180,0,0);
                 StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos,  FinalDestination));
             }

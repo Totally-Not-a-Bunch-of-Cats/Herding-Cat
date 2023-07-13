@@ -6,24 +6,20 @@ using UnityEngine.UI;
 public class CatInfoManager : MonoBehaviour
 {
     // List of Cat Skins
-    [SerializeField] private List<Sprite> CatSkins = new List<Sprite>();
+    [SerializeField] private List<RuntimeAnimatorController> CatAnim = new List<RuntimeAnimatorController>();
+    [SerializeField] private List<Sprite> CatSkins = new List<Sprite>(); //Catskins and cat anims must be same length
     // List of Accessories
     [SerializeField] private List<AcessoryInfo> Accessories = new List<AcessoryInfo>();
     // Cat Prefabs
     [SerializeField] private List<Cat> CatPrefabs = new List<Cat>();
     // Cat Prefab Selected
     public GameObject SelectCatPrefab;
+    public Animator CurrentAnim;
     public Sprite CurrentSkin;
     public Sprite CurrentAccessory;
     public int CurrentSelected;
     [SerializeField] int CurrentSkinIndex;
     [SerializeField] int CurrentAccessoryIndex;
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     // Opens the Customize Screen
     public void GoToCustomize(int Selected, GameObject Reference)
@@ -32,7 +28,9 @@ public class CatInfoManager : MonoBehaviour
         Reference.transform.GetChild(1).gameObject.SetActive(true);
         // Gathers the prefab from the scriptable object
         SelectCatPrefab = CatPrefabs[Selected].GetPrefab();
+        Instantiate(SelectCatPrefab);
         // Updates the variables that hold the selected cat's customizations and then updates the screen to match the selected
+        CurrentAnim = SelectCatPrefab.transform.GetChild(0).GetComponent<Animator>();
         CurrentSkin = SelectCatPrefab.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
         Reference.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Image>().sprite = CurrentSkin;
         CurrentAccessory = SelectCatPrefab.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
@@ -87,8 +85,11 @@ public class CatInfoManager : MonoBehaviour
         }
 
         // Setting the visual in the customization to fit the new skin, as well as adjusting the scriptable object to the new skin
-        CurrentSkin = CatSkins[CurrentSkinIndex];
-        CatPrefabs[CurrentSelected].GetPrefab().transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = CurrentSkin;
+        Debug.Log(CatAnim[CurrentSkinIndex]);
+        Debug.Log(CurrentAnim);
+        Debug.Log(CurrentAnim.runtimeAnimatorController);
+        CurrentAnim.runtimeAnimatorController = CatAnim[CurrentSkinIndex];
+        CatPrefabs[CurrentSelected].GetPrefab().transform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = CurrentAnim.runtimeAnimatorController;
         Reference.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Image>().sprite = CurrentSkin;
     }
 
@@ -105,9 +106,12 @@ public class CatInfoManager : MonoBehaviour
             CurrentSkinIndex = CatSkins.Count - 1;
         }
         // Setting the visual in the customization to fit the new skin, as well as adjusting the scriptable object to the new skin
-        CurrentSkin = CatSkins[CurrentSkinIndex];
-        CatPrefabs[CurrentSelected].GetPrefab().transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = CurrentSkin;
+        CurrentAnim.runtimeAnimatorController = CatAnim[CurrentSkinIndex];
+        CatPrefabs[CurrentSelected].GetPrefab().transform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = CurrentAnim.runtimeAnimatorController;
         Reference.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Image>().sprite = CurrentSkin;
+        //CurrentAnim = CatSkins[CurrentSkinIndex];
+        //CatPrefabs[CurrentSelected].GetPrefab().transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = CurrentAnim;
+        //Reference.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Image>().sprite = CurrentSkin;
     }
 
     // Goes to the next accessory for the cat to wear
