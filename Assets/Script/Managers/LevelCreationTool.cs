@@ -43,6 +43,8 @@ public class LevelCreationTool : MonoBehaviour
     public List<Item> PossibleItems;
     public enum Mode{Edit, Create};
     public Mode CurrentMode = Mode.Create;
+    public Redirection redirection = new Redirection();
+    List<Vector2Int> redirections = new List<Vector2Int>() {Vector2Int.up,Vector2Int.down,Vector2Int.left,Vector2Int.right};
 
     //then activates buttons to begin working on the level
 
@@ -456,7 +458,7 @@ public class LevelCreationTool : MonoBehaviour
                             GameObject temp = Instantiate(SelectedBoardTile.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);
                             temp.name = SelectedBoardTile.name + $" ({tileLocation.x}, {tileLocation.y})";
                             ItemReferences.Add(temp);
-                            Tiles.Add(new PosTile(tileLocation, SelectedBoardTile));
+                            Tiles.Add(new PosTile(tileLocation, SelectedBoardTile, redirections[(int)redirection],""));
                         }
                     }
                 }
