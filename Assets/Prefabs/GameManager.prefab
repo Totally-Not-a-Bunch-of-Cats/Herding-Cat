@@ -197,9 +197,29 @@ MonoBehaviour:
   CatSkins:
   - {fileID: 989879375, guid: 1f9a8dced562bfd47889925a8f9821b8, type: 3}
   - {fileID: -354253076, guid: 76cb5d0bd2fce1a43a1b69b8991ba9b9, type: 3}
+  - {fileID: 169629692, guid: 1f9a8dced562bfd47889925a8f9821b8, type: 3}
+  - {fileID: 812799902, guid: 76cb5d0bd2fce1a43a1b69b8991ba9b9, type: 3}
   Accessories:
-  - {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
-  - {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
+  - Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
+    CatPrefabLocation: {x: 0, y: 0, z: 0}
+    CatButtonLocation: {x: 0, y: 0, z: 0}
+    MaxoffsetforCatButton: {x: 26, y: 0}
+    MinoffsetforCatButton: {x: 70, y: 100}
+  - Acessory: {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
+    CatPrefabLocation: {x: 0, y: 0, z: 0}
+    CatButtonLocation: {x: 0, y: 0, z: 0}
+    MaxoffsetforCatButton: {x: 0, y: 0}
+    MinoffsetforCatButton: {x: 0, y: 0}
+  - Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
+    CatPrefabLocation: {x: 0, y: 0, z: 0}
+    CatButtonLocation: {x: 0, y: 0, z: 0}
+    MaxoffsetforCatButton: {x: 26, y: -15}
+    MinoffsetforCatButton: {x: 70, y: 100}
+  - Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
+    CatPrefabLocation: {x: 0, y: 0, z: 0}
+    CatButtonLocation: {x: 0, y: 0, z: 0}
+    MaxoffsetforCatButton: {x: 20, y: 5}
+    MinoffsetforCatButton: {x: 65, y: 100}
   CatPrefabs:
   - {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
   - {fileID: 11400000, guid: 1874b8b6a361f564880fa4a3e13e85c5, type: 2}
@@ -207,6 +227,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b1b6c6f21d028124bbc63e252f176c41, type: 2}
   - {fileID: 11400000, guid: e555ba895d5a24446bccda1cb968e5d7, type: 2}
   SelectCatPrefab: {fileID: 0}
-  CurrentSkin: {fileID: 0}
-  CurrentAccessory: {fileID: 0}
+  CurrentSkin: {fileID: -354253076, guid: 76cb5d0bd2fce1a43a1b69b8991ba9b9, type: 3}
+  CurrentAccessory: {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
   CurrentSelected: 0
+  CurrentSkinIndex: 0
+  CurrentAccessoryIndex: 0

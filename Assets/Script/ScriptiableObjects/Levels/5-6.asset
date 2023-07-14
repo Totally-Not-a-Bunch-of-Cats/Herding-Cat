@@ -19,7 +19,7 @@ MonoBehaviour:
   Category: 0
   TileName: 
   StarsEarned: 0
-  Unlocked: 0
+  Unlocked: 1
   NewItemIntroduced: 0
   BackgroundTile: {fileID: 11400000, guid: 76cbab4e70ed36846808f77c6f9b14f9, type: 2}
   Tiles:
@@ -32,12 +32,7 @@ MonoBehaviour:
     Position: {x: 3, y: 4}
     Slate: {fileID: 11400000, guid: 6539a1653aded724789464aef428b98b, type: 2}
     TubeDestination: {x: 0, y: 0}
-    Redirection: {x: 0, y: 1}
-  - name: Cat Tree (5,4)
-    Position: {x: 5, y: 4}
-    Slate: {fileID: 11400000, guid: 6539a1653aded724789464aef428b98b, type: 2}
-    TubeDestination: {x: 0, y: 0}
-    Redirection: {x: 0, y: 1}
+    Redirection: {x: 0, y: 0}
   - name: Bed (5,5)
     Position: {x: 5, y: 5}
     Slate: {fileID: 11400000, guid: 9ec04edcfdc6e2a4eaf2f549e868d193, type: 2}

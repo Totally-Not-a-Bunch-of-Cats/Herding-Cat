@@ -13,7 +13,7 @@ using TMPro;
 //* Creates the Cat Buttons dynamically
 public class CatChooseButtons : MonoBehaviour
 {
-    // Cat Prefab
+    //Cat Prefab
     [SerializeField] private Transform CatPrefab;
     [SerializeField] private GameObject Customizer;
     //[SerializeField] private List<GameObject> CatPrefabs;
@@ -25,9 +25,9 @@ public class CatChooseButtons : MonoBehaviour
     }
 
     /// <summary>
-    /// Creates the level select buttons according to the current world the player is on
+    /// 
     /// </summary>
-    /// <param name="CurrentWorld"> The current world that the player is going to </param>
+    /// <param name="CreateCatButtons"> The current world that the player is going to </param>
     public void CreateCatButtons()
     {
         // Destorying previous buttons that will no longer be used
@@ -46,9 +46,9 @@ public class CatChooseButtons : MonoBehaviour
             Transform CatButtonTransform = Instantiate(CatPrefab, this.transform);
             int CurrentButton = i;
             CatButtonTransform.GetChild(0).GetComponent<Image>().sprite = GameManager.Instance._catInfoManager.GetCatPrefab(CurrentButton).transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
-            CatButtonTransform.GetChild(1).GetComponent<Image>().sprite = GameManager.Instance._catInfoManager.GetCatPrefab(CurrentButton).transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
+            CatButtonTransform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = GameManager.Instance._catInfoManager.GetCatPrefab(CurrentButton).transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
             // Sets the text of the button to the respective level
-            CatButtonTransform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Cat: " + (i + 1);
+            CatButtonTransform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Cat: " + (i + 1);
             // Creates the action to go to the Customize Window
             CatButtonTransform.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._catInfoManager.GoToCustomize(CurrentButton, Customizer));
         }

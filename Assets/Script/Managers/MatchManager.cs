@@ -47,6 +47,8 @@ public class MatchManager : MonoBehaviour
     [SerializeField] private GameObject ItemButtonPrefab;
     public LevelData CurrentLevel;
     public GameObject GameWonUI;
+    public List<TubePairImage> TubePairs = new List<TubePairImage>();
+
 
     /// <summary>
     /// Initialize the <see cref="Board"/> and all scene <see cref="GameObject"/>s for the match
@@ -98,7 +100,7 @@ public class MatchManager : MonoBehaviour
 
             // place tiles(cat pens/cats/traps) associated to level
             int count = 0;
-            Transform[,] TubePairs = new Transform[GameBoard.Tubes.Count/2, 2];
+            //List<TubePairImage> TubePairs = new List<TubePairImage>();
             for (int i = 0; i < currentLevel.GetTiles().Length; i++)
             {
                 Vector3 pos = new Vector3(currentLevel.GetTiles()[i].Position.x - tempx + 0.5f - BoardOffset.x,
@@ -106,16 +108,39 @@ public class MatchManager : MonoBehaviour
                 Transform temp = Instantiate(currentLevel.GetTiles()[i].Slate.GetPrefab(), pos, Quaternion.identity, transform).transform;
                 if(currentLevel.GetTiles()[i].Slate.name == "Cat Tube")
                 {
-                    for(int j = 0; j < GameBoard.Tubes.Count/2; j++)
+                    for (int j = 0; j < GameBoard.Tubes.Count; j++)
                     {
                         //sort the tube pairs as they come matching the tube pairs with each other.
                         //sort by location and destination
-                        if (TubePairs[0, 0] == null)
+                        if (GameBoard.Tubes[j].Position == currentLevel.GetTiles()[i].Position)
                         {
-                            TubePairs[0, 0] = temp;
+                            if (TubePairs.Count == 0)
+                            {
+                                TubePairs.Add(new TubePairImage(temp, GameBoard.Tubes[j]));
+                                TubePairs[TubePairs.Count - 1].Image = TubeIcons[TubePairs.Count - 1];
+                            }
+                            else
+                            {
+                                int Test = TubePairs.Count;
+                                for (int k = 0; k < TubePairs.Count; k++)
+                                {
+                                    if (TubePairs[k].Pos2 == GameBoard.Tubes[j].Position)
+                                    {
+                                        TubePairs[k].Tube2 = temp;
+                                        Test--;
+                                        break;
+                                    }
+                                }
+                                if (Test == TubePairs.Count)
+                                {
+                                    TubePairs.Add(new TubePairImage(temp, GameBoard.Tubes[j]));
+                                    TubePairs[TubePairs.Count - 1].Image = TubeIcons[TubePairs.Count - 1];
+                                }
+                            }
                         }
                     }
                 }
+
                 // Faces arrow towards direction that being redirected to
                 if (currentLevel.GetTiles()[i].Slate.name == "Redirection Pad")
                 {
@@ -139,6 +164,8 @@ public class MatchManager : MonoBehaviour
                     count++;
                 }
             }
+
+            MarkTubes(TubePairs);
 
             //places items 
             for (int i = 0; i < currentLevel.GetPossibleItems().Length; i++)
@@ -181,9 +208,12 @@ public class MatchManager : MonoBehaviour
         return false;
     }
 
-    void MarkTubes()
+    void MarkTubes(List<TubePairImage> TubePairs)
     {
-        int TubePairs = 0;
+        for (int i = 0; i < TubePairs.Count; i++)
+        {
+            TubePairs[i].SetTubeSprites();
+        }
     }
 
 
