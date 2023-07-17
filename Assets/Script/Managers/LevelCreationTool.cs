@@ -38,9 +38,9 @@ public class LevelCreationTool : MonoBehaviour
     Vector3 BoardOffset = new Vector3();
     public GameLevels GamelevelList;
     public bool Remove;
-    public List<Vector2Int> TileLocations;
     public List<GameObject> ItemReferences;
     public List<Item> PossibleItems;
+    public int SavedTubeTilePosition = -1;
 
     public enum Mode{Edit, Create};
     public Mode CurrentMode = Mode.Create;
@@ -186,7 +186,9 @@ public class LevelCreationTool : MonoBehaviour
                     ItemBoardButtons.SetActive(true);
                     return;
                 }
-            } else {
+            } 
+            else 
+            {
                 // Adds the selected items to the selected items of the created level
                 for (int i = 0; i < ItemToggles.Count; i++)
                 {
@@ -202,30 +204,17 @@ public class LevelCreationTool : MonoBehaviour
                 //then turn on buttons with items
                 ItemBoardButtons.SetActive(true);
             }
-        } else {
-            Debug.LogWarning("Level Name or Board size invalid");
-        }
-    }
-
-    /// <summary>
-    /// Resets star counts to 0 and locks all levels except first one
-    /// </summary>
-    public void ResetLevels()
-    {
-        for (int i = 0; i < GamelevelList.GameLevel.Count; i++)
+        } 
+        else 
         {
-            GamelevelList.GameLevel[i].StarsEarned = 0;
-            if (i != 0)
-            {
-                GamelevelList.GameLevel[i].SetUnlocked(false);
-            }    
+            Debug.LogWarning("Level Name or Board size invalid");
         }
     }
 
     /// <summary>
     /// Fills the Info into the Info Setup screen
     /// </summary>
-    public void FillLevelInfoForm ()
+    public void FillLevelInfoForm()
     {
         GameObject.Find("InputField for size X").GetComponent<TMP_InputField>().text = $"{BoardSize.x}";
         GameObject.Find("InputField for size Y").GetComponent<TMP_InputField>().text = $"{BoardSize.y}";
@@ -365,7 +354,24 @@ public class LevelCreationTool : MonoBehaviour
             Vector3 pos = new Vector3(CurPosTile.Position.x - tempx + 0.5f - BoardOffset.x,
             CurPosTile.Position.y - tempy + 0.5f - BoardOffset.y, 5);
             Transform temp = Instantiate(CurPosTile.Slate.GetPrefab(), pos, Quaternion.identity, transform).transform;
+            ItemReferences.Add(temp.gameObject);
             temp.gameObject.name = CurPosTile.Slate.name + $" ({CurPosTile.Position.x}, {CurPosTile.Position.y})";
+            // Faces arrow towards direction that being redirected to
+            if (CurPosTile.Slate.name == "Redirection Pad")
+            {
+                if (CurPosTile.Redirection == Vector2Int.down)
+                {
+                    temp.localRotation *= Quaternion.Euler(0, 0, 90f);
+                }
+                else if (CurPosTile.Redirection == Vector2Int.up)
+                {
+                    temp.localRotation *= Quaternion.Euler(0, 0, -90f);
+                }
+                else if (CurPosTile.Redirection == Vector2Int.right)
+                {
+                    temp.localRotation *= Quaternion.Euler(0, 0, 180f);
+                }
+            }
         }
     }
 
@@ -439,7 +445,6 @@ public class LevelCreationTool : MonoBehaviour
                             if(Tiles[i].Position == tileLocation)
                             {
                                 Tiles.RemoveAt(i);
-                                TileLocations.Remove(tileLocation);
                                 Destroy(ItemReferences[i]);
                                 ItemReferences.RemoveAt(i);
                                 break;
@@ -452,7 +457,6 @@ public class LevelCreationTool : MonoBehaviour
                     {
                         if (GameBoard.At(tileLocation) == null)
                         {
-                            TileLocations.Add(tileLocation);
                             GameBoard.Set(tileLocation, SelectedBoardTile);
                             GameObject temp = Instantiate(SelectedBoardTile.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);
                             temp.name = SelectedBoardTile.name + $" ({tileLocation.x}, {tileLocation.y})";
@@ -463,13 +467,22 @@ public class LevelCreationTool : MonoBehaviour
                         else if (GameBoard.At(tileLocation).name == "Cat Tube")
                         {
                             Debug.Log("Cat Tube: " + tileLocation);
-                            /*for (int i = 0; i < Tiles.Count; i++)
+                            for (int i = 0; i < Tiles.Count; i++)
                             {
                                 if (Tiles[i].Position == tileLocation)
                                 {
-                                    // 
+                                    if(SavedTubeTilePosition == -1)
+                                    {
+                                        SavedTubeTilePosition = i;
+                                    }
+                                    else
+                                    {
+                                        Tiles[SavedTubeTilePosition].TubeDestination = tileLocation;
+                                        Tiles[i].TubeDestination = Tiles[SavedTubeTilePosition].Position;
+                                        SavedTubeTilePosition = -1;
+                                    }
                                 }
-                            }*/
+                            }
                         }
                         else if (GameBoard.At(tileLocation).name == "Redirection Pad")
                         {
