@@ -157,10 +157,28 @@ public class UIManager : MonoBehaviour
                     }
                     if (GameManager.Instance._matchManager.GameBoard.Items.Count != 0)
                     {
-                        if (GameManager.Instance._matchManager.CurrentLevel.name == "1-1" && GameManager.Instance._matchManager.GameBoard.Items[0].Position == new Vector2(2, 0))
+                        Debug.Log(WorldPosition);
+                        if (GameManager.Instance._matchManager.CurrentLevel.name == "1-1" && WorldPosition == new Vector3(1, 0, 3))
                         {
-                            GameManager.Instance._matchManager.SavedIndicator.SetActive(false);
-                            Instantiate(GameManager.Instance._matchManager.UIIndicator, GameObject.Find("End Turn Button").transform.position, Quaternion.identity, GUI.transform);
+                            Debug.Log("bill");
+                            if(GameManager.Instance._matchManager.SavedIndicator2 == null)
+                            {
+                                GameManager.Instance._matchManager.SavedIndicator2 = Instantiate(GameManager.Instance._matchManager.UIIndicator, GameObject.Find("End Turn Button").transform.position, Quaternion.identity, GUI.transform);
+                            }
+                            else
+                            {
+                                GameManager.Instance._matchManager.SavedIndicator2.SetActive(true);
+                            }
+                            if (GameManager.Instance._matchManager.CurrentLevel.name == "1-1" && WorldPosition == new Vector3(1, 0, 3) && GameManager.Instance._matchManager.SavedIndicator.activeSelf == false)
+                            {
+                                Debug.Log("b0ll");
+                                GameManager.Instance._matchManager.SavedIndicator.SetActive(true);
+                                GameManager.Instance._matchManager.SavedIndicator2.SetActive(false);
+                            }
+                            else
+                            {
+                                GameManager.Instance._matchManager.SavedIndicator.SetActive(false);
+                            }
                         }
                         if (GameManager.Instance._matchManager.CurrentLevel.name == "1-2" && GameManager.Instance._matchManager.GameBoard.Items[0].Position == new Vector2(1, 2) && NextIndicator)
                         {
