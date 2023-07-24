@@ -155,27 +155,77 @@ public class UIManager : MonoBehaviour
                             }
                         }
                     }
+                    //runs the help indicators on the first and second level touch if you dare
                     if (GameManager.Instance._matchManager.GameBoard.Items.Count != 0)
                     {
-                        if (GameManager.Instance._matchManager.CurrentLevel.name == "1-1" && GameManager.Instance._matchManager.GameBoard.Items[0].Position == new Vector2(2, 0))
+                        if (GameManager.Instance._matchManager.CurrentLevel.name == "1-1" && WorldPosition == new Vector3(1, 0, 3))
                         {
-                            GameManager.Instance._matchManager.SavedIndicator.SetActive(false);
-                            Instantiate(GameManager.Instance._matchManager.UIIndicator, GameObject.Find("End Turn Button").transform.position, Quaternion.identity, GUI.transform);
+                            if(GameManager.Instance._matchManager.HelpIndicator2 == null)
+                            {
+                                GameManager.Instance._matchManager.HelpIndicator2 = 
+                                    Instantiate(GameManager.Instance._matchManager.UIHelpIndicator, GameObject.Find("End Turn Button").transform.position, Quaternion.identity, GUI.transform);
+                            }
+                            else
+                            {
+                                GameManager.Instance._matchManager.HelpIndicator2.SetActive(true);
+                            }
+                            if (GameManager.Instance._matchManager.HelpIndicator.activeSelf == false)
+                            {
+                                GameManager.Instance._matchManager.HelpIndicator.SetActive(true);
+                                GameManager.Instance._matchManager.HelpIndicator2.SetActive(false);
+                            }
+                            else
+                            {
+                                GameManager.Instance._matchManager.HelpIndicator.SetActive(false);
+                            }
                         }
-                        if (GameManager.Instance._matchManager.CurrentLevel.name == "1-2" && GameManager.Instance._matchManager.GameBoard.Items[0].Position == new Vector2(1, 2) && NextIndicator)
+                        if (GameManager.Instance._matchManager.CurrentLevel.name == "1-2" && WorldPosition == new Vector3(0, 1, 3))
                         {
-                            GameManager.Instance._matchManager.SavedIndicator.SetActive(false);
-                            NextIndicator = false;
-                            GameManager.Instance._matchManager.SavedIndicator2 = Instantiate(GameManager.Instance._matchManager.Indicator, new Vector3(0f, -1f, 0), Quaternion.identity, Board.transform);
+                            if (GameManager.Instance._matchManager.HelpIndicator2 == null)
+                            {
+                                GameManager.Instance._matchManager.HelpIndicator2 = 
+                                    Instantiate(GameManager.Instance._matchManager.Indicator, new Vector3(0f, -1f, 0), Quaternion.identity, Board.transform);
+                            }
+                            else
+                            {
+                                GameManager.Instance._matchManager.HelpIndicator2.SetActive(true);
+                            }
+                            if (GameManager.Instance._matchManager.HelpIndicator.activeSelf == false)
+                            {
+                                GameManager.Instance._matchManager.HelpIndicator.SetActive(true);
+                                GameManager.Instance._matchManager.HelpIndicator2.SetActive(false);
+                            }
+                            else
+                            {
+                                GameManager.Instance._matchManager.HelpIndicator.SetActive(false);
+                            }
                         }
                     }
                     if (GameManager.Instance._matchManager.GameBoard.Items.Count != 1)
                     {
-                        if (GameManager.Instance._matchManager.CurrentLevel.name == "1-2" && GameManager.Instance._matchManager.GameBoard.Items[1].Position == new Vector2(1, 0))
+                        if (GameManager.Instance._matchManager.CurrentLevel.name == "1-2" && WorldPosition == new Vector3(0, -1, 3))
                         {
-                            GameManager.Instance._matchManager.SavedIndicator2.SetActive(false);
-                            Instantiate(GameManager.Instance._matchManager.UIIndicator, GameObject.Find("End Turn Button").transform.position, Quaternion.identity, GUI.transform);
+                            if (GameManager.Instance._matchManager.HelpIndicator3 == null)
+                            {
+                                GameManager.Instance._matchManager.HelpIndicator3 = 
+                                    Instantiate(GameManager.Instance._matchManager.UIHelpIndicator, GameObject.Find("End Turn Button").transform.position, Quaternion.identity, GUI.transform);
+                            }
+                            else
+                            {
+                                GameManager.Instance._matchManager.HelpIndicator3.SetActive(true);
+                            }
+                            if (GameManager.Instance._matchManager.HelpIndicator2.activeSelf == false)
+                            {
+                                GameManager.Instance._matchManager.HelpIndicator.SetActive(false);
+                                GameManager.Instance._matchManager.HelpIndicator2.SetActive(true);
+                                GameManager.Instance._matchManager.HelpIndicator3.SetActive(false);
+                            }
+                            else
+                            {
+                                GameManager.Instance._matchManager.HelpIndicator2.SetActive(false);
+                            }
                         }
+
                     }
                     CanPlaceItem = false;
                 }

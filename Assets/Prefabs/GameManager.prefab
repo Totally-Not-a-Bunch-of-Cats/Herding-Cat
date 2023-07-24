@@ -194,30 +194,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b41e952c99454d34285474a62ab06a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CatAnim:
+  - {fileID: 9100000, guid: 3b3859dba476d7143977ce83cfa36e01, type: 2}
+  - {fileID: 9100000, guid: 0b62742f5e63a1c42bb417f48537734c, type: 2}
   CatSkins:
-  - {fileID: 989879375, guid: 1f9a8dced562bfd47889925a8f9821b8, type: 3}
-  - {fileID: -354253076, guid: 76cb5d0bd2fce1a43a1b69b8991ba9b9, type: 3}
-  - {fileID: 169629692, guid: 1f9a8dced562bfd47889925a8f9821b8, type: 3}
-  - {fileID: 812799902, guid: 76cb5d0bd2fce1a43a1b69b8991ba9b9, type: 3}
+  - {fileID: -251871438, guid: 3589b1d7c5d65374093d56104ed629bc, type: 3}
+  - {fileID: 259100279, guid: cb60cf56fc227a14abd6491736b7b318, type: 3}
   Accessories:
   - Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
-    CatPrefabLocation: {x: 0, y: 0, z: 0}
-    CatButtonLocation: {x: 0, y: 0, z: 0}
+    CatPrefabLocation: {x: -0.27, y: 0.5, z: 0}
+    CatButtonLocation: {x: -35, y: 40, z: 0}
     MaxoffsetforCatButton: {x: 26, y: 0}
     MinoffsetforCatButton: {x: 70, y: 100}
   - Acessory: {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
-    CatPrefabLocation: {x: 0, y: 0, z: 0}
+    CatPrefabLocation: {x: -0.27, y: 0.28, z: 0}
     CatButtonLocation: {x: 0, y: 0, z: 0}
     MaxoffsetforCatButton: {x: 0, y: 0}
     MinoffsetforCatButton: {x: 0, y: 0}
   - Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
-    CatPrefabLocation: {x: 0, y: 0, z: 0}
-    CatButtonLocation: {x: 0, y: 0, z: 0}
+    CatPrefabLocation: {x: -0.27, y: 0.5, z: 0}
+    CatButtonLocation: {x: -35, y: 40, z: 0}
     MaxoffsetforCatButton: {x: 26, y: -15}
     MinoffsetforCatButton: {x: 70, y: 100}
   - Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
-    CatPrefabLocation: {x: 0, y: 0, z: 0}
-    CatButtonLocation: {x: 0, y: 0, z: 0}
+    CatPrefabLocation: {x: -0.27, y: 0.5, z: 0}
+    CatButtonLocation: {x: -35, y: 40, z: 0}
     MaxoffsetforCatButton: {x: 20, y: 5}
     MinoffsetforCatButton: {x: 65, y: 100}
   CatPrefabs:
@@ -227,7 +228,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b1b6c6f21d028124bbc63e252f176c41, type: 2}
   - {fileID: 11400000, guid: e555ba895d5a24446bccda1cb968e5d7, type: 2}
   SelectCatPrefab: {fileID: 0}
-  CurrentSkin: {fileID: -354253076, guid: 76cb5d0bd2fce1a43a1b69b8991ba9b9, type: 3}
+  CurrentAnim: {fileID: 0}
+  CurrentSkin: {fileID: 259100279, guid: cb60cf56fc227a14abd6491736b7b318, type: 3}
   CurrentAccessory: {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
   CurrentSelected: 0
   CurrentSkinIndex: 0

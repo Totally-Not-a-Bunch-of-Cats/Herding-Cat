@@ -35,9 +35,10 @@ public class MatchManager : MonoBehaviour
     public int ItemsUsed = 0;
     public LevelNameUpdator LevNameUpdator;
     public GameObject Indicator;
-    public GameObject UIIndicator;
-    public GameObject SavedIndicator;
-    public GameObject SavedIndicator2;
+    public GameObject UIHelpIndicator;
+    public GameObject HelpIndicator;
+    public GameObject HelpIndicator2;
+    public GameObject HelpIndicator3;
     public GameObject RewardAD;
     public GameObject ForcedAD;
     public Animator Animator;
@@ -197,11 +198,11 @@ public class MatchManager : MonoBehaviour
             }
             if (currentLevel.name == "1-1")
             {
-                SavedIndicator = Instantiate(Indicator, new Vector3(1, 0, 0), Quaternion.identity, transform);
+                HelpIndicator = Instantiate(Indicator, new Vector3(1, 0, 0), Quaternion.identity, transform);
             }
             if (currentLevel.name == "1-2")
             {
-                SavedIndicator = Instantiate(Indicator, new Vector3(0, 1, 0), Quaternion.identity, transform);
+                HelpIndicator = Instantiate(Indicator, new Vector3(0, 1, 0), Quaternion.identity, transform);
             }
             return true;
         }
@@ -546,6 +547,7 @@ public class MatchManager : MonoBehaviour
                 Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
                 Animator.SetBool("Idle", false);
                 Animator.SetBool("Walk", true);
+                //Animator.runtimeAnimatorController
                 GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0,180,0,0);
                 StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos,  FinalDestination));
             }
