@@ -35,9 +35,10 @@ public class MatchManager : MonoBehaviour
     public int ItemsUsed = 0;
     public LevelNameUpdator LevNameUpdator;
     public GameObject Indicator;
-    public GameObject UIIndicator;
-    public GameObject SavedIndicator;
-    public GameObject SavedIndicator2;
+    public GameObject UIHelpIndicator;
+    public GameObject HelpIndicator;
+    public GameObject HelpIndicator2;
+    public GameObject HelpIndicator3;
     public GameObject RewardAD;
     public GameObject ForcedAD;
     public Animator Animator;
@@ -197,11 +198,11 @@ public class MatchManager : MonoBehaviour
             }
             if (currentLevel.name == "1-1")
             {
-                SavedIndicator = Instantiate(Indicator, new Vector3(1, 0, 0), Quaternion.identity, transform);
+                HelpIndicator = Instantiate(Indicator, new Vector3(1, 0, 0), Quaternion.identity, transform);
             }
             if (currentLevel.name == "1-2")
             {
-                SavedIndicator = Instantiate(Indicator, new Vector3(0, 1, 0), Quaternion.identity, transform);
+                HelpIndicator = Instantiate(Indicator, new Vector3(0, 1, 0), Quaternion.identity, transform);
             }
             return true;
         }
