@@ -16,3 +16,7 @@ MonoBehaviour:
   Distance: 0
   Skipped: 0
   Speed: 0
+  AnimationController: {fileID: 9100000, guid: 0b62742f5e63a1c42bb417f48537734c, type: 2}
+  Skin: {fileID: 1159634615, guid: cb60cf56fc227a14abd6491736b7b318, type: 3}
+  Acessory1: {fileID: 0}
+  Acessory2: {fileID: 0}

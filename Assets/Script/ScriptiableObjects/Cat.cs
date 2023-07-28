@@ -18,6 +18,9 @@ public class Cat : Tile
     [Tooltip("The animation controller of the cat.")]
     public RuntimeAnimatorController AnimationController;
 
+    [Tooltip("The skin color of the cat.")]
+    public Sprite Skin;
+
     [Tooltip("The acessory 1 of the cat.")]
     public GameObject Acessory1;
 
