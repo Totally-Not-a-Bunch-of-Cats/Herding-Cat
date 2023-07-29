@@ -111,7 +111,7 @@ MonoBehaviour:
     Sleeping: 0
     Tile: {fileID: 0}
   SelectedButton: {fileID: 0}
-  SelectedBoxSprite: {fileID: 21300000, guid: d87833b9fc4b24845a60e3d646ed79b8, type: 3}
+  SelectedBoxSprite: {fileID: 21300000, guid: decba4c4f89a41748899f6742f60ef64, type: 3}
   BoxSprite: {fileID: 21300000, guid: 020dc191381a8284e854f98e51a53a43, type: 3}
   NextIndicator: 1
   PauseMenu: {fileID: 0}
