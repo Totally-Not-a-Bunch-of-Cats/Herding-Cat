@@ -11,7 +11,7 @@ public class CatInfoManager : MonoBehaviour
     // List of Accessories
     [SerializeField] private List<AcessoryInfo> Accessories = new List<AcessoryInfo>();
     // Cat Prefabs
-    [SerializeField] private List<Cat> Catlist = new List<Cat>();
+    [SerializeField] public List<Cat> Catlist = new List<Cat>();
     // Cat Prefab Selected
     public Cat SelectCat;
     public RuntimeAnimatorController CurrentAnim;
@@ -133,6 +133,7 @@ public class CatInfoManager : MonoBehaviour
         ReferenceChild.GetComponent<Image>().sprite = CurrentAccessory;
         ReferenceChild.GetComponent<RectTransform>().offsetMax = -Accessories[CurrentAccessoryIndex].MaxoffsetforCatButton;
         ReferenceChild.GetComponent<RectTransform>().offsetMin = Accessories[CurrentAccessoryIndex].MinoffsetforCatButton;
+        Catlist[CurrentSelected].Acessory1 = CurrentAccessory;
     }
 
     // Goes to the previous accessory for the cat to wear
@@ -154,5 +155,6 @@ public class CatInfoManager : MonoBehaviour
         ReferenceChild.GetComponent<Image>().sprite = CurrentAccessory;
         ReferenceChild.GetComponent<RectTransform>().offsetMax = -Accessories[CurrentAccessoryIndex].MaxoffsetforCatButton;
         ReferenceChild.GetComponent<RectTransform>().offsetMin = Accessories[CurrentAccessoryIndex].MinoffsetforCatButton;
+        Catlist[CurrentSelected].Acessory1 = CurrentAccessory;
     }
 }

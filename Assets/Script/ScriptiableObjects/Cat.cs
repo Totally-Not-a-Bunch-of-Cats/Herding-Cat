@@ -22,8 +22,8 @@ public class Cat : Tile
     public Sprite Skin;
 
     [Tooltip("The acessory 1 of the cat.")]
-    public GameObject Acessory1;
+    public Sprite Acessory1;
 
     [Tooltip("The acessory 2 of the cat.")]
-    public GameObject Acessory2;
+    public Sprite Acessory2;
 }
