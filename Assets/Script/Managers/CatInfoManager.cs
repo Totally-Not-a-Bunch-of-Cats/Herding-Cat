@@ -35,6 +35,8 @@ public class CatInfoManager : MonoBehaviour
         Reference.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Image>().sprite = CurrentSkin;
         CurrentAccessory = SelectCat.GetPrefab().transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
         Reference.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Image>().sprite = SelectCat.GetPrefab().transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
+        Reference.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<RectTransform>().offsetMax = -Accessories[CurrentAccessoryIndex].MaxoffsetforCatButton;
+        Reference.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<RectTransform>().offsetMin = Accessories[CurrentAccessoryIndex].MinoffsetforCatButton;
         CurrentSkinIndex = GetSkinIndex();
         CurrentAccessoryIndex = GetAccessoryIndex();
         CurrentSelected = Selected;
@@ -129,7 +131,8 @@ public class CatInfoManager : MonoBehaviour
         Catlist[CurrentSelected].GetPrefab().transform.GetChild(1).position = Accessories[CurrentAccessoryIndex].CatPrefabLocation;
         Transform ReferenceChild = Reference.transform.GetChild(1).GetChild(1).GetChild(1);
         ReferenceChild.GetComponent<Image>().sprite = CurrentAccessory;
-        ReferenceChild.localPosition = Accessories[CurrentAccessoryIndex].CatButtonLocation;
+        ReferenceChild.GetComponent<RectTransform>().offsetMax = -Accessories[CurrentAccessoryIndex].MaxoffsetforCatButton;
+        ReferenceChild.GetComponent<RectTransform>().offsetMin = Accessories[CurrentAccessoryIndex].MinoffsetforCatButton;
     }
 
     // Goes to the previous accessory for the cat to wear
@@ -143,10 +146,13 @@ public class CatInfoManager : MonoBehaviour
         {
             CurrentAccessoryIndex = Accessories.Count - 1;
         }
-
         // Setting the visual in the customization to fit the new accessory, as well as adjusting the scriptable object to the new accessory
         CurrentAccessory = Accessories[CurrentAccessoryIndex].Acessory;
         Catlist[CurrentSelected].GetPrefab().transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = CurrentAccessory;
-        Reference.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Image>().sprite = CurrentAccessory;
+        Catlist[CurrentSelected].GetPrefab().transform.GetChild(1).position = Accessories[CurrentAccessoryIndex].CatPrefabLocation;
+        Transform ReferenceChild = Reference.transform.GetChild(1).GetChild(1).GetChild(1);
+        ReferenceChild.GetComponent<Image>().sprite = CurrentAccessory;
+        ReferenceChild.GetComponent<RectTransform>().offsetMax = -Accessories[CurrentAccessoryIndex].MaxoffsetforCatButton;
+        ReferenceChild.GetComponent<RectTransform>().offsetMin = Accessories[CurrentAccessoryIndex].MinoffsetforCatButton;
     }
 }
