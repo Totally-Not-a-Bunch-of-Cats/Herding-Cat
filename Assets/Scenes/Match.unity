@@ -973,7 +973,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 3.5}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &131580564
 MonoBehaviour:
@@ -988,14 +988,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.59607846, g: 0.13725491, b: 0.13725491, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 70f78e062098c4496b852abefff63acf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0f5c5f037c852294fa8f1585eae839a4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1202,15 +1202,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.87843144, g: 0.8705883, b: 0.69803923, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 08be456a6ddbf458784cf3a37e52822f, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: a5259311831c7e54ba1950dded73139e, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2385,15 +2385,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.49803922, g: 0.27450982, b: 0.105882354, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fb4ddd419e9fb4bcd8d3c4ded642e4f4, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 62e59c040fe7e8a4282619b92162ffcd, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2898,7 +2898,7 @@ RectTransform:
   m_GameObject: {fileID: 362409463}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1641583087}
@@ -2907,7 +2907,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -256, y: -1.5878983}
+  m_AnchoredPosition: {x: -251.99997, y: 1}
   m_SizeDelta: {x: -550, y: -44.5046}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &362409465
@@ -2986,8 +2986,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 12cfc2b0181f64634bb2c971f1562978, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 924476f0a303d794dbb9d83333468ba0, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4787,25 +4787,25 @@ MonoBehaviour:
     Description: If a cat enters the tile of a cat bed it falls asleep and doesnt
       respond to items for the rest of the round.
     Video: {fileID: 32900000, guid: b99885257708b5a4d95e61f1e263cdfe, type: 3}
-    Icon: {fileID: 21300000, guid: c0e3a80b607c74c468311b14a90f603c, type: 3}
+    Icon: {fileID: 21300000, guid: 8bebb7f836e4fc84f8e8ab51822695ad, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Cat Tree
     Description: If a cat enters the tile of cat tree it jumpts over the next tile
       in the direction it was going.
     Video: {fileID: 32900000, guid: 92e9ecdc19dfef244b30ecd0b13c5b30, type: 3}
-    Icon: {fileID: 21300000, guid: 563ca0f21bfce408b86459e92e3deaa1, type: 3}
+    Icon: {fileID: 21300000, guid: af8552716c77bd94b8a1b01fb1f8e8ca, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Cat Tube
     Description: When a cat enters the tile of a cat tube it journies to the adjoined
       cat tube
     Video: {fileID: 32900000, guid: be26565c75a69164ebc6122dc7215338, type: 3}
-    Icon: {fileID: 21300000, guid: 915e4eea686046b48b85e5176cb20c27, type: 3}
+    Icon: {fileID: 21300000, guid: 0bdb3af61a58fa34980e7ea90f01efd4, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Redirection Pad
     Description: 'When a cat enters a tile of a redicrection pad it will be moved
       in the direction indicated. '
     Video: {fileID: 32900000, guid: 29e3e5f12be721c4b85ac84dcafbc313, type: 3}
-    Icon: {fileID: 21300000, guid: 0bca651f898f1479c957ebcc1fa23f88, type: 3}
+    Icon: {fileID: 21300000, guid: cf5aa3c6046982d4b9b2d668c6bc3923, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   VideoPlayer: {fileID: 918059139}
   ViewPorts:
@@ -8587,15 +8587,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.87843144, g: 0.8705883, b: 0.69803923, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 12cfc2b0181f64634bb2c971f1562978, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 62e59c040fe7e8a4282619b92162ffcd, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -11447,15 +11447,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.050980397, g: 0.45098042, b: 0.73333335, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 08be456a6ddbf458784cf3a37e52822f, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 5325bad825466d740ac56b5b1602f264, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -12176,7 +12176,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 896329900}
   m_HandleRect: {fileID: 896329899}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -12326,7 +12326,7 @@ RectTransform:
   m_GameObject: {fileID: 1492910987}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2043747027}
@@ -12335,7 +12335,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: -1.5878983}
+  m_AnchoredPosition: {x: 4, y: 1}
   m_SizeDelta: {x: -550, y: -44.5046}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1492910989
@@ -12414,8 +12414,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 12cfc2b0181f64634bb2c971f1562978, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 924476f0a303d794dbb9d83333468ba0, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -13757,8 +13757,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 681db73f19fb24efe843aad713eccb43, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 44d9082bb0b415a4e8d7d6226e632425, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -16797,8 +16797,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 12cfc2b0181f64634bb2c971f1562978, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 924476f0a303d794dbb9d83333468ba0, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -17224,7 +17224,7 @@ RectTransform:
   m_GameObject: {fileID: 3114180075214776659}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6352895145015670790}
@@ -17233,7 +17233,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 257, y: -1.5878983}
+  m_AnchoredPosition: {x: 261, y: 1}
   m_SizeDelta: {x: -550, y: -44.5046}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8794584627938987355
