@@ -114,6 +114,7 @@ public class Board
             }
         }
     }
+
     /// <summary>
     /// a deep copy constructor that copies the tiles and puts them into a different board 
     /// </summary>
@@ -265,9 +266,15 @@ public class Board
             throw new ArgumentOutOfRangeException($"Position must be between (0, 0) and ({this._width}, {this._height})");
         }
     }
+
+    /// <summary>
+    /// Adds a tile to the saved tile list
+    /// </summary>
+    /// <param name="_pos">Position that tile being saved is located on <see cref="Board"/></param>
+    /// <param name="_tile">Type of tile being saved</param>
     public void SaveTile(Vector2Int _pos, Tile _tile)
     {
-        for(int i = 0; i < SavedTiles.Count; i++)
+        for (int i = 0; i < SavedTiles.Count; i++)
         {
             if (_pos == SavedTiles[i].Position)
             {
@@ -276,6 +283,98 @@ public class Board
         }
         SavedTiles.Add(new PosTile(_pos, _tile));
     }
+
+    // Down/Up: Destination.x, y
+    // Right/Left: x, Destination.y
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="CellSpot"></param>
+    /// <param name="ListPos">Position cat is in cats list</param>
+    /// <param name="item"></param>
+    /// <param name="Destination"></param>
+    /// <param name="direction">Direction Cat is being moved</param>
+    /// <returns></returns>
+    public Vector2Int CheckSpot(Vector2Int CellSpot, int ListPos, PosObject item, Vector2Int Destination, Vector2Int direction)
+    {
+        Vector2Int OppositeDirection = Vector2Int.zero;
+        if (direction == Vector2Int.up || direction == Vector2Int.down)
+        {
+            OppositeDirection = Vector2Int.right;
+        }
+        else
+        {
+            OppositeDirection = Vector2Int.up;
+        }
+        int x = Math.Abs(CellSpot.x * direction.x) + (Destination.x * OppositeDirection.x);
+        int y = Math.Abs(CellSpot.y * direction.y) + (Destination.y * OppositeDirection.y);
+
+        if (_cells[x, y] != null)
+        {
+            if (_cells[x, y].Is<Trap>() || _cells[x, y].Is<Item>() || _cells[x, y].Is<Cat>())
+            {
+                //if the destination has something the cat cant be on, make sure it does step on it
+                //return (Destination * OppositeDirection) + (CellSpot * direction) + direction;
+                // Destination.y/x = y/x +/- 1
+                if (_cells[x, y].name == "Post")
+                {
+                    //TODO
+                    //Destination.y = y; on ice right now (could lure a cat one tile closer)
+                    //break;
+                }
+                if (_cells[x, y].name == "Cat Tree")
+                {
+                    Vector2Int CatTreeCellPos = new Vector2Int(x + (direction.x * 2), y + (direction.y * 2));
+                    if (_cells[CatTreeCellPos.x, CatTreeCellPos.y] == null || _cells[CatTreeCellPos.x, CatTreeCellPos.y].Is<CatPen>()
+                        || _cells[CatTreeCellPos.x, CatTreeCellPos.y].name == "Bed")
+                    {
+                        //|| _cells[Destination.x, y].name == "Redirection Pad" maybe think about handeling this exception
+                        //handles bed execption
+                        if (_cells[CatTreeCellPos.x, CatTreeCellPos.y] != null)
+                        {
+                            if (_cells[CatTreeCellPos.x, CatTreeCellPos.y].name == "Bed")
+                            {
+                                Cats[ListPos].Sleeping = true;
+                                Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                                return (new Vector2Int(x, y) + (2 * direction));
+                            }
+                        }
+                        return (new Vector2Int(x, y) + (2 * direction));
+                    }
+                    //Destination.y = y;
+                    return new Vector2Int(x, y);
+                }
+                if (_cells[x, y].name == "Cat Tube")
+                {
+                    return new Vector2Int(x, y);
+                }
+                if (_cells[x, y].name == "Redirection Pad")
+                {
+                    return new Vector2Int(x, y);
+                }
+                if (_cells[x, y].name == "Bed")
+                {
+                    Cats[ListPos].Sleeping = true;
+                    Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                    return new Vector2Int(x, y);
+                }
+                if (_cells[x, y].name == "Toy" && item.Position == new Vector2Int(x, y))
+                {
+                    //allows cat to move on cat pen
+                    return new Vector2Int(x, y);
+                }
+                //return;
+            }
+            else if (_cells[x, y].Is<CatPen>())
+            {
+                //allows cat to move on cat pen
+                return new Vector2Int(x, y);
+            }
+            return (new Vector2Int(x, y) - direction);
+        }
+        return Destination;
+    }
+
 
     /// <summary>
     /// Moves a spcific cat to the farthest empty spot inbetween Destination and cats location
@@ -298,8 +397,19 @@ public class Board
                 } 
                 for (int y = Cat.y - 1; y >= Destination.y; y--)
                 {
+                    Vector2Int TestDestination = CheckSpot(new Vector2Int(0, y), ListPos, Item, Destination, Vector2Int.down);
+                    if (TestDestination != Destination)
+                    {
+                        Destination = TestDestination;
+                        break;
+                    }
+                    else
+                    {
+                        Destination = TestDestination;
+                    }
+
                     //checks what the destination is
-                    if (_cells[Destination.x, y] != null)
+                    /*if (_cells[Destination.x, y] != null)
                     {
                         if (_cells[Destination.x, y].Is<Trap>() || _cells[Destination.x, y].Is<Item>() || _cells[Destination.x, y].Is<Cat>())
                         {
@@ -367,7 +477,7 @@ public class Board
                             Destination.y = y;
                             break;
                         }
-                    }
+                    }*/
                 }
                 GameManager.Instance._matchManager.MoveCat(Vector2Int.down, At(Cat), Destination, ListPos);
             }
@@ -381,8 +491,19 @@ public class Board
                 }
                 for (int y = Cat.y + 1; y <= Destination.y; y++)
                 {
+                    Vector2Int TestDestination = CheckSpot(new Vector2Int(0, y), ListPos, Item, Destination, Vector2Int.up);
+                    if (TestDestination != Destination)
+                    {
+                        Destination = TestDestination;
+                        break;
+                    }
+                    else
+                    {
+                        Destination = TestDestination;
+                    }
+
                     //checks what the destination is
-                    if (_cells[Destination.x, y] != null)
+                    /*if (_cells[Destination.x, y] != null)
                     {
                         if (_cells[Destination.x, y].Is<Trap>() || _cells[Destination.x, y].Is<Item>() || _cells[Destination.x, y].Is<Cat>())
                         {
@@ -449,7 +570,7 @@ public class Board
                             Destination.y = y;
                             break;
                         }
-                    }
+                    }*/
                 }
                 GameManager.Instance._matchManager.MoveCat(Vector2Int.up, At(Cat), Destination, ListPos);
             }
@@ -466,8 +587,19 @@ public class Board
                 }
                 for (int x = Cat.x - 1; x >= Destination.x; x--)
                 {
+                    Vector2Int TestDestination = CheckSpot(new Vector2Int(x, 0), ListPos, Item, Destination, Vector2Int.left);
+                    if (TestDestination != Destination)
+                    {
+                        Destination = TestDestination;
+                        break;
+                    }
+                    else
+                    {
+                        Destination = TestDestination;
+                    }
+
                     //checks what the destination is
-                    if (_cells[x, Destination.y] != null)
+                    /*if (_cells[x, Destination.y] != null)
                     {
                         if (_cells[x, Destination.y].Is<Trap>() || _cells[x, Destination.y].Is<Item>() 
                             || _cells[x, Destination.y].Is<Cat>())
@@ -535,7 +667,7 @@ public class Board
                             Destination.x = x;
                             break;
                         }
-                    }
+                    }*/
                 }
                 GameManager.Instance._matchManager.MoveCat(Vector2Int.left, At(Cat), Destination, ListPos);
             }
@@ -549,8 +681,19 @@ public class Board
                 }
                 for (int x = Cat.x + 1; x <= Destination.x; x++)
                 {
+                    Vector2Int TestDestination = CheckSpot(new Vector2Int(x, 0), ListPos, Item, Destination, Vector2Int.right);
+                    if (TestDestination != Destination)
+                    {
+                        Destination = TestDestination;
+                        break;
+                    }
+                    else
+                    {
+                        Destination = TestDestination;
+                    }
+
                     //checks what the destination is
-                    if (_cells[x, Destination.y] != null)
+                    /*if (_cells[x, Destination.y] != null)
                     {
                         if (_cells[x, Destination.y].Is<Trap>() || _cells[x, Destination.y].Is<Item>() || _cells[x, Destination.y].Is<Cat>())
                         {
@@ -619,7 +762,7 @@ public class Board
                             Destination.x = x;
                             break;
                         }
-                    }
+                    }*/
                 }
                 GameManager.Instance._matchManager.MoveCat(Vector2Int.right, At(Cat), Destination, ListPos);
             }
