@@ -8,4 +8,6 @@ public class AcessoryInfo
     public Vector3 CatButtonLocation;
     public Vector2 MaxoffsetforCatButton;
     public Vector2 MinoffsetforCatButton;
+    public Vector2 MaxoffsetforExternalCatButton;
+    public Vector2 MinoffsetforExternalCatButton;
 }

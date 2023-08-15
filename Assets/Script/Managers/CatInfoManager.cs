@@ -9,7 +9,7 @@ public class CatInfoManager : MonoBehaviour
     [SerializeField] private List<RuntimeAnimatorController> CatAnim = new List<RuntimeAnimatorController>();
     [SerializeField] private List<Sprite> CatSkins = new List<Sprite>(); //Catskins and cat anims must be same length
     // List of Accessories
-    [SerializeField] private List<AcessoryInfo> Accessories = new List<AcessoryInfo>();
+    [SerializeField] public List<AcessoryInfo> Accessories = new List<AcessoryInfo>();
     // Cat Prefabs
     [SerializeField] public List<Cat> Catlist = new List<Cat>();
     // Cat Prefab Selected
@@ -19,7 +19,7 @@ public class CatInfoManager : MonoBehaviour
     public Sprite CurrentAccessory;
     public int CurrentSelected;
     [SerializeField] int CurrentSkinIndex;
-    [SerializeField] int CurrentAccessoryIndex;
+    public int CurrentAccessoryIndex;
 
     // Opens the Customize Screen
     public void GoToCustomize(int Selected, GameObject Reference)
@@ -56,7 +56,7 @@ public class CatInfoManager : MonoBehaviour
         return -10;
     }
 
-    int GetAccessoryIndex()
+    public int GetAccessoryIndex()
     {
         for (int i = 0; i < Accessories.Count; i++)
         {
