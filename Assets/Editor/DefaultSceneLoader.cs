@@ -7,7 +7,10 @@ public static class DefaultSceneLoader
 {
     static DefaultSceneLoader()
     {
-        EditorApplication.playModeStateChanged += LoadDefaultScene;
+        if (EditorSceneManager.GetActiveScene().buildIndex != 0)
+        {
+            EditorApplication.playModeStateChanged += LoadDefaultScene;
+        }
     }
 
     static void LoadDefaultScene(PlayModeStateChange state)
@@ -17,9 +20,9 @@ public static class DefaultSceneLoader
             EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
         }
 
-        if (state == PlayModeStateChange.EnteredPlayMode && EditorSceneManager.GetActiveScene().buildIndex != 0)
+        if (state == PlayModeStateChange.EnteredPlayMode)
         {
-            EditorSceneManager.LoadScene(0);
+            EditorSceneManager.LoadScene(0, UnityEngine.SceneManagement.LoadSceneMode.Single);
         }
     }
 }
