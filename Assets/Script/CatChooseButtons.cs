@@ -25,6 +25,14 @@ public class CatChooseButtons : MonoBehaviour
         Debug.Log("ive been enabeled");
     }
 
+    private void OnDisable()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -46,13 +54,11 @@ public class CatChooseButtons : MonoBehaviour
             // Creates a button in the level select
             int CurrentButton = i;
             Transform CatButtonTransform = Instantiate(CatPrefab, this.transform);
-            Debug.Log(GameManager.Instance._catInfoManager.Catlist[i].Acessory1);
             CatButtonTransform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = GameManager.Instance._catInfoManager.Catlist[i].AnimationController;
             CatButtonTransform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = GameManager.Instance._catInfoManager.Catlist[i].Acessory1;
-
-            Debug.Log("Acessory1ListNum: " + GameManager.Instance._catInfoManager.Catlist[i].Acessory1ListNum + " Cat num: " + i);
-            CatButtonTransform.GetChild(0).GetChild(0).GetComponent<RectTransform>().offsetMax = -GameManager.Instance._catInfoManager.Accessories[GameManager.Instance._catInfoManager.Catlist[i].Acessory1ListNum].MaxoffsetforExternalCatButton;
-            CatButtonTransform.GetChild(0).GetChild(0).GetComponent<RectTransform>().offsetMin = GameManager.Instance._catInfoManager.Accessories[GameManager.Instance._catInfoManager.Catlist[i].Acessory1ListNum].MinoffsetforExternalCatButton;
+            GameManager.Instance._catInfoManager.CurrentName = GameManager.Instance._catInfoManager.Catlist[i].nameofAcessory1;
+            CatButtonTransform.GetChild(0).GetChild(0).GetComponent<RectTransform>().offsetMax = -GameManager.Instance._catInfoManager.Accessories[GameManager.Instance._catInfoManager.GetAccessoryIndex()].MaxoffsetforExternalCatButton;
+            CatButtonTransform.GetChild(0).GetChild(0).GetComponent<RectTransform>().offsetMin = GameManager.Instance._catInfoManager.Accessories[GameManager.Instance._catInfoManager.GetAccessoryIndex()].MinoffsetforExternalCatButton;
             // Sets the text of the button to the respective level
             CatButtonTransform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Cat: " + (i + 1);
             // Creates the action to go to the Customize Window

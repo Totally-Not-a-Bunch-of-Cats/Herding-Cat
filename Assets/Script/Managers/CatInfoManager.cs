@@ -17,6 +17,7 @@ public class CatInfoManager : MonoBehaviour
     public RuntimeAnimatorController CurrentAnim;
     public Sprite CurrentSkin;
     public Sprite CurrentAccessory;
+    public string CurrentName;
     public int CurrentSelected;
     [SerializeField] int CurrentSkinIndex;
     public int CurrentAccessoryIndex;
@@ -26,6 +27,7 @@ public class CatInfoManager : MonoBehaviour
     {
         // Sets the customizatoin screen to active
         Reference.transform.GetChild(1).gameObject.SetActive(true);
+        //CurrentAccessoryIndex = GetAccessoryIndex();
         // Gathers the prefab from the scriptable object
         SelectCat = Catlist[Selected];
         //Instantiate(SelectCatPrefab);
@@ -33,12 +35,13 @@ public class CatInfoManager : MonoBehaviour
         CurrentAnim = SelectCat.AnimationController;
         CurrentSkin = SelectCat.Skin;
         Reference.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Image>().sprite = CurrentSkin;
-        CurrentAccessory = SelectCat.GetPrefab().transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
-        Reference.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Image>().sprite = SelectCat.GetPrefab().transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
-        Reference.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<RectTransform>().offsetMax = -Accessories[CurrentAccessoryIndex].MaxoffsetforCatButton;
-        Reference.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<RectTransform>().offsetMin = Accessories[CurrentAccessoryIndex].MinoffsetforCatButton;
+        //CurrentAccessory = SelectCat.GetPrefab().transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
+        CurrentAccessory = Catlist[Selected].Acessory1;
+        CurrentName = Catlist[Selected].nameofAcessory1;
+        Reference.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Image>().sprite = Catlist[Selected].Acessory1;
+        Reference.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<RectTransform>().offsetMax = -Accessories[GetAccessoryIndex()].MaxoffsetforCatButton;
+        Reference.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<RectTransform>().offsetMin = Accessories[GetAccessoryIndex()].MinoffsetforCatButton;
         CurrentSkinIndex = GetSkinIndex();
-        CurrentAccessoryIndex = GetAccessoryIndex();
         CurrentSelected = Selected;
         Reference.transform.GetChild(0).gameObject.SetActive(false);
     }
@@ -60,7 +63,7 @@ public class CatInfoManager : MonoBehaviour
     {
         for (int i = 0; i < Accessories.Count; i++)
         {
-            if (Accessories[i].Acessory == CurrentAccessory)
+            if (Accessories[i].Name == CurrentName)
             {
                 return i;
             }
@@ -134,9 +137,8 @@ public class CatInfoManager : MonoBehaviour
         ReferenceChild.GetComponent<RectTransform>().offsetMax = -Accessories[CurrentAccessoryIndex].MaxoffsetforCatButton;
         ReferenceChild.GetComponent<RectTransform>().offsetMin = Accessories[CurrentAccessoryIndex].MinoffsetforCatButton;
         Catlist[CurrentSelected].Acessory1 = CurrentAccessory;
-        Catlist[CurrentSelected].Acessory1ListNum = CurrentAccessoryIndex;
-        Debug.Log(CurrentAccessoryIndex);
-        Debug.Log(Catlist[CurrentSelected].Acessory1ListNum);
+        Catlist[CurrentSelected].nameofAcessory1 = Accessories[CurrentAccessoryIndex].Name;
+        //Catlist[CurrentSelected].Acessory1ListNum = CurrentAccessoryIndex;
     }
 
     // Goes to the previous accessory for the cat to wear
@@ -159,6 +161,6 @@ public class CatInfoManager : MonoBehaviour
         ReferenceChild.GetComponent<RectTransform>().offsetMax = -Accessories[CurrentAccessoryIndex].MaxoffsetforCatButton;
         ReferenceChild.GetComponent<RectTransform>().offsetMin = Accessories[CurrentAccessoryIndex].MinoffsetforCatButton;
         Catlist[CurrentSelected].Acessory1 = CurrentAccessory;
-        Catlist[CurrentSelected].Acessory1ListNum = CurrentAccessoryIndex;
+        Catlist[CurrentSelected].nameofAcessory1 = Accessories[CurrentAccessoryIndex].Name;
     }
 }

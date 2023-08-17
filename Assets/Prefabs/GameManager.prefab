@@ -201,25 +201,29 @@ MonoBehaviour:
   - {fileID: -251871438, guid: 3589b1d7c5d65374093d56104ed629bc, type: 3}
   - {fileID: 1159634615, guid: cb60cf56fc227a14abd6491736b7b318, type: 3}
   Accessories:
-  - Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
+  - Name: Normal Hat
+    Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
     CatPrefabLocation: {x: -0.27, y: 0.5, z: 0}
     MaxoffsetforCatButton: {x: 139.85, y: 132.2}
     MinoffsetforCatButton: {x: 63.7, y: 200}
     MaxoffsetforExternalCatButton: {x: 71, y: 3}
     MinoffsetforExternalCatButton: {x: 26, y: 99.5}
-  - Acessory: {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
+  - Name: Headset
+    Acessory: {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
     CatPrefabLocation: {x: -0.27, y: 0.28, z: 0}
     MaxoffsetforCatButton: {x: 120, y: 141}
     MinoffsetforCatButton: {x: 46, y: 157}
     MaxoffsetforExternalCatButton: {x: 63.5, y: 17.5}
     MinoffsetforExternalCatButton: {x: 20, y: 76}
-  - Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
+  - Name: Tall Hat
+    Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
     CatPrefabLocation: {x: -0.27, y: 0.5, z: 0}
     MaxoffsetforCatButton: {x: 136.9, y: 65.3}
     MinoffsetforCatButton: {x: 62.1, y: 198.7}
     MaxoffsetforExternalCatButton: {x: 71.5, y: -20}
     MinoffsetforExternalCatButton: {x: 25.5, y: 99}
-  - Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
+  - Name: Wide Hat
+    Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
     CatPrefabLocation: {x: -0.27, y: 0.5, z: 0}
     MaxoffsetforCatButton: {x: 113.7, y: 124.7}
     MinoffsetforCatButton: {x: 39.3, y: 201.3}

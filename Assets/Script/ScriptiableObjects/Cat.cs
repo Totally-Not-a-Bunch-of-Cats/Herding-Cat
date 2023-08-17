@@ -25,7 +25,10 @@ public class Cat : Tile
     public Sprite Acessory1;
 
     [Tooltip("The number of acessory in list stored on gm.")]
-    public int Acessory1ListNum;
+    public string nameofAcessory1;
+
+    //[Tooltip("The number of acessory in list stored on gm.")]
+    //public int Acessory1ListNum;
 
     [Tooltip("The acessory 2 of the cat.")]
     public Sprite Acessory2;
