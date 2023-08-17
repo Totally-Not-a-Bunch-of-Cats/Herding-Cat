@@ -134,6 +134,9 @@ public class CatInfoManager : MonoBehaviour
         ReferenceChild.GetComponent<RectTransform>().offsetMax = -Accessories[CurrentAccessoryIndex].MaxoffsetforCatButton;
         ReferenceChild.GetComponent<RectTransform>().offsetMin = Accessories[CurrentAccessoryIndex].MinoffsetforCatButton;
         Catlist[CurrentSelected].Acessory1 = CurrentAccessory;
+        Catlist[CurrentSelected].Acessory1ListNum = CurrentAccessoryIndex;
+        Debug.Log(CurrentAccessoryIndex);
+        Debug.Log(Catlist[CurrentSelected].Acessory1ListNum);
     }
 
     // Goes to the previous accessory for the cat to wear
@@ -156,5 +159,6 @@ public class CatInfoManager : MonoBehaviour
         ReferenceChild.GetComponent<RectTransform>().offsetMax = -Accessories[CurrentAccessoryIndex].MaxoffsetforCatButton;
         ReferenceChild.GetComponent<RectTransform>().offsetMin = Accessories[CurrentAccessoryIndex].MinoffsetforCatButton;
         Catlist[CurrentSelected].Acessory1 = CurrentAccessory;
+        Catlist[CurrentSelected].Acessory1ListNum = CurrentAccessoryIndex;
     }
 }
