@@ -45,8 +45,10 @@ public class LevelCreationTool : MonoBehaviour
     public enum Mode{Edit, Create};
     public Mode CurrentMode = Mode.Create;
 
-    //then activates buttons to begin working on the level
 
+    /// <summary>
+    /// Sets the default tile type
+    /// </summary>
     private void Start()
     {
         BackgroundTile = TileImages[0];
@@ -106,6 +108,10 @@ public class LevelCreationTool : MonoBehaviour
         LevelName = name;
     }
 
+    /// <summary>
+    /// Sets the tile to the index given
+    /// </summary>
+    /// <param name="ListTileNum">index of tile to use</param>
     public void TileSelect(int ListTileNum)
     {
         BackgroundTile = TileImages[ListTileNum];
@@ -156,6 +162,9 @@ public class LevelCreationTool : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Continues to Layout design
+    /// </summary>
     public void Continue()
     {
         if (LevelName != null && BoardSize.x != 0 && BoardSize.y != 0)
@@ -394,6 +403,9 @@ public class LevelCreationTool : MonoBehaviour
         Remove = true;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     void Update()
     {
         //checks to see if you can place an item
@@ -408,24 +420,16 @@ public class LevelCreationTool : MonoBehaviour
                 WorldPosition = TileLocationSanitization(WorldPosition);
                 float clickableX = BoardSize.x / 2;
                 float clickableY = BoardSize.y / 2;
-                if (BoardOffset.y == 0.5f)
-                {
-                    clickableY -= 0.5f;
-                }
-                if (BoardOffset.x == 0.5f)
-                {
-                    clickableX -= 0.5f;
-                }
+
+                clickableX -= GameManager.Instance._matchManager.BoardOffset.y;
+                clickableY -= GameManager.Instance._matchManager.BoardOffset.x;
+
                 Vector2Int tileLocation = new Vector2Int((int)(WorldPosition.x - 0.5 + clickableX),
                     (int)(WorldPosition.y - 0.5 + clickableY));
-                if (BoardOffset.x == 0.5f)
-                {
-                    tileLocation.x += 1;
-                }
-                if (BoardOffset.y == 0.5f)
-                {
-                    tileLocation.y += 1;
-                }
+
+                tileLocation.x += (int)(2 * GameManager.Instance._matchManager.BoardOffset.x);
+                tileLocation.y += (int)(2 * GameManager.Instance._matchManager.BoardOffset.y);
+
                 if (tileLocation.x == 0 || tileLocation.x == BoardSize.x - 1)
                 {
                     clickableX += 1;
@@ -434,6 +438,7 @@ public class LevelCreationTool : MonoBehaviour
                 {
                     clickableY += 1;
                 }
+
                 if ((WorldPosition.x >= -clickableX && WorldPosition.x < clickableX)
                     && (WorldPosition.y >= -clickableY && WorldPosition.y < clickableY))
                 {

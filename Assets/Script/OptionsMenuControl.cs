@@ -15,6 +15,9 @@ public class OptionsMenuControl : MonoBehaviour
 
     private readonly string SpeedAdjustWording = "Cat Speed Augment: ";
 
+    /// <summary>
+    /// Sets the UI objects to the value that has been saved
+    /// </summary>
     private void Awake()
     {
         SpeedAdjustSlider.value = (GameManager.Instance.CatSpeed - .75f) / .25f;
@@ -22,6 +25,9 @@ public class OptionsMenuControl : MonoBehaviour
         ItemAffectButtons[0].interactable = GameManager.Instance.ItemIndicators;
     }
 
+    /// <summary>
+    /// Changes the speed of cat movement
+    /// </summary>
     public void SpeedChange()
     {
         float AgmentAmount = SpeedAdjustSlider.value + 1 - (.25f + (0.75f * SpeedAdjustSlider.value));
@@ -29,6 +35,10 @@ public class OptionsMenuControl : MonoBehaviour
         GameManager.Instance._PlayerPrefsManager.SaveFloat("CatSpeed", AgmentAmount);
     }
     
+    /// <summary>
+    /// Controls turning on/off of the item affect indicators
+    /// </summary>
+    /// <param name="ItemAffect">If the item affect toggle is on or off</param>
     public void AffectToggle(bool ItemAffect)
     {
         GameManager.Instance.ItemIndicators = ItemAffect;

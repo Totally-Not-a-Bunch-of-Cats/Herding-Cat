@@ -209,6 +209,10 @@ public class MatchManager : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Sets all the icon images for the matching tubes
+    /// </summary>
+    /// <param name="TubePairs">List of Tube pairs th put icons on</param>
     void MarkTubes(List<TubePairImage> TubePairs)
     {
         for (int i = 0; i < TubePairs.Count; i++)
@@ -216,7 +220,6 @@ public class MatchManager : MonoBehaviour
             TubePairs[i].SetTubeSprites();
         }
     }
-
 
     /// <summary>
     /// Finds closest cat to an item and starts the movement 
@@ -408,7 +411,7 @@ public class MatchManager : MonoBehaviour
             ActiveMatch = false;
             CurrentLevel.CalculateStars(RoundsPlayed, ItemsUsed, GameManager.Instance.UpdateLevelData);
             //prevent player spam
-            if(CurrentLevel.NewThingIntroduced == true && GameManager.Instance.ClearStartHelpScreen == true)
+            if (CurrentLevel.NewThingIntroduced == true && GameManager.Instance.ClearStartHelpScreen == true)
             {
                 CurrentLevel.NewThingIntroduced = false;
             }
@@ -527,6 +530,7 @@ public class MatchManager : MonoBehaviour
         }
         return new Vector2Int(-100, -100);
     }
+
     /// <summary>
     /// Moves the cat object to the visualy in cell on board
     /// </summary>
@@ -812,28 +816,10 @@ public class MatchManager : MonoBehaviour
             GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", CurrentLevel.StarsEarned + GameManager.Instance.StarCount);
         }
         GameWonUI.SetActive(true);
-        ActivateStars();
     }
 
     /// <summary>
-    /// Sets the stars on the Win UI to the won amount
-    /// </summary>
-    private void ActivateStars()
-    {
-        //get references to stars and activate them
-        List<Image> Stars = new List<Image>();
-        Stars.Add(GameObject.Find("Star1").GetComponent<Image>());
-        Stars.Add(GameObject.Find("Star2").GetComponent<Image>());
-        Stars.Add(GameObject.Find("Star3").GetComponent<Image>());
-
-        for (int i = 0; i < CurrentLevel.StarsEarned; i++)
-        {
-            Stars[i].color = Color.white;
-        }
-    }
-
-    /// <summary>
-    /// 
+    /// Decays the sleep zzz's
     /// </summary>
     /// <param name="i">Index of cat in list that is falling asleep</param>
     /// <returns></returns>

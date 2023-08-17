@@ -12,8 +12,11 @@ using UnityEngine.UI;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-    // Number of stars that the player has
+    [Header("Saved Values")]
+    [Tooltip("Number of stars that the player has")]
     public int StarCount;
+    [Tooltip("Furthest level player has unlocked")]
+    public string FurthestLevel;
 
     [Header("Sub Managers")]
     public MatchManager _matchManager;
@@ -22,16 +25,19 @@ public class GameManager : MonoBehaviour
     public ReWindManager _ReWindManager;
     public PlayerPrefsManager _PlayerPrefsManager;
     public CatInfoManager _catInfoManager;
+
+    [Header("Misc")]
     //list of all level data
     //public static List<LevelData> Levels;
     public List<LevelData> Levels = new List<LevelData>();
     public GameLevels GamelevelList;
     public int LevelPosition = 0;
-    public bool ActivateItemIndicators = false;
+    //public bool ActivateItemIndicators = false;
+    public bool ClearStartHelpScreen = false;
+
+    [Header("Ad Varables")]
     public int GamesTillRewardAd = 4;
     public int GamesTillMandatoryAd = 10;
-    public bool ClearStartHelpScreen = false;
-    public string FurthestLevel;
 
     // Option Varables(Can be changed in options menu)
     [Header("Option Varables")]
