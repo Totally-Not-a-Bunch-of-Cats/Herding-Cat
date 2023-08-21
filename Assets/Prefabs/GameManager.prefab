@@ -203,28 +203,32 @@ MonoBehaviour:
   Accessories:
   - Name: Normal Hat
     Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
-    CatPrefabLocation: {x: -0.27, y: 0.5, z: 0}
+    CatPrefabLocation: {x: -0.245, y: 0.5, z: 1}
+    CatPrefabScale: {x: 0.21, y: 0.21, z: 1}
     MaxoffsetforCatButton: {x: 139.85, y: 132.2}
     MinoffsetforCatButton: {x: 63.7, y: 200}
     MaxoffsetforExternalCatButton: {x: 71, y: 3}
     MinoffsetforExternalCatButton: {x: 26, y: 99.5}
   - Name: Headset
     Acessory: {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
-    CatPrefabLocation: {x: -0.27, y: 0.28, z: 0}
+    CatPrefabLocation: {x: -0.23, y: 0.328, z: 1}
+    CatPrefabScale: {x: 0.21, y: 0.185, z: 1}
     MaxoffsetforCatButton: {x: 120, y: 141}
     MinoffsetforCatButton: {x: 46, y: 157}
     MaxoffsetforExternalCatButton: {x: 63.5, y: 17.5}
     MinoffsetforExternalCatButton: {x: 20, y: 76}
   - Name: Tall Hat
     Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
-    CatPrefabLocation: {x: -0.27, y: 0.5, z: 0}
+    CatPrefabLocation: {x: -0.24, y: 0.66, z: 1}
+    CatPrefabScale: {x: 0.21, y: 0.5, z: 1}
     MaxoffsetforCatButton: {x: 136.9, y: 65.3}
     MinoffsetforCatButton: {x: 62.1, y: 198.7}
     MaxoffsetforExternalCatButton: {x: 71.5, y: -20}
     MinoffsetforExternalCatButton: {x: 25.5, y: 99}
   - Name: Wide Hat
     Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
-    CatPrefabLocation: {x: -0.27, y: 0.5, z: 0}
+    CatPrefabLocation: {x: -0.238, y: 0.49, z: 1}
+    CatPrefabScale: {x: 0.285, y: 0.22, z: 1}
     MaxoffsetforCatButton: {x: 113.7, y: 124.7}
     MinoffsetforCatButton: {x: 39.3, y: 201.3}
     MaxoffsetforExternalCatButton: {x: 65, y: 7.5}
@@ -239,6 +243,7 @@ MonoBehaviour:
   CurrentAnim: {fileID: 9100000, guid: 3b3859dba476d7143977ce83cfa36e01, type: 2}
   CurrentSkin: {fileID: -251871438, guid: 3589b1d7c5d65374093d56104ed629bc, type: 3}
   CurrentAccessory: {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
+  CurrentName: 
   CurrentSelected: 0
   CurrentSkinIndex: 0
   CurrentAccessoryIndex: 1

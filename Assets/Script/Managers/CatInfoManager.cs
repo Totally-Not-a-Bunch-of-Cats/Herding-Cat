@@ -135,15 +135,13 @@ public class CatInfoManager : MonoBehaviour
         Debug.Log(CurrentSelected); // is zero for some reason
         Debug.Log(SelectCat);
         CurrentAccessory = Accessories[CurrentAccessoryIndex].Acessory;
-        //Catlist[CurrentSelected].GetPrefab().transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = CurrentAccessory;
-        //Catlist[CurrentSelected].GetPrefab().transform.GetChild(1).position = Accessories[CurrentAccessoryIndex].CatPrefabLocation;
         Transform ReferenceChild = Reference.transform.GetChild(1).GetChild(1).GetChild(1);
         ReferenceChild.GetComponent<Image>().sprite = CurrentAccessory;
         ReferenceChild.GetComponent<RectTransform>().offsetMax = -Accessories[CurrentAccessoryIndex].MaxoffsetforCatButton;
         ReferenceChild.GetComponent<RectTransform>().offsetMin = Accessories[CurrentAccessoryIndex].MinoffsetforCatButton;
         Catlist[CurrentSelected].Acessory1 = CurrentAccessory;
         Catlist[CurrentSelected].nameofAcessory1 = Accessories[CurrentAccessoryIndex].Name;
-        //Catlist[CurrentSelected].Acessory1ListNum = CurrentAccessoryIndex;
+        Catlist[CurrentSelected].Acessory1ListNum = CurrentAccessoryIndex;
     }
 
     // Goes to the previous accessory for the cat to wear
@@ -167,5 +165,6 @@ public class CatInfoManager : MonoBehaviour
         ReferenceChild.GetComponent<RectTransform>().offsetMin = Accessories[CurrentAccessoryIndex].MinoffsetforCatButton;
         Catlist[CurrentSelected].Acessory1 = CurrentAccessory;
         Catlist[CurrentSelected].nameofAcessory1 = Accessories[CurrentAccessoryIndex].Name;
+        Catlist[CurrentSelected].Acessory1ListNum = CurrentAccessoryIndex;
     }
 }

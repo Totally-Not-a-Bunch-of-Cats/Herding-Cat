@@ -149,6 +149,8 @@ public class MatchManager : MonoBehaviour
                         if (currentLevel.GetTiles()[i].Slate.name == GameManager.Instance._catInfoManager.Catlist[k].name)
                         {
                             temp.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = GameManager.Instance._catInfoManager.Catlist[k].Acessory1;
+                            temp.transform.GetChild(1).localPosition = GameManager.Instance._catInfoManager.Accessories[GameManager.Instance._catInfoManager.Catlist[k].Acessory1ListNum].CatPrefabLocation;
+                            temp.transform.GetChild(1).localScale = GameManager.Instance._catInfoManager.Accessories[GameManager.Instance._catInfoManager.Catlist[k].Acessory1ListNum].CatPrefabScale;
                             temp.transform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = GameManager.Instance._catInfoManager.Catlist[k].AnimationController;
                         }
                     }

@@ -6,6 +6,7 @@ public class AcessoryInfo
     public string Name;
     public Sprite Acessory;
     public Vector3 CatPrefabLocation;
+    public Vector3 CatPrefabScale;
     public Vector2 MaxoffsetforCatButton;
     public Vector2 MinoffsetforCatButton;
     public Vector2 MaxoffsetforExternalCatButton;
