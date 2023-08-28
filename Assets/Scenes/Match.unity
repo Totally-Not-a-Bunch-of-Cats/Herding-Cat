@@ -4728,47 +4728,47 @@ MonoBehaviour:
   CurrentPage: 0
   GeneralHelpList:
   - name: Deleting
-    Description: 'You can delete a placed item by clicking on the tile the item inhabits
-      while the item selected is the same item that you want to delete. '
+    Description: To delete an already placed toy, select that item in the sidebar,
+      then tap the toy you want to remove.
     Video: {fileID: 32900000, guid: f26274dc1be9bfc46907ef6188995251, type: 3}
     Icon: {fileID: 21300000, guid: 8a34905290cbb491a8b6e37adc6b2a96, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Replacing
-    Description: You can replace an item with another item by clikcing on the tile
-      of the item you wish to replace when a different item is selected
+    Description: To swap a placed toy with another item, select the item you want
+      to be placed instead in the sidebar, then tap the toy you want to replace.
     Video: {fileID: 32900000, guid: dc6b3dc62837e7a4e9658021f1973ccf, type: 3}
     Icon: {fileID: 21300000, guid: 6d6088174bb906b49ad8428526ee337b, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Re-Ordering
-    Description: You can change the excution order of the items by moving the items
-      in the side pannel up or down. % If you are confused about which item is which
-      click on the icon to activate the indicator.
+    Description: You can change the execution order of the items by moving the items
+      in the side panel up or down. To highlight the toy you're reordering, tap it
+      in the side panel.
     Video: {fileID: 32900000, guid: d656f31abff02ad4588f5102eb34f45b, type: 3}
     Icon: {fileID: 21300000, guid: d04b5fd68437e4faba7a160858d7b6a6, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Blocking Cats with items
-    Description: Cats will generally not move into occupied tiles, a toy luring a
-      cat on its tile is a exception.
+    Description: 'Cats will not move onto occupied tiles, including items you''ve
+      placed. '
     Video: {fileID: 32900000, guid: ff09b68a444cb4148be715fe1c8f7251, type: 3}
     Icon: {fileID: 21300000, guid: f26474d143dc84587bc9514d14d0674f, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Rewind
-    Description: You can revert to the last round at any time by hitting the rewind
-      button.
+    Description: 'You can undo the most recent round played by pressing the rewind
+      button. '
     Video: {fileID: 32900000, guid: 01aff6cd7586edc4b80985b5b2aa8dbd, type: 3}
     Icon: {fileID: 21300000, guid: 3c211ed28a1254ad5be923faa2874f0e, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   ItemHelpList:
   - name: Toy
-    Description: The Toy moves the Cat 1 tile closer to itself.  It can even lure
-      a Cat on to its own tile.  The Toy effects Cat up to a range of 2 tiles and
+    Description: The Toy moves the Cat 1 tile closer to itself. It can even lure
+      a Cat onto its own tile. The Toy affects Cats up to a range of 2 tiles and
       doesn't work diagonally.
     Video: {fileID: 32900000, guid: 6003e83e79556464c96f6b7c07d00ddc, type: 3}
     Icon: {fileID: 21300000, guid: 0146fa7bb7aaaa94db5f750339727661, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Snake
-    Description: The Snake moves the Cat 2 tiles away from itself.   The Snake only
-      effects Cats 1 tile from itself and doesn't work diagonally.
+    Description: The Snake moves the Cat 2 tiles away from itself. The Snake only
+      affects Cats 1 tile away from itself and doesn't work diagonally.
     Video: {fileID: 32900000, guid: 66274e9e097ee9148a1700a37bc25eca, type: 3}
     Icon: {fileID: 21300000, guid: ddad149a4a2d376429689cc6824af54a, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
@@ -4784,26 +4784,26 @@ MonoBehaviour:
     IconScale: {x: 0.6, y: 1, z: 0}
   TrapHelpList:
   - name: Cat Bed
-    Description: If a cat enters the tile of a cat bed it falls asleep and doesnt
+    Description: If a cat enters the tile of a cat bed, it falls asleep and doesn't
       respond to items for the rest of the round.
     Video: {fileID: 32900000, guid: b99885257708b5a4d95e61f1e263cdfe, type: 3}
     Icon: {fileID: 21300000, guid: 8bebb7f836e4fc84f8e8ab51822695ad, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Cat Tree
-    Description: If a cat enters the tile of cat tree it jumpts over the next tile
-      in the direction it was going.
+    Description: The cat tree lets cats jump over the next tile in the direction
+      they're headed.
     Video: {fileID: 32900000, guid: 92e9ecdc19dfef244b30ecd0b13c5b30, type: 3}
     Icon: {fileID: 21300000, guid: af8552716c77bd94b8a1b01fb1f8e8ca, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Cat Tube
-    Description: When a cat enters the tile of a cat tube it journies to the adjoined
-      cat tube
+    Description: When a cat enters a cat tube, it pops out at the other tube in the
+      pair.
     Video: {fileID: 32900000, guid: be26565c75a69164ebc6122dc7215338, type: 3}
     Icon: {fileID: 21300000, guid: 0bdb3af61a58fa34980e7ea90f01efd4, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Redirection Pad
-    Description: 'When a cat enters a tile of a redicrection pad it will be moved
-      in the direction indicated. '
+    Description: When a cat enters a tile of a redirection pad, it will be moved
+      in the indicated direction.
     Video: {fileID: 32900000, guid: 29e3e5f12be721c4b85ac84dcafbc313, type: 3}
     Icon: {fileID: 21300000, guid: cf5aa3c6046982d4b9b2d668c6bc3923, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
@@ -12176,7 +12176,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 896329900}
   m_HandleRect: {fileID: 896329899}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
