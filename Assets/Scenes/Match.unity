@@ -11819,6 +11819,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemsUsed: {fileID: 1223106805}
   RoundsElapsed: {fileID: 1592248352}
+  Stars:
+  - {fileID: 368778542}
+  - {fileID: 853294453}
+  - {fileID: 1254521950}
 --- !u!1 &1454511631
 GameObject:
   m_ObjectHideFlags: 0
@@ -13819,7 +13823,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -4, y: 0}
-  m_SizeDelta: {x: -787.0525, y: -1259.4685}
+  m_SizeDelta: {x: -787.0525, y: -1405.4794}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1710488741
 MonoBehaviour:

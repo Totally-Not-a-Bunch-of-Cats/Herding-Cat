@@ -40,6 +40,7 @@ public class HelpGUIController : MonoBehaviour
     [SerializeField] private int ScreenHight;
 
     [Header("Object Button selection")]
+    [Space]
     [SerializeField] private GameObject DownButtonObject;
     [SerializeField] private GameObject UpButtonObject;
     [SerializeField] private Transform HelpButtonsParent;
@@ -65,9 +66,7 @@ public class HelpGUIController : MonoBehaviour
 
     private void DetermineScrenSize()
     {
-        float ScreenWidth = Screen.width;
-        float ScreenHight = Screen.height;
-        float ScreenDiv = ScreenWidth / ScreenHight;
+        float ScreenDiv = Screen.width / ScreenHight;
         if(ScreenDiv > 2)
         {
             ActivePort = 1;

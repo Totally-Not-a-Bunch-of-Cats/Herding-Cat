@@ -61,26 +61,16 @@ public class UIManager : MonoBehaviour
                     WorldPosition = ItemLocationSanitization(WorldPosition);
                     float clickableX = GameManager.Instance._matchManager.GameBoard.GetWidth() / 2;
                     float clickableY = GameManager.Instance._matchManager.GameBoard.GetHeight() / 2;
-                    if(GameManager.Instance._matchManager.BoardOffset.y == 0.5f)
-                    {
-                        clickableY -= 0.5f;
-                    }
-                    if (GameManager.Instance._matchManager.BoardOffset.x == 0.5f)
-                    {
-                        clickableX -= 0.5f;
-                    }
+
+                    clickableX -= GameManager.Instance._matchManager.BoardOffset.y;
+                    clickableY -= GameManager.Instance._matchManager.BoardOffset.x;
 
                     Vector2Int itemLocation = new Vector2Int((int)(WorldPosition.x - 0.5 + clickableX),
                         (int)(WorldPosition.y - 0.5 + clickableY));
 
-                    if (GameManager.Instance._matchManager.BoardOffset.x == 0.5f)
-                    {
-                        itemLocation.x += 1;
-                    }
-                    if (GameManager.Instance._matchManager.BoardOffset.y == 0.5f)
-                    {
-                        itemLocation.y += 1;
-                    }
+                    itemLocation.x += (int)(2 * GameManager.Instance._matchManager.BoardOffset.x);
+                    itemLocation.y += (int)(2 * GameManager.Instance._matchManager.BoardOffset.y);
+
                     //checs for edge casts hehe and adjusts accordingly
                     if (itemLocation.y == 0 || itemLocation.y == GameManager.Instance._matchManager.GameBoard.GetHeight() - 1)
                     {

@@ -10,7 +10,7 @@ using UnityEngine.Tilemaps;
 /// Grid of <see cref="BoardCell"/>'s.
 /// </summary>
 [System.Serializable]
-public class Board
+public class BoardOld
 {
     [SerializeField]
     private Tile[,] _cells;
@@ -35,7 +35,7 @@ public class Board
     /// </summary>
     /// <param name="Width">Board width</param>
     /// <param name="Height">Board height</param>
-    public Board(int Width, int Height, PosTile[] Tiles = null)
+    public BoardOld(int Width, int Height, PosTile[] Tiles = null)
     {
         this._height = Height;
         this._width = Width;
@@ -77,7 +77,7 @@ public class Board
     /// Initialize 2D board with width and height
     /// </summary>
     /// <param name="dimensions">Board dimensions as a vector</param>
-    public Board(Vector2Int dimensions, PosTile[] Tiles = null)
+    public BoardOld(Vector2Int dimensions, PosTile[] Tiles = null)
     {
         this._width = dimensions.x;
         this._height = dimensions.y;
@@ -120,7 +120,7 @@ public class Board
     /// </summary>
     /// <param name="BoardToCopy">passes current board to board constructor</param>
     /// <param name="Tiles"> takes in an array of tiles to loopp through from the level data </param>
-    public Board(Board BoardToCopy, PosTile[] Tiles = null)
+    public BoardOld(BoardOld BoardToCopy, PosTile[] Tiles = null)
     {
         this._width = BoardToCopy._width;
         this._height = BoardToCopy._height;
@@ -407,6 +407,77 @@ public class Board
                     {
                         Destination = TestDestination;
                     }
+
+                    //checks what the destination is
+                    /*if (_cells[Destination.x, y] != null)
+                    {
+                        if (_cells[Destination.x, y].Is<Trap>() || _cells[Destination.x, y].Is<Item>() || _cells[Destination.x, y].Is<Cat>())
+                        {
+                            //if the destination has something the cat cant be on, make sure it does step on it
+                            Destination.y = y + 1;
+                            if (_cells[Destination.x, y].name == "Post")
+                            {
+                                //TODO
+                                //Destination.y = y; on ice right now (could lure a cat one tile closer)
+                                //break;
+                            }
+                            if (_cells[Destination.x, y].name == "Cat Tree")
+                            {
+                                if (_cells[Destination.x, y - 2] == null || _cells[Destination.x, y - 2].Is<CatPen>() || _cells[Destination.x, y - 2].name == "Bed")
+                                {
+                                    //|| _cells[Destination.x, y].name == "Redirection Pad" maybe think about handeling this exception
+                                    //handles bed execption
+                                    if (_cells[Destination.x, y - 2] != null)
+                                    {
+                                        if (_cells[Destination.x, y - 2].name == "Bed")
+                                        {
+                                            Destination.y = y - 2;
+                                            Cats[ListPos].Sleeping = true;
+                                            Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                                            break;
+                                        }
+                                    }
+                                    Destination.y = y - 2;
+                                    break;
+                                }
+                                Destination.y = y;
+                                break;
+                            }
+                            if (_cells[Destination.x, y].name == "Cat Tube")
+                            {
+                                Destination.y = y;
+                                break;
+                            }
+                            if (_cells[Destination.x, y].name == "Redirection Pad")
+                            {
+                                Destination.y = y;
+                                break;
+                            }
+                            if (_cells[Destination.x, y].name == "Bed")
+                            {
+                                Destination.y = y;
+                                Cats[ListPos].Sleeping = true;
+                                Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                                break;
+                            }
+                            if(Item != null)
+                            {
+                                if (_cells[Destination.x, y].name == "Toy" && Item.Position == new Vector2Int(Destination.x, y))
+                                {
+                                    //allows cat to move on cat pen
+                                    Destination.y = y;
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                        else if (_cells[Destination.x, y].Is<CatPen>())
+                        {
+                            //allows cat to move on cat pen
+                            Destination.y = y;
+                            break;
+                        }
+                    }*/
                 }
                 GameManager.Instance._matchManager.MoveCat(Vector2Int.down, At(Cat), Destination, ListPos);
             }
@@ -430,6 +501,76 @@ public class Board
                     {
                         Destination = TestDestination;
                     }
+
+                    //checks what the destination is
+                    /*if (_cells[Destination.x, y] != null)
+                    {
+                        if (_cells[Destination.x, y].Is<Trap>() || _cells[Destination.x, y].Is<Item>() || _cells[Destination.x, y].Is<Cat>())
+                        {
+                            //if the destination has something the cat cant be on, make sure it does step on it
+                            Destination.y = y - 1;
+                            if(_cells[Destination.x, y].name == "Post")
+                            {
+                                //Destination.y = y;
+                                //break;
+                            }
+                            if (_cells[Destination.x, y].name == "Cat Tree")
+                            {
+                                if (_cells[Destination.x, y + 2] == null || _cells[Destination.x, y + 2].Is<CatPen>() || _cells[Destination.x, y + 2].name == "Bed")
+                                {
+                                    //|| _cells[Destination.x, y - 2].name == "Redirection Pad" maybe think about handeling this exception
+                                    //handles bed execption
+                                    if (_cells[Destination.x, y + 2] != null)
+                                    {
+                                        if (_cells[Destination.x, y + 2].name == "Bed")
+                                        {
+                                            Destination.y = y + 2;
+                                            Cats[ListPos].Sleeping = true;
+                                            Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                                            break;
+                                        }
+                                    }
+                                    Destination.y = y + 2;
+                                    break;
+                                }
+                                Destination.y = y;
+                                break;
+                            }
+                            if (_cells[Destination.x, y].name == "Cat Tube")
+                            {
+                                Destination.y = y;
+                                break;
+                            }
+                            if (_cells[Destination.x, y].name == "Redirection Pad")
+                            {
+                                Destination.y = y;
+                                break;
+                            }
+                            if (_cells[Destination.x, y].name == "Bed")
+                            {
+                                Destination.y = y;
+                                Cats[ListPos].Sleeping = true;
+                                Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                                break;
+                            }
+                            if (Item != null)
+                            {
+                                if (_cells[Destination.x, y].name == "Toy" && Item.Position == new Vector2Int(Destination.x, y))
+                                {
+                                    //allows cat to move on cat pen
+                                    Destination.y = y;
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                        else if (_cells[Destination.x, y].Is<CatPen>())
+                        {
+                            //allows cat to move on cat pen
+                            Destination.y = y;
+                            break;
+                        }
+                    }*/
                 }
                 GameManager.Instance._matchManager.MoveCat(Vector2Int.up, At(Cat), Destination, ListPos);
             }
@@ -456,6 +597,77 @@ public class Board
                     {
                         Destination = TestDestination;
                     }
+
+                    //checks what the destination is
+                    /*if (_cells[x, Destination.y] != null)
+                    {
+                        if (_cells[x, Destination.y].Is<Trap>() || _cells[x, Destination.y].Is<Item>() 
+                            || _cells[x, Destination.y].Is<Cat>())
+                        {
+                            //if the destination has something the cat cant be on, make sure it does step on it
+                            Destination.x = x + 1;
+                            if (_cells[x, Destination.y].name == "Post")
+                            {
+                                //Destination.x = x;
+                                //break;
+                            }
+                            if (_cells[x, Destination.y].name == "Cat Tree")
+                            {
+                                if (_cells[x - 2, Destination.y] == null || _cells[x - 2, Destination.y].Is<CatPen>() || _cells[x - 2, Destination.y].name == "Bed")
+                                {
+                                    //|| _cells[x + 2, Destination.y].name == "Redirection Pad" maybe think about handeling this exception
+                                    //handles bed execption
+                                    if (_cells[x - 2, Destination.y] != null)
+                                    {
+                                        if (_cells[x - 2, Destination.y].name == "Bed")
+                                        {
+                                            Destination.x = x - 2;
+                                            Cats[ListPos].Sleeping = true;
+                                            Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                                            break;
+                                        }
+                                    }
+                                    Destination.x = x - 2;
+                                    break;
+                                }
+                                Destination.x = x;
+                                break;
+                            }
+                            if (_cells[x, Destination.y].name == "Cat Tube")
+                            {
+                                Destination.x = x;
+                                break;
+                            }
+                            if (_cells[x, Destination.y].name == "Redirection Pad")
+                            {
+                                Destination.x = x;
+                                break;
+                            }
+                            if (_cells[x, Destination.y].name == "Bed")
+                            {
+                                Destination.x = x;
+                                Cats[ListPos].Sleeping = true;
+                                Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                                break;
+                            }
+                            if (Item != null)
+                            {
+                                if (_cells[x, Destination.y].name == "Toy" && Item.Position == new Vector2Int(x, Destination.y))
+                                {
+                                    //allows cat to move on cat pen
+                                    Destination.x = x;
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                        else if (_cells[x, Destination.y].Is<CatPen>())
+                        {
+                            //allows cat to move on cat pen
+                            Destination.x = x;
+                            break;
+                        }
+                    }*/
                 }
                 GameManager.Instance._matchManager.MoveCat(Vector2Int.left, At(Cat), Destination, ListPos);
             }
@@ -479,6 +691,78 @@ public class Board
                     {
                         Destination = TestDestination;
                     }
+
+                    //checks what the destination is
+                    /*if (_cells[x, Destination.y] != null)
+                    {
+                        if (_cells[x, Destination.y].Is<Trap>() || _cells[x, Destination.y].Is<Item>() || _cells[x, Destination.y].Is<Cat>())
+                        {
+                            //if the destination has something the cat cant be on, make sure it does step on it
+                            Destination.x = x - 1;
+                            if (_cells[x, Destination.y].name == "Post")
+                            {
+                                //Destination.x = x;
+                                //break;
+                            }
+                            if (_cells[x, Destination.y].name == "Cat Tree")
+                            {
+                                //Debug.Log(_cells[x + 2, Destination.y].name);
+                                if (_cells[x + 2, Destination.y] == null || _cells[x + 2, Destination.y].Is<CatPen>() || _cells[x + 2, Destination.y].name == "Bed")
+                                {
+                                    //|| _cells[x + 2, Destination.y].name == "Redirection Pad" maybe think about handeling this exception
+                                    //handles bed execption
+                                    if(_cells[x + 2, Destination.y] != null)
+                                    {
+                                        if (_cells[x + 2, Destination.y].name == "Bed")
+                                        {
+                                            Destination.x = x + 2;
+                                            Cats[ListPos].Sleeping = true;
+                                            Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                                            break;
+                                        }
+                                    }
+                                    Destination.x = x + 2;
+                                    break;
+                                }
+                                Destination.x = x;
+                                break;
+                            }
+                            if (_cells[x, Destination.y].name == "Cat Tube")
+                            {
+                                Destination.x = x;
+                                break;
+                            }
+                            if (_cells[x, Destination.y].name == "Redirection Pad")
+                            {
+                                Destination.x = x;
+                                break;
+                            }
+                            if (_cells[x, Destination.y].name == "Bed")
+                            {
+                                Destination.x = x;
+                                Cats[ListPos].Sleeping = true;
+                                Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                                
+                                break;
+                            }
+                            if (Item != null)
+                            {
+                                if (_cells[x, Destination.y].name == "Toy" && Item.Position == new Vector2Int(x, Destination.y))
+                                {
+                                    //allows cat to move on cat pen
+                                    Destination.x = x;
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                        else if(_cells[x, Destination.y].Is<CatPen>())
+                        {
+                            //allows cat to move on cat pen
+                            Destination.x = x;
+                            break;
+                        }
+                    }*/
                 }
                 GameManager.Instance._matchManager.MoveCat(Vector2Int.right, At(Cat), Destination, ListPos);
             }

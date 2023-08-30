@@ -12,39 +12,51 @@ using UnityEngine.UI;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-    // Number of stars that the player has
+    [Header("Saved Values")]
+    [Tooltip("Number of stars that the player has")]
     public int StarCount;
+    [Tooltip("Furthest level player has unlocked")]
+    public string FurthestLevel;
 
-    //Holds references to the other managers
+    [Header("Sub Managers")]
     public MatchManager _matchManager;
     public UIManager _uiManager;
     public ScreenResizeManager _screenResizeManager;
     public ReWindManager _ReWindManager;
     public PlayerPrefsManager _PlayerPrefsManager;
     public CatInfoManager _catInfoManager;
+
+    [Header("Misc")]
     //list of all level data
     //public static List<LevelData> Levels;
     public List<LevelData> Levels = new List<LevelData>();
     public GameLevels GamelevelList;
-    // Check to see if we're about to be destroyed.
-    private static bool m_ShuttingDown = false;
-    private static object m_Lock = new object();
-    private static GameManager m_Instance;
     public int LevelPosition = 0;
-    public bool ActivateItemIndicators = false;
+    //public bool ActivateItemIndicators = false;
+    public bool ClearStartHelpScreen = false;
+
+    [Header("Ad Varables")]
     public int GamesTillRewardAd = 4;
     public int GamesTillMandatoryAd = 10;
-    public bool ClearStartHelpScreen = false;
-    public string FurthestLevel;
+
     // Option Varables(Can be changed in options menu)
+    [Header("Option Varables")]
     public float CatSpeed = 1;
     public bool ItemIndicators = false;
     public float sfxVolume;
     public float musicVolume;
 
     // Used for testing to determine if star count for a level should be changed or outputed in console.
+    [Header("Toggles to update info")]
     public bool UpdateLevelData = false;
     public bool PlayerPrefsTrue = false;
+
+    // Singleton Varables
+    //Check to see if we're about to be destroyed.
+    private static bool m_ShuttingDown = false;
+    private static object m_Lock = new object();
+    private static GameManager m_Instance;
+
     public static GameManager Instance
     {
         get
@@ -82,12 +94,17 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Levels = GamelevelList.GameLevel;
-        if(PlayerPrefsTrue)
+        if (PlayerPrefsTrue)
         {
             _PlayerPrefsManager.LoadSettings();
         }
         StartCoroutine(SwitchScene("Main Menu"));
     }
+
+    /// <summary>
+    /// Changes a current scene to a scene with a given name
+    /// </summary>
+    /// <param name="Name">Name of scene to go to</param>
     public void ChangeScene(string Name)
     {
         Instance.StartCoroutine(SwitchScene(Name));
@@ -111,6 +128,10 @@ public class GameManager : MonoBehaviour
         Instance.StartCoroutine(StartMatch(level_name));
     }
 
+    /// <summary>
+    /// Sets current level position
+    /// </summary>
+    /// <param name="buttonPressed">Level position that was pressed</param>
     public void ButtonOfSelectedNum(int buttonPressed)
     {
         Instance.LevelPosition = buttonPressed;

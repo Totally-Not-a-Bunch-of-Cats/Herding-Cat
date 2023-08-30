@@ -42,7 +42,7 @@ public class MatchManager : MonoBehaviour
     public GameObject RewardAD;
     public GameObject ForcedAD;
     public Animator Animator;
-    [SerializeField] Sprite[] TubeIcons;
+    [SerializeField] private Sprite[] TubeIcons;
 
     public Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
@@ -222,6 +222,10 @@ public class MatchManager : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Sets all the icon images for the matching tubes
+    /// </summary>
+    /// <param name="TubePairs">List of Tube pairs th put icons on</param>
     void MarkTubes(List<TubePairImage> TubePairs)
     {
         for (int i = 0; i < TubePairs.Count; i++)
@@ -229,7 +233,6 @@ public class MatchManager : MonoBehaviour
             TubePairs[i].SetTubeSprites();
         }
     }
-
 
     /// <summary>
     /// Finds closest cat to an item and starts the movement 
@@ -421,7 +424,7 @@ public class MatchManager : MonoBehaviour
             ActiveMatch = false;
             CurrentLevel.CalculateStars(RoundsPlayed, ItemsUsed, GameManager.Instance.UpdateLevelData);
             //prevent player spam
-            if(CurrentLevel.NewThingIntroduced == true && GameManager.Instance.ClearStartHelpScreen == true)
+            if (CurrentLevel.NewThingIntroduced == true && GameManager.Instance.ClearStartHelpScreen == true)
             {
                 CurrentLevel.NewThingIntroduced = false;
             }
@@ -540,6 +543,7 @@ public class MatchManager : MonoBehaviour
         }
         return new Vector2Int(-100, -100);
     }
+
     /// <summary>
     /// Moves the cat object to the visualy in cell on board
     /// </summary>
@@ -758,7 +762,7 @@ public class MatchManager : MonoBehaviour
             if (GameBoard.Tubes[i].Position == cat.Position && GameBoard.At(GameBoard.Tubes[i].TubeDestination).name == "Cat Tube")
             {
                 //moves the cat game object in world.
-                Vector2Int TubeDestination = cat.Position - GameBoard.Tubes[i].TubeDestination; 
+                Vector2Int TubeDestination = cat.Position - GameBoard.Tubes[i].TubeDestination;
                 cat.Object.localPosition = new Vector3(cat.Object.localPosition.x - TubeDestination.x,
                     cat.Object.localPosition.y - TubeDestination.y, cat.Object.localPosition.z);
                 //adds the tube to the save tile list to be changed back to a tube and sets the new position of the cat
@@ -825,28 +829,10 @@ public class MatchManager : MonoBehaviour
             GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", CurrentLevel.StarsEarned + GameManager.Instance.StarCount);
         }
         GameWonUI.SetActive(true);
-        ActivateStars();
     }
 
     /// <summary>
-    /// Sets the stars on the Win UI to the won amount
-    /// </summary>
-    private void ActivateStars()
-    {
-        //get references to stars and activate them
-        List<Image> Stars = new List<Image>();
-        Stars.Add(GameObject.Find("Star1").GetComponent<Image>());
-        Stars.Add(GameObject.Find("Star2").GetComponent<Image>());
-        Stars.Add(GameObject.Find("Star3").GetComponent<Image>());
-
-        for (int i = 0; i < CurrentLevel.StarsEarned; i++)
-        {
-            Stars[i].color = Color.white;
-        }
-    }
-
-    /// <summary>
-    /// 
+    /// Decays the sleep zzz's
     /// </summary>
     /// <param name="i">Index of cat in list that is falling asleep</param>
     /// <returns></returns>
