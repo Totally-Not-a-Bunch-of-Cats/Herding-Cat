@@ -11880,11 +11880,16 @@ MonoBehaviour:
   ForcedAD: {fileID: 1988917680}
   Animator: {fileID: 0}
   TubeIcons:
-  - {fileID: 21300000, guid: 2a395c4f5dd914dd2b50468e92772309, type: 3}
-  - {fileID: 21300000, guid: b7f3c32c855a846c5bb5d8c57de050fd, type: 3}
-  - {fileID: 21300000, guid: d6f2cb48e10724bfea4116c456799a2c, type: 3}
-  - {fileID: 21300000, guid: 05661abc1924045c89b0e56f76854e4d, type: 3}
-  - {fileID: 21300000, guid: 6d034811652a84633bc8c63d22ce5574, type: 3}
+  - {fileID: 21300000, guid: ad5088ae9e0ea1846a03d30e0f2cfe23, type: 3}
+  - {fileID: 21300000, guid: 0f5c5f037c852294fa8f1585eae839a4, type: 3}
+  - {fileID: 21300000, guid: 730e6b5f297889e489a8372f037406c0, type: 3}
+  - {fileID: 21300000, guid: e3c18ac7dc78e9743975c06c6fc43e4c, type: 3}
+  - {fileID: 21300000, guid: 48add0ff38fb03643b6477896eb093ea, type: 3}
+  - {fileID: 21300000, guid: 922f69546b1429346b4e7fec40e3b553, type: 3}
+  - {fileID: 21300000, guid: 098db2607d2cf7b409acff955a64e08e, type: 3}
+  - {fileID: 21300000, guid: a10c6a7c0f11aa44790cf1dc020bd28e, type: 3}
+  - {fileID: 21300000, guid: 709da68a5f5a4e646a2957d953680480, type: 3}
+  - {fileID: 21300000, guid: b033a703b4459764a8145385461962ea, type: 3}
   BoardTileMap: {fileID: 0}
   ItemButtonPrefab: {fileID: 7992114167247847449, guid: 7826566737c5df942a89fcdf38ad2069, type: 3}
   CurrentLevel: {fileID: 0}
@@ -12176,7 +12181,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 896329900}
   m_HandleRect: {fileID: 896329899}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
