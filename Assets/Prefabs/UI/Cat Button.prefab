@@ -101,7 +101,7 @@ Animator:
   m_GameObject: {fileID: 1627822754363528275}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3b3859dba476d7143977ce83cfa36e01, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0b62742f5e63a1c42bb417f48537734c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -334,6 +334,7 @@ GameObject:
   - component: {fileID: 2450337278002580313}
   - component: {fileID: 5617216205377155800}
   - component: {fileID: 899895220776170554}
+  - component: {fileID: 7124824449785240177}
   m_Layer: 5
   m_Name: Cat Button
   m_TagString: Untagged
@@ -445,6 +446,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7124824449785240177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6852820026053325406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652b2f68d5066284d9319b4091fff8ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CatPrefab: {fileID: 0}
+  Customizer: {fileID: 0}
 --- !u!1 &8891998711426323431
 GameObject:
   m_ObjectHideFlags: 0

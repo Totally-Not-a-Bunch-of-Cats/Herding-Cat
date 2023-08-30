@@ -14,14 +14,14 @@ using TMPro;
 public class CatChooseButtons : MonoBehaviour
 {
     //Cat Prefab
-    [SerializeField] private Transform CatPrefab;
-    [SerializeField] private GameObject Customizer;
-    //[SerializeField] private List<GameObject> CatPrefabs;
+    [SerializeField] private int childNum;
     // Start is called before the first frame update
 
-    private void Awake()
+    private void OnEnable()
     {
+        childNum = transform.GetSiblingIndex();
         CreateCatButtons();
+        Debug.Log("ive been enabeled");
     }
 
     /// <summary>
@@ -30,27 +30,14 @@ public class CatChooseButtons : MonoBehaviour
     /// <param name="CreateCatButtons"> The current world that the player is going to </param>
     public void CreateCatButtons()
     {
-        // Destorying previous buttons that will no longer be used
-        foreach (Transform buttonTransform in this.transform)
-        {
-            Destroy(buttonTransform.gameObject);
-        }
-
-        // Checking to make sure that there is 10 levels to create and if not reducing the amount of levels created
-        int AmountOfButtons = 5;
-
         // Creating 5 buttons for the current world that the player has entered
-        for (int i = 0; i < AmountOfButtons; i++)
-        {
-            // Creates a button in the level select
-            Transform CatButtonTransform = Instantiate(CatPrefab, this.transform);
-            int CurrentButton = i;
-            CatButtonTransform.GetChild(0).GetComponent<Image>().sprite = GameManager.Instance._catInfoManager.GetCatPrefab(CurrentButton).transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
-            CatButtonTransform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = GameManager.Instance._catInfoManager.GetCatPrefab(CurrentButton).transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
-            // Sets the text of the button to the respective level
-            CatButtonTransform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Cat: " + (i + 1);
-            // Creates the action to go to the Customize Window
-            CatButtonTransform.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._catInfoManager.GoToCustomize(CurrentButton, Customizer));
-        }
+        // Creates a button in the level select
+        transform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = GameManager.Instance._catInfoManager.Catlist[childNum].AnimationController;
+        transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = GameManager.Instance._catInfoManager.Catlist[childNum].Acessory1;
+        GameManager.Instance._catInfoManager.CurrentName = GameManager.Instance._catInfoManager.Catlist[childNum].nameofAcessory1;
+        transform.GetChild(0).GetChild(0).GetComponent<RectTransform>().offsetMax = -GameManager.Instance._catInfoManager.Accessories[GameManager.Instance._catInfoManager.GetAccessoryIndex()].MaxoffsetforExternalCatButton;
+        transform.GetChild(0).GetChild(0).GetComponent<RectTransform>().offsetMin = GameManager.Instance._catInfoManager.Accessories[GameManager.Instance._catInfoManager.GetAccessoryIndex()].MinoffsetforExternalCatButton;
+        // Sets the text of the button to the respective level
+        transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Cat: " + (childNum + 1);
     }
 }
