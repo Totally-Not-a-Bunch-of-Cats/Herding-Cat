@@ -42,7 +42,7 @@ public class MatchManager : MonoBehaviour
     public GameObject RewardAD;
     public GameObject ForcedAD;
     public Animator Animator;
-    [SerializeField] Sprite[] TubeIcons;
+    [SerializeField] private Sprite[] TubeIcons;
 
     public Tilemap BoardTileMap;
     [SerializeField] private GameObject ItemButtonPrefab;
@@ -749,7 +749,7 @@ public class MatchManager : MonoBehaviour
             if (GameBoard.Tubes[i].Position == cat.Position && GameBoard.At(GameBoard.Tubes[i].TubeDestination).name == "Cat Tube")
             {
                 //moves the cat game object in world.
-                Vector2Int TubeDestination = cat.Position - GameBoard.Tubes[i].TubeDestination; 
+                Vector2Int TubeDestination = cat.Position - GameBoard.Tubes[i].TubeDestination;
                 cat.Object.localPosition = new Vector3(cat.Object.localPosition.x - TubeDestination.x,
                     cat.Object.localPosition.y - TubeDestination.y, cat.Object.localPosition.z);
                 //adds the tube to the save tile list to be changed back to a tube and sets the new position of the cat
