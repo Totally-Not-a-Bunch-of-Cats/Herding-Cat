@@ -111,7 +111,7 @@ MonoBehaviour:
     Sleeping: 0
     Tile: {fileID: 0}
   SelectedButton: {fileID: 0}
-  SelectedBoxSprite: {fileID: 21300000, guid: d87833b9fc4b24845a60e3d646ed79b8, type: 3}
+  SelectedBoxSprite: {fileID: 21300000, guid: decba4c4f89a41748899f6742f60ef64, type: 3}
   BoxSprite: {fileID: 21300000, guid: 020dc191381a8284e854f98e51a53a43, type: 3}
   NextIndicator: 1
   PauseMenu: {fileID: 0}
@@ -199,38 +199,51 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 0b62742f5e63a1c42bb417f48537734c, type: 2}
   CatSkins:
   - {fileID: -251871438, guid: 3589b1d7c5d65374093d56104ed629bc, type: 3}
-  - {fileID: 259100279, guid: cb60cf56fc227a14abd6491736b7b318, type: 3}
+  - {fileID: 1159634615, guid: cb60cf56fc227a14abd6491736b7b318, type: 3}
   Accessories:
-  - Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
-    CatPrefabLocation: {x: -0.27, y: 0.5, z: 0}
-    CatButtonLocation: {x: -35, y: 40, z: 0}
-    MaxoffsetforCatButton: {x: 26, y: 0}
-    MinoffsetforCatButton: {x: 70, y: 100}
-  - Acessory: {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
-    CatPrefabLocation: {x: -0.27, y: 0.28, z: 0}
-    CatButtonLocation: {x: 0, y: 0, z: 0}
-    MaxoffsetforCatButton: {x: 0, y: 0}
-    MinoffsetforCatButton: {x: 0, y: 0}
-  - Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
-    CatPrefabLocation: {x: -0.27, y: 0.5, z: 0}
-    CatButtonLocation: {x: -35, y: 40, z: 0}
-    MaxoffsetforCatButton: {x: 26, y: -15}
-    MinoffsetforCatButton: {x: 70, y: 100}
-  - Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
-    CatPrefabLocation: {x: -0.27, y: 0.5, z: 0}
-    CatButtonLocation: {x: -35, y: 40, z: 0}
-    MaxoffsetforCatButton: {x: 20, y: 5}
-    MinoffsetforCatButton: {x: 65, y: 100}
-  CatPrefabs:
+  - Name: Normal Hat
+    Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
+    CatPrefabLocation: {x: -0.245, y: 0.5, z: 1}
+    CatPrefabScale: {x: 0.21, y: 0.21, z: 1}
+    MaxoffsetforCatButton: {x: 139.85, y: 132.2}
+    MinoffsetforCatButton: {x: 63.7, y: 200}
+    MaxoffsetforExternalCatButton: {x: 71, y: 3}
+    MinoffsetforExternalCatButton: {x: 26, y: 99.5}
+  - Name: Headset
+    Acessory: {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
+    CatPrefabLocation: {x: -0.23, y: 0.328, z: 1}
+    CatPrefabScale: {x: 0.21, y: 0.185, z: 1}
+    MaxoffsetforCatButton: {x: 120, y: 141}
+    MinoffsetforCatButton: {x: 46, y: 157}
+    MaxoffsetforExternalCatButton: {x: 63.5, y: 17.5}
+    MinoffsetforExternalCatButton: {x: 20, y: 76}
+  - Name: Tall Hat
+    Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
+    CatPrefabLocation: {x: -0.24, y: 0.66, z: 1}
+    CatPrefabScale: {x: 0.21, y: 0.5, z: 1}
+    MaxoffsetforCatButton: {x: 136.9, y: 65.3}
+    MinoffsetforCatButton: {x: 62.1, y: 198.7}
+    MaxoffsetforExternalCatButton: {x: 71.5, y: -20}
+    MinoffsetforExternalCatButton: {x: 25.5, y: 99}
+  - Name: Wide Hat
+    Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
+    CatPrefabLocation: {x: -0.238, y: 0.49, z: 1}
+    CatPrefabScale: {x: 0.285, y: 0.22, z: 1}
+    MaxoffsetforCatButton: {x: 113.7, y: 124.7}
+    MinoffsetforCatButton: {x: 39.3, y: 201.3}
+    MaxoffsetforExternalCatButton: {x: 65, y: 7.5}
+    MinoffsetforExternalCatButton: {x: 18.5, y: 99}
+  Catlist:
   - {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
+  - {fileID: 11400000, guid: b1b6c6f21d028124bbc63e252f176c41, type: 2}
   - {fileID: 11400000, guid: 1874b8b6a361f564880fa4a3e13e85c5, type: 2}
   - {fileID: 11400000, guid: bc652e92a1286f049be1245a488222d4, type: 2}
-  - {fileID: 11400000, guid: b1b6c6f21d028124bbc63e252f176c41, type: 2}
   - {fileID: 11400000, guid: e555ba895d5a24446bccda1cb968e5d7, type: 2}
-  SelectCatPrefab: {fileID: 0}
-  CurrentAnim: {fileID: 0}
-  CurrentSkin: {fileID: 259100279, guid: cb60cf56fc227a14abd6491736b7b318, type: 3}
+  SelectCat: {fileID: 0}
+  CurrentAnim: {fileID: 9100000, guid: 3b3859dba476d7143977ce83cfa36e01, type: 2}
+  CurrentSkin: {fileID: -251871438, guid: 3589b1d7c5d65374093d56104ed629bc, type: 3}
   CurrentAccessory: {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
+  CurrentName: 
   CurrentSelected: 0
   CurrentSkinIndex: 0
-  CurrentAccessoryIndex: 0
+  CurrentAccessoryIndex: 1

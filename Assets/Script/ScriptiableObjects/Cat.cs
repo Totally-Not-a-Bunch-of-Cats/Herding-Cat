@@ -14,4 +14,22 @@ public class Cat : Tile
 
     [Tooltip("The speed of the cat.")]
     public int Speed;
+
+    [Tooltip("The animation controller of the cat.")]
+    public RuntimeAnimatorController AnimationController;
+
+    [Tooltip("The skin color of the cat.")]
+    public Sprite Skin;
+
+    [Tooltip("The acessory 1 of the cat.")]
+    public Sprite Acessory1;
+
+    [Tooltip("The number of acessory in list stored on gm.")]
+    public string nameofAcessory1;
+
+    [Tooltip("The number of acessory in list stored on gm.")]
+    public int Acessory1ListNum;
+
+    [Tooltip("The acessory 2 of the cat.")]
+    public Sprite Acessory2;
 }

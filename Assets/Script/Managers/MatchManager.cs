@@ -58,7 +58,7 @@ public class MatchManager : MonoBehaviour
     /// <returns>True if match was successfully initialized</returns>
     public bool InitMatch(LevelData currentLevel)
     {
-        if (currentLevel != null && currentLevel.Valid())
+        if(currentLevel != null && currentLevel.Valid())
         {
             BoardSize = currentLevel.GetDimensions();
             TargetRounds = currentLevel.GetTargetRounds();
@@ -77,13 +77,13 @@ public class MatchManager : MonoBehaviour
             bool oddX = BoardSize.x % 2 != 0;
             bool oddY = BoardSize.y % 2 != 0;
 
-            if (oddX || oddY)
+            if(oddX || oddY)
             {
-                if (oddX)
+                if(oddX)
                 {
                     BoardOffset.x = 0.5f;
                 }
-                if (oddY)
+                if(oddY)
                 {
                     BoardOffset.y = 0.5f;
                 }
@@ -91,9 +91,9 @@ public class MatchManager : MonoBehaviour
             }
 
             // setup background(tilemap)
-            for (int x = (int)(-tempx - (0.5f + BoardOffset.x)); x < tempx; x++)
+            for(int x = (int)(-tempx - (0.5f + BoardOffset.x)); x < tempx; x++)
             {
-                for (int y = (int)(-tempy - (0.5f + BoardOffset.y)); y < tempy; y++)
+                for(int y = (int)(-tempy - (0.5f + BoardOffset.y)); y < tempy; y++)
                 {
                     BoardTileMap.SetTile(new Vector3Int(x, y, 0), currentLevel.GetBackgroundTile());
                 }
@@ -102,20 +102,20 @@ public class MatchManager : MonoBehaviour
             // place tiles(cat pens/cats/traps) associated to level
             int count = 0;
             //List<TubePairImage> TubePairs = new List<TubePairImage>();
-            for (int i = 0; i < currentLevel.GetTiles().Length; i++)
+            for(int i = 0; i < currentLevel.GetTiles().Length; i++)
             {
                 Vector3 pos = new Vector3(currentLevel.GetTiles()[i].Position.x - tempx + 0.5f - BoardOffset.x,
                     currentLevel.GetTiles()[i].Position.y - tempy + 0.5f - BoardOffset.y, 5);
                 Transform temp = Instantiate(currentLevel.GetTiles()[i].Slate.GetPrefab(), pos, Quaternion.identity, transform).transform;
                 if(currentLevel.GetTiles()[i].Slate.name == "Cat Tube")
                 {
-                    for (int j = 0; j < GameBoard.Tubes.Count; j++)
+                    for(int j = 0; j < GameBoard.Tubes.Count; j++)
                     {
                         //sort the tube pairs as they come matching the tube pairs with each other.
                         //sort by location and destination
-                        if (GameBoard.Tubes[j].Position == currentLevel.GetTiles()[i].Position)
+                        if(GameBoard.Tubes[j].Position == currentLevel.GetTiles()[i].Position)
                         {
-                            if (TubePairs.Count == 0)
+                            if(TubePairs.Count == 0)
                             {
                                 TubePairs.Add(new TubePairImage(temp, GameBoard.Tubes[j]));
                                 TubePairs[TubePairs.Count - 1].Image = TubeIcons[TubePairs.Count - 1];
@@ -123,16 +123,16 @@ public class MatchManager : MonoBehaviour
                             else
                             {
                                 int Test = TubePairs.Count;
-                                for (int k = 0; k < TubePairs.Count; k++)
+                                for(int k = 0; k < TubePairs.Count; k++)
                                 {
-                                    if (TubePairs[k].Pos2 == GameBoard.Tubes[j].Position)
+                                    if(TubePairs[k].Pos2 == GameBoard.Tubes[j].Position)
                                     {
                                         TubePairs[k].Tube2 = temp;
                                         Test--;
                                         break;
                                     }
                                 }
-                                if (Test == TubePairs.Count)
+                                if(Test == TubePairs.Count)
                                 {
                                     TubePairs.Add(new TubePairImage(temp, GameBoard.Tubes[j]));
                                     TubePairs[TubePairs.Count - 1].Image = TubeIcons[TubePairs.Count - 1];
@@ -141,25 +141,38 @@ public class MatchManager : MonoBehaviour
                         }
                     }
                 }
-
-                // Faces arrow towards direction that being redirected to
-                if (currentLevel.GetTiles()[i].Slate.name == "Redirection Pad")
+                //places the accessories on the cat correctly 
+                if (currentLevel.GetTiles()[i].Slate.Is<Cat>())
                 {
-                    if (currentLevel.GetTiles()[i].Redirection == Vector2Int.down)
+                    for (int k = 0; k < GameManager.Instance._catInfoManager.Catlist.Count; k++)
+                    {
+                        if (currentLevel.GetTiles()[i].Slate.name == GameManager.Instance._catInfoManager.Catlist[k].name)
+                        {
+                            temp.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = GameManager.Instance._catInfoManager.Catlist[k].Acessory1;
+                            temp.transform.GetChild(1).localPosition = GameManager.Instance._catInfoManager.Accessories[GameManager.Instance._catInfoManager.Catlist[k].Acessory1ListNum].CatPrefabLocation;
+                            temp.transform.GetChild(1).localScale = GameManager.Instance._catInfoManager.Accessories[GameManager.Instance._catInfoManager.Catlist[k].Acessory1ListNum].CatPrefabScale;
+                            temp.transform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = GameManager.Instance._catInfoManager.Catlist[k].AnimationController;
+                        }
+                    }
+                }
+                // Faces arrow towards direction that being redirected to
+                if(currentLevel.GetTiles()[i].Slate.name == "Redirection Pad")
+                {
+                    if(currentLevel.GetTiles()[i].Redirection == Vector2Int.down)
                     {
                         temp.localRotation *= Quaternion.Euler(0, 0, 90f);
                     }
-                    else if (currentLevel.GetTiles()[i].Redirection == Vector2Int.up)
+                    else if(currentLevel.GetTiles()[i].Redirection == Vector2Int.up)
                     {
                         temp.localRotation *= Quaternion.Euler(0, 0, -90f);
                     }
-                    else if (currentLevel.GetTiles()[i].Redirection == Vector2Int.right)
+                    else if(currentLevel.GetTiles()[i].Redirection == Vector2Int.right)
                     {
                         temp.localRotation *= Quaternion.Euler(0, 0, 180f);
                     }
                 }
                 temp.gameObject.name = currentLevel.GetTiles()[i].Slate.name + $" ({currentLevel.GetTiles()[i].Position.x}, {currentLevel.GetTiles()[i].Position.y})";
-                if (currentLevel.GetTiles()[i].Slate.Is<Cat>())
+                if(currentLevel.GetTiles()[i].Slate.Is<Cat>())
                 {
                     GameBoard.Cats[count].Object = temp;
                     count++;
@@ -169,7 +182,7 @@ public class MatchManager : MonoBehaviour
             MarkTubes(TubePairs);
 
             //places items 
-            for (int i = 0; i < currentLevel.GetPossibleItems().Length; i++)
+            for(int i = 0; i < currentLevel.GetPossibleItems().Length; i++)
             {
                 //Screen.height
                 int buffer = 85;
