@@ -8541,8 +8541,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 55, y: -45.273994}
-  m_SizeDelta: {x: -193, y: -192.99998}
+  m_AnchoredPosition: {x: 55, y: -58.38697}
+  m_SizeDelta: {x: -193, y: -166.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1019513906
 MonoBehaviour:
@@ -11431,8 +11431,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 70, y: 0}
-  m_SizeDelta: {x: 100, y: -50}
+  m_AnchoredPosition: {x: 82.05768, y: 2.5}
+  m_SizeDelta: {x: 130, y: -45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1404190665
 MonoBehaviour:
@@ -11880,16 +11880,16 @@ MonoBehaviour:
   ForcedAD: {fileID: 1988917680}
   Animator: {fileID: 0}
   TubeIcons:
+  - {fileID: 21300000, guid: d0e172f873318564989a76332af8d90c, type: 3}
+  - {fileID: 21300000, guid: b150bd1979f249244a406f26d63d08fb, type: 3}
+  - {fileID: 21300000, guid: b1cbcf1c485016f4495883e7bc0afc89, type: 3}
+  - {fileID: 21300000, guid: a8f81fe1b82acb04992282e556332510, type: 3}
+  - {fileID: 21300000, guid: 229fe23215753754ca49d49e3476ac07, type: 3}
   - {fileID: 21300000, guid: ad5088ae9e0ea1846a03d30e0f2cfe23, type: 3}
   - {fileID: 21300000, guid: 0f5c5f037c852294fa8f1585eae839a4, type: 3}
   - {fileID: 21300000, guid: 730e6b5f297889e489a8372f037406c0, type: 3}
   - {fileID: 21300000, guid: e3c18ac7dc78e9743975c06c6fc43e4c, type: 3}
   - {fileID: 21300000, guid: 48add0ff38fb03643b6477896eb093ea, type: 3}
-  - {fileID: 21300000, guid: 922f69546b1429346b4e7fec40e3b553, type: 3}
-  - {fileID: 21300000, guid: 098db2607d2cf7b409acff955a64e08e, type: 3}
-  - {fileID: 21300000, guid: a10c6a7c0f11aa44790cf1dc020bd28e, type: 3}
-  - {fileID: 21300000, guid: 709da68a5f5a4e646a2957d953680480, type: 3}
-  - {fileID: 21300000, guid: b033a703b4459764a8145385461962ea, type: 3}
   BoardTileMap: {fileID: 0}
   ItemButtonPrefab: {fileID: 7992114167247847449, guid: 7826566737c5df942a89fcdf38ad2069, type: 3}
   CurrentLevel: {fileID: 0}
