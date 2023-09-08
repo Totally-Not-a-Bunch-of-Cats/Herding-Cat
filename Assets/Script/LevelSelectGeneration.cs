@@ -61,7 +61,7 @@ public class LevelSelectGeneration : MonoBehaviour
             // Creates a button in the level select
             Transform levelButtonTransform = Instantiate(LevelButtonPrefab, this.transform);
             // Sets the text of the button to the respective level
-            levelButtonTransform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Level: " + CurrentWorld + "-" + (i + 1);
+            levelButtonTransform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Level: " + CurrentWorld + "-" + (i + 1);
             // Sets the button to active or inactive depending on if the level has been unlocked
             levelButtonTransform.GetComponent<Button>().enabled = (GameManager.Instance.Levels[i + ((CurrentWorld - 1) * 10)].GetUnlocked());
 
@@ -76,7 +76,7 @@ public class LevelSelectGeneration : MonoBehaviour
             {
                 if (GameManager.Instance.Levels[i + ((CurrentWorld - 1) * 10)].StarsEarned > j)
                 {
-                    levelButtonTransform.GetChild(1).GetChild(j).GetComponent<Image>().color = Color.yellow;
+                    levelButtonTransform.GetChild(0).GetChild(j).GetComponent<Image>().color = Color.yellow;
                 }
             }
 

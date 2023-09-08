@@ -4731,32 +4731,32 @@ MonoBehaviour:
     Description: To delete an already placed toy, select that item in the sidebar,
       then tap the toy you want to remove.
     Video: {fileID: 32900000, guid: f26274dc1be9bfc46907ef6188995251, type: 3}
-    Icon: {fileID: 21300000, guid: 8a34905290cbb491a8b6e37adc6b2a96, type: 3}
+    Icon: {fileID: 21300000, guid: c4865bda184fe624c9e647d5d660c8d9, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Replacing
     Description: To swap a placed toy with another item, select the item you want
       to be placed instead in the sidebar, then tap the toy you want to replace.
     Video: {fileID: 32900000, guid: dc6b3dc62837e7a4e9658021f1973ccf, type: 3}
-    Icon: {fileID: 21300000, guid: 6d6088174bb906b49ad8428526ee337b, type: 3}
+    Icon: {fileID: 21300000, guid: fc0bdcfa9d059af4bb4dab47ccb4505b, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Re-Ordering
     Description: You can change the execution order of the items by moving the items
       in the side panel up or down. To highlight the toy you're reordering, tap it
       in the side panel.
     Video: {fileID: 32900000, guid: d656f31abff02ad4588f5102eb34f45b, type: 3}
-    Icon: {fileID: 21300000, guid: d04b5fd68437e4faba7a160858d7b6a6, type: 3}
+    Icon: {fileID: 21300000, guid: 99e1133925e6bc94d8b6acd046a21317, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Blocking Cats with items
     Description: 'Cats will not move onto occupied tiles, including items you''ve
       placed. '
     Video: {fileID: 32900000, guid: ff09b68a444cb4148be715fe1c8f7251, type: 3}
-    Icon: {fileID: 21300000, guid: f26474d143dc84587bc9514d14d0674f, type: 3}
+    Icon: {fileID: 21300000, guid: 0d5e9ce0cdba54a4e9278459c32781b6, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Rewind
     Description: 'You can undo the most recent round played by pressing the rewind
       button. '
     Video: {fileID: 32900000, guid: 01aff6cd7586edc4b80985b5b2aa8dbd, type: 3}
-    Icon: {fileID: 21300000, guid: 3c211ed28a1254ad5be923faa2874f0e, type: 3}
+    Icon: {fileID: 21300000, guid: 78ae892dfcdc26a489f8504e20c826de, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   ItemHelpList:
   - name: Toy
@@ -8541,8 +8541,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 55, y: -45.273994}
-  m_SizeDelta: {x: -193, y: -192.99998}
+  m_AnchoredPosition: {x: 55, y: -58.38697}
+  m_SizeDelta: {x: -193, y: -166.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1019513906
 MonoBehaviour:
@@ -10607,15 +10607,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 184333628044429746, guid: 732cea236a696485a80ae3ce15e08b5c, type: 3}
       propertyPath: m_Color.b
-      value: 0.14117648
+      value: 0.73333335
       objectReference: {fileID: 0}
     - target: {fileID: 184333628044429746, guid: 732cea236a696485a80ae3ce15e08b5c, type: 3}
       propertyPath: m_Color.g
-      value: 0.14117648
+      value: 0.45098042
       objectReference: {fileID: 0}
     - target: {fileID: 184333628044429746, guid: 732cea236a696485a80ae3ce15e08b5c, type: 3}
       propertyPath: m_Color.r
-      value: 0.59607846
+      value: 0.050980397
       objectReference: {fileID: 0}
     - target: {fileID: 2190329774030321587, guid: 732cea236a696485a80ae3ce15e08b5c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -11431,8 +11431,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 70, y: 0}
-  m_SizeDelta: {x: 100, y: -50}
+  m_AnchoredPosition: {x: 82.05768, y: 2.5}
+  m_SizeDelta: {x: 130, y: -45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1404190665
 MonoBehaviour:
@@ -11884,16 +11884,16 @@ MonoBehaviour:
   ForcedAD: {fileID: 1988917680}
   Animator: {fileID: 0}
   TubeIcons:
+  - {fileID: 21300000, guid: d0e172f873318564989a76332af8d90c, type: 3}
+  - {fileID: 21300000, guid: b150bd1979f249244a406f26d63d08fb, type: 3}
+  - {fileID: 21300000, guid: b1cbcf1c485016f4495883e7bc0afc89, type: 3}
+  - {fileID: 21300000, guid: a8f81fe1b82acb04992282e556332510, type: 3}
+  - {fileID: 21300000, guid: 229fe23215753754ca49d49e3476ac07, type: 3}
   - {fileID: 21300000, guid: ad5088ae9e0ea1846a03d30e0f2cfe23, type: 3}
   - {fileID: 21300000, guid: 0f5c5f037c852294fa8f1585eae839a4, type: 3}
   - {fileID: 21300000, guid: 730e6b5f297889e489a8372f037406c0, type: 3}
   - {fileID: 21300000, guid: e3c18ac7dc78e9743975c06c6fc43e4c, type: 3}
   - {fileID: 21300000, guid: 48add0ff38fb03643b6477896eb093ea, type: 3}
-  - {fileID: 21300000, guid: 922f69546b1429346b4e7fec40e3b553, type: 3}
-  - {fileID: 21300000, guid: 098db2607d2cf7b409acff955a64e08e, type: 3}
-  - {fileID: 21300000, guid: a10c6a7c0f11aa44790cf1dc020bd28e, type: 3}
-  - {fileID: 21300000, guid: 709da68a5f5a4e646a2957d953680480, type: 3}
-  - {fileID: 21300000, guid: b033a703b4459764a8145385461962ea, type: 3}
   BoardTileMap: {fileID: 0}
   ItemButtonPrefab: {fileID: 7992114167247847449, guid: 7826566737c5df942a89fcdf38ad2069, type: 3}
   CurrentLevel: {fileID: 0}
