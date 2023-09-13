@@ -62,8 +62,8 @@ public class UIManager : MonoBehaviour
                     float clickableX = GameManager.Instance._matchManager.GameBoard.GetWidth() / 2;
                     float clickableY = GameManager.Instance._matchManager.GameBoard.GetHeight() / 2;
 
-                    clickableX -= GameManager.Instance._matchManager.BoardOffset.y;
-                    clickableY -= GameManager.Instance._matchManager.BoardOffset.x;
+                    clickableX -= GameManager.Instance._matchManager.BoardOffset.x;
+                    clickableY -= GameManager.Instance._matchManager.BoardOffset.y;
 
                     Vector2Int itemLocation = new Vector2Int((int)(WorldPosition.x - 0.5 + clickableX),
                         (int)(WorldPosition.y - 0.5 + clickableY));
@@ -80,11 +80,13 @@ public class UIManager : MonoBehaviour
                     {
                         clickableX += 1;
                     }
+                    Debug.Log(itemLocation);
                     // Checks if position is within board and if the tile is empty
                     if (WorldPosition.x >= -clickableX && WorldPosition.x < clickableX &&
                         (WorldPosition.y >= -clickableY && WorldPosition.y < clickableY)
                         && GameManager.Instance._matchManager.GameBoard.At(itemLocation) == null)
                     {
+                        Debug.Log("the item is placed");
                         // Creating Item for On Board
                         GameManager.Instance._matchManager.GameBoard.Set(itemLocation, SelectedItem);
                         GameObject temp = Instantiate(SelectedItem.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);
@@ -246,6 +248,7 @@ public class UIManager : MonoBehaviour
     /// <param name="item"><see cref="Item"/> that will be placed when clicked on board</param>
     public void PlaceItem(Item item, GameObject selectedButton)
     {
+        Debug.Log("we placing items");
         if (SelectedButton != null)
         {
             SelectedButton.GetComponent<Image>().sprite = BoxSprite;
@@ -255,7 +258,6 @@ public class UIManager : MonoBehaviour
         SelectedButton.GetComponent<Image>().sprite = SelectedBoxSprite;
         SelectedItem = item;
         CanPlaceItem = true;
-
     }
 
     /// <summary>

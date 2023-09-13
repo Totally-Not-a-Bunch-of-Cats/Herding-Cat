@@ -2593,7 +2593,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 326395013}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -2675,7 +2675,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 326395013}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b79b5624d944058bd39aad2b90fb275, type: 3}
   m_Name: 
@@ -8838,7 +8838,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 469066730}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -8920,7 +8920,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 469066730}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b79b5624d944058bd39aad2b90fb275, type: 3}
   m_Name: 
@@ -9121,8 +9121,20 @@ PrefabInstance:
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -41
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.000030517578
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -11.999999
       objectReference: {fileID: 0}
     - target: {fileID: 6593748991052650734, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_Pivot.x
@@ -9211,6 +9223,14 @@ PrefabInstance:
     - target: {fileID: 6852820026053325406, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_Name
       value: Cat Button (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6880436941579670369, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.9119034
+      objectReference: {fileID: 0}
+    - target: {fileID: 6880436941579670369, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 5.3365936
       objectReference: {fileID: 0}
     - target: {fileID: 7124824449785240177, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: childNum
@@ -15533,8 +15553,20 @@ PrefabInstance:
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -41
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.000030517578
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -11.999998
       objectReference: {fileID: 0}
     - target: {fileID: 6593748991052650734, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_Pivot.x
@@ -15623,6 +15655,14 @@ PrefabInstance:
     - target: {fileID: 6852820026053325406, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_Name
       value: Cat Button (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6880436941579670369, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.9119034
+      objectReference: {fileID: 0}
+    - target: {fileID: 6880436941579670369, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 5.3365936
       objectReference: {fileID: 0}
     - target: {fileID: 7124824449785240177, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: childNum
@@ -17853,7 +17893,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 861908381}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -17935,7 +17975,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 861908381}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b79b5624d944058bd39aad2b90fb275, type: 3}
   m_Name: 
@@ -20764,8 +20804,20 @@ PrefabInstance:
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -41.000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.000030517578
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 6593748991052650734, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_Pivot.x
@@ -20854,6 +20906,14 @@ PrefabInstance:
     - target: {fileID: 6852820026053325406, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_Name
       value: Cat Button (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6880436941579670369, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.9119034
+      objectReference: {fileID: 0}
+    - target: {fileID: 6880436941579670369, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 5.3365936
       objectReference: {fileID: 0}
     - target: {fileID: 7124824449785240177, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: childNum
@@ -23753,8 +23813,20 @@ PrefabInstance:
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -41
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.000030517578
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -11.999998
       objectReference: {fileID: 0}
     - target: {fileID: 6593748991052650734, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_Pivot.x
@@ -23843,6 +23915,14 @@ PrefabInstance:
     - target: {fileID: 6852820026053325406, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_Name
       value: Cat Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 6880436941579670369, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.9119034
+      objectReference: {fileID: 0}
+    - target: {fileID: 6880436941579670369, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 5.3365936
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
@@ -41811,8 +41891,32 @@ PrefabInstance:
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -41.000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.000030517578
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842595766448437705, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 6593748991052650734, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_Pivot.x
@@ -41901,6 +42005,14 @@ PrefabInstance:
     - target: {fileID: 6852820026053325406, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_Name
       value: Cat Button (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6880436941579670369, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.9119034
+      objectReference: {fileID: 0}
+    - target: {fileID: 6880436941579670369, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 5.336609
       objectReference: {fileID: 0}
     - target: {fileID: 7124824449785240177, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: childNum
@@ -42779,6 +42891,7 @@ GameObject:
   - component: {fileID: 2134543384}
   - component: {fileID: 2134543383}
   - component: {fileID: 2134543382}
+  - component: {fileID: 2134543385}
   m_Layer: 5
   m_Name: Puchase Button
   m_TagString: Untagged
@@ -42814,7 +42927,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2134543380}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -42889,6 +43002,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2134543380}
   m_CullTransparentMesh: 0
+--- !u!114 &2134543385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2134543380}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b79b5624d944058bd39aad2b90fb275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productId: 
+  buttonType: 0
+  consumePurchase: 1
+  onTransactionsRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  onProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  button: {fileID: 0}
 --- !u!1 &2141771345
 GameObject:
   m_ObjectHideFlags: 0

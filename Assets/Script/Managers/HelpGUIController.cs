@@ -66,7 +66,7 @@ public class HelpGUIController : MonoBehaviour
 
     private void DetermineScrenSize()
     {
-        float ScreenDiv = Screen.width / ScreenHight;
+        float ScreenDiv = Screen.width / Screen.height;
         if(ScreenDiv > 2)
         {
             ActivePort = 1;

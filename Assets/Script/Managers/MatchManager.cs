@@ -195,9 +195,11 @@ public class MatchManager : MonoBehaviour
                 button.GetComponent<RectTransform>().anchorMax = new Vector2(1, 0);
                 button.GetComponent<RectTransform>().anchorMin = new Vector2(1, 0);
                 button.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._uiManager.PlaceItem(item, button));
+                Debug.Log(item);
                 if(i == 0)
                 {
                     GameManager.Instance._uiManager.PlaceItem(item, button);
+                    Debug.Log("im here");
                 }
             }
             
