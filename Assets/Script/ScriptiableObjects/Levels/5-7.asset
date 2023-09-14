@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: 5-7
   m_EditorClassIdentifier: 
   Dimensions: {x: 12, y: 12}
-  TargetRounds: 9
+  TargetRounds: 1
   TargetItems: 9
   NewThingIntroduced: 0
   Category: 0
   TileName: 
-  StarsEarned: 0
-  Unlocked: 0
+  StarsEarned: 3
+  Unlocked: 1
   NewItemIntroduced: 0
-  BackgroundTile: {fileID: 11400000, guid: 76cbab4e70ed36846808f77c6f9b14f9, type: 2}
+  BackgroundTile: {fileID: 11400000, guid: 103593486162c964aa10539a0ed04a9e, type: 2}
   Tiles:
   - name: Wall (0,4)
     Position: {x: 0, y: 4}
@@ -156,12 +156,12 @@ MonoBehaviour:
   - name: Cat Tube (7,10)
     Position: {x: 7, y: 10}
     Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
-    TubeDestination: {x: 10, y: 10}
+    TubeDestination: {x: 2, y: 5}
     Redirection: {x: -1, y: 0}
   - name: Cat Tube (10,10)
     Position: {x: 10, y: 10}
     Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
-    TubeDestination: {x: 7, y: 10}
+    TubeDestination: {x: 2, y: 6}
     Redirection: {x: -1, y: 0}
   - name: Bed (10,11)
     Position: {x: 10, y: 11}
@@ -187,11 +187,6 @@ MonoBehaviour:
     Position: {x: 5, y: 9}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
-    Redirection: {x: -1, y: 0}
-  - name: Cat Tube (2,10)
-    Position: {x: 2, y: 10}
-    Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
-    TubeDestination: {x: 10, y: 6}
     Redirection: {x: -1, y: 0}
   - name: Cat Tube (10,6)
     Position: {x: 10, y: 6}
@@ -238,11 +233,6 @@ MonoBehaviour:
     Slate: {fileID: 11400000, guid: 9ec04edcfdc6e2a4eaf2f549e868d193, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: -1, y: 0}
-  - name: Bed (9,6)
-    Position: {x: 9, y: 6}
-    Slate: {fileID: 11400000, guid: 9ec04edcfdc6e2a4eaf2f549e868d193, type: 2}
-    TubeDestination: {x: 0, y: 0}
-    Redirection: {x: -1, y: 0}
   - name: Bed (10,5)
     Position: {x: 10, y: 5}
     Slate: {fileID: 11400000, guid: 9ec04edcfdc6e2a4eaf2f549e868d193, type: 2}
@@ -253,25 +243,25 @@ MonoBehaviour:
     Slate: {fileID: 11400000, guid: 9ec04edcfdc6e2a4eaf2f549e868d193, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: -1, y: 0}
-  - name: Cat Tube (2,7)
-    Position: {x: 2, y: 7}
-    Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
-    TubeDestination: {x: 2, y: 6}
-    Redirection: {x: -1, y: 0}
   - name: Cat Tube (2,6)
     Position: {x: 2, y: 6}
     Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
-    TubeDestination: {x: 2, y: 6}
+    TubeDestination: {x: 10, y: 10}
     Redirection: {x: -1, y: 0}
   - name: Cat Tube (2,5)
     Position: {x: 2, y: 5}
     Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
-    TubeDestination: {x: 8, y: 6}
+    TubeDestination: {x: 7, y: 10}
     Redirection: {x: -1, y: 0}
-  - name: Cat Tube (8,6)
-    Position: {x: 8, y: 6}
+  - name: Cat Tube (2,10)
+    Position: {x: 2, y: 10}
     Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
-    TubeDestination: {x: 2, y: 5}
+    TubeDestination: {x: 10, y: 6}
+    Redirection: {x: -1, y: 0}
+  - name: Cat Tube (2,10)
+    Position: {x: 9, y: 6}
+    Slate: {fileID: 11400000, guid: 9ec04edcfdc6e2a4eaf2f549e868d193, type: 2}
+    TubeDestination: {x: 0, y: 0}
     Redirection: {x: -1, y: 0}
   PossibleItems:
   - {fileID: 11400000, guid: 089f360dd355a504085896f04d3eb986, type: 2}

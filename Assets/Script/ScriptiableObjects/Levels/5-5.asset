@@ -21,7 +21,7 @@ MonoBehaviour:
   StarsEarned: 3
   Unlocked: 1
   NewItemIntroduced: 0
-  BackgroundTile: {fileID: 11400000, guid: 76cbab4e70ed36846808f77c6f9b14f9, type: 2}
+  BackgroundTile: {fileID: 11400000, guid: 103593486162c964aa10539a0ed04a9e, type: 2}
   Tiles:
   - name: Wall (5,8)
     Position: {x: 5, y: 8}
