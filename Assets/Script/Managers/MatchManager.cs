@@ -195,11 +195,9 @@ public class MatchManager : MonoBehaviour
                 button.GetComponent<RectTransform>().anchorMax = new Vector2(1, 0);
                 button.GetComponent<RectTransform>().anchorMin = new Vector2(1, 0);
                 button.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._uiManager.PlaceItem(item, button));
-                Debug.Log(item);
                 if(i == 0)
                 {
                     GameManager.Instance._uiManager.PlaceItem(item, button);
-                    Debug.Log("im here");
                 }
             }
             
@@ -381,6 +379,7 @@ public class MatchManager : MonoBehaviour
                 {
                     for (int c = 0; c < CatMoveInfo.Count; c++)
                     {
+                        Debug.Log(GameBoard.Items[i] + "primay call");
                         GameBoard.CheckMovement(CurrentItem.MoveDistance, (Vector2Int)CatMoveInfo[c].Destination, CatMoveInfo[c].Index, GameBoard.Items[i]);
                     }
                     CatMoveInfo.Clear();
@@ -803,6 +802,7 @@ public class MatchManager : MonoBehaviour
         }
         Destination = cat.Position + addition;
         GameBoard.Set(cat.Position, cat.Tile);
+        Debug.Log("secondau call");
         GameBoard.CheckMovement(1, Destination, ListPos, null);
     }
 

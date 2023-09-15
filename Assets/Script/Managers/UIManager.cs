@@ -80,13 +80,11 @@ public class UIManager : MonoBehaviour
                     {
                         clickableX += 1;
                     }
-                    Debug.Log(itemLocation);
                     // Checks if position is within board and if the tile is empty
                     if (WorldPosition.x >= -clickableX && WorldPosition.x < clickableX &&
                         (WorldPosition.y >= -clickableY && WorldPosition.y < clickableY)
                         && GameManager.Instance._matchManager.GameBoard.At(itemLocation) == null)
                     {
-                        Debug.Log("the item is placed");
                         // Creating Item for On Board
                         GameManager.Instance._matchManager.GameBoard.Set(itemLocation, SelectedItem);
                         GameObject temp = Instantiate(SelectedItem.GetPrefab(), WorldPosition, Quaternion.identity, Board.transform);

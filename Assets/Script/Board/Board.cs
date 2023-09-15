@@ -358,7 +358,8 @@ public class Board
                     Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
                     return new Vector2Int(x, y);
                 }
-                if (_cells[x, y].name == "Toy" && item.Position == new Vector2Int(x, y))
+                //&& item.Position == new Vector2Int(x, y)
+                if (_cells[x, y].name == "Toy")
                 {
                     //allows cat to move on cat pen
                     return new Vector2Int(x, y);
@@ -384,6 +385,7 @@ public class Board
     /// <param name="ListPos">Position in the list that the moving cat is</param>
     public void CheckMovement(int ItemMoveDistance, Vector2Int Destination, int ListPos, PosObject Item)
     {
+        Debug.Log("call once" + Item);
         Vector2Int Cat = Cats[ListPos].Position;
         if (Cat.x == Destination.x)
         {
@@ -397,6 +399,7 @@ public class Board
                 } 
                 for (int y = Cat.y - 1; y >= Destination.y; y--)
                 {
+                    Debug.Log(Item);
                     Vector2Int TestDestination = CheckSpot(new Vector2Int(0, y), ListPos, Item, Destination, Vector2Int.down);
                     if (TestDestination != Destination)
                     {

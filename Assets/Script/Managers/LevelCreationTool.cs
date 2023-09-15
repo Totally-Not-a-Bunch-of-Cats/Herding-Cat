@@ -421,14 +421,14 @@ public class LevelCreationTool : MonoBehaviour
                 float clickableX = BoardSize.x / 2;
                 float clickableY = BoardSize.y / 2;
 
-                clickableX -= GameManager.Instance._matchManager.BoardOffset.y;
-                clickableY -= GameManager.Instance._matchManager.BoardOffset.x;
+                clickableX -= BoardOffset.x;
+                clickableY -= BoardOffset.y;
 
                 Vector2Int tileLocation = new Vector2Int((int)(WorldPosition.x - 0.5 + clickableX),
                     (int)(WorldPosition.y - 0.5 + clickableY));
 
-                tileLocation.x += (int)(2 * GameManager.Instance._matchManager.BoardOffset.x);
-                tileLocation.y += (int)(2 * GameManager.Instance._matchManager.BoardOffset.y);
+                tileLocation.x += (int)(2 * BoardOffset.x);
+                tileLocation.y += (int)(2 * BoardOffset.y);
 
                 if (tileLocation.x == 0 || tileLocation.x == BoardSize.x - 1)
                 {
