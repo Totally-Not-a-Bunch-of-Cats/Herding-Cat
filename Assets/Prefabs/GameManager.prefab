@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StarCount: 0
+  FurthestLevel: 
   _matchManager: {fileID: 0}
   _uiManager: {fileID: 7126871971944188214}
   _screenResizeManager: {fileID: 3686397751258903135}
@@ -61,11 +62,9 @@ MonoBehaviour:
   Levels: []
   GamelevelList: {fileID: 11400000, guid: c8a95196aa4f1044ebf30b9017149d3b, type: 2}
   LevelPosition: 0
-  ActivateItemIndicators: 0
+  ClearStartHelpScreen: 0
   GamesTillRewardAd: 4
   GamesTillMandatoryAd: 10
-  ClearStartHelpScreen: 0
-  FurthestLevel: 
   CatSpeed: 1
   ItemIndicators: 0
   sfxVolume: 0
@@ -201,8 +200,10 @@ MonoBehaviour:
   - {fileID: -251871438, guid: 3589b1d7c5d65374093d56104ed629bc, type: 3}
   - {fileID: 1159634615, guid: cb60cf56fc227a14abd6491736b7b318, type: 3}
   Accessories:
-  - Name: Normal Hat
+  - Name: NormalHat
     Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
+    Cost: 5
+    Unlocked: 0
     CatPrefabLocation: {x: -0.245, y: 0.5, z: 1}
     CatPrefabScale: {x: 0.21, y: 0.21, z: 1}
     MaxoffsetforCatButton: {x: 139.85, y: 132.2}
@@ -211,22 +212,28 @@ MonoBehaviour:
     MinoffsetforExternalCatButton: {x: 26, y: 99.5}
   - Name: Headset
     Acessory: {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
+    Cost: 5
+    Unlocked: 0
     CatPrefabLocation: {x: -0.23, y: 0.328, z: 1}
     CatPrefabScale: {x: 0.21, y: 0.185, z: 1}
     MaxoffsetforCatButton: {x: 120, y: 141}
     MinoffsetforCatButton: {x: 46, y: 157}
     MaxoffsetforExternalCatButton: {x: 63.5, y: 17.5}
     MinoffsetforExternalCatButton: {x: 20, y: 76}
-  - Name: Tall Hat
+  - Name: TallHat
     Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
+    Cost: 5
+    Unlocked: 0
     CatPrefabLocation: {x: -0.24, y: 0.66, z: 1}
     CatPrefabScale: {x: 0.21, y: 0.5, z: 1}
     MaxoffsetforCatButton: {x: 136.9, y: 65.3}
     MinoffsetforCatButton: {x: 62.1, y: 198.7}
     MaxoffsetforExternalCatButton: {x: 71.5, y: -20}
     MinoffsetforExternalCatButton: {x: 25.5, y: 99}
-  - Name: Wide Hat
+  - Name: WideHat
     Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
+    Cost: 5
+    Unlocked: 0
     CatPrefabLocation: {x: -0.238, y: 0.49, z: 1}
     CatPrefabScale: {x: 0.285, y: 0.22, z: 1}
     MaxoffsetforCatButton: {x: 113.7, y: 124.7}
@@ -239,11 +246,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1874b8b6a361f564880fa4a3e13e85c5, type: 2}
   - {fileID: 11400000, guid: bc652e92a1286f049be1245a488222d4, type: 2}
   - {fileID: 11400000, guid: e555ba895d5a24446bccda1cb968e5d7, type: 2}
-  SelectCat: {fileID: 0}
+  SelectCat: {fileID: 11400000, guid: bc652e92a1286f049be1245a488222d4, type: 2}
   CurrentAnim: {fileID: 9100000, guid: 3b3859dba476d7143977ce83cfa36e01, type: 2}
   CurrentSkin: {fileID: -251871438, guid: 3589b1d7c5d65374093d56104ed629bc, type: 3}
-  CurrentAccessory: {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
-  CurrentName: 
-  CurrentSelected: 0
+  CurrentAccessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
+  CurrentName: Tall Hat
+  CurrentSelected: 3
   CurrentSkinIndex: 0
-  CurrentAccessoryIndex: 1
+  CurrentAccessoryIndex: 0

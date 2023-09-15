@@ -358,7 +358,7 @@ public class Board
                     Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
                     return new Vector2Int(x, y);
                 }
-                //&& item.Position == new Vector2Int(x, y)
+                //&& item.Position == new Vector2Int(x, y) could be a bug prob not
                 if (_cells[x, y].name == "Toy")
                 {
                     //allows cat to move on cat pen

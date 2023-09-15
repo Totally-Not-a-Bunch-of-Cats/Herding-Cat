@@ -52,8 +52,6 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
-
-
     //saves float information
     public void SaveFloat(string name, float value)
     {
@@ -87,8 +85,6 @@ public class PlayerPrefsManager : MonoBehaviour
     {
         return PlayerPrefs.GetString(KeyName,"");
     }
-
-
 
 
     public void SaveBool(string name, bool value)
