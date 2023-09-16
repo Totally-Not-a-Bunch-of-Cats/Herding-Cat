@@ -358,15 +358,9 @@ public class Board
                     Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
                     return new Vector2Int(x, y);
                 }
-<<<<<<< Updated upstream
-                //&& item.Position == new Vector2Int(x, y)
-                if (_cells[x, y].name == "Toy")
-=======
                 //&& item.Position == new Vector2Int(x, y) could be a bug prob not
-                if (_cells[x, y].name == "Toy" && isREdirectionPad == false) 
->>>>>>> Stashed changes
+                if (_cells[x, y].name == "Toy" && isREdirectionPad == false)
                 {
-                    Debug.Log("mep");
                     //allows cat to move on cat pen
                     return new Vector2Int(x, y);
                 }
