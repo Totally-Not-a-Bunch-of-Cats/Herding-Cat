@@ -695,7 +695,6 @@ public class MatchManager : MonoBehaviour
                         }
                     }
                 }
-
                 GameBoard.Set(GameBoard.SavedTiles[i].Position, GameBoard.SavedTiles[i].Slate);
                 GameBoard.SavedTiles.RemoveAt(i);
             }
@@ -715,7 +714,7 @@ public class MatchManager : MonoBehaviour
     {
         CatMoving = true;
         float startTime = Time.time;
-
+        Debug.Log("the cat is moving");
         while (Time.time < startTime + (overTime / GameManager.Instance.CatSpeed))
         {
             GameBoard.Cats[ListPos].Object.localPosition = Vector3.Lerp(source, target, (Time.time - startTime) / overTime);
@@ -737,8 +736,8 @@ public class MatchManager : MonoBehaviour
             }
             if (GameBoard.At(FinalDestination).name == "Redirection Pad")
             {
-                TileCatRedirection(GameBoard.Cats[ListPos], ListPos);
                 Debug.Log("Redirection Done " + FinalDestination);
+                TileCatRedirection(GameBoard.Cats[ListPos], ListPos);
             }
         }
         if (GameBoard.At(FinalDestination).name != "Redirection Pad")

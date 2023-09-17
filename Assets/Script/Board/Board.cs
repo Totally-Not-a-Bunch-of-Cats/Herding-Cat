@@ -358,7 +358,7 @@ public class Board
                     Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
                     return new Vector2Int(x, y);
                 }
-                //&& item.Position == new Vector2Int(x, y) could be a bug prob not
+                //&& item.Position == new Vector2Int(x, y) there is 100% a bug here when trying to move 2 cats while one is using a reircton pad and a toy
                 if (_cells[x, y].name == "Toy" && isREdirectionPad == false)
                 {
                     //allows cat to move on cat pen
