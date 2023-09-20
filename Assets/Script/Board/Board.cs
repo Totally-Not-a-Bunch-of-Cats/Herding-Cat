@@ -359,12 +359,14 @@ public class Board
                     return new Vector2Int(x, y);
                 }
                 //&& item.Position == new Vector2Int(x, y) there is 100% a bug here when trying to move 2 cats while one is using a reircton pad and a toy
-                if (_cells[x, y].name == "Toy" && isREdirectionPad == false)
+                if(item != null)
                 {
-                    //allows cat to move on cat pen
-                    return new Vector2Int(x, y);
+                    if (_cells[x, y].name == "Toy" && item.Position == new Vector2Int(x, y))
+                    {
+                        //allows cat to move on cat pen
+                        return new Vector2Int(x, y);
+                    }
                 }
-                //return;
             }
             else if (_cells[x, y].Is<CatPen>())
             {
@@ -398,7 +400,6 @@ public class Board
                 } 
                 for (int y = Cat.y - 1; y >= Destination.y; y--)
                 {
-                    Debug.Log(Item);
                     Vector2Int TestDestination = CheckSpot(new Vector2Int(0, y), ListPos, Item, Destination, Vector2Int.down, isREdirectionPad);
                     if (TestDestination != Destination)
                     {

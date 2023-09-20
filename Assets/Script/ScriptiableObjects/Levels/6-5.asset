@@ -19,7 +19,7 @@ MonoBehaviour:
   Category: 0
   TileName: 
   StarsEarned: 0
-  Unlocked: 0
+  Unlocked: 1
   NewItemIntroduced: 0
   BackgroundTile: {fileID: 11400000, guid: d756be87d23ee174f869fab071be06bf, type: 2}
   Tiles:
@@ -191,21 +191,6 @@ MonoBehaviour:
   - name: Wall (7,6)
     Position: {x: 7, y: 6}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
-    TubeDestination: {x: 0, y: 0}
-    Redirection: {x: -1, y: 0}
-  - name: Redirection Pad (5,4)
-    Position: {x: 5, y: 4}
-    Slate: {fileID: 11400000, guid: 53efc83f5a114514f9d2e8cd576d0992, type: 2}
-    TubeDestination: {x: 0, y: 0}
-    Redirection: {x: 0, y: -1}
-  - name: Redirection Pad (5,3)
-    Position: {x: 5, y: 3}
-    Slate: {fileID: 11400000, guid: 53efc83f5a114514f9d2e8cd576d0992, type: 2}
-    TubeDestination: {x: 0, y: 0}
-    Redirection: {x: -1, y: 0}
-  - name: Redirection Pad (4,3)
-    Position: {x: 4, y: 3}
-    Slate: {fileID: 11400000, guid: 53efc83f5a114514f9d2e8cd576d0992, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: -1, y: 0}
   PossibleItems:

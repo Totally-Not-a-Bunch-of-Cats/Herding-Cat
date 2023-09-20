@@ -41,6 +41,7 @@ public class MatchManager : MonoBehaviour
     public GameObject HelpIndicator3;
     public GameObject RewardAD;
     public GameObject ForcedAD;
+    public int ActiveCats;
     public Animator Animator;
     [SerializeField] private Sprite[] TubeIcons;
 
@@ -60,6 +61,7 @@ public class MatchManager : MonoBehaviour
     {
         if(currentLevel != null && currentLevel.Valid())
         {
+            GameManager.Instance._ReWindManager.Clear();
             BoardSize = currentLevel.GetDimensions();
             TargetRounds = currentLevel.GetTargetRounds();
             TargetItems = currentLevel.GetTargetItems();
@@ -377,6 +379,7 @@ public class MatchManager : MonoBehaviour
                 // Checks to see if a cat is actually in range
                 if (CatMoveInfo.Count > 0)
                 {
+                    ActiveCats = CatMoveInfo.Count;
                     for (int c = 0; c < CatMoveInfo.Count; c++)
                     {
                         GameBoard.CheckMovement(CurrentItem.MoveDistance, (Vector2Int)CatMoveInfo[c].Destination, CatMoveInfo[c].Index, GameBoard.Items[i]);
@@ -556,55 +559,63 @@ public class MatchManager : MonoBehaviour
         Animator = GameBoard.Cats[ListPos].Object.GetComponentInChildren<Animator>();
         Vector2Int CatPos = GameBoard.Cats[ListPos].Position;
         //moves the cat the correct the direction
-        if (Direction.x > 0)
+        Debug.Log(FinalDestination + " " + GameBoard.Cats[ListPos].Position);
+        if(GameBoard.Cats[ListPos].Position != FinalDestination)
         {
-            if (GameBoard.Cats[ListPos].Position.x != FinalDestination.x)
+            if (Direction.x > 0)
             {
-                Vector3 Goalpos = new Vector3(((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x))), 0f, 0f);
-                Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
-                Animator.SetBool("Idle", false);
-                Animator.SetBool("Walk", true);
-                //Animator.runtimeAnimatorController
-                GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0,180,0,0);
-                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos,  FinalDestination));
+                if (GameBoard.Cats[ListPos].Position.x != FinalDestination.x)
+                {
+                    Vector3 Goalpos = new Vector3(((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x))), 0f, 0f);
+                    Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
+                    Animator.SetBool("Idle", false);
+                    Animator.SetBool("Walk", true);
+                    //Animator.runtimeAnimatorController
+                    GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 180, 0, 0);
+                    StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
+                }
             }
-        }
-        else if (Direction.y > 0)
-        {
-            Vector3 Goalpos = new Vector3(0f, ((Math.Abs(GameBoard.Cats[ListPos].Position.y - FinalDestination.y))), 0f);
-            Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
-            if (TempDestination != GameBoard.Cats[ListPos].Object.localPosition)
+            else if (Direction.y > 0)
             {
-                Animator.SetBool("Idle", false);
-                Animator.SetBool("Walk", true);
-                GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 0, 0, -90);
-                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
-            }
-        }
-        else if (Direction.x < 0)
-        {
-            if (GameBoard.Cats[ListPos].Position.x != FinalDestination.x)
-            {
-                Vector3 Goalpos = new Vector3((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x)), 0f, 0f);
+                Vector3 Goalpos = new Vector3(0f, ((Math.Abs(GameBoard.Cats[ListPos].Position.y - FinalDestination.y))), 0f);
                 Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
-                Animator.SetBool("Idle", false);
-                Animator.SetBool("Walk", true);
-                GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 0, 0, 0);
-                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
+                if (TempDestination != GameBoard.Cats[ListPos].Object.localPosition)
+                {
+                    Animator.SetBool("Idle", false);
+                    Animator.SetBool("Walk", true);
+                    GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 0, 0, -90);
+                    StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
+                }
+            }
+            else if (Direction.x < 0)
+            {
+                if (GameBoard.Cats[ListPos].Position.x != FinalDestination.x)
+                {
+                    Vector3 Goalpos = new Vector3((Math.Abs(GameBoard.Cats[ListPos].Position.x - FinalDestination.x)), 0f, 0f);
+                    Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
+                    Animator.SetBool("Idle", false);
+                    Animator.SetBool("Walk", true);
+                    GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 0, 0, 0);
+                    StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
+                }
+            }
+            else
+            {
+                Vector3 Goalpos = new Vector3(0f, ((Math.Abs(GameBoard.Cats[ListPos].Position.y - FinalDestination.y))), 0f);
+                Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
+
+                if (TempDestination != GameBoard.Cats[ListPos].Object.localPosition)
+                {
+                    Animator.SetBool("Idle", false);
+                    Animator.SetBool("Walk", true);
+                    GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 0, 0, 90);
+                    StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
+                }
             }
         }
         else
         {
-            Vector3 Goalpos = new Vector3(0f, ((Math.Abs(GameBoard.Cats[ListPos].Position.y - FinalDestination.y))), 0f);
-            Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
-
-            if (TempDestination != GameBoard.Cats[ListPos].Object.localPosition)
-            {
-                Animator.SetBool("Idle", false);
-                Animator.SetBool("Walk", true);
-                GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 0, 0, 90);
-                StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
-            }
+            ActiveCats -= 1;
         }
         //move cat in data structure all at once
         if (GameBoard.At(FinalDestination) != null)
@@ -714,13 +725,14 @@ public class MatchManager : MonoBehaviour
     {
         CatMoving = true;
         float startTime = Time.time;
-        Debug.Log("the cat is moving");
+        Debug.Log("the cat is moving" + GameBoard.Cats[ListPos].Position);
         while (Time.time < startTime + (overTime / GameManager.Instance.CatSpeed))
         {
             GameBoard.Cats[ListPos].Object.localPosition = Vector3.Lerp(source, target, (Time.time - startTime) / overTime);
          
             yield return null;
         }
+        Debug.Log("the not move" + FinalDestination);
         Animator.SetBool("Walk", false);
         Animator.SetBool("Idle", true);
         GameBoard.Cats[ListPos].Object.localPosition = target;
@@ -742,7 +754,13 @@ public class MatchManager : MonoBehaviour
         }
         if (GameBoard.At(FinalDestination).name != "Redirection Pad")
         {
+            Debug.Log(ActiveCats +"active cats -1" + CatMoving);
+            ActiveCats -= 1;
+        }
+        if(ActiveCats <= 0)
+        {
             CatMoving = false;
+            Debug.Log(CatMoving);
         }
     }
 
@@ -800,6 +818,7 @@ public class MatchManager : MonoBehaviour
         }
         Destination = cat.Position + addition;
         GameBoard.Set(cat.Position, cat.Tile);
+        Debug.Log(Destination);
         GameBoard.CheckMovement(1, Destination, ListPos, null, true);
     }
 
