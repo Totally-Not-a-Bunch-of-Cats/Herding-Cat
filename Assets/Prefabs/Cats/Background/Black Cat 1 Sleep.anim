@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Black Cat Sleep 1
+  m_Name: Black Cat 1 Sleep
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -39,6 +39,27 @@ AnimationClip:
     path: 
     classID: 212
     script: {fileID: 0}
+  - curve:
+    - time: 0
+      value: {fileID: 21300000, guid: 7d75bf6db335bdf4abba1601c6307ce2, type: 3}
+    - time: 0.083333336
+      value: {fileID: 21300000, guid: 188ab0751a91b9c40a5761c6d9fcbc3e, type: 3}
+    - time: 0.16666667
+      value: {fileID: 21300000, guid: 73e4715971422c743a5bd4d0ffc0c1db, type: 3}
+    - time: 0.25
+      value: {fileID: 21300000, guid: e1ea0dfa4df11bf498f27f69a3af9862, type: 3}
+    - time: 0.33333334
+      value: {fileID: 21300000, guid: 2660583bb7775274cb9241ad5bc6e4b0, type: 3}
+    - time: 0.41666666
+      value: {fileID: 21300000, guid: 6313278f877f5d54382d54bdd44ef96d, type: 3}
+    - time: 0.5
+      value: {fileID: 21300000, guid: 2997f230fe768a54e8042f80eada5ccf, type: 3}
+    - time: 0.5833333
+      value: {fileID: 21300000, guid: 816aa4d7a02ba8945bb0b900d715df4a, type: 3}
+    attribute: m_Sprite
+    path: 
+    classID: 114
+    script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
@@ -53,7 +74,22 @@ AnimationClip:
       typeID: 212
       customType: 23
       isPPtrCurve: 1
+    - serializedVersion: 2
+      path: 0
+      attribute: 2015549526
+      script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 1
     pptrCurveMapping:
+    - {fileID: 21300000, guid: 7d75bf6db335bdf4abba1601c6307ce2, type: 3}
+    - {fileID: 21300000, guid: 188ab0751a91b9c40a5761c6d9fcbc3e, type: 3}
+    - {fileID: 21300000, guid: 73e4715971422c743a5bd4d0ffc0c1db, type: 3}
+    - {fileID: 21300000, guid: e1ea0dfa4df11bf498f27f69a3af9862, type: 3}
+    - {fileID: 21300000, guid: 2660583bb7775274cb9241ad5bc6e4b0, type: 3}
+    - {fileID: 21300000, guid: 6313278f877f5d54382d54bdd44ef96d, type: 3}
+    - {fileID: 21300000, guid: 2997f230fe768a54e8042f80eada5ccf, type: 3}
+    - {fileID: 21300000, guid: 816aa4d7a02ba8945bb0b900d715df4a, type: 3}
     - {fileID: 21300000, guid: 7d75bf6db335bdf4abba1601c6307ce2, type: 3}
     - {fileID: 21300000, guid: 188ab0751a91b9c40a5761c6d9fcbc3e, type: 3}
     - {fileID: 21300000, guid: 73e4715971422c743a5bd4d0ffc0c1db, type: 3}

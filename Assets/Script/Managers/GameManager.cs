@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        Application.targetFrameRate = Screen.currentResolution.refreshRate;
         Levels = GamelevelList.GameLevel;
         if (PlayerPrefsTrue)
         {
