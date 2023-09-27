@@ -295,7 +295,7 @@ public class Board
     /// <param name="Destination"></param>
     /// <param name="direction">Direction Cat is being moved</param>
     /// <returns></returns>
-    public Vector2Int CheckSpot(Vector2Int CellSpot, int ListPos, PosObject item, Vector2Int Destination, Vector2Int direction)
+    public Vector2Int CheckSpot(Vector2Int CellSpot, int ListPos, PosObject item, Vector2Int Destination, Vector2Int direction, Boolean isREdirectionPad = false)
     {
         Vector2Int OppositeDirection = Vector2Int.zero;
         if (direction == Vector2Int.up || direction == Vector2Int.down)
@@ -358,13 +358,15 @@ public class Board
                     Cats[ListPos].Object.GetChild(0).GetChild(0).gameObject.SetActive(true);
                     return new Vector2Int(x, y);
                 }
-                //&& item.Position == new Vector2Int(x, y)
-                if (_cells[x, y].name == "Toy")
+                //&& item.Position == new Vector2Int(x, y) there is 100% a bug here when trying to move 2 cats while one is using a reircton pad and a toy
+                if(item != null)
                 {
-                    //allows cat to move on cat pen
-                    return new Vector2Int(x, y);
+                    if (_cells[x, y].name == "Toy" && item.Position == new Vector2Int(x, y))
+                    {
+                        //allows cat to move on cat pen
+                        return new Vector2Int(x, y);
+                    }
                 }
-                //return;
             }
             else if (_cells[x, y].Is<CatPen>())
             {
@@ -383,9 +385,8 @@ public class Board
     /// <param name="ItemMoveDistance">Number of tiles the Item moves on the <see cref="Board"/></param>
     /// <param name="Destination">Farthest Location on the <see cref="Board"/> that the cat will move</param>
     /// <param name="ListPos">Position in the list that the moving cat is</param>
-    public void CheckMovement(int ItemMoveDistance, Vector2Int Destination, int ListPos, PosObject Item)
+    public void CheckMovement(int ItemMoveDistance, Vector2Int Destination, int ListPos, PosObject Item, Boolean isREdirectionPad = false)
     {
-        Debug.Log("call once" + Item);
         Vector2Int Cat = Cats[ListPos].Position;
         if (Cat.x == Destination.x)
         {
@@ -399,8 +400,7 @@ public class Board
                 } 
                 for (int y = Cat.y - 1; y >= Destination.y; y--)
                 {
-                    Debug.Log(Item);
-                    Vector2Int TestDestination = CheckSpot(new Vector2Int(0, y), ListPos, Item, Destination, Vector2Int.down);
+                    Vector2Int TestDestination = CheckSpot(new Vector2Int(0, y), ListPos, Item, Destination, Vector2Int.down, isREdirectionPad);
                     if (TestDestination != Destination)
                     {
                         Destination = TestDestination;
@@ -423,7 +423,7 @@ public class Board
                 }
                 for (int y = Cat.y + 1; y <= Destination.y; y++)
                 {
-                    Vector2Int TestDestination = CheckSpot(new Vector2Int(0, y), ListPos, Item, Destination, Vector2Int.up);
+                    Vector2Int TestDestination = CheckSpot(new Vector2Int(0, y), ListPos, Item, Destination, Vector2Int.up, isREdirectionPad);
                     if (TestDestination != Destination)
                     {
                         Destination = TestDestination;
@@ -449,7 +449,7 @@ public class Board
                 }
                 for (int x = Cat.x - 1; x >= Destination.x; x--)
                 {
-                    Vector2Int TestDestination = CheckSpot(new Vector2Int(x, 0), ListPos, Item, Destination, Vector2Int.left);
+                    Vector2Int TestDestination = CheckSpot(new Vector2Int(x, 0), ListPos, Item, Destination, Vector2Int.left, isREdirectionPad);
                     if (TestDestination != Destination)
                     {
                         Destination = TestDestination;
@@ -472,7 +472,7 @@ public class Board
                 }
                 for (int x = Cat.x + 1; x <= Destination.x; x++)
                 {
-                    Vector2Int TestDestination = CheckSpot(new Vector2Int(x, 0), ListPos, Item, Destination, Vector2Int.right);
+                    Vector2Int TestDestination = CheckSpot(new Vector2Int(x, 0), ListPos, Item, Destination, Vector2Int.right, isREdirectionPad);
                     if (TestDestination != Destination)
                     {
                         Destination = TestDestination;
