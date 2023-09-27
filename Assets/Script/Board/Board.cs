@@ -360,6 +360,7 @@ public class Board
                 }
                 //&& item.Position == new Vector2Int(x, y) there is 100% a bug here when trying to move 2 cats while one is using a reircton pad and a toy
                 if(item != null)
+
                 {
                     if (_cells[x, y].name == "Toy" && item.Position == new Vector2Int(x, y))
                     {
