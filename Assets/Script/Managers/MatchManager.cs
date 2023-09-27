@@ -202,7 +202,11 @@ public class MatchManager : MonoBehaviour
                     GameManager.Instance._uiManager.PlaceItem(item, button);
                 }
             }
-            
+            if (currentLevel.SpecialHelpTxt == true)
+            {
+                LevNameUpdator.SpecialHelpText(currentLevel.SpecialHelpLevelNum);
+            }
+
             GameManager.Instance._uiManager.GetUI();
             GameManager.Instance._uiManager.Override = true;
             ActiveMatch = true;
@@ -559,7 +563,6 @@ public class MatchManager : MonoBehaviour
         Animator = GameBoard.Cats[ListPos].Object.GetComponentInChildren<Animator>();
         Vector2Int CatPos = GameBoard.Cats[ListPos].Position;
         //moves the cat the correct the direction
-        Debug.Log(FinalDestination + " " + GameBoard.Cats[ListPos].Position);
         if(GameBoard.Cats[ListPos].Position != FinalDestination)
         {
             if (Direction.x > 0)
@@ -725,14 +728,12 @@ public class MatchManager : MonoBehaviour
     {
         CatMoving = true;
         float startTime = Time.time;
-        Debug.Log("the cat is moving" + GameBoard.Cats[ListPos].Position);
         while (Time.time < startTime + (overTime / GameManager.Instance.CatSpeed))
         {
             GameBoard.Cats[ListPos].Object.localPosition = Vector3.Lerp(source, target, (Time.time - startTime) / overTime);
          
             yield return null;
         }
-        Debug.Log("the not move" + FinalDestination);
         Animator.SetBool("Walk", false);
         Animator.SetBool("Idle", true);
         GameBoard.Cats[ListPos].Object.localPosition = target;
@@ -748,19 +749,16 @@ public class MatchManager : MonoBehaviour
             }
             if (GameBoard.At(FinalDestination).name == "Redirection Pad")
             {
-                Debug.Log("Redirection Done " + FinalDestination);
                 TileCatRedirection(GameBoard.Cats[ListPos], ListPos);
             }
         }
         if (GameBoard.At(FinalDestination).name != "Redirection Pad")
         {
-            Debug.Log(ActiveCats +"active cats -1" + CatMoving);
             ActiveCats -= 1;
         }
         if(ActiveCats <= 0)
         {
             CatMoving = false;
-            Debug.Log(CatMoving);
         }
     }
 
@@ -818,7 +816,6 @@ public class MatchManager : MonoBehaviour
         }
         Destination = cat.Position + addition;
         GameBoard.Set(cat.Position, cat.Tile);
-        Debug.Log(Destination);
         GameBoard.CheckMovement(1, Destination, ListPos, null, true);
     }
 

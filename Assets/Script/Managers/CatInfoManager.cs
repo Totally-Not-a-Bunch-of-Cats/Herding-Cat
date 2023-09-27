@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class CatInfoManager : MonoBehaviour
 {
     // List of Cat Skins
-    [SerializeField] private List<RuntimeAnimatorController> CatAnim = new List<RuntimeAnimatorController>();
-    [SerializeField] private List<Sprite> CatSkins = new List<Sprite>(); //Catskins and cat anims must be same length
+    //[SerializeField] private List<RuntimeAnimatorController> CatAnim = new List<RuntimeAnimatorController>();
+    //public List<Sprite> CatSkins = new List<Sprite>(); //Catskins and cat anims must be same length
+    public List<SkinInfo> Cats = new List<SkinInfo>();
     // List of Accessories
     [SerializeField] public List<AcessoryInfo> Accessories = new List<AcessoryInfo>();
     // Cat Prefabs
@@ -39,15 +40,14 @@ public class CatInfoManager : MonoBehaviour
         Reference.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<RectTransform>().offsetMax = -Accessories[CurrentAccessoryIndex].MaxoffsetforCatButton;
         Reference.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<RectTransform>().offsetMin = Accessories[CurrentAccessoryIndex].MinoffsetforCatButton;
         CurrentSkinIndex = GetSkinIndex();
-        Debug.Log(CurrentSelected);
     }
 
 
     int GetSkinIndex()
     {
-        for (int i = 0; i < CatSkins.Count; i++)
+        for (int i = 0; i < Cats.Count; i++)
         {
-            if (CatSkins[i] == CurrentSkin)
+            if (Cats[i].Skin == CurrentSkin)
             {
                 return i;
             }
@@ -84,18 +84,16 @@ public class CatInfoManager : MonoBehaviour
         CurrentSkinIndex++;
 
         // Loops the skins back around so that user doesn't have to go back from hitting the walls
-        if(CurrentSkinIndex >= CatSkins.Count)
+        if(CurrentSkinIndex >= Cats.Count)
         {
             CurrentSkinIndex = 0;
         }
-        Debug.Log(CurrentSelected);
         // Setting the visual in the customization to fit the new skin, as well as adjusting the scriptable object to the new skin
-        CurrentAnim = CatAnim[CurrentSkinIndex];
+        CurrentAnim = Cats[CurrentSkinIndex].CatAnim;
         Catlist[CurrentSelected].AnimationController = CurrentAnim;
-        CurrentSkin = CatSkins[CurrentSkinIndex];
+        CurrentSkin = Cats[CurrentSkinIndex].Skin;
         Catlist[CurrentSelected].Skin = CurrentSkin;
         Reference.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Image>().sprite = CurrentSkin;
-        Debug.Log(CurrentSelected);
     }
 
     // Goes to the previous skin for the cat to be
@@ -108,16 +106,14 @@ public class CatInfoManager : MonoBehaviour
         // Loops the skins back around so that user doesn't have to go back from hitting the walls
         if(CurrentSkinIndex < 0)
         {
-            CurrentSkinIndex = CatSkins.Count - 1;
+            CurrentSkinIndex = Cats.Count - 1;
         }
         // Setting the visual in the customization to fit the new skin, as well as adjusting the scriptable object to the new skin
-        Debug.Log(CurrentSelected);
-        CurrentAnim = CatAnim[CurrentSkinIndex];
+        CurrentAnim = Cats[CurrentSkinIndex].CatAnim;
         Catlist[CurrentSelected].AnimationController = CurrentAnim;
-        CurrentSkin = CatSkins[CurrentSkinIndex];
+        CurrentSkin = Cats[CurrentSkinIndex].Skin;
         Catlist[CurrentSelected].Skin = CurrentSkin;
         Reference.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Image>().sprite = CurrentSkin;
-        Debug.Log(CurrentSelected);
     }
 
     // Goes to the next accessory for the cat to wear
@@ -132,8 +128,6 @@ public class CatInfoManager : MonoBehaviour
             CurrentAccessoryIndex = 0;
         }
         // Setting the visual in the customization to fit the new accessory, as well as adjusting the scriptable object to the new accessory
-        Debug.Log(CurrentSelected); // is zero for some reason
-        Debug.Log(SelectCat);
         CurrentAccessory = Accessories[CurrentAccessoryIndex].Acessory;
         Transform ReferenceChild = Reference.transform.GetChild(1).GetChild(1).GetChild(1);
         ReferenceChild.GetComponent<Image>().sprite = CurrentAccessory;

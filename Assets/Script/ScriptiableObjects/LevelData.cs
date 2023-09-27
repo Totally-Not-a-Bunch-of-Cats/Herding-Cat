@@ -20,6 +20,8 @@ public class LevelData: ScriptableObject
     public int StarsEarned = 0;
     [SerializeField] bool Unlocked = false;
     public bool NewItemIntroduced = false;
+    public bool SpecialHelpTxt = false;
+    public int SpecialHelpLevelNum = -1;
 
     [Header("Tile Data")]
     // Tile that is set for the backgound of play area

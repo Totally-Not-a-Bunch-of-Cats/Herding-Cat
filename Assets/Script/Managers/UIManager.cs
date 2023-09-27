@@ -246,7 +246,6 @@ public class UIManager : MonoBehaviour
     /// <param name="item"><see cref="Item"/> that will be placed when clicked on board</param>
     public void PlaceItem(Item item, GameObject selectedButton)
     {
-        Debug.Log("we placing items");
         if (SelectedButton != null)
         {
             SelectedButton.GetComponent<Image>().sprite = BoxSprite;
