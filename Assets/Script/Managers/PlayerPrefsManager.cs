@@ -25,6 +25,7 @@ public class PlayerPrefsManager : MonoBehaviour
         GameManager.Instance.ItemIndicators = GetBool("ItemIndicators");
         GameManager.Instance.FurthestLevel = GetString("FurthestLevel");
     }
+
     /// <summary>
     /// goes through the levels on game launch to make sure the level data matches the playerprefs data
     /// </summary> //make cause a bug/ crash if you have completed all levels
@@ -52,19 +53,29 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
+    public void RemoveHelpScreens()
+    {
+       for(int i = 0; i < GameManager.Instance.Levels.Count; i++)
+       {
+            if(GetBool(GameManager.Instance.Levels[i].name) == true)
+            {
+                GameManager.Instance.Levels[i].SpecialHelpTxt = false;
+                GameManager.Instance.Levels[i].NewThingIntroduced = false;
+            }
+        }
+    }
+
     //saves float information
     public void SaveFloat(string name, float value)
     {
         PlayerPrefs.SetFloat(name, value);
     }
+
     //gets float info with key
     public float GetFloat(string KeyName)
     {
         return PlayerPrefs.GetFloat(KeyName , -1);
     }
-
-
-
 
     //saves int with a key
     public void SaveInt(string name, int value)
@@ -81,11 +92,11 @@ public class PlayerPrefsManager : MonoBehaviour
     {
         PlayerPrefs.SetString(name, value);
     }
+
     public string GetString(string KeyName)
     {
         return PlayerPrefs.GetString(KeyName,"");
     }
-
 
     public void SaveBool(string name, bool value)
     {
@@ -101,6 +112,7 @@ public class PlayerPrefsManager : MonoBehaviour
             PlayerPrefs.SetInt(name, boolVal);
         }
     }
+
     public bool GetBool(string KeyName)
     {
         if(PlayerPrefs.GetInt(KeyName) == 1)

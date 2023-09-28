@@ -43,6 +43,7 @@ public class MatchManager : MonoBehaviour
     public GameObject ForcedAD;
     public int ActiveCats;
     public Animator Animator;
+    public Animator Animator2;
     [SerializeField] private Sprite[] TubeIcons;
 
     public Tilemap BoardTileMap;
@@ -573,7 +574,7 @@ public class MatchManager : MonoBehaviour
                     Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
                     Animator.SetBool("Idle", false);
                     Animator.SetBool("Walk", true);
-                    //Animator.runtimeAnimatorController
+                    Debug.Log(Animator);
                     GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 180, 0, 0);
                     StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
                 }
@@ -586,6 +587,7 @@ public class MatchManager : MonoBehaviour
                 {
                     Animator.SetBool("Idle", false);
                     Animator.SetBool("Walk", true);
+                    Debug.Log(Animator);
                     GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 0, 0, -90);
                     StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
                 }
@@ -598,6 +600,7 @@ public class MatchManager : MonoBehaviour
                     Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
                     Animator.SetBool("Idle", false);
                     Animator.SetBool("Walk", true);
+                    Debug.Log(Animator);
                     GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 0, 0, 0);
                     StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
                 }
@@ -611,6 +614,7 @@ public class MatchManager : MonoBehaviour
                 {
                     Animator.SetBool("Idle", false);
                     Animator.SetBool("Walk", true);
+                    Debug.Log(Animator);
                     GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 0, 0, 90);
                     StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
                 }
@@ -728,19 +732,19 @@ public class MatchManager : MonoBehaviour
     {
         CatMoving = true;
         float startTime = Time.time;
+        //Animator2 = GameBoard.Cats[ListPos].Object.GetComponentInChildren<Animator>();
         while (Time.time < startTime + (overTime / GameManager.Instance.CatSpeed))
         {
             GameBoard.Cats[ListPos].Object.localPosition = Vector3.Lerp(source, target, (Time.time - startTime) / overTime);
          
             yield return null;
         }
-        Animator.SetBool("Walk", false);
-        Animator.SetBool("Idle", true);
         GameBoard.Cats[ListPos].Object.localPosition = target;
         if (GameBoard.At(FinalDestination) != null)
         {
             if (GameBoard.At(FinalDestination).Is<CatPen>())
             {
+                GameBoard.Cats[ListPos].Object.gameObject.SetActive(false);
                 GameBoard.Cats[ListPos] = null;
             }
             if (GameBoard.At(FinalDestination).name == "Cat Tube")
@@ -760,6 +764,7 @@ public class MatchManager : MonoBehaviour
         {
             CatMoving = false;
         }
+        ClearAnims();
     }
 
     /// <summary>
@@ -864,5 +869,18 @@ public class MatchManager : MonoBehaviour
         }
         GameBoard.Cats[i].Object.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = FullAlpha;
         GameBoard.Cats[i].Object.GetChild(0).GetChild(0).gameObject.SetActive(false);
+    }
+
+    public void ClearAnims()
+    {
+        for(int i = 0; i < GameBoard.Cats.Count; i++)
+        {
+            if (GameBoard.Cats[i] != null)
+            {
+                Animator2 = GameBoard.Cats[i].Object.GetComponentInChildren<Animator>();
+                Animator2.SetBool("Walk", false);
+                Animator2.SetBool("Idle", true);
+            }
+        }
     }
 }

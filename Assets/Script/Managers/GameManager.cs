@@ -98,6 +98,8 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefsTrue)
         {
             _PlayerPrefsManager.LoadSettings();
+            _PlayerPrefsManager.CheckLevels();
+            _PlayerPrefsManager.RemoveHelpScreens();
         }
         StartCoroutine(SwitchScene("Main Menu"));
     }
