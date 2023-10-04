@@ -57,28 +57,42 @@ public class HelpGUIController : MonoBehaviour
             HelpText.gameObject.SetActive(false);
             ViewPorts[ActivePort].SetActive(false);
             DefaultBackground.gameObject.SetActive(true);
-        } else
+        } 
+        else
         {
             IsDirect = false;
         }
-        DetermineScrenSize();
+        DetermineScreenSize();
     }
 
-    private void DetermineScrenSize()
+    private void DetermineScreenSize()
     {
         float ScreenDiv = Screen.width / Screen.height;
-        if(ScreenDiv > 2)
+        if(ScreenDiv < 1.59f)
         {
             ActivePort = 1;
         }
-        else if (ScreenDiv > 1.59f)
+        else
         {
             ActivePort = 0;
+        }
+        Debug.Log(ActivePort);
+    }
+
+    public void SwitchToScreenWithTxt()
+    {
+        ViewPorts[ActivePort].SetActive(false);
+        if (ActivePort == 1)
+        {
+            ActivePort = 3;
         }
         else
         {
             ActivePort = 2;
         }
+        Debug.Log(ActivePort);
+        ViewPorts[ActivePort].SetActive(true);
+        VideoPlayer.targetTexture = (RenderTexture)ViewPorts[ActivePort].GetComponent<RawImage>().texture;
     }
     
     /// <summary>
@@ -114,7 +128,7 @@ public class HelpGUIController : MonoBehaviour
                 break;
         }
 
-        ButtonsPerPage = Mathf.FloorToInt((HelpButtonsParent.GetComponent<RectTransform>().rect.height - 30) / (90 + 15));
+        ButtonsPerPage = Mathf.FloorToInt((HelpButtonsParent.GetComponent<RectTransform>().rect.height - 50) / (120 + 15));
         CurrentPage = 1;
         
         // Creates Buttons of the selected Category
@@ -144,7 +158,7 @@ public class HelpGUIController : MonoBehaviour
         DownButtonObject.SetActive(HelpPages != 1);
         if (HelpPages != 1)
         {
-            float Bottom = HelpButtonsParent.GetComponent<RectTransform>().rect.height - (90 + 15) * ButtonsPerPage;
+            float Bottom = HelpButtonsParent.GetComponent<RectTransform>().rect.height - (120 + 15) * ButtonsPerPage;
             Content.transform.parent.GetComponent<RectTransform>().offsetMin = new Vector2(0, Bottom);
         }
         UpButtonObject.SetActive(false);
@@ -189,10 +203,10 @@ public class HelpGUIController : MonoBehaviour
     {
         CurrentPage--;
         DownButtonObject.SetActive(true);
-        float ContentY = Content.transform.localPosition.y - ButtonsPerPage * 105;
+        float ContentY = Content.transform.localPosition.y - ButtonsPerPage * 135;
         Content.transform.localPosition = new Vector3(Content.transform.localPosition.x,
            ContentY, Content.transform.localPosition.z);
-        float Bottom = HelpButtonsParent.GetComponent<RectTransform>().rect.height - (90 + 15) * ButtonsPerPage;
+        float Bottom = HelpButtonsParent.GetComponent<RectTransform>().rect.height - (120 + 15) * ButtonsPerPage;
         Content.transform.parent.GetComponent<RectTransform>().offsetMin = new Vector2(0, Bottom - 50);
         if (CurrentPage == 1)
         {
@@ -209,10 +223,10 @@ public class HelpGUIController : MonoBehaviour
     {
         CurrentPage++;
         UpButtonObject.SetActive(true);
-        float ContentY = Content.transform.localPosition.y + ButtonsPerPage  * 105;
+        float ContentY = Content.transform.localPosition.y + ButtonsPerPage  * 135;
         Content.transform.localPosition = new Vector3(Content.transform.localPosition.x,
             ContentY, Content.transform.localPosition.z);
-        float Bottom = HelpButtonsParent.GetComponent<RectTransform>().rect.height - (90 + 15) * ButtonsPerPage;
+        float Bottom = HelpButtonsParent.GetComponent<RectTransform>().rect.height - (120 + 15) * ButtonsPerPage;
         Content.transform.parent.GetComponent<RectTransform>().offsetMin = new Vector2(0, Bottom-50);
         Content.transform.parent.GetComponent<RectTransform>().offsetMax = new Vector2(0, -50);
         if (CurrentPage == HelpPages)
