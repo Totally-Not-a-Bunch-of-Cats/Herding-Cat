@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     [Header("Ad Varables")]
     public int GamesTillRewardAd = 4;
     public int GamesTillMandatoryAd = 10;
+    public bool ADsoff = false;
 
     // Option Varables(Can be changed in options menu)
     [Header("Option Varables")]
@@ -193,6 +194,12 @@ public class GameManager : MonoBehaviour
                 Debug.LogError("Failed to initialize the match");
             }
         }
+    }
+
+    public void Purchasemade()
+    {
+        ADsoff = true;
+        _PlayerPrefsManager.SaveBool("Adsoff", true);
     }
 
 }

@@ -24,6 +24,7 @@ public class PlayerPrefsManager : MonoBehaviour
         GameManager.Instance.CatSpeed = GetFloat("CatSpeed");
         GameManager.Instance.ItemIndicators = GetBool("ItemIndicators");
         GameManager.Instance.FurthestLevel = GetString("FurthestLevel");
+        GameManager.Instance.ADsoff = GetBool("Adsoff");
     }
 
     /// <summary>

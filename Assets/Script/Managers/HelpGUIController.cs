@@ -10,7 +10,6 @@ using UnityEngine.Video;
 /// </summary>
 public class HelpGUIController : MonoBehaviour
 {
-
     //None = 0, General = 1, Item = 2, Trap = 3
     [SerializeField] private int SelectedOption = 0;
     [SerializeField] private List<HelpInfo> SelectedList;

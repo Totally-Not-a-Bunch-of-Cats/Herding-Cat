@@ -17,7 +17,6 @@ public class LevelNameUpdator : MonoBehaviour
     public Button RewindButton;
     public Button EndTurnButton;
     public List<string> SpecHelpText;
-    public List<int> SpecHelpLevelNum;
 
     public void NameUpdate()
     {

@@ -24,7 +24,6 @@ public class MatchManager : MonoBehaviour
     private bool CatMoving = false;
     public Vector3 BoardOffset;
     public bool CatJustinCage = false;
-    public HelpGUIController HGC;
 
     //stores the items used, rounds passed, and targets for starts gained
     [Header("Gameplay Info")]
@@ -51,6 +50,7 @@ public class MatchManager : MonoBehaviour
     public LevelData CurrentLevel;
     public GameObject GameWonUI;
     public List<TubePairImage> TubePairs = new List<TubePairImage>();
+    public GameObject ForcedHelpObject;
 
 
     /// <summary>
@@ -214,7 +214,7 @@ public class MatchManager : MonoBehaviour
             LevNameUpdator.NameUpdate();
             if (currentLevel.NewThingIntroduced == true)
             {
-                HGC.GetComponent<HelpGUIController>().JumpToHelpScreen(currentLevel.Category, currentLevel.TileName);
+                ForcedHelpObject.SetActive(true);
             }
             if (currentLevel.name == "1-1")
             {
@@ -836,7 +836,7 @@ public class MatchManager : MonoBehaviour
         {
             RewardAD.SetActive(true);
         }
-        if (GameManager.Instance.GamesTillMandatoryAd == 0)
+        if (GameManager.Instance.GamesTillMandatoryAd == 0 && GameManager.Instance.ADsoff == false)
         {
             ForcedAD.SetActive(true);
             GameManager.Instance.GamesTillMandatoryAd = 10;
