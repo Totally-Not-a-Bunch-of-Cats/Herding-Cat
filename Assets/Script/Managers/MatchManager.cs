@@ -744,8 +744,8 @@ public class MatchManager : MonoBehaviour
         {
             if (GameBoard.At(FinalDestination).Is<CatPen>())
             {
-                GameBoard.Cats[ListPos].Object.gameObject.SetActive(false);
-                GameBoard.Cats[ListPos] = null;
+                Debug.Log("we starting");
+                StartCoroutine(CatShuffle(ListPos));
             }
             if (GameBoard.At(FinalDestination).name == "Cat Tube")
             {
@@ -777,7 +777,6 @@ public class MatchManager : MonoBehaviour
         //cycles through all of the tubes looking for the right one to move the cat tube
         for (int i = 0; i < GameBoard.Tubes.Count; i++)
         {
-            Debug.Log(GameBoard.At(GameBoard.Tubes[i].TubeDestination));
             //checks to see if there is room for the cat to move before movings
             if (GameBoard.Tubes[i].Position == cat.Position && GameBoard.At(GameBoard.Tubes[i].TubeDestination).name == "Cat Tube")
             {
@@ -799,6 +798,16 @@ public class MatchManager : MonoBehaviour
                 break;
             }
         }
+    }
+    public IEnumerator CatShuffle(int cat)
+    {
+        Debug.Log("we are in");
+        GameBoard.Cats[cat].Object.gameObject.transform.localPosition += new Vector3(.1f, 0, 1);
+        yield return new WaitForSeconds(.2f);
+        GameBoard.Cats[cat].Object.gameObject.transform.localPosition -= new Vector3(.2f, 0, 1);
+        yield return new WaitForSeconds(.25f);
+        GameBoard.Cats[cat].Object.gameObject.SetActive(false);
+        GameBoard.Cats[cat] = null;
     }
 
     /// <summary>

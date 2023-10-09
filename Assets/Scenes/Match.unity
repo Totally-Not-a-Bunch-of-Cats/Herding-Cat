@@ -1757,7 +1757,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1532252250}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -4912,6 +4912,10 @@ MonoBehaviour:
   UpButtonObject: {fileID: 197382695}
   HelpButtonsParent: {fileID: 1404190663}
   Content: {fileID: 1926271840}
+  BottomButtonHeight: 0
+  TopButtonHeight: 0
+  ButtonHeight: 0
+  ButtonViewHeight: 0
 --- !u!1 &598445370
 GameObject:
   m_ObjectHideFlags: 0
@@ -9795,7 +9799,7 @@ RectTransform:
   - {fileID: 680451813}
   - {fileID: 1616528048}
   m_Father: {fileID: 1532252250}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10445,7 +10449,7 @@ RectTransform:
   - {fileID: 271347826}
   - {fileID: 1608149531}
   m_Father: {fileID: 1532252250}
-  m_RootOrder: 5
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -10757,7 +10761,7 @@ RectTransform:
   - {fileID: 1545512453}
   - {fileID: 966719868}
   m_Father: {fileID: 1532252250}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -11353,7 +11357,7 @@ RectTransform:
   - {fileID: 574417928}
   - {fileID: 1960486992}
   m_Father: {fileID: 1532252250}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -12065,7 +12069,7 @@ RectTransform:
   - {fileID: 1097365777}
   - {fileID: 1988917681}
   m_Father: {fileID: 1532252250}
-  m_RootOrder: 6
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -12939,13 +12943,13 @@ RectTransform:
   - {fileID: 1370403329}
   - {fileID: 1569308439}
   - {fileID: 8755789}
-  - {fileID: 1234941267}
-  - {fileID: 1453756896}
   - {fileID: 1293664575}
   - {fileID: 1126287501}
   - {fileID: 1558094965}
   - {fileID: 234214352}
+  - {fileID: 1234941267}
   - {fileID: 1247294686}
+  - {fileID: 1453756896}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13124,7 +13128,7 @@ RectTransform:
   - {fileID: 1187987242}
   - {fileID: 598445371}
   m_Father: {fileID: 1532252250}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
