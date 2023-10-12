@@ -144,7 +144,18 @@ public class MatchManager : MonoBehaviour
                         }
                     }
                 }
-                //places the accessories on the cat correctly 
+                if (currentLevel.GetTiles()[i].Slate.Is<CatPen>())
+                {
+                    for(int z = 0; z < GameBoard.CatPenLocation.Count; z++)
+                    {
+                        if(currentLevel.GetTiles()[i].Position == GameBoard.CatPenLocation[z].Position)
+                        {
+                            GameBoard.CatPenLocation[z].Object = temp;
+                            break;
+                        }
+                    }
+                }
+                    //places the accessories on the cat correctly 
                 if (currentLevel.GetTiles()[i].Slate.Is<Cat>())
                 {
                     for (int k = 0; k < GameManager.Instance._catInfoManager.Catlist.Count; k++)
@@ -744,8 +755,9 @@ public class MatchManager : MonoBehaviour
         {
             if (GameBoard.At(FinalDestination).Is<CatPen>())
             {
-                Debug.Log("we starting");
-                StartCoroutine(CatShuffle(ListPos));
+                StartCoroutine(CatCageShift(FinalDestination));
+                GameBoard.Cats[ListPos].Object.gameObject.SetActive(false);
+                GameBoard.Cats[ListPos] = null;
             }
             if (GameBoard.At(FinalDestination).name == "Cat Tube")
             {
@@ -799,15 +811,25 @@ public class MatchManager : MonoBehaviour
             }
         }
     }
-    public IEnumerator CatShuffle(int cat)
+    public IEnumerator CatCageShift(Vector2Int location)
     {
+        int Cage = 0;
         Debug.Log("we are in");
-        GameBoard.Cats[cat].Object.gameObject.transform.localPosition += new Vector3(.1f, 0, 1);
+        for(int i = 0; i < GameBoard.CatPenLocation.Count; i++)
+        {
+            if (location == GameBoard.CatPenLocation[i].Position)
+            {
+                Cage = i;
+                break;
+            }
+        }
+        GameBoard.CatPenLocation[Cage].Object.transform.localPosition += new Vector3(.1f, 0, 1);
         yield return new WaitForSeconds(.2f);
-        GameBoard.Cats[cat].Object.gameObject.transform.localPosition -= new Vector3(.2f, 0, 1);
-        yield return new WaitForSeconds(.25f);
-        GameBoard.Cats[cat].Object.gameObject.SetActive(false);
-        GameBoard.Cats[cat] = null;
+        GameBoard.CatPenLocation[Cage].Object.transform.localPosition -= new Vector3(.1f, 0, 1);
+        yield return new WaitForSeconds(.2f);
+        GameBoard.CatPenLocation[Cage].Object.transform.localPosition += new Vector3(.1f, 0, 1);
+        yield return new WaitForSeconds(.2f);
+        GameBoard.CatPenLocation[Cage].Object.transform.localPosition -= new Vector3(.1f, 0, 1);
     }
 
     /// <summary>
