@@ -22,7 +22,7 @@ MonoBehaviour:
   Unlocked: 1
   NewItemIntroduced: 0
   SpecialHelpTxt: 1
-  SpecialHelpLevelNum: -1
+  SpecialHelpLevelNum: 7
   BackgroundTile: {fileID: 11400000, guid: d756be87d23ee174f869fab071be06bf, type: 2}
   Tiles:
   - name: 
