@@ -123,7 +123,16 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(Name, LoadSceneMode.Single);
         yield return new WaitForEndOfFrame();
     }
-
+    public IEnumerator GotoLevelSecet()
+    {
+        StartCoroutine(GoingtoLevelSecet());
+        yield return new WaitForEndOfFrame();
+    }
+    public IEnumerator GoingtoLevelSecet()
+    {
+        yield return new WaitForSeconds(.1f);
+        GameObject.Find("Canvas").GetComponent<GoToLevelSelect>().SwitchToLevelSelect();
+    }
     /// <summary>
     /// Starts the level
     /// </summary>
@@ -195,11 +204,9 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
     public void Purchasemade()
     {
         ADsoff = true;
         _PlayerPrefsManager.SaveBool("Adsoff", true);
     }
-
 }

@@ -823,13 +823,17 @@ public class MatchManager : MonoBehaviour
                 break;
             }
         }
-        GameBoard.CatPenLocation[Cage].Object.transform.localPosition += new Vector3(.1f, 0, 1);
-        yield return new WaitForSeconds(.2f);
-        GameBoard.CatPenLocation[Cage].Object.transform.localPosition -= new Vector3(.1f, 0, 1);
-        yield return new WaitForSeconds(.2f);
-        GameBoard.CatPenLocation[Cage].Object.transform.localPosition += new Vector3(.1f, 0, 1);
-        yield return new WaitForSeconds(.2f);
-        GameBoard.CatPenLocation[Cage].Object.transform.localPosition -= new Vector3(.1f, 0, 1);
+        //GameBoard.CatPenLocation[Cage].Object.transform.localPosition += new Vector3(.05f, 0, 1);
+        GameBoard.CatPenLocation[Cage].Object.transform.Rotate(0.0f, 0.0f, 20.0f, Space.Self);
+        yield return new WaitForSeconds(.15f);
+        //GameBoard.CatPenLocation[Cage].Object.transform.localPosition -= new Vector3(.05f, 0, 1);
+        GameBoard.CatPenLocation[Cage].Object.transform.Rotate(0.0f, 0.0f, -20.0f, Space.Self);
+        yield return new WaitForSeconds(.15f);
+        //GameBoard.CatPenLocation[Cage].Object.transform.localPosition += new Vector3(.05f, 0, 1);
+        GameBoard.CatPenLocation[Cage].Object.transform.Rotate(0.0f, 0.0f, -20.0f, Space.Self);
+        yield return new WaitForSeconds(.15f);
+        //GameBoard.CatPenLocation[Cage].Object.transform.localPosition -= new Vector3(.05f, 0, 1);
+        GameBoard.CatPenLocation[Cage].Object.transform.Rotate(0.0f, 0.0f, 20.0f, Space.Self);
     }
 
     /// <summary>
