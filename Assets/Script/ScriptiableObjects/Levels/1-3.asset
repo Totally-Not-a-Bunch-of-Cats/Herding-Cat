@@ -15,9 +15,9 @@ MonoBehaviour:
   Dimensions: {x: 5, y: 5}
   TargetRounds: 3
   TargetItems: 8
-  NewThingIntroduced: 1
-  Category: 1
-  TileName: Deleting
+  NewThingIntroduced: 0
+  Category: 0
+  TileName: 
   StarsEarned: 3
   Unlocked: 1
   NewItemIntroduced: 0

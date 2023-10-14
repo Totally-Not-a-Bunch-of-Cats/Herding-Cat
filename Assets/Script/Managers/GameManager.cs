@@ -123,15 +123,15 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(Name, LoadSceneMode.Single);
         yield return new WaitForEndOfFrame();
     }
-    public IEnumerator GotoLevelSecet()
+    public IEnumerator GotoLevelSecet(string name)
     {
-        StartCoroutine(GoingtoLevelSecet());
+        StartCoroutine(GoingtoLevelSecet(name));
         yield return new WaitForEndOfFrame();
     }
-    public IEnumerator GoingtoLevelSecet()
+    public IEnumerator GoingtoLevelSecet(string name)
     {
         yield return new WaitForSeconds(.1f);
-        GameObject.Find("Canvas").GetComponent<GoToLevelSelect>().SwitchToLevelSelect();
+        GameObject.Find("Canvas").GetComponent<GoToLevelSelect>().SwitchToLevelSelect(name);
     }
     /// <summary>
     /// Starts the level

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GoToLevelSelect : MonoBehaviour
 {
-    public void SwitchToLevelSelect()
+    public void SwitchToLevelSelect(string name)
     {
         for (int i = 0; i < this.transform.childCount; i++)
         {
@@ -12,7 +12,7 @@ public class GoToLevelSelect : MonoBehaviour
             {
                 this.transform.GetChild(i).gameObject.SetActive(false);
             }
-            if (this.transform.GetChild(i).name == "Level Select")
+            if (this.transform.GetChild(i).name == name)
             {
                 this.transform.GetChild(i).gameObject.SetActive(true);
             }

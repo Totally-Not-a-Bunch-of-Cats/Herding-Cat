@@ -16,8 +16,8 @@ MonoBehaviour:
   TargetRounds: 2
   TargetItems: 3
   NewThingIntroduced: 0
-  Category: 1
-  TileName: Replacing
+  Category: 0
+  TileName: 
   StarsEarned: 3
   Unlocked: 1
   NewItemIntroduced: 0
