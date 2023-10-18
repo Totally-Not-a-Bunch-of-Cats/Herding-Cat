@@ -5,6 +5,7 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour
 {
     public AudioSource AudioPlayer;
+    public AudioClip MainMenuTrack;
     public List<AudioClip> AudioTracks;
     public List<AudioClip> AudioEffect;
 

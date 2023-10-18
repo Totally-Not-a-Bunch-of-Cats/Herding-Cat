@@ -18,8 +18,8 @@ MonoBehaviour:
   NewThingIntroduced: 0
   Category: 0
   TileName: 
-  StarsEarned: 3
-  Unlocked: 1
+  StarsEarned: 0
+  Unlocked: 0
   NewItemIntroduced: 0
   SpecialHelpTxt: 1
   SpecialHelpLevelNum: 5
@@ -37,7 +37,7 @@ MonoBehaviour:
     Redirection: {x: 0, y: 0}
   - name: 
     Position: {x: 2, y: 0}
-    Slate: {fileID: 11400000, guid: b1b6c6f21d028124bbc63e252f176c41, type: 2}
+    Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
   - name: 
@@ -77,7 +77,7 @@ MonoBehaviour:
     Redirection: {x: 0, y: 0}
   - name: 
     Position: {x: 3, y: 2}
-    Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
+    Slate: {fileID: 11400000, guid: 1874b8b6a361f564880fa4a3e13e85c5, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
   PossibleItems:

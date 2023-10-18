@@ -130,73 +130,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 918842535, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: Accessories.Array.data[0].MaxoffsetforExternalCatButton.x
-      value: 79
-      objectReference: {fileID: 0}
-    - target: {fileID: 918842535, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: Accessories.Array.data[0].MaxoffsetforExternalCatButton.y
-      value: -3
-      objectReference: {fileID: 0}
-    - target: {fileID: 918842535, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: Accessories.Array.data[0].MinoffsetforExternalCatButton.x
-      value: 19
-      objectReference: {fileID: 0}
-    - target: {fileID: 918842535, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: Accessories.Array.data[0].MinoffsetforExternalCatButton.y
-      value: 111
-      objectReference: {fileID: 0}
-    - target: {fileID: 918842535, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: Accessories.Array.data[1].MaxoffsetforExternalCatButton.x
-      value: 67
-      objectReference: {fileID: 0}
-    - target: {fileID: 918842535, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: Accessories.Array.data[1].MaxoffsetforExternalCatButton.y
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 918842535, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: Accessories.Array.data[1].MinoffsetforExternalCatButton.x
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 918842535, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: Accessories.Array.data[1].MinoffsetforExternalCatButton.y
-      value: 80.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 918842535, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: Accessories.Array.data[2].MaxoffsetforExternalCatButton.x
-      value: 79
-      objectReference: {fileID: 0}
-    - target: {fileID: 918842535, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: Accessories.Array.data[2].MaxoffsetforExternalCatButton.y
-      value: -34
-      objectReference: {fileID: 0}
-    - target: {fileID: 918842535, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: Accessories.Array.data[2].MinoffsetforExternalCatButton.x
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 918842535, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: Accessories.Array.data[2].MinoffsetforExternalCatButton.y
-      value: 113
-      objectReference: {fileID: 0}
-    - target: {fileID: 918842535, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: Accessories.Array.data[3].MaxoffsetforExternalCatButton.x
-      value: 69
-      objectReference: {fileID: 0}
-    - target: {fileID: 918842535, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: Accessories.Array.data[3].MaxoffsetforExternalCatButton.y
-      value: -4.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 918842535, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: Accessories.Array.data[3].MinoffsetforExternalCatButton.x
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 918842535, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: Accessories.Array.data[3].MinoffsetforExternalCatButton.y
-      value: 111
+    - target: {fileID: 590294061082041606, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
+      propertyPath: ADsoff
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 590294061082041606, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
-      propertyPath: PlayerPrefsTrue
-      value: 0
+      propertyPath: ClearStartHelpScreen
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 590294061082041607, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
       propertyPath: m_RootOrder

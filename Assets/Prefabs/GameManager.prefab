@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 918842533}
   - component: {fileID: 918842534}
   - component: {fileID: 918842535}
+  - component: {fileID: 918842532}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -65,6 +66,7 @@ MonoBehaviour:
   ClearStartHelpScreen: 0
   GamesTillRewardAd: 4
   GamesTillMandatoryAd: 10
+  ADsoff: 0
   CatSpeed: 1
   ItemIndicators: 0
   sfxVolume: 0
@@ -213,8 +215,8 @@ MonoBehaviour:
     CatPrefabScale: {x: 0.21, y: 0.21, z: 1}
     MaxoffsetforCatButton: {x: 139.85, y: 132.2}
     MinoffsetforCatButton: {x: 63.7, y: 200}
-    MaxoffsetforExternalCatButton: {x: 71, y: 3}
-    MinoffsetforExternalCatButton: {x: 26, y: 99.5}
+    MaxoffsetforExternalCatButton: {x: 79, y: -3}
+    MinoffsetforExternalCatButton: {x: 19, y: 111}
   - Name: Headset
     Acessory: {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
     Cost: 5
@@ -223,8 +225,8 @@ MonoBehaviour:
     CatPrefabScale: {x: 0.21, y: 0.185, z: 1}
     MaxoffsetforCatButton: {x: 120, y: 141}
     MinoffsetforCatButton: {x: 46, y: 157}
-    MaxoffsetforExternalCatButton: {x: 63.5, y: 17.5}
-    MinoffsetforExternalCatButton: {x: 20, y: 76}
+    MaxoffsetforExternalCatButton: {x: 67, y: 9}
+    MinoffsetforExternalCatButton: {x: 7, y: 80.5}
   - Name: Tall Hat
     Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
     Cost: 5
@@ -233,8 +235,8 @@ MonoBehaviour:
     CatPrefabScale: {x: 0.21, y: 0.5, z: 1}
     MaxoffsetforCatButton: {x: 136.9, y: 65.3}
     MinoffsetforCatButton: {x: 62.1, y: 198.7}
-    MaxoffsetforExternalCatButton: {x: 71.5, y: -20}
-    MinoffsetforExternalCatButton: {x: 25.5, y: 99}
+    MaxoffsetforExternalCatButton: {x: 79, y: -34}
+    MinoffsetforExternalCatButton: {x: 17, y: 113}
   - Name: Wide Hat
     Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
     Cost: 5
@@ -243,8 +245,8 @@ MonoBehaviour:
     CatPrefabScale: {x: 0.285, y: 0.22, z: 1}
     MaxoffsetforCatButton: {x: 113.7, y: 124.7}
     MinoffsetforCatButton: {x: 39.3, y: 201.3}
-    MaxoffsetforExternalCatButton: {x: 65, y: 7.5}
-    MinoffsetforExternalCatButton: {x: 18.5, y: 99}
+    MaxoffsetforExternalCatButton: {x: 69, y: -4.5}
+    MinoffsetforExternalCatButton: {x: 6, y: 111}
   Catlist:
   - {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
   - {fileID: 11400000, guid: b1b6c6f21d028124bbc63e252f176c41, type: 2}
@@ -252,10 +254,31 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bc652e92a1286f049be1245a488222d4, type: 2}
   - {fileID: 11400000, guid: e555ba895d5a24446bccda1cb968e5d7, type: 2}
   SelectCat: {fileID: 11400000, guid: b1b6c6f21d028124bbc63e252f176c41, type: 2}
-  CurrentAnim: {fileID: 9100000, guid: 3b3859dba476d7143977ce83cfa36e01, type: 2}
-  CurrentSkin: {fileID: -251871438, guid: 3589b1d7c5d65374093d56104ed629bc, type: 3}
-  CurrentAccessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
+  CurrentAnim: {fileID: 9100000, guid: 0b62742f5e63a1c42bb417f48537734c, type: 2}
+  CurrentSkin: {fileID: 1159634615, guid: cb60cf56fc227a14abd6491736b7b318, type: 3}
+  CurrentAccessory: {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
   CurrentName: Normal Hat
   CurrentSelected: 1
-  CurrentSkinIndex: 0
-  CurrentAccessoryIndex: -1
+  CurrentSkinIndex: 1
+  CurrentAccessoryIndex: 1
+--- !u!114 &918842532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590294061082041624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee2f090df1558f945b7901b8c321dbf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AudioPlayer: {fileID: 0}
+  MainMenuTrack: {fileID: 8300000, guid: 3b62462537581e54f81daa7afaab5cfa, type: 3}
+  AudioTracks:
+  - {fileID: 8300000, guid: 8210552378dcf5f4ca24be2bf74f61a8, type: 3}
+  - {fileID: 8300000, guid: a785267b91feb6b4da175d43c4c3f9fb, type: 3}
+  - {fileID: 8300000, guid: db73828ab95a53f4e888d6a11769f2bd, type: 3}
+  - {fileID: 8300000, guid: 056cbe616c033974e8533109a8314102, type: 3}
+  AudioEffect:
+  - {fileID: 8300000, guid: 7d7ad6a831001834aa32a0dad156b033, type: 3}

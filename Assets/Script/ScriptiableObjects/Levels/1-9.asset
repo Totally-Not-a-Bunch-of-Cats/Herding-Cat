@@ -19,8 +19,10 @@ MonoBehaviour:
   Category: 1
   TileName: Rewind
   StarsEarned: 0
-  Unlocked: 1
+  Unlocked: 0
   NewItemIntroduced: 0
+  SpecialHelpTxt: 0
+  SpecialHelpLevelNum: -1
   BackgroundTile: {fileID: 11400000, guid: d756be87d23ee174f869fab071be06bf, type: 2}
   Tiles:
   - name: 
@@ -70,7 +72,7 @@ MonoBehaviour:
     Redirection: {x: 0, y: 0}
   - name: 
     Position: {x: 1, y: 1}
-    Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
+    Slate: {fileID: 11400000, guid: 1874b8b6a361f564880fa4a3e13e85c5, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
   - name: 
