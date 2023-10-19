@@ -18,7 +18,7 @@ MonoBehaviour:
   NewThingIntroduced: 1
   Category: 2
   TileName: Toy
-  StarsEarned: 3
+  StarsEarned: 0
   Unlocked: 1
   NewItemIntroduced: 1
   SpecialHelpTxt: 1

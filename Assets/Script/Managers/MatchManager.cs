@@ -235,6 +235,11 @@ public class MatchManager : MonoBehaviour
             {
                 HelpIndicator = Instantiate(Indicator, new Vector3(0, 1, 0), Quaternion.identity, transform);
             }
+            //prevent player spam
+            if (CurrentLevel.NewThingIntroduced == true && GameManager.Instance.ClearStartHelpScreen == true)
+            {
+                CurrentLevel.NewThingIntroduced = false;
+            }
             return true;
         }
         return false;
@@ -442,11 +447,6 @@ public class MatchManager : MonoBehaviour
         {
             ActiveMatch = false;
             CurrentLevel.CalculateStars(RoundsPlayed, ItemsUsed, GameManager.Instance.UpdateLevelData);
-            //prevent player spam
-            if (CurrentLevel.NewThingIntroduced == true && GameManager.Instance.ClearStartHelpScreen == true)
-            {
-                CurrentLevel.NewThingIntroduced = false;
-            }
             //Finds next level name
             string[] LevelNameParts = CurrentLevel.name.Split('-');
             string NextLevelName = LevelNameParts[0] + "-";
@@ -880,8 +880,11 @@ public class MatchManager : MonoBehaviour
         yield return new WaitForSeconds(.15f);
         if(GameManager.Instance.PlayerPrefsTrue)
         {
-            GameManager.Instance._PlayerPrefsManager.SaveInt(CurrentLevel.name, CurrentLevel.StarsEarned);
-            GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", CurrentLevel.StarsEarned + GameManager.Instance.StarCount);
+            if(PlayerPrefs.GetInt(CurrentLevel.name) == 0)
+            {
+                GameManager.Instance._PlayerPrefsManager.SaveInt(CurrentLevel.name, CurrentLevel.StarsEarned);
+                GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", CurrentLevel.StarsEarned + GameManager.Instance.StarCount);
+            }
         }
         GameWonUI.SetActive(true);
     }

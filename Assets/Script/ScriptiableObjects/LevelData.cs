@@ -69,6 +69,12 @@ public class LevelData: ScriptableObject
         return TargetRounds;
     }
 
+    public void ResetVids()
+    {
+        NewThingIntroduced = true;
+        Debug.Log("mop" + NewThingIntroduced + name);
+    }
+
     /// <summary>
     /// Gets the target number of items to get all cats in the pen
     /// </summary>
@@ -148,6 +154,14 @@ public class LevelData: ScriptableObject
         }
         // Checking/Adding star for round count
         if (TargetRounds >= roundCount)
+        {
+            NewStarsEarned++;
+        }
+        if (StarsEarned > NewStarsEarned)
+        {
+            AdjustStarCount = false;
+        }
+        if (GameManager.Instance.PurchasedStarBoost == true)
         {
             NewStarsEarned++;
         }

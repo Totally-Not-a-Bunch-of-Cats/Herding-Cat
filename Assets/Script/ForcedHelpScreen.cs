@@ -38,7 +38,14 @@ public class ForcedHelpScreen : MonoBehaviour
                 break;
             }
         }
-        StartCoroutine(CountDown());
+        if(GameManager.Instance.SkipForcedVids == true)
+        {
+            EnableExitButton();
+        }
+        else
+        {
+            StartCoroutine(CountDown());
+        }
         
     }
 

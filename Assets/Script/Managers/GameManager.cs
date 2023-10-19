@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
     public int LevelPosition = 0;
     //public bool ActivateItemIndicators = false;
     public bool ClearStartHelpScreen = false;
+    public bool PurchasedStarBoost = false;
+    public bool SkipForcedVids = false;
 
     [Header("Ad Varables")]
     public int GamesTillRewardAd = 4;
