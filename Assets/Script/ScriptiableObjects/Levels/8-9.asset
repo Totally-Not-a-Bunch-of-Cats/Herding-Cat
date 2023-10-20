@@ -18,9 +18,11 @@ MonoBehaviour:
   NewThingIntroduced: 0
   Category: 0
   TileName: 
-  StarsEarned: 0
-  Unlocked: 0
+  StarsEarned: 2
+  Unlocked: 1
   NewItemIntroduced: 0
+  SpecialHelpTxt: 0
+  SpecialHelpLevelNum: -1
   BackgroundTile: {fileID: 11400000, guid: d756be87d23ee174f869fab071be06bf, type: 2}
   Tiles:
   - name: Alfred (4,1)
