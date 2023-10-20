@@ -9555,7 +9555,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.49230957, y: -21.315989}
+  m_AnchoredPosition: {x: -0.4921875, y: -21.31604}
   m_SizeDelta: {x: -170.6614, y: -72.888}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1126287502
@@ -10652,7 +10652,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -31.628801, y: -62.799988}
+  m_AnchoredPosition: {x: -31.628801, y: -62.80005}
   m_SizeDelta: {x: 780.7424, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1247294687
@@ -11978,7 +11978,7 @@ MonoBehaviour:
   HelpIndicator: {fileID: 0}
   HelpIndicator2: {fileID: 0}
   HelpIndicator3: {fileID: 0}
-  RewardAD: {fileID: 0}
+  RewardAD: {fileID: 705291061}
   ForcedAD: {fileID: 1988917680}
   ActiveCats: 0
   Animator: {fileID: 0}
