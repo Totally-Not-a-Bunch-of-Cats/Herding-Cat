@@ -469,7 +469,7 @@ public class MatchManager : MonoBehaviour
                 {
                     Debug.LogError($"Unable to parse '{LevelNameParts[1]}'");
                 }
-                NextLevelName = NextLevelName + "-" + LevelNameParts[1];
+                NextLevelName = NextLevelName + "-1";
                 if (!GameManager.Instance.Levels.Exists(level => level.name == NextLevelName))
                 {
                     Debug.LogWarning("No Next Level");
@@ -481,11 +481,39 @@ public class MatchManager : MonoBehaviour
             if (GameManager.Instance.UpdateLevelData == true)
             {
                 // Updates level data info for current/next level
-                if(GameManager.Instance.PlayerPrefsTrue)
+                if (GameManager.Instance.PlayerPrefsTrue)
                 {
                     GameManager.Instance._PlayerPrefsManager.SaveString("FurthestLevel", NextLevelName);
                 }
                 GameManager.Instance.Levels.Find(level => level.name == NextLevelName).SetUnlocked(true);
+                //unlock levels equal to the number of stars earned
+                if (GameManager.Instance.Levels.Exists(level => level.name == NextLevelName))
+                {
+                    for(int j =1; j < CurrentLevel.StarsEarned; j++)
+                    {
+                        string[] additionalLevelName = NextLevelName.Split('-');
+                        NextLevelName = "";
+                        if (additionalLevelName[1] != "10")
+                        {
+                            NextLevelName = additionalLevelName[0] + "-";
+                            NextLevelName += int.Parse(additionalLevelName[1]) + 1;
+                        }
+                        else
+                        {
+                            NextLevelName += int.Parse(additionalLevelName[0]) + 1;
+                            NextLevelName = NextLevelName + "-1";
+                        }
+                        Debug.Log(NextLevelName);
+                        if (GameManager.Instance.Levels.Exists(level => level.name == NextLevelName))
+                        {
+                            GameManager.Instance.Levels.Find(level => level.name == NextLevelName).SetUnlocked(true);
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }                
             }
             else
             {
@@ -585,7 +613,6 @@ public class MatchManager : MonoBehaviour
                     Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
                     Animator.SetBool("Idle", false);
                     Animator.SetBool("Walk", true);
-                    Debug.Log(Animator);
                     GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 180, 0, 0);
                     StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
                 }
@@ -598,7 +625,6 @@ public class MatchManager : MonoBehaviour
                 {
                     Animator.SetBool("Idle", false);
                     Animator.SetBool("Walk", true);
-                    Debug.Log(Animator);
                     GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 0, 0, -90);
                     StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
                 }
@@ -611,7 +637,6 @@ public class MatchManager : MonoBehaviour
                     Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
                     Animator.SetBool("Idle", false);
                     Animator.SetBool("Walk", true);
-                    Debug.Log(Animator);
                     GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 0, 0, 0);
                     StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
                 }
@@ -625,7 +650,6 @@ public class MatchManager : MonoBehaviour
                 {
                     Animator.SetBool("Idle", false);
                     Animator.SetBool("Walk", true);
-                    Debug.Log(Animator);
                     GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 0, 0, 90);
                     StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
                 }
@@ -814,7 +838,6 @@ public class MatchManager : MonoBehaviour
     public IEnumerator CatCageShift(Vector2Int location)
     {
         int Cage = 0;
-        Debug.Log("we are in");
         for(int i = 0; i < GameBoard.CatPenLocation.Count; i++)
         {
             if (location == GameBoard.CatPenLocation[i].Position)
