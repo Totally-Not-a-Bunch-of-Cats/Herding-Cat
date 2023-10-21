@@ -194,9 +194,10 @@ public class MatchManager : MonoBehaviour
             }
 
             MarkTubes(TubePairs);
+            GameManager.Instance.StartMatchMusic();
 
             //places items 
-            for(int i = 0; i < currentLevel.GetPossibleItems().Length; i++)
+            for (int i = 0; i < currentLevel.GetPossibleItems().Length; i++)
             {
                 //Screen.height
                 int buffer = 85;

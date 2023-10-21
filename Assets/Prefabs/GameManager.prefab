@@ -60,13 +60,16 @@ MonoBehaviour:
   _ReWindManager: {fileID: 8661864018276491431}
   _PlayerPrefsManager: {fileID: 918842534}
   _catInfoManager: {fileID: 918842535}
+  _musicManager: {fileID: 918842532}
   Levels: []
   GamelevelList: {fileID: 11400000, guid: c8a95196aa4f1044ebf30b9017149d3b, type: 2}
   LevelPosition: 0
-  ClearStartHelpScreen: 0
+  ClearStartHelpScreen: 1
+  PurchasedStarBoost: 0
+  SkipForcedVids: 0
   GamesTillRewardAd: 4
   GamesTillMandatoryAd: 10
-  ADsoff: 0
+  ADsoff: 1
   CatSpeed: 1
   ItemIndicators: 0
   sfxVolume: 0
@@ -275,6 +278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioPlayer: {fileID: 0}
   MainMenuTrack: {fileID: 8300000, guid: 3b62462537581e54f81daa7afaab5cfa, type: 3}
+  CurrentLevelTrack: 0
   AudioTracks:
   - {fileID: 8300000, guid: 8210552378dcf5f4ca24be2bf74f61a8, type: 3}
   - {fileID: 8300000, guid: a785267b91feb6b4da175d43c4c3f9fb, type: 3}

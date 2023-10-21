@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public ReWindManager _ReWindManager;
     public PlayerPrefsManager _PlayerPrefsManager;
     public CatInfoManager _catInfoManager;
+    public MusicManager _musicManager;
 
     [Header("Misc")]
     //list of all level data
@@ -105,6 +106,7 @@ public class GameManager : MonoBehaviour
             _PlayerPrefsManager.RemoveHelpScreens();
         }
         StartCoroutine(SwitchScene("Main Menu"));
+        StartCoroutine(StartMenuMusic());
     }
 
     /// <summary>
@@ -150,6 +152,18 @@ public class GameManager : MonoBehaviour
     public void ButtonOfSelectedNum(int buttonPressed)
     {
         Instance.LevelPosition = buttonPressed;
+    }
+
+    public IEnumerator StartMenuMusic()
+    {
+        yield return new WaitForSeconds(0);
+        Instance._musicManager.PlayMenuSong();
+    }
+
+    public void StartMatchMusic()
+    {
+       Instance._musicManager.RandomTrack();
+       Instance._musicManager.PlayTrack();
     }
 
     /// <summary>
