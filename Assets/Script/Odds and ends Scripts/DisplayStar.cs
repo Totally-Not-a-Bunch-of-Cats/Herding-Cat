@@ -9,4 +9,8 @@ public class DisplayStar : MonoBehaviour
     {
         Stars.text = "Stars: " + GameManager.Instance.StarCount;
     }
+    private void LateUpdate()
+    {
+        Stars.text = "Stars: " + GameManager.Instance.StarCount;
+    }
 }

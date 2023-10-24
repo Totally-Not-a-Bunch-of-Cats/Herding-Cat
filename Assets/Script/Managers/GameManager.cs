@@ -165,6 +165,20 @@ public class GameManager : MonoBehaviour
        Instance._musicManager.RandomTrack();
        Instance._musicManager.PlayTrack();
     }
+    /// <summary>
+    /// gives the player their bonus stars for levels already completed, when they purchase the +1 stars pack
+    /// </summary>
+    public void GrantBonusStars()
+    {
+        for(int i = 0; i < Levels.Count; i++)
+        {
+            if(Levels[i].StarsEarned < 1)
+            {
+                Levels[i].StarsEarned += 1;
+                Instance._PlayerPrefsManager.SaveInt(Levels[i].name, Levels[i].StarsEarned);
+            }
+        }
+    }
 
     /// <summary>
     /// starts the match of level 1-1, also checks if the level is already loaded,

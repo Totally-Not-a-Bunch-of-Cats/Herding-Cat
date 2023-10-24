@@ -9,7 +9,21 @@ public class CosmeticUnlockSaver : MonoBehaviour
     int SelectedSkin;
     public string SkinName;
     public GameObject PurchaseFailure;
+    [SerializeField] GameObject PurchaseButton;
 
+    private void OnEnable()
+    {
+        for (int i = 0; i < GameManager.Instance._catInfoManager.Accessories.Count; i++)
+        {
+            if (GameManager.Instance._catInfoManager.Accessories[i].Name == AcessoryName 
+                && GameManager.Instance._catInfoManager.Accessories[i].Unlocked == true)
+            {
+                PurchaseButton.SetActive(false);
+                break;
+            }
+        }
+    }
+    // && GameManager.Instance._catInfoManager.Accessories[i].Unlocked == true
     public void UnlockAccessory()
     {
         if (GameManager.Instance.PlayerPrefsTrue)
@@ -22,18 +36,21 @@ public class CosmeticUnlockSaver : MonoBehaviour
                     break;
                 }
             }
-            if (GameManager.Instance.StarCount >= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].Cost)
+            if(GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].Unlocked == false)
             {
-                GameManager.Instance._PlayerPrefsManager.SaveBool(AcessoryName, true);
-                GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].Unlocked = true;
-                GameManager.Instance.StarCount -= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].Cost;
-                GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", GameManager.Instance.StarCount);
-            }
-            else
-            {
-                //make error screen for not enough stars
-                Debug.Log("oops all tears");
-                PurchaseFailure.SetActive(true);
+                if (GameManager.Instance.StarCount >= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].Cost)
+                {
+                    GameManager.Instance._PlayerPrefsManager.SaveBool(AcessoryName, true);
+                    GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].Unlocked = true;
+                    GameManager.Instance.StarCount -= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].Cost;
+                    GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", GameManager.Instance.StarCount);
+                }
+                else
+                {
+                    //make error screen for not enough stars
+                    Debug.Log("oops all tears");
+                    PurchaseFailure.SetActive(true);
+                }
             }
         }
         else
@@ -70,6 +87,14 @@ public class CosmeticUnlockSaver : MonoBehaviour
         else
         {
             Debug.Log("playerpref false");
+        }
+    }
+
+    public void DisableButton(GameObject button)
+    {
+        if(GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].Unlocked == true)
+        {
+            button.SetActive(false);
         }
     }
 }

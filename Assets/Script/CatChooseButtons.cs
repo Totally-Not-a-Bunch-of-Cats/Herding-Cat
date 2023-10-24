@@ -34,9 +34,11 @@ public class CatChooseButtons : MonoBehaviour
         transform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = GameManager.Instance._catInfoManager.Catlist[childNum].AnimationController;
         transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = GameManager.Instance._catInfoManager.Catlist[childNum].Acessory1;
         GameManager.Instance._catInfoManager.CurrentName = GameManager.Instance._catInfoManager.Catlist[childNum].nameofAcessory1;
+        Debug.Log(transform.GetChild(0).GetChild(0));
         transform.GetChild(0).GetChild(0).GetComponent<RectTransform>().offsetMax = -GameManager.Instance._catInfoManager.Accessories[GameManager.Instance._catInfoManager.GetAccessoryIndex()].MaxoffsetforExternalCatButton;
         transform.GetChild(0).GetChild(0).GetComponent<RectTransform>().offsetMin = GameManager.Instance._catInfoManager.Accessories[GameManager.Instance._catInfoManager.GetAccessoryIndex()].MinoffsetforExternalCatButton;
         // Sets the text of the button to the respective level
         transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Cat: " + (childNum + 1);
+        Debug.Log(childNum);
     }
 }

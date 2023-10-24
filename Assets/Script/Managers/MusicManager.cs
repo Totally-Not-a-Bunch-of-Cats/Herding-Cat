@@ -11,7 +11,7 @@ public class MusicManager : MonoBehaviour
     public List<AudioClip> AudioEffect;
 
 
-    public void updateVolume()
+    public void UpdateVolume()
     {
         AudioPlayer.GetComponent<AudioSource>().volume = GameManager.Instance.musicVolume;
     }
@@ -25,7 +25,7 @@ public class MusicManager : MonoBehaviour
     {
         AudioPlayer = GameObject.Find("MainCamera/AudioSource");
         AudioPlayer.GetComponent<AudioSource>().clip = AudioTracks[CurrentLevelTrack];
-        updateVolume();
+        UpdateVolume();
         AudioPlayer.GetComponent<AudioSource>().Play();
     }
 
@@ -33,7 +33,7 @@ public class MusicManager : MonoBehaviour
     {
         AudioPlayer = GameObject.Find("MainCamera/AudioSource");
         AudioPlayer.GetComponent<AudioSource>().clip = MainMenuTrack;
-        updateVolume();
+        UpdateVolume();
         AudioPlayer.GetComponent<AudioSource>().Play();
     }
 

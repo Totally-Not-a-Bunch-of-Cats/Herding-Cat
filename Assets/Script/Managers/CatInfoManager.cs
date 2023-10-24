@@ -13,6 +13,10 @@ public class CatInfoManager : MonoBehaviour
     [SerializeField] public List<AcessoryInfo> Accessories = new List<AcessoryInfo>();
     // Cat Prefabs
     [SerializeField] public List<Cat> Catlist = new List<Cat>();
+    // list of warnings for the warning
+    [SerializeField] public List<string> WarningList = new List<string>();
+    //List of colors
+    [SerializeField] public List<AcessoryInfo> AccessoryColors = new List<AcessoryInfo>();
     // Cat Prefab Selected
     public Cat SelectCat;
     public RuntimeAnimatorController CurrentAnim;
@@ -22,6 +26,7 @@ public class CatInfoManager : MonoBehaviour
     public int CurrentSelected;
     [SerializeField] int CurrentSkinIndex;
     public int CurrentAccessoryIndex;
+    public GameObject Warning;
     // Opens the Customize Screen
     public void GoToCustomize(GameObject Reference)
     {
@@ -42,7 +47,6 @@ public class CatInfoManager : MonoBehaviour
         CurrentSkinIndex = GetSkinIndex();
     }
 
-
     int GetSkinIndex()
     {
         for (int i = 0; i < Cats.Count; i++)
@@ -60,6 +64,18 @@ public class CatInfoManager : MonoBehaviour
         for (int i = 0; i < Accessories.Count; i++)
         {
             if (Accessories[i].Name == CurrentName)
+            {
+                return i;
+            }
+        }
+        return -10;
+    }
+    //finish me
+    int GetColorIndex()
+    {
+        for (int i = 0; i < Cats.Count; i++)
+        {
+            if (Cats[i].Skin == CurrentSkin)
             {
                 return i;
             }
@@ -88,6 +104,7 @@ public class CatInfoManager : MonoBehaviour
         {
             CurrentSkinIndex = 0;
         }
+
         // Setting the visual in the customization to fit the new skin, as well as adjusting the scriptable object to the new skin
         CurrentAnim = Cats[CurrentSkinIndex].CatAnim;
         Catlist[CurrentSelected].AnimationController = CurrentAnim;
@@ -127,6 +144,12 @@ public class CatInfoManager : MonoBehaviour
         {
             CurrentAccessoryIndex = 0;
         }
+        //actives the warning if you dont own the accessory
+        //if (Accessories[CurrentAccessoryIndex].Unlocked == false)
+        //{
+        //    Warning.SetActive(true);
+        //    Warning.GetComponentInChildren<TMPro.TMP_Text>().text = WarningList[0];
+        //}
         // Setting the visual in the customization to fit the new accessory, as well as adjusting the scriptable object to the new accessory
         CurrentAccessory = Accessories[CurrentAccessoryIndex].Acessory;
         Transform ReferenceChild = Reference.transform.GetChild(1).GetChild(1).GetChild(1);
@@ -160,5 +183,13 @@ public class CatInfoManager : MonoBehaviour
         Catlist[CurrentSelected].Acessory1 = CurrentAccessory;
         Catlist[CurrentSelected].nameofAcessory1 = Accessories[CurrentAccessoryIndex].Name;
         Catlist[CurrentSelected].Acessory1ListNum = CurrentAccessoryIndex;
+    }
+    public void NextColor(GameObject Reference)
+    {
+
+    }
+    public void PreviousColor(GameObject Reference)
+    {
+
     }
 }
