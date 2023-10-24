@@ -145,11 +145,13 @@ public class CatInfoManager : MonoBehaviour
             CurrentAccessoryIndex = 0;
         }
         //actives the warning if you dont own the accessory
-        //if (Accessories[CurrentAccessoryIndex].Unlocked == false)
-        //{
-        //    Warning.SetActive(true);
-        //    Warning.GetComponentInChildren<TMPro.TMP_Text>().text = WarningList[0];
-        //}
+        if (Accessories[CurrentAccessoryIndex].Unlocked == false)
+        {
+            Warning.GetComponentInChildren<TMPro.TMP_Text>().text = WarningList[0];
+            Debug.Log(Warning.GetComponent<Image>().color);
+            Warning.GetComponent<Image>().color = new Color(0,0,1,1);
+            Debug.Log(Warning.GetComponent<Image>().color);
+        }
         // Setting the visual in the customization to fit the new accessory, as well as adjusting the scriptable object to the new accessory
         CurrentAccessory = Accessories[CurrentAccessoryIndex].Acessory;
         Transform ReferenceChild = Reference.transform.GetChild(1).GetChild(1).GetChild(1);
@@ -171,6 +173,12 @@ public class CatInfoManager : MonoBehaviour
         if(CurrentAccessoryIndex < 0)
         {
             CurrentAccessoryIndex = Accessories.Count - 1;
+        }
+        //actives the warning if you dont own the accessory
+        if (Accessories[CurrentAccessoryIndex].Unlocked == false)
+        {
+            Warning.SetActive(true);
+            Warning.GetComponentInChildren<TMPro.TMP_Text>().text = WarningList[0];
         }
         // Setting the visual in the customization to fit the new accessory, as well as adjusting the scriptable object to the new accessory
         CurrentAccessory = Accessories[CurrentAccessoryIndex].Acessory;
