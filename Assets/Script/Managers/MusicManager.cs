@@ -9,11 +9,13 @@ public class MusicManager : MonoBehaviour
     public int CurrentLevelTrack;
     public List<AudioClip> AudioTracks;
     public List<AudioClip> AudioEffect;
+    float AudioLevel;
 
 
-    public void UpdateVolume()
+    public void GetAudioLevel()
     {
-        AudioPlayer.GetComponent<AudioSource>().volume = GameManager.Instance.musicVolume;
+        AudioLevel = GameManager.Instance.musicVolume;
+        //AudioPlayer.GetComponent<AudioSource>().volume = GameManager.Instance.musicVolume;
     }
 
     public void RandomTrack()
@@ -25,16 +27,18 @@ public class MusicManager : MonoBehaviour
     {
         AudioPlayer = GameObject.Find("MainCamera/AudioSource");
         AudioPlayer.GetComponent<AudioSource>().clip = AudioTracks[CurrentLevelTrack];
-        UpdateVolume();
+        GetAudioLevel();
         AudioPlayer.GetComponent<AudioSource>().Play();
+        StartCoroutine(FadeIn());
     }
 
     public void PlayMenuSong()
     {
         AudioPlayer = GameObject.Find("MainCamera/AudioSource");
         AudioPlayer.GetComponent<AudioSource>().clip = MainMenuTrack;
-        UpdateVolume();
+        GetAudioLevel();
         AudioPlayer.GetComponent<AudioSource>().Play();
+        StartCoroutine(FadeIn());
     }
 
 
@@ -45,5 +49,30 @@ public class MusicManager : MonoBehaviour
         AudioPlayer = GameObject.Find("MainCamera/AudioSource");
         AudioPlayer.GetComponent<AudioSource>().clip = AudioEffect[location];
         AudioPlayer.GetComponent<AudioSource>().Play();
+    }
+
+
+    IEnumerator FadeIn()
+    {
+        yield return new WaitForSeconds(1);
+        AudioPlayer.GetComponent<AudioSource>().volume += AudioLevel / 4;
+        yield return new WaitForSeconds(1);
+        AudioPlayer.GetComponent<AudioSource>().volume += AudioLevel / 4;
+        yield return new WaitForSeconds(1);
+        AudioPlayer.GetComponent<AudioSource>().volume += AudioLevel / 4;
+        yield return new WaitForSeconds(1);
+        AudioPlayer.GetComponent<AudioSource>().volume += AudioLevel / 4;
+    }
+
+    IEnumerator FadeOut()
+    {
+        yield return new WaitForSeconds(1);
+        AudioPlayer.GetComponent<AudioSource>().volume -= AudioLevel / 4;
+        yield return new WaitForSeconds(1);
+        AudioPlayer.GetComponent<AudioSource>().volume -= AudioLevel / 4;
+        yield return new WaitForSeconds(1);
+        AudioPlayer.GetComponent<AudioSource>().volume -= AudioLevel / 4;
+        yield return new WaitForSeconds(1);
+        AudioPlayer.GetComponent<AudioSource>().volume -= AudioLevel / 4;
     }
 }
