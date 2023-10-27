@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     public List<LevelData> Levels = new List<LevelData>();
     public GameLevels GamelevelList;
     public int LevelPosition = 0;
+    public int WorldNumber = 1;
     //public bool ActivateItemIndicators = false;
     public bool ClearStartHelpScreen = false;
     public bool PurchasedStarBoost = false;
@@ -239,4 +240,7 @@ public class GameManager : MonoBehaviour
         ADsoff = true;
         _PlayerPrefsManager.SaveBool("Adsoff", true);
     }
+
+    public int GetWorldNumber(){return WorldNumber;}
+    public void SetWorldNumber(int SelectedWorld){WorldNumber = SelectedWorld;}
 }

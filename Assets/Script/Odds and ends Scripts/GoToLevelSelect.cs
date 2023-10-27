@@ -15,6 +15,11 @@ public class GoToLevelSelect : MonoBehaviour
             if (this.transform.GetChild(i).name == name)
             {
                 this.transform.GetChild(i).gameObject.SetActive(true);
+                this.transform.GetChild(i).GetChild(0).gameObject.GetComponent<LevelSelectGeneration>().LoadWorlds();
+                if(GameManager.Instance.WorldNumber > 1)
+                {
+                    this.transform.GetChild(i).GetChild(4).gameObject.SetActive(true);
+                }
             }
         }
     }

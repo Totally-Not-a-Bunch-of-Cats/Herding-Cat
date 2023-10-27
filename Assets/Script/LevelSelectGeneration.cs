@@ -22,21 +22,19 @@ public class LevelSelectGeneration : MonoBehaviour
     [SerializeField] private Transform NextWorldButton;
     [SerializeField] private Transform PreviousWorldButton;
     // Int holding the current world the user is on
-    private int WorldNumber = 1;
+    public int WorldNumber = 1;
 
     // Start is called before the first frame update
     private void Start()
     {
-        CreateWorldButtons(1);
-
-        PreviousWorldButton.gameObject.SetActive(false);
+        LoadWorlds();
     }
 
     /// <summary>
     /// Creates the level select buttons according to the current world the player is on
     /// </summary>
     /// <param name="CurrentWorld"> The current world that the player is going to </param>
-    private void CreateWorldButtons(int CurrentWorld)
+    public void CreateWorldButtons(int CurrentWorld)
     {
         // Destorying previous buttons that will no longer be used
         foreach (Transform buttonTransform in this.transform)
@@ -63,7 +61,8 @@ public class LevelSelectGeneration : MonoBehaviour
             // Sets the text of the button to the respective level
             levelButtonTransform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Level: " + CurrentWorld + "-" + (i + 1);
             // Sets the button to active or inactive depending on if the level has been unlocked
-            levelButtonTransform.GetComponent<Button>().enabled = (GameManager.Instance.Levels[i + ((CurrentWorld - 1) * 10)].GetUnlocked());
+            Debug.Log(CurrentWorld);
+            levelButtonTransform.GetComponent<Button>().enabled = GameManager.Instance.Levels[i + ((CurrentWorld - 1) * 10)].GetUnlocked();
 
             // Creates the action on the button that will load the level associated with the button
             int currentLevel = i + 1;
@@ -88,11 +87,31 @@ public class LevelSelectGeneration : MonoBehaviour
         if (CurrentWorld < WorldNumber)
         {
             WorldNumber--;
+            GameManager.Instance.SetWorldNumber(WorldNumber);
         }
         else if (CurrentWorld > WorldNumber)
         {
             WorldNumber++;
+            GameManager.Instance.SetWorldNumber(WorldNumber);
         }
+
+        if(CurrentWorld == 1)
+        {     
+            PreviousWorldButton.gameObject.SetActive(false);
+        }
+        if(CurrentWorld == Math.Ceiling((double)(GameManager.Instance.Levels.Count)/10))
+        {
+            NextWorldButton.gameObject.SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// Reloads the level to current gen
+    /// </summary>
+    public void LoadWorlds()
+    {
+        WorldNumber = GameManager.Instance.WorldNumber;
+        CreateWorldButtons(WorldNumber);
     }
 
     /// <summary>
@@ -101,6 +120,7 @@ public class LevelSelectGeneration : MonoBehaviour
     public void NextWorld()
     {
         WorldNumber++;
+        GameManager.Instance.SetWorldNumber(WorldNumber);
         CreateWorldButtons(WorldNumber);
 
         // Check to see if the user is on the last world
@@ -123,6 +143,7 @@ public class LevelSelectGeneration : MonoBehaviour
     public void PreviousWorld()
     {
         WorldNumber--;
+        GameManager.Instance.SetWorldNumber(WorldNumber);
         CreateWorldButtons(WorldNumber);
 
         // Check to see if the user is on the first world
