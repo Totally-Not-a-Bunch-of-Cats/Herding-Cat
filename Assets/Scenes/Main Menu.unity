@@ -19423,7 +19423,7 @@ GameObject:
   - component: {fileID: 704047099}
   - component: {fileID: 704047098}
   m_Layer: 5
-  m_Name: In app purchase Block
+  m_Name: In app purchase Block 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27083,11 +27083,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8069800294527774929, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -215.29999
+      value: -434.33
       objectReference: {fileID: 0}
     - target: {fileID: 8069800294527774929, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -100.000015
+      value: -302
       objectReference: {fileID: 0}
     - target: {fileID: 8069800294527774929, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -34921,11 +34921,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8069800294527774929, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 105.67001
+      value: 324.7
       objectReference: {fileID: 0}
     - target: {fileID: 8069800294527774929, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -2
+      value: 201.29999
       objectReference: {fileID: 0}
     - target: {fileID: 8069800294527774929, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -57643,7 +57643,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2037722024967833063, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
       propertyPath: m_text
-      value: Cat Hat Colors
+      value: "Cat Hat \nFlower Colors"
       objectReference: {fileID: 0}
     - target: {fileID: 2037722024967833063, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
       propertyPath: m_fontSize

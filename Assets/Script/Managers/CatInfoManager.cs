@@ -148,9 +148,7 @@ public class CatInfoManager : MonoBehaviour
         if (Accessories[CurrentAccessoryIndex].Unlocked == false)
         {
             Warning.GetComponentInChildren<TMPro.TMP_Text>().text = WarningList[0];
-            Debug.Log(Warning.GetComponent<Image>().color);
             Warning.GetComponent<Image>().color = new Color(0,0,1,1);
-            Debug.Log(Warning.GetComponent<Image>().color);
         }
         // Setting the visual in the customization to fit the new accessory, as well as adjusting the scriptable object to the new accessory
         CurrentAccessory = Accessories[CurrentAccessoryIndex].Acessory;
