@@ -64,6 +64,7 @@ MonoBehaviour:
   Levels: []
   GamelevelList: {fileID: 11400000, guid: c8a95196aa4f1044ebf30b9017149d3b, type: 2}
   LevelPosition: 0
+  WorldNumber: 1
   ClearStartHelpScreen: 1
   PurchasedStarBoost: 0
   SkipForcedVids: 0
@@ -274,12 +275,12 @@ MonoBehaviour:
     Acessory: {fileID: 21300000, guid: 09f8a11800e601e4f9b1d2dd4de98575, type: 3}
     Cost: 30
     Unlocked: 0
-    CatPrefabLocation: {x: -0.238, y: 0.49, z: 1}
-    CatPrefabScale: {x: 0.285, y: 0.22, z: 1}
-    MaxoffsetforCatButton: {x: 113.7, y: 124.7}
-    MinoffsetforCatButton: {x: 39.3, y: 201.3}
-    MaxoffsetforExternalCatButton: {x: 69, y: -4.5}
-    MinoffsetforExternalCatButton: {x: 6, y: 111}
+    CatPrefabLocation: {x: -0.24, y: 0.44, z: 1}
+    CatPrefabScale: {x: 0.17, y: 0.15, z: 1}
+    MaxoffsetforCatButton: {x: 131, y: 130}
+    MinoffsetforCatButton: {x: 54, y: 197.5}
+    MaxoffsetforExternalCatButton: {x: 77, y: 2}
+    MinoffsetforExternalCatButton: {x: 18, y: 111.5}
   - Name: Wide Flower Hat
     Acessory: {fileID: 21300000, guid: 09f8a11800e601e4f9b1d2dd4de98575, type: 3}
     Cost: 30
@@ -322,11 +323,11 @@ MonoBehaviour:
   SelectCat: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
   CurrentAnim: {fileID: 9100000, guid: 3b3859dba476d7143977ce83cfa36e01, type: 2}
   CurrentSkin: {fileID: -251871438, guid: 3589b1d7c5d65374093d56104ed629bc, type: 3}
-  CurrentAccessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
-  CurrentName: Normal Hat
+  CurrentAccessory: {fileID: 21300000, guid: 09f8a11800e601e4f9b1d2dd4de98575, type: 3}
+  CurrentName: Flower Hat
   CurrentSelected: 0
   CurrentSkinIndex: 0
-  CurrentAccessoryIndex: 0
+  CurrentAccessoryIndex: 6
   Warning: {fileID: 38641375586690239, guid: a3b1f80bdb434f143aff86bb93adcdb7, type: 3}
 --- !u!114 &918842532
 MonoBehaviour:
