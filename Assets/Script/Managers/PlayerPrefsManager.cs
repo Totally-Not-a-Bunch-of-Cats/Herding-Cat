@@ -19,12 +19,15 @@ public class PlayerPrefsManager : MonoBehaviour
     public void LoadSettings()
     {
         GameManager.Instance.sfxVolume = PlayerPrefs.GetFloat("SfxVolume");
+        GameManager.Instance.SFXToggle = GetBool("SFXToggle");
         GameManager.Instance.musicVolume = PlayerPrefs.GetFloat("MusicVolume");
+        GameManager.Instance.MusicToggle = GetBool("MusicToggle");
         GameManager.Instance.StarCount = PlayerPrefs.GetInt("StarCount");
         GameManager.Instance.CatSpeed = PlayerPrefs.GetFloat("CatSpeed");
         GameManager.Instance.ItemIndicators = GetBool("ItemIndicators");
         GameManager.Instance.FurthestLevel = PlayerPrefs.GetString("FurthestLevel");
         GameManager.Instance.ADsoff = GetBool("Adsoff");
+        GameManager.Instance.ADsoff = GetBool("SkipForcedVids");
     }
 
     /// <summary>

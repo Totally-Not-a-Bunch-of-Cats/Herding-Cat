@@ -49,7 +49,9 @@ public class GameManager : MonoBehaviour
     public float CatSpeed = 1;
     public bool ItemIndicators = false;
     public float sfxVolume;
+    public bool SFXToggle;
     public float musicVolume;
+    public bool MusicToggle;
 
     // Used for testing to determine if star count for a level should be changed or outputed in console.
     [Header("Toggles to update info")]

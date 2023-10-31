@@ -61,7 +61,6 @@ public class LevelSelectGeneration : MonoBehaviour
             // Sets the text of the button to the respective level
             levelButtonTransform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Level: " + CurrentWorld + "-" + (i + 1);
             // Sets the button to active or inactive depending on if the level has been unlocked
-            Debug.Log(CurrentWorld);
             levelButtonTransform.GetComponent<Button>().enabled = GameManager.Instance.Levels[i + ((CurrentWorld - 1) * 10)].GetUnlocked();
 
             // Creates the action on the button that will load the level associated with the button
