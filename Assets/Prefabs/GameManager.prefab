@@ -61,6 +61,7 @@ MonoBehaviour:
   _PlayerPrefsManager: {fileID: 918842534}
   _catInfoManager: {fileID: 918842535}
   _musicManager: {fileID: 918842532}
+  _WarningTxtManager: {fileID: 0}
   Levels: []
   GamelevelList: {fileID: 11400000, guid: c8a95196aa4f1044ebf30b9017149d3b, type: 2}
   LevelPosition: 0
@@ -74,7 +75,9 @@ MonoBehaviour:
   CatSpeed: 1
   ItemIndicators: 0
   sfxVolume: 1
-  musicVolume: 0.75
+  SFXToggle: 1
+  musicVolume: 1
+  MusicToggle: 1
   UpdateLevelData: 1
   PlayerPrefsTrue: 0
 --- !u!114 &590294061082041625
@@ -211,6 +214,16 @@ MonoBehaviour:
     Cost: 20
     Unlocked: 0
   Accessories:
+  - Name: NA
+    Acessory: {fileID: 0}
+    Cost: 0
+    Unlocked: 1
+    CatPrefabLocation: {x: 0, y: 0, z: 0}
+    CatPrefabScale: {x: 0, y: 0, z: 0}
+    MaxoffsetforCatButton: {x: 0, y: 0}
+    MinoffsetforCatButton: {x: 0, y: 0}
+    MaxoffsetforExternalCatButton: {x: 0, y: 0}
+    MinoffsetforExternalCatButton: {x: 0, y: 0}
   - Name: Normal Hat
     Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
     Cost: 30

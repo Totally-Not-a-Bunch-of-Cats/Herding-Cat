@@ -15,8 +15,8 @@ public class CatInfoManager : MonoBehaviour
     [SerializeField] public List<Cat> Catlist = new List<Cat>();
     // list of warnings for the warning
     [SerializeField] public List<string> WarningList = new List<string>();
-    //List of colors
-    [SerializeField] public List<AcessoryInfo> AccessoryColors = new List<AcessoryInfo>();
+    //List of colors for that acessory
+    [SerializeField] public List<AcessoryColorInfo> AccessoryColors = new List<AcessoryColorInfo>();
     // Cat Prefab Selected
     public Cat SelectCat;
     public RuntimeAnimatorController CurrentAnim;
@@ -145,7 +145,7 @@ public class CatInfoManager : MonoBehaviour
             CurrentAccessoryIndex = 0;
         }
         //actives the warning if you dont own the accessory
-        if (Accessories[CurrentAccessoryIndex].Unlocked == false)
+        if (Accessories[CurrentAccessoryIndex].AcessoryUnlock == false)
         {
             Warning.GetComponentInChildren<TMPro.TMP_Text>().text = WarningList[0];
             Warning.GetComponent<Image>().color = new Color(0,0,1,1);
@@ -156,6 +156,10 @@ public class CatInfoManager : MonoBehaviour
         ReferenceChild.GetComponent<Image>().sprite = CurrentAccessory;
         ReferenceChild.GetComponent<RectTransform>().offsetMax = -Accessories[CurrentAccessoryIndex].MaxoffsetforCatButton;
         ReferenceChild.GetComponent<RectTransform>().offsetMin = Accessories[CurrentAccessoryIndex].MinoffsetforCatButton;
+        if(Accessories[CurrentAccessoryIndex].AcessoryUnlock == false)
+        {
+            GameManager.Instance._WarningTxtManager.SwitchTxt(0);
+        }
         Catlist[CurrentSelected].Acessory1 = CurrentAccessory;
         Catlist[CurrentSelected].nameofAcessory1 = Accessories[CurrentAccessoryIndex].Name;
         Catlist[CurrentSelected].Acessory1ListNum = CurrentAccessoryIndex;
@@ -173,19 +177,21 @@ public class CatInfoManager : MonoBehaviour
             CurrentAccessoryIndex = Accessories.Count - 1;
         }
         //actives the warning if you dont own the accessory
-        if (Accessories[CurrentAccessoryIndex].Unlocked == false)
+        if (Accessories[CurrentAccessoryIndex].AcessoryUnlock == false)
         {
             Warning.SetActive(true);
             Warning.GetComponentInChildren<TMPro.TMP_Text>().text = WarningList[0];
         }
         // Setting the visual in the customization to fit the new accessory, as well as adjusting the scriptable object to the new accessory
         CurrentAccessory = Accessories[CurrentAccessoryIndex].Acessory;
-        //Catlist[CurrentSelected].GetPrefab().transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = CurrentAccessory;
-        //Catlist[CurrentSelected].GetPrefab().transform.GetChild(1).position = Accessories[CurrentAccessoryIndex].CatPrefabLocation;
         Transform ReferenceChild = Reference.transform.GetChild(1).GetChild(1).GetChild(1);
         ReferenceChild.GetComponent<Image>().sprite = CurrentAccessory;
         ReferenceChild.GetComponent<RectTransform>().offsetMax = -Accessories[CurrentAccessoryIndex].MaxoffsetforCatButton;
         ReferenceChild.GetComponent<RectTransform>().offsetMin = Accessories[CurrentAccessoryIndex].MinoffsetforCatButton;
+        if (Accessories[CurrentAccessoryIndex].AcessoryUnlock == false)
+        {
+            GameManager.Instance._WarningTxtManager.SwitchTxt(0);
+        }
         Catlist[CurrentSelected].Acessory1 = CurrentAccessory;
         Catlist[CurrentSelected].nameofAcessory1 = Accessories[CurrentAccessoryIndex].Name;
         Catlist[CurrentSelected].Acessory1ListNum = CurrentAccessoryIndex;

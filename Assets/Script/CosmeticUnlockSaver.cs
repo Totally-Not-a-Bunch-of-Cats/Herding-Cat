@@ -17,7 +17,7 @@ public class CosmeticUnlockSaver : MonoBehaviour
         for (int i = 0; i < GameManager.Instance._catInfoManager.Accessories.Count; i++)
         {
             if (GameManager.Instance._catInfoManager.Accessories[i].Name == AcessoryName 
-                && GameManager.Instance._catInfoManager.Accessories[i].Unlocked == true)
+                && GameManager.Instance._catInfoManager.Accessories[i].AcessoryUnlock == true)
             {
                 PurchaseButton.SetActive(false);
                 break;
@@ -37,13 +37,13 @@ public class CosmeticUnlockSaver : MonoBehaviour
                     break;
                 }
             }
-            if(GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].Unlocked == false)
+            if(GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryUnlock == false)
             {
-                if (GameManager.Instance.StarCount >= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].Cost)
+                if (GameManager.Instance.StarCount >= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryCost)
                 {
                     GameManager.Instance._PlayerPrefsManager.SaveBool(AcessoryName, true);
-                    GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].Unlocked = true;
-                    GameManager.Instance.StarCount -= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].Cost;
+                    GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryUnlock = true;
+                    GameManager.Instance.StarCount -= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryCost;
                     GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", GameManager.Instance.StarCount);
                 }
                 else
@@ -103,13 +103,13 @@ public class CosmeticUnlockSaver : MonoBehaviour
                     break;
                 }
             }
-            if (GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].Unlocked == false)
+            if (GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryUnlock == false)
             {
-                if (GameManager.Instance.StarCount >= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].Cost)
+                if (GameManager.Instance.StarCount >= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryCost)
                 {
                     GameManager.Instance._PlayerPrefsManager.SaveBool(AcessoryName, true);
-                    GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].Unlocked = true;
-                    GameManager.Instance.StarCount -= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].Cost;
+                    GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryUnlock = true;
+                    GameManager.Instance.StarCount -= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryCost;
                     GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", GameManager.Instance.StarCount);
                 }
                 else
@@ -128,7 +128,7 @@ public class CosmeticUnlockSaver : MonoBehaviour
 
     public void DisableButton(GameObject button)
     {
-        if(GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].Unlocked == true)
+        if(GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryUnlock == true)
         {
             button.SetActive(false);
         }

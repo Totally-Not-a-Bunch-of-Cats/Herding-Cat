@@ -24239,7 +24239,7 @@ GameObject:
   - component: {fileID: 1099176391}
   - component: {fileID: 1099176390}
   m_Layer: 5
-  m_Name: ReturnToMenu
+  m_Name: Lock In
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24371,7 +24371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.57254905, g: 0.60784316, b: 1, a: 1}
+  m_Color: {r: 0.4481132, g: 0.66369396, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -45418,6 +45418,7 @@ GameObject:
   - component: {fileID: 1954352590}
   - component: {fileID: 1954352589}
   - component: {fileID: 1954352593}
+  - component: {fileID: 1954352594}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -45526,6 +45527,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff470ccb218d34142a8165a9451a300e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1954352594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954352588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c826a994ae1f90458e71c123d88415b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ConfirmButton: {fileID: 1099176388}
+  Warning: {fileID: 38641375507163234}
+  WarningTMP: {fileID: 0}
+  WarningTxt: 
+  WarningList:
+  - 'Warning: You dont own this accessory.'
+  - 'Warning: You dont own this skin.'
+  - 'Warning: You dont own these acessory colors.'
 --- !u!1 &1958608612
 GameObject:
   m_ObjectHideFlags: 0
@@ -58832,7 +58853,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 38641375586690177, guid: a3b1f80bdb434f143aff86bb93adcdb7, type: 3}
       propertyPath: m_Color.a
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 38641375586690177, guid: a3b1f80bdb434f143aff86bb93adcdb7, type: 3}
       propertyPath: m_Color.b
@@ -58936,30 +58957,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 38641375586690239, guid: a3b1f80bdb434f143aff86bb93adcdb7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 38641376028581917, guid: a3b1f80bdb434f143aff86bb93adcdb7, type: 3}
       propertyPath: m_text
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 38641376028581917, guid: a3b1f80bdb434f143aff86bb93adcdb7, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 38641376028581917, guid: a3b1f80bdb434f143aff86bb93adcdb7, type: 3}
       propertyPath: m_margin.w
-      value: -39.090927
+      value: -30.330898
       objectReference: {fileID: 0}
     - target: {fileID: 38641376028581917, guid: a3b1f80bdb434f143aff86bb93adcdb7, type: 3}
       propertyPath: m_margin.x
-      value: -66.63221
+      value: -38.161995
       objectReference: {fileID: 0}
     - target: {fileID: 38641376028581917, guid: a3b1f80bdb434f143aff86bb93adcdb7, type: 3}
       propertyPath: m_margin.y
-      value: -38.20247
+      value: -32.362495
       objectReference: {fileID: 0}
     - target: {fileID: 38641376028581917, guid: a3b1f80bdb434f143aff86bb93adcdb7, type: 3}
       propertyPath: m_margin.z
-      value: -65.74378
+      value: -41.65365
+      objectReference: {fileID: 0}
+    - target: {fileID: 38641376028581917, guid: a3b1f80bdb434f143aff86bb93adcdb7, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 38641376028581917, guid: a3b1f80bdb434f143aff86bb93adcdb7, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3b1f80bdb434f143aff86bb93adcdb7, type: 3}
+--- !u!1 &38641375507163234 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 38641375586690239, guid: a3b1f80bdb434f143aff86bb93adcdb7, type: 3}
+  m_PrefabInstance: {fileID: 38641375507163233}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3193636591146050095
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public PlayerPrefsManager _PlayerPrefsManager;
     public CatInfoManager _catInfoManager;
     public MusicManager _musicManager;
+    public WarningTxtManager _WarningTxtManager;
 
     [Header("Misc")]
     //list of all level data
@@ -129,6 +130,12 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(Name, LoadSceneMode.Single);
         yield return new WaitForEndOfFrame();
+        if(Name == "Main Menu")
+        {
+            yield return new WaitForEndOfFrame();
+            GameObject WaringTxt = GameObject.Find("Canvas");
+            Instance._WarningTxtManager = WaringTxt.GetComponent<WarningTxtManager>();
+        }
     }
     public IEnumerator GotoLevelSecet(string name)
     {
