@@ -20,6 +20,8 @@ public class LevelData: ScriptableObject
     public int StarsEarned = 0;
     [SerializeField] bool Unlocked = false;
     public bool NewItemIntroduced = false;
+    public bool SpecialHelpTxt = false;
+    public int SpecialHelpLevelNum = -1;
 
     [Header("Tile Data")]
     // Tile that is set for the backgound of play area
@@ -65,6 +67,12 @@ public class LevelData: ScriptableObject
     public int GetTargetRounds()
     {
         return TargetRounds;
+    }
+
+    public void ResetVids()
+    {
+        NewThingIntroduced = true;
+        Debug.Log("mop" + NewThingIntroduced + name);
     }
 
     /// <summary>
@@ -146,6 +154,14 @@ public class LevelData: ScriptableObject
         }
         // Checking/Adding star for round count
         if (TargetRounds >= roundCount)
+        {
+            NewStarsEarned++;
+        }
+        if (StarsEarned > NewStarsEarned)
+        {
+            AdjustStarCount = false;
+        }
+        if (GameManager.Instance.PurchasedStarBoost == true)
         {
             NewStarsEarned++;
         }

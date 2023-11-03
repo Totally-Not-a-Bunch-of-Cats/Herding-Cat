@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     public ReWindManager _ReWindManager;
     public PlayerPrefsManager _PlayerPrefsManager;
     public CatInfoManager _catInfoManager;
+    public MusicManager _musicManager;
+    public WarningTxtManager _WarningTxtManager;
 
     [Header("Misc")]
     //list of all level data
@@ -32,19 +34,25 @@ public class GameManager : MonoBehaviour
     public List<LevelData> Levels = new List<LevelData>();
     public GameLevels GamelevelList;
     public int LevelPosition = 0;
+    public int WorldNumber = 1;
     //public bool ActivateItemIndicators = false;
     public bool ClearStartHelpScreen = false;
+    public bool PurchasedStarBoost = false;
+    public bool SkipForcedVids = false;
 
     [Header("Ad Varables")]
     public int GamesTillRewardAd = 4;
     public int GamesTillMandatoryAd = 10;
+    public bool ADsoff = false;
 
     // Option Varables(Can be changed in options menu)
     [Header("Option Varables")]
     public float CatSpeed = 1;
     public bool ItemIndicators = false;
     public float sfxVolume;
+    public bool SFXToggle;
     public float musicVolume;
+    public bool MusicToggle;
 
     // Used for testing to determine if star count for a level should be changed or outputed in console.
     [Header("Toggles to update info")]
@@ -98,8 +106,11 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefsTrue)
         {
             _PlayerPrefsManager.LoadSettings();
+            _PlayerPrefsManager.CheckLevels();
+            _PlayerPrefsManager.RemoveHelpScreens();
         }
         StartCoroutine(SwitchScene("Main Menu"));
+        StartCoroutine(StartMenuMusic());
     }
 
     /// <summary>
@@ -119,8 +130,23 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(Name, LoadSceneMode.Single);
         yield return new WaitForEndOfFrame();
+        if(Name == "Main Menu")
+        {
+            yield return new WaitForEndOfFrame();
+            GameObject WaringTxt = GameObject.Find("Canvas");
+            Instance._WarningTxtManager = WaringTxt.GetComponent<WarningTxtManager>();
+        }
     }
-
+    public IEnumerator GotoLevelSecet(string name)
+    {
+        StartCoroutine(GoingtoLevelSecet(name));
+        yield return new WaitForEndOfFrame();
+    }
+    public IEnumerator GoingtoLevelSecet(string name)
+    {
+        yield return new WaitForSeconds(.1f);
+        GameObject.Find("Canvas").GetComponent<GoToLevelSelect>().SwitchToLevelSelect(name);
+    }
     /// <summary>
     /// Starts the level
     /// </summary>
@@ -136,6 +162,32 @@ public class GameManager : MonoBehaviour
     public void ButtonOfSelectedNum(int buttonPressed)
     {
         Instance.LevelPosition = buttonPressed;
+    }
+
+    public IEnumerator StartMenuMusic()
+    {
+        yield return new WaitForSeconds(0);
+        Instance._musicManager.PlayMenuSong();
+    }
+
+    public void StartMatchMusic()
+    {
+       Instance._musicManager.RandomTrack();
+       Instance._musicManager.PlayTrack();
+    }
+    /// <summary>
+    /// gives the player their bonus stars for levels already completed, when they purchase the +1 stars pack
+    /// </summary>
+    public void GrantBonusStars()
+    {
+        for(int i = 0; i < Levels.Count; i++)
+        {
+            if(Levels[i].StarsEarned < 1)
+            {
+                Levels[i].StarsEarned += 1;
+                Instance._PlayerPrefsManager.SaveInt(Levels[i].name, Levels[i].StarsEarned);
+            }
+        }
     }
 
     /// <summary>
@@ -192,5 +244,12 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    public void Purchasemade()
+    {
+        ADsoff = true;
+        _PlayerPrefsManager.SaveBool("Adsoff", true);
+    }
 
+    public int GetWorldNumber(){return WorldNumber;}
+    public void SetWorldNumber(int SelectedWorld){WorldNumber = SelectedWorld;}
 }

@@ -21,7 +21,6 @@ public class CatChooseButtons : MonoBehaviour
     {
         childNum = transform.GetSiblingIndex();
         CreateCatButtons();
-        Debug.Log("ive been enabeled");
     }
 
     /// <summary>

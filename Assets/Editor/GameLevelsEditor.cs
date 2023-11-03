@@ -60,6 +60,11 @@ public class GameLevelsEditor : Editor
                 {
                     myScript.GameLevel[i].SetUnlocked(false);
                 }
+                if (myScript.GameLevel[i].name == "1-1" || myScript.GameLevel[i].name == "1-6" || myScript.GameLevel[i].name == "1-9" || myScript.GameLevel[i].name == "2-6" || myScript.GameLevel[i].name == "3-1" || myScript.GameLevel[i].name == "4-1" || myScript.GameLevel[i].name == "4-6")
+                {
+                    myScript.GameLevel[i].ResetVids();
+                    Debug.Log("mep");
+                }
             }
         }
 

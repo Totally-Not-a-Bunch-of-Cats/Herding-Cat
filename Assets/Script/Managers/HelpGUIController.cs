@@ -10,7 +10,6 @@ using UnityEngine.Video;
 /// </summary>
 public class HelpGUIController : MonoBehaviour
 {
-
     //None = 0, General = 1, Item = 2, Trap = 3
     [SerializeField] private int SelectedOption = 0;
     [SerializeField] private List<HelpInfo> SelectedList;
@@ -46,6 +45,24 @@ public class HelpGUIController : MonoBehaviour
     [SerializeField] private Transform HelpButtonsParent;
     [SerializeField] private GameObject Content;
 
+    [Header("Button Placement Varables")]
+    [Space]
+    [SerializeField] private float BottomButtonHeight;
+    [SerializeField] private float TopButtonHeight;
+    [SerializeField] private float ButtonHeight;
+    [SerializeField] private float ButtonViewHeight;
+
+
+    /// <summary>
+    /// Sets the varables that will help calculate the buttons per page count
+    /// </summary>
+    private void Awake()
+    {
+        BottomButtonHeight = DownButtonObject.GetComponent<RectTransform>().rect.height;
+        TopButtonHeight = UpButtonObject.GetComponent<RectTransform>().rect.height;
+        ButtonHeight = ButtonPrefab.GetComponent<RectTransform>().rect.height + 15;
+    }
+
     /// <summary>
     /// Turns off old info if not direct
     /// </summary>
@@ -57,28 +74,48 @@ public class HelpGUIController : MonoBehaviour
             HelpText.gameObject.SetActive(false);
             ViewPorts[ActivePort].SetActive(false);
             DefaultBackground.gameObject.SetActive(true);
-        } else
+        } 
+        else
         {
             IsDirect = false;
         }
-        DetermineScrenSize();
+        DetermineScreenSize();
     }
 
-    private void DetermineScrenSize()
+    /// <summary>
+    /// Determines the size of video that should be shown
+    /// </summary>
+    private void DetermineScreenSize()
     {
         float ScreenDiv = Screen.width / Screen.height;
-        if(ScreenDiv > 2)
+        if(ScreenDiv < 1.59f)
         {
             ActivePort = 1;
         }
-        else if (ScreenDiv > 1.59f)
+        else
         {
             ActivePort = 0;
+        }
+        Debug.Log(ActivePort);
+    }
+
+    /// <summary>
+    /// Switches to the size of video that is shown when text is shown
+    /// </summary>
+    public void SwitchToScreenWithTxt()
+    {
+        ViewPorts[ActivePort].SetActive(false);
+        if (ActivePort == 1)
+        {
+            ActivePort = 3;
         }
         else
         {
             ActivePort = 2;
         }
+        Debug.Log(ActivePort);
+        ViewPorts[ActivePort].SetActive(true);
+        VideoPlayer.targetTexture = (RenderTexture)ViewPorts[ActivePort].GetComponent<RawImage>().texture;
     }
     
     /// <summary>
@@ -114,9 +151,9 @@ public class HelpGUIController : MonoBehaviour
                 break;
         }
 
-        ButtonsPerPage = Mathf.FloorToInt((HelpButtonsParent.GetComponent<RectTransform>().rect.height - 30) / (90 + 15));
+        ButtonsPerPage = Mathf.FloorToInt((HelpButtonsParent.GetComponent<RectTransform>().rect.height - BottomButtonHeight) / ButtonHeight);
         CurrentPage = 1;
-        
+
         // Creates Buttons of the selected Category
         for (int i = 0; i < SelectedList.Count; i++)
         {
@@ -142,10 +179,11 @@ public class HelpGUIController : MonoBehaviour
         }
 
         DownButtonObject.SetActive(HelpPages != 1);
+        ButtonViewHeight = HelpButtonsParent.GetComponent<RectTransform>().rect.height - (ButtonHeight * ButtonsPerPage);
+
         if (HelpPages != 1)
         {
-            float Bottom = HelpButtonsParent.GetComponent<RectTransform>().rect.height - (90 + 15) * ButtonsPerPage;
-            Content.transform.parent.GetComponent<RectTransform>().offsetMin = new Vector2(0, Bottom);
+            Content.transform.parent.GetComponent<RectTransform>().offsetMin = new Vector2(0, ButtonViewHeight);
         }
         UpButtonObject.SetActive(false);
         Content.transform.parent.GetComponent<RectTransform>().offsetMax = Vector2.zero;
@@ -189,15 +227,13 @@ public class HelpGUIController : MonoBehaviour
     {
         CurrentPage--;
         DownButtonObject.SetActive(true);
-        float ContentY = Content.transform.localPosition.y - ButtonsPerPage * 105;
-        Content.transform.localPosition = new Vector3(Content.transform.localPosition.x,
-           ContentY, Content.transform.localPosition.z);
-        float Bottom = HelpButtonsParent.GetComponent<RectTransform>().rect.height - (90 + 15) * ButtonsPerPage;
-        Content.transform.parent.GetComponent<RectTransform>().offsetMin = new Vector2(0, Bottom - 50);
+        float ContentY = Content.transform.localPosition.y - (ButtonsPerPage * ButtonHeight);
+        Content.transform.localPosition = new Vector3(Content.transform.localPosition.x, ContentY, Content.transform.localPosition.z);
+        Content.transform.parent.GetComponent<RectTransform>().offsetMin = new Vector2(0, ButtonViewHeight - TopButtonHeight);
         if (CurrentPage == 1)
         {
             UpButtonObject.SetActive(false);
-            Content.transform.parent.GetComponent<RectTransform>().offsetMin = new Vector2(0, Bottom);
+            Content.transform.parent.GetComponent<RectTransform>().offsetMin = new Vector2(0, ButtonViewHeight);
             Content.transform.parent.GetComponent<RectTransform>().offsetMax = Vector2.zero;
         }
     }
@@ -209,12 +245,10 @@ public class HelpGUIController : MonoBehaviour
     {
         CurrentPage++;
         UpButtonObject.SetActive(true);
-        float ContentY = Content.transform.localPosition.y + ButtonsPerPage  * 105;
-        Content.transform.localPosition = new Vector3(Content.transform.localPosition.x,
-            ContentY, Content.transform.localPosition.z);
-        float Bottom = HelpButtonsParent.GetComponent<RectTransform>().rect.height - (90 + 15) * ButtonsPerPage;
-        Content.transform.parent.GetComponent<RectTransform>().offsetMin = new Vector2(0, Bottom-50);
-        Content.transform.parent.GetComponent<RectTransform>().offsetMax = new Vector2(0, -50);
+        float ContentY = Content.transform.localPosition.y + (ButtonsPerPage * ButtonHeight);
+        Content.transform.localPosition = new Vector3(Content.transform.localPosition.x, ContentY, Content.transform.localPosition.z);
+        Content.transform.parent.GetComponent<RectTransform>().offsetMin = new Vector2(0, ButtonViewHeight - BottomButtonHeight);
+        Content.transform.parent.GetComponent<RectTransform>().offsetMax = new Vector2(0, -BottomButtonHeight);
         if (CurrentPage == HelpPages)
         {
             DownButtonObject.SetActive(false);

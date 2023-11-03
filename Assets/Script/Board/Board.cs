@@ -20,7 +20,7 @@ public class Board
     public List<PosObject> SecondCatList;
     public int NumberofCats = 0;
     public List<PosObject> Items;
-    public List<Vector2Int> CatPenLocation;
+    public List<PosObject> CatPenLocation;
     public int NumCatinPen = 0;
     public List<PosTile> SavedTiles;
     public List<PosTile> Tubes;
@@ -46,7 +46,7 @@ public class Board
         RedirectionPads = new List<PosTile>();
         SecondCatList = new List<PosObject>();
         Items = new List<PosObject>();
-        CatPenLocation = new List<Vector2Int>();
+        CatPenLocation = new List<PosObject>();
         if (Tiles != null)
         {
             foreach (PosTile tile in Tiles)
@@ -59,7 +59,7 @@ public class Board
                 }
                 if (tile.Slate.Is<CatPen>())
                 {
-                    CatPenLocation.Add(tile.Position);
+                    CatPenLocation.Add(new PosObject(tile.Position, tile.Slate.name, tile.Slate));
                 }
                 if (tile.Slate.name == "Cat Tube")
                 {
@@ -88,7 +88,7 @@ public class Board
         SavedTiles = new List<PosTile>();
         SecondCatList = new List<PosObject>();
         Items = new List<PosObject>();
-        CatPenLocation = new List<Vector2Int>();
+        CatPenLocation = new List<PosObject>();
         if (Tiles != null)
         {
             foreach (PosTile tile in Tiles)
@@ -101,7 +101,7 @@ public class Board
                 }
                 if (tile.Slate.Is<CatPen>())
                 {
-                    CatPenLocation.Add(tile.Position);
+                    CatPenLocation.Add(new PosObject(tile.Position, tile.Slate.name, tile.Slate));
                 }
                 if (tile.Slate.name == "Cat Tube")
                 {
@@ -124,7 +124,7 @@ public class Board
     {
         this._width = BoardToCopy._width;
         this._height = BoardToCopy._height;
-        CatPenLocation = new List<Vector2Int>();
+        CatPenLocation = new List<PosObject>();
         SavedTiles = new List<PosTile>();
         Tubes = new List<PosTile>();
         RedirectionPads = new List<PosTile>();
@@ -169,7 +169,7 @@ public class Board
                 }
                 if (tile.Slate.Is<CatPen>())
                 {
-                    CatPenLocation.Add(tile.Position);
+                    CatPenLocation.Add(new PosObject(tile.Position, tile.Slate.name, tile.Slate));
                     _cells[tile.Position.x, tile.Position.y] = tile.Slate;
                 }
                 if (tile.Slate.Is<Trap>())

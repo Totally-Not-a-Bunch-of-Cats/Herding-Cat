@@ -21,6 +21,8 @@ MonoBehaviour:
   StarsEarned: 3
   Unlocked: 1
   NewItemIntroduced: 1
+  SpecialHelpTxt: 1
+  SpecialHelpLevelNum: 4
   BackgroundTile: {fileID: 11400000, guid: d756be87d23ee174f869fab071be06bf, type: 2}
   Tiles:
   - name: 
