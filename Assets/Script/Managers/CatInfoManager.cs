@@ -8,15 +8,21 @@ public class CatInfoManager : MonoBehaviour
     // List of Cat Skins
     //[SerializeField] private List<RuntimeAnimatorController> CatAnim = new List<RuntimeAnimatorController>();
     //public List<Sprite> CatSkins = new List<Sprite>(); //Catskins and cat anims must be same length
-    public List<SkinInfo> Cats = new List<SkinInfo>();
-    // List of Accessories
+    public List<SkinInfo> SkinList = new List<SkinInfo>();
+    //List of Accessories
     [SerializeField] public List<AcessoryInfo> Accessories = new List<AcessoryInfo>();
-    // Cat Prefabs
+    //Cat Prefabs
     [SerializeField] public List<Cat> Catlist = new List<Cat>();
-    // list of warnings for the warning
-    [SerializeField] public List<string> WarningList = new List<string>();
-    //List of colors for that acessory
-    [SerializeField] public List<AcessoryColorInfo> AccessoryColors = new List<AcessoryColorInfo>();
+    //List of colors for the Hat acessory
+    [SerializeField] public List<AcessoryColorInfo> HatAccessoryColors = new List<AcessoryColorInfo>();
+    //List of colors for the Headset acessory
+    [SerializeField] public List<AcessoryColorInfo> HeadsetColors = new List<AcessoryColorInfo>();
+    //List of colors for the Cone acessory
+    [SerializeField] public List<AcessoryColorInfo> ConeColors = new List<AcessoryColorInfo>();
+    //List of colors for the Flower acessory
+    [SerializeField] public List<AcessoryColorInfo> FlowerColors = new List<AcessoryColorInfo>();
+    //List of colors for the Flower Hat acessory
+    [SerializeField] public List<AcessoryColorInfo> FlowerHatColors = new List<AcessoryColorInfo>();
     // Cat Prefab Selected
     public Cat SelectCat;
     public RuntimeAnimatorController CurrentAnim;
@@ -49,9 +55,9 @@ public class CatInfoManager : MonoBehaviour
 
     int GetSkinIndex()
     {
-        for (int i = 0; i < Cats.Count; i++)
+        for (int i = 0; i < SkinList.Count; i++)
         {
-            if (Cats[i].Skin == CurrentSkin)
+            if (SkinList[i].Skin == CurrentSkin)
             {
                 return i;
             }
@@ -73,9 +79,9 @@ public class CatInfoManager : MonoBehaviour
     //finish me
     int GetColorIndex()
     {
-        for (int i = 0; i < Cats.Count; i++)
+        for (int i = 0; i < SkinList.Count; i++)
         {
-            if (Cats[i].Skin == CurrentSkin)
+            if (SkinList[i].Skin == CurrentSkin)
             {
                 return i;
             }
@@ -100,15 +106,24 @@ public class CatInfoManager : MonoBehaviour
         CurrentSkinIndex++;
 
         // Loops the skins back around so that user doesn't have to go back from hitting the walls
-        if(CurrentSkinIndex >= Cats.Count)
+        if(CurrentSkinIndex >= SkinList.Count)
         {
             CurrentSkinIndex = 0;
         }
-
+        //Checks to see if skin is unlocked
+        if (SkinList[CurrentSkinIndex].Unlocked == false)
+        {
+            GameManager.Instance._WarningTxtManager.SwitchTxtSkin(1);
+        }
+        else
+        {
+            GameManager.Instance._WarningTxtManager.HideTxtSkin();
+            GameManager.Instance._WarningTxtManager.EnableConfirmButton();
+        }
         // Setting the visual in the customization to fit the new skin, as well as adjusting the scriptable object to the new skin
-        CurrentAnim = Cats[CurrentSkinIndex].CatAnim;
+        CurrentAnim = SkinList[CurrentSkinIndex].CatAnim;
         Catlist[CurrentSelected].AnimationController = CurrentAnim;
-        CurrentSkin = Cats[CurrentSkinIndex].Skin;
+        CurrentSkin = SkinList[CurrentSkinIndex].Skin;
         Catlist[CurrentSelected].Skin = CurrentSkin;
         Reference.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Image>().sprite = CurrentSkin;
     }
@@ -123,12 +138,22 @@ public class CatInfoManager : MonoBehaviour
         // Loops the skins back around so that user doesn't have to go back from hitting the walls
         if(CurrentSkinIndex < 0)
         {
-            CurrentSkinIndex = Cats.Count - 1;
+            CurrentSkinIndex = SkinList.Count - 1;
+        }
+        //Checks to see if skin is unlocked
+        if (SkinList[CurrentSkinIndex].Unlocked == false)
+        {
+            GameManager.Instance._WarningTxtManager.SwitchTxtSkin(1);
+        }
+        else
+        {
+            GameManager.Instance._WarningTxtManager.HideTxtSkin();
+            GameManager.Instance._WarningTxtManager.EnableConfirmButton();
         }
         // Setting the visual in the customization to fit the new skin, as well as adjusting the scriptable object to the new skin
-        CurrentAnim = Cats[CurrentSkinIndex].CatAnim;
+        CurrentAnim = SkinList[CurrentSkinIndex].CatAnim;
         Catlist[CurrentSelected].AnimationController = CurrentAnim;
-        CurrentSkin = Cats[CurrentSkinIndex].Skin;
+        CurrentSkin = SkinList[CurrentSkinIndex].Skin;
         Catlist[CurrentSelected].Skin = CurrentSkin;
         Reference.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Image>().sprite = CurrentSkin;
     }
@@ -144,21 +169,21 @@ public class CatInfoManager : MonoBehaviour
         {
             CurrentAccessoryIndex = 0;
         }
-        //actives the warning if you dont own the accessory
-        if (Accessories[CurrentAccessoryIndex].AcessoryUnlock == false)
-        {
-            Warning.GetComponentInChildren<TMPro.TMP_Text>().text = WarningList[0];
-            Warning.GetComponent<Image>().color = new Color(0,0,1,1);
-        }
         // Setting the visual in the customization to fit the new accessory, as well as adjusting the scriptable object to the new accessory
         CurrentAccessory = Accessories[CurrentAccessoryIndex].Acessory;
         Transform ReferenceChild = Reference.transform.GetChild(1).GetChild(1).GetChild(1);
         ReferenceChild.GetComponent<Image>().sprite = CurrentAccessory;
         ReferenceChild.GetComponent<RectTransform>().offsetMax = -Accessories[CurrentAccessoryIndex].MaxoffsetforCatButton;
         ReferenceChild.GetComponent<RectTransform>().offsetMin = Accessories[CurrentAccessoryIndex].MinoffsetforCatButton;
-        if(Accessories[CurrentAccessoryIndex].AcessoryUnlock == false)
+        //Checks to see if acessory is unlocked
+        if (Accessories[CurrentAccessoryIndex].AcessoryUnlock == false)
         {
-            GameManager.Instance._WarningTxtManager.SwitchTxt(0);
+            GameManager.Instance._WarningTxtManager.SwitchTxtAccessory(0);
+        }
+        else
+        {
+            GameManager.Instance._WarningTxtManager.HideTxtAccessory();
+            GameManager.Instance._WarningTxtManager.EnableConfirmButton();
         }
         Catlist[CurrentSelected].Acessory1 = CurrentAccessory;
         Catlist[CurrentSelected].nameofAcessory1 = Accessories[CurrentAccessoryIndex].Name;
@@ -176,12 +201,6 @@ public class CatInfoManager : MonoBehaviour
         {
             CurrentAccessoryIndex = Accessories.Count - 1;
         }
-        //actives the warning if you dont own the accessory
-        if (Accessories[CurrentAccessoryIndex].AcessoryUnlock == false)
-        {
-            Warning.SetActive(true);
-            Warning.GetComponentInChildren<TMPro.TMP_Text>().text = WarningList[0];
-        }
         // Setting the visual in the customization to fit the new accessory, as well as adjusting the scriptable object to the new accessory
         CurrentAccessory = Accessories[CurrentAccessoryIndex].Acessory;
         Transform ReferenceChild = Reference.transform.GetChild(1).GetChild(1).GetChild(1);
@@ -190,7 +209,12 @@ public class CatInfoManager : MonoBehaviour
         ReferenceChild.GetComponent<RectTransform>().offsetMin = Accessories[CurrentAccessoryIndex].MinoffsetforCatButton;
         if (Accessories[CurrentAccessoryIndex].AcessoryUnlock == false)
         {
-            GameManager.Instance._WarningTxtManager.SwitchTxt(0);
+            GameManager.Instance._WarningTxtManager.SwitchTxtAccessory(0);
+        }
+        else
+        {
+            GameManager.Instance._WarningTxtManager.HideTxtAccessory();
+            GameManager.Instance._WarningTxtManager.EnableConfirmButton();
         }
         Catlist[CurrentSelected].Acessory1 = CurrentAccessory;
         Catlist[CurrentSelected].nameofAcessory1 = Accessories[CurrentAccessoryIndex].Name;
@@ -199,9 +223,27 @@ public class CatInfoManager : MonoBehaviour
     public void NextColor(GameObject Reference)
     {
 
+        if (Accessories[CurrentAccessoryIndex].AcessoryUnlock == false)
+        {
+            GameManager.Instance._WarningTxtManager.SwitchTxtAccColor(2);
+        }
+        else
+        {
+            GameManager.Instance._WarningTxtManager.HideTxtColor();
+            GameManager.Instance._WarningTxtManager.EnableConfirmButton();
+        }
     }
     public void PreviousColor(GameObject Reference)
     {
 
+        if (Accessories[CurrentAccessoryIndex].AcessoryUnlock == false)
+        {
+            GameManager.Instance._WarningTxtManager.SwitchTxtAccColor(2);
+        }
+        else
+        {
+            GameManager.Instance._WarningTxtManager.HideTxtColor();
+            GameManager.Instance._WarningTxtManager.EnableConfirmButton();
+        }
     }
 }

@@ -202,12 +202,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b41e952c99454d34285474a62ab06a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cats:
+  SkinList:
   - Name: BlackCat
     Skin: {fileID: -251871438, guid: 3589b1d7c5d65374093d56104ed629bc, type: 3}
     CatAnim: {fileID: 9100000, guid: 3b3859dba476d7143977ce83cfa36e01, type: 2}
-    Cost: 20
-    Unlocked: 0
+    Cost: 0
+    Unlocked: 1
   - Name: OrangeCat
     Skin: {fileID: 1159634615, guid: cb60cf56fc227a14abd6491736b7b318, type: 3}
     CatAnim: {fileID: 9100000, guid: 0b62742f5e63a1c42bb417f48537734c, type: 2}
@@ -215,9 +215,11 @@ MonoBehaviour:
     Unlocked: 0
   Accessories:
   - Name: NA
-    Acessory: {fileID: 0}
-    Cost: 0
-    Unlocked: 1
+    Acessory: {fileID: 21300000, guid: f9fc23c976581b94db2d0441c920e1c1, type: 3}
+    AcessoryUnlock: 1
+    AcessoryCost: 0
+    AcessoryColorUnlock: 0
+    AcessoryColorCost: 0
     CatPrefabLocation: {x: 0, y: 0, z: 0}
     CatPrefabScale: {x: 0, y: 0, z: 0}
     MaxoffsetforCatButton: {x: 0, y: 0}
@@ -226,8 +228,10 @@ MonoBehaviour:
     MinoffsetforExternalCatButton: {x: 0, y: 0}
   - Name: Normal Hat
     Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
-    Cost: 30
-    Unlocked: 0
+    AcessoryUnlock: 0
+    AcessoryCost: 30
+    AcessoryColorUnlock: 0
+    AcessoryColorCost: 0
     CatPrefabLocation: {x: -0.245, y: 0.47, z: 1}
     CatPrefabScale: {x: 0.18, y: 0.16, z: 1}
     MaxoffsetforCatButton: {x: 138, y: 134}
@@ -236,8 +240,10 @@ MonoBehaviour:
     MinoffsetforExternalCatButton: {x: 19, y: 111}
   - Name: Headset
     Acessory: {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
-    Cost: 30
-    Unlocked: 0
+    AcessoryUnlock: 0
+    AcessoryCost: 30
+    AcessoryColorUnlock: 0
+    AcessoryColorCost: 0
     CatPrefabLocation: {x: -0.245, y: 0.328, z: 1}
     CatPrefabScale: {x: 0.21, y: 0.185, z: 1}
     MaxoffsetforCatButton: {x: 120, y: 141}
@@ -246,8 +252,10 @@ MonoBehaviour:
     MinoffsetforExternalCatButton: {x: 7, y: 80.5}
   - Name: Tall Hat
     Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
-    Cost: 30
-    Unlocked: 0
+    AcessoryUnlock: 0
+    AcessoryCost: 30
+    AcessoryColorUnlock: 0
+    AcessoryColorCost: 0
     CatPrefabLocation: {x: -0.25, y: 0.66, z: 1}
     CatPrefabScale: {x: 0.21, y: 0.5, z: 1}
     MaxoffsetforCatButton: {x: 139, y: 80}
@@ -256,8 +264,10 @@ MonoBehaviour:
     MinoffsetforExternalCatButton: {x: 17, y: 113}
   - Name: Wide Hat
     Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
-    Cost: 30
-    Unlocked: 0
+    AcessoryUnlock: 0
+    AcessoryCost: 30
+    AcessoryColorUnlock: 0
+    AcessoryColorCost: 0
     CatPrefabLocation: {x: -0.238, y: 0.49, z: 1}
     CatPrefabScale: {x: 0.285, y: 0.22, z: 1}
     MaxoffsetforCatButton: {x: 115, y: 130.5}
@@ -266,8 +276,10 @@ MonoBehaviour:
     MinoffsetforExternalCatButton: {x: 6, y: 111}
   - Name: Cone
     Acessory: {fileID: 21300000, guid: b5e6f9a25b92b674a95212436df6d7ac, type: 3}
-    Cost: 30
-    Unlocked: 0
+    AcessoryUnlock: 0
+    AcessoryCost: 30
+    AcessoryColorUnlock: 0
+    AcessoryColorCost: 0
     CatPrefabLocation: {x: -0.252, y: 0.226, z: 1}
     CatPrefabScale: {x: 0.21, y: 0.22, z: 1}
     MaxoffsetforCatButton: {x: 107, y: 149.5}
@@ -276,8 +288,10 @@ MonoBehaviour:
     MinoffsetforExternalCatButton: {x: -10, y: 74}
   - Name: Flower
     Acessory: {fileID: 21300000, guid: d355f321b02fed3469680c75b1d853a5, type: 3}
-    Cost: 30
-    Unlocked: 0
+    AcessoryUnlock: 0
+    AcessoryCost: 30
+    AcessoryColorUnlock: 0
+    AcessoryColorCost: 0
     CatPrefabLocation: {x: -0.115, y: 0.4227, z: 1}
     CatPrefabScale: {x: 0.2, y: 0.2, z: 1}
     MaxoffsetforCatButton: {x: 134.5, y: 142}
@@ -286,8 +300,10 @@ MonoBehaviour:
     MinoffsetforExternalCatButton: {x: 46.5, y: 115.5}
   - Name: Flower Hat
     Acessory: {fileID: 21300000, guid: 09f8a11800e601e4f9b1d2dd4de98575, type: 3}
-    Cost: 30
-    Unlocked: 0
+    AcessoryUnlock: 0
+    AcessoryCost: 30
+    AcessoryColorUnlock: 0
+    AcessoryColorCost: 0
     CatPrefabLocation: {x: -0.24, y: 0.44, z: 1}
     CatPrefabScale: {x: 0.17, y: 0.15, z: 1}
     MaxoffsetforCatButton: {x: 131, y: 130}
@@ -296,8 +312,10 @@ MonoBehaviour:
     MinoffsetforExternalCatButton: {x: 18, y: 111.5}
   - Name: Wide Flower Hat
     Acessory: {fileID: 21300000, guid: 09f8a11800e601e4f9b1d2dd4de98575, type: 3}
-    Cost: 30
-    Unlocked: 0
+    AcessoryUnlock: 0
+    AcessoryCost: 30
+    AcessoryColorUnlock: 0
+    AcessoryColorCost: 0
     CatPrefabLocation: {x: -0.238, y: 0.49, z: 1}
     CatPrefabScale: {x: 0.285, y: 0.22, z: 1}
     MaxoffsetforCatButton: {x: 113.7, y: 124.7}
@@ -306,8 +324,10 @@ MonoBehaviour:
     MinoffsetforExternalCatButton: {x: 6, y: 111}
   - Name: Tall Flower Hat
     Acessory: {fileID: 21300000, guid: 09f8a11800e601e4f9b1d2dd4de98575, type: 3}
-    Cost: 30
-    Unlocked: 0
+    AcessoryUnlock: 0
+    AcessoryCost: 30
+    AcessoryColorUnlock: 0
+    AcessoryColorCost: 0
     CatPrefabLocation: {x: -0.238, y: 0.49, z: 1}
     CatPrefabScale: {x: 0.285, y: 0.22, z: 1}
     MaxoffsetforCatButton: {x: 113.7, y: 124.7}
@@ -316,8 +336,10 @@ MonoBehaviour:
     MinoffsetforExternalCatButton: {x: 6, y: 111}
   - Name: Even Wider Flower Hat
     Acessory: {fileID: 21300000, guid: 09f8a11800e601e4f9b1d2dd4de98575, type: 3}
-    Cost: 30
-    Unlocked: 0
+    AcessoryUnlock: 0
+    AcessoryCost: 30
+    AcessoryColorUnlock: 0
+    AcessoryColorCost: 0
     CatPrefabLocation: {x: -0.238, y: 0.49, z: 1}
     CatPrefabScale: {x: 0.285, y: 0.22, z: 1}
     MaxoffsetforCatButton: {x: 113.7, y: 124.7}
@@ -330,17 +352,88 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1874b8b6a361f564880fa4a3e13e85c5, type: 2}
   - {fileID: 11400000, guid: bc652e92a1286f049be1245a488222d4, type: 2}
   - {fileID: 11400000, guid: e555ba895d5a24446bccda1cb968e5d7, type: 2}
-  WarningList:
-  - 'Warning: You dont own this accessory.'
-  AccessoryColors: []
+  HatAccessoryColors:
+  - Name: BlueHat
+    NamofBaseAcessory: Hat
+    ColorAcessory: {fileID: 21300000, guid: a05381c2b5c45904e807f9df1e08c9e2, type: 3}
+  - Name: GreenHat
+    NamofBaseAcessory: Hat
+    ColorAcessory: {fileID: 21300000, guid: 6a80404fbc7a5be4491ac3795533245f, type: 3}
+  - Name: PinkHat
+    NamofBaseAcessory: Hat
+    ColorAcessory: {fileID: 21300000, guid: 2959cca759fc1d846b1a673eb134da65, type: 3}
+  - Name: RedHat
+    NamofBaseAcessory: Hat
+    ColorAcessory: {fileID: 21300000, guid: 9a7a342fbafcfca4190e3ae4df246ced, type: 3}
+  - Name: YellowHat
+    NamofBaseAcessory: Hat
+    ColorAcessory: {fileID: 21300000, guid: 453ae98aa2fbe9748b8d0b63abe5f602, type: 3}
+  HeadsetColors:
+  - Name: BlueHeadset
+    NamofBaseAcessory: Headset
+    ColorAcessory: {fileID: 21300000, guid: a793440e50c97bd49ba3a4d7848c3248, type: 3}
+  - Name: BlueHeadset
+    NamofBaseAcessory: Headset
+    ColorAcessory: {fileID: 21300000, guid: f5e6ea3d21c8a254cbb45a114e26ccad, type: 3}
+  - Name: PinkHeadset
+    NamofBaseAcessory: Headset
+    ColorAcessory: {fileID: 21300000, guid: ec74d0afe52127944b283010346b3082, type: 3}
+  - Name: RedHeadset
+    NamofBaseAcessory: Headset
+    ColorAcessory: {fileID: 21300000, guid: f7760640a29e3004e97caf65df3a2994, type: 3}
+  - Name: YellowHeadset
+    NamofBaseAcessory: Headset
+    ColorAcessory: {fileID: 21300000, guid: e02822a8fb17c42468f19ae21b2ad51b, type: 3}
+  ConeColors:
+  - Name: White Cone
+    NamofBaseAcessory: Cone
+    ColorAcessory: {fileID: 21300000, guid: bbc046aaffae54441bb75069bff33ce7, type: 3}
+  - Name: Yellow Cone
+    NamofBaseAcessory: Cone
+    ColorAcessory: {fileID: 21300000, guid: 4abf3dc25e3456240bf94cbc484814c3, type: 3}
+  - Name: Pink Cone
+    NamofBaseAcessory: Cone
+    ColorAcessory: {fileID: 21300000, guid: b7ead7188a8fe494f99fb8cd7b10ca65, type: 3}
+  - Name: Red Cone
+    NamofBaseAcessory: Cone
+    ColorAcessory: {fileID: 21300000, guid: 5c393234edbd5fa49a4a20c76c202981, type: 3}
+  - Name: Blue Cone
+    NamofBaseAcessory: Cone
+    ColorAcessory: {fileID: 21300000, guid: 46579a5aab436ff4d9c1858cbba6a399, type: 3}
+  FlowerColors:
+  - Name: YellowFlower
+    NamofBaseAcessory: Flower
+    ColorAcessory: {fileID: 21300000, guid: ff342cae3ae3d744b989e99dd2e4a757, type: 3}
+  - Name: PinkFlower
+    NamofBaseAcessory: Flower
+    ColorAcessory: {fileID: 21300000, guid: 105323e14b7678a4ba173c921baffbcf, type: 3}
+  - Name: RedFlower
+    NamofBaseAcessory: Flower
+    ColorAcessory: {fileID: 21300000, guid: fd6dfe9a04b43cd439f8d60aa67d2d28, type: 3}
+  - Name: BlueFlower
+    NamofBaseAcessory: Flower
+    ColorAcessory: {fileID: 21300000, guid: 3807213e9b3dd4a4eb6316fc6dafdef0, type: 3}
+  FlowerHatColors:
+  - Name: YellowFlowerHat
+    NamofBaseAcessory: Flower Hat, Tall Flower Hat, Wide Flower Hat
+    ColorAcessory: {fileID: 21300000, guid: 63f42e4db63d7b04a9ddd12c8878d9ef, type: 3}
+  - Name: PinkFlowerHat
+    NamofBaseAcessory: Flower Hat, Tall Flower Hat, Wide Flower Hat
+    ColorAcessory: {fileID: 21300000, guid: 529b884d44752054e90d185215940608, type: 3}
+  - Name: RedFlowerHat
+    NamofBaseAcessory: Flower Hat, Tall Flower Hat, Wide Flower Hat
+    ColorAcessory: {fileID: 21300000, guid: 01425236c2826dc42957c65e6fe4b99f, type: 3}
+  - Name: BlueFlowerHat
+    NamofBaseAcessory: Flower Hat, Tall Flower Hat, Wide Flower Hat
+    ColorAcessory: {fileID: 21300000, guid: e38b43298d2b2a14cada11abf71b3c52, type: 3}
   SelectCat: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
   CurrentAnim: {fileID: 9100000, guid: 3b3859dba476d7143977ce83cfa36e01, type: 2}
   CurrentSkin: {fileID: -251871438, guid: 3589b1d7c5d65374093d56104ed629bc, type: 3}
-  CurrentAccessory: {fileID: 21300000, guid: 09f8a11800e601e4f9b1d2dd4de98575, type: 3}
-  CurrentName: Flower Hat
+  CurrentAccessory: {fileID: 21300000, guid: 127279d577f25ac4ea17dae3782e5074, type: 3}
+  CurrentName: NA
   CurrentSelected: 0
   CurrentSkinIndex: 0
-  CurrentAccessoryIndex: 6
+  CurrentAccessoryIndex: 0
   Warning: {fileID: 38641375586690239, guid: a3b1f80bdb434f143aff86bb93adcdb7, type: 3}
 --- !u!114 &918842532
 MonoBehaviour:

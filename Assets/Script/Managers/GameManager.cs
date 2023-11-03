@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour
 
     [Header("Misc")]
     //list of all level data
-    //public static List<LevelData> Levels;
     public List<LevelData> Levels = new List<LevelData>();
     public GameLevels GamelevelList;
     public int LevelPosition = 0;

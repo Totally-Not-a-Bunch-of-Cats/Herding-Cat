@@ -63,19 +63,19 @@ public class CosmeticUnlockSaver : MonoBehaviour
     {
         if (GameManager.Instance.PlayerPrefsTrue)
         {
-            for (int i = 0; i < GameManager.Instance._catInfoManager.Cats.Count; i++)
+            for (int i = 0; i < GameManager.Instance._catInfoManager.SkinList.Count; i++)
             {
-                if (GameManager.Instance._catInfoManager.Cats[i].Name == SkinName)
+                if (GameManager.Instance._catInfoManager.SkinList[i].Name == SkinName)
                 {
                     SelectedSkin = i;
                     break;
                 }
             }
-            if (GameManager.Instance.StarCount >= GameManager.Instance._catInfoManager.Cats[SelectedSkin].Cost)
+            if (GameManager.Instance.StarCount >= GameManager.Instance._catInfoManager.SkinList[SelectedSkin].Cost)
             {
                 GameManager.Instance._PlayerPrefsManager.SaveBool(SkinName, true);
-                GameManager.Instance._catInfoManager.Cats[SelectedSkin].Unlocked = true;
-                GameManager.Instance.StarCount -= GameManager.Instance._catInfoManager.Cats[SelectedSkin].Cost;
+                GameManager.Instance._catInfoManager.SkinList[SelectedSkin].Unlocked = true;
+                GameManager.Instance.StarCount -= GameManager.Instance._catInfoManager.SkinList[SelectedSkin].Cost;
                 GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", GameManager.Instance.StarCount);
             }
             else
