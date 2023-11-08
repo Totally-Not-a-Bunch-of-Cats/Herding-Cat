@@ -226,30 +226,30 @@ MonoBehaviour:
     MinoffsetforCatButton: {x: 0, y: 0}
     MaxoffsetforExternalCatButton: {x: 0, y: 0}
     MinoffsetforExternalCatButton: {x: 0, y: 0}
-  - Name: Normal Hat
-    Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
-    AcessoryUnlock: 0
-    AcessoryCost: 30
-    AcessoryColorUnlock: 0
-    AcessoryColorCost: 0
-    CatPrefabLocation: {x: -0.245, y: 0.47, z: 1}
-    CatPrefabScale: {x: 0.18, y: 0.16, z: 1}
-    MaxoffsetforCatButton: {x: 138, y: 134}
-    MinoffsetforCatButton: {x: 63, y: 198}
-    MaxoffsetforExternalCatButton: {x: 79, y: -3}
-    MinoffsetforExternalCatButton: {x: 19, y: 111}
   - Name: Headset
     Acessory: {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
     AcessoryUnlock: 0
     AcessoryCost: 30
     AcessoryColorUnlock: 0
-    AcessoryColorCost: 0
+    AcessoryColorCost: 20
     CatPrefabLocation: {x: -0.245, y: 0.328, z: 1}
     CatPrefabScale: {x: 0.21, y: 0.185, z: 1}
     MaxoffsetforCatButton: {x: 120, y: 141}
     MinoffsetforCatButton: {x: 46, y: 157}
     MaxoffsetforExternalCatButton: {x: 67, y: 9}
     MinoffsetforExternalCatButton: {x: 7, y: 80.5}
+  - Name: Normal Hat
+    Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
+    AcessoryUnlock: 0
+    AcessoryCost: 30
+    AcessoryColorUnlock: 0
+    AcessoryColorCost: 20
+    CatPrefabLocation: {x: -0.245, y: 0.47, z: 1}
+    CatPrefabScale: {x: 0.18, y: 0.16, z: 1}
+    MaxoffsetforCatButton: {x: 138, y: 134}
+    MinoffsetforCatButton: {x: 63, y: 198}
+    MaxoffsetforExternalCatButton: {x: 79, y: -3}
+    MinoffsetforExternalCatButton: {x: 19, y: 111}
   - Name: Tall Hat
     Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
     AcessoryUnlock: 0
@@ -279,7 +279,7 @@ MonoBehaviour:
     AcessoryUnlock: 0
     AcessoryCost: 30
     AcessoryColorUnlock: 0
-    AcessoryColorCost: 0
+    AcessoryColorCost: 20
     CatPrefabLocation: {x: -0.252, y: 0.226, z: 1}
     CatPrefabScale: {x: 0.21, y: 0.22, z: 1}
     MaxoffsetforCatButton: {x: 107, y: 149.5}
@@ -291,7 +291,7 @@ MonoBehaviour:
     AcessoryUnlock: 0
     AcessoryCost: 30
     AcessoryColorUnlock: 0
-    AcessoryColorCost: 0
+    AcessoryColorCost: 20
     CatPrefabLocation: {x: -0.115, y: 0.4227, z: 1}
     CatPrefabScale: {x: 0.2, y: 0.2, z: 1}
     MaxoffsetforCatButton: {x: 134.5, y: 142}
@@ -303,7 +303,7 @@ MonoBehaviour:
     AcessoryUnlock: 0
     AcessoryCost: 30
     AcessoryColorUnlock: 0
-    AcessoryColorCost: 0
+    AcessoryColorCost: 20
     CatPrefabLocation: {x: -0.24, y: 0.44, z: 1}
     CatPrefabScale: {x: 0.17, y: 0.15, z: 1}
     MaxoffsetforCatButton: {x: 131, y: 130}
@@ -449,7 +449,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioPlayer: {fileID: 0}
   MainMenuTrack: {fileID: 8300000, guid: 3b62462537581e54f81daa7afaab5cfa, type: 3}
-  CurrentLevelTrack: 0
+  CurrentLevelTrack: -1
+  TrackProgression: 0
   AudioTracks:
   - {fileID: 8300000, guid: 8210552378dcf5f4ca24be2bf74f61a8, type: 3}
   - {fileID: 8300000, guid: a785267b91feb6b4da175d43c4c3f9fb, type: 3}
@@ -457,3 +458,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 056cbe616c033974e8533109a8314102, type: 3}
   AudioEffect:
   - {fileID: 8300000, guid: 7d7ad6a831001834aa32a0dad156b033, type: 3}
+  SwitchFromMainMenuMusic: 1

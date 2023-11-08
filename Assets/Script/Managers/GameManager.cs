@@ -166,13 +166,16 @@ public class GameManager : MonoBehaviour
     public IEnumerator StartMenuMusic()
     {
         yield return new WaitForSeconds(0);
-        Instance._musicManager.PlayMenuSong();
+        //Instance._musicManager.PlayMenuSong();
     }
 
     public void StartMatchMusic()
     {
-       Instance._musicManager.RandomTrack();
-       Instance._musicManager.PlayTrack();
+        if (_musicManager.CurrentLevelTrack == -1)
+        {
+            Instance._musicManager.RandomTrack();
+        }
+        Instance._musicManager.PlayTrack();
     }
     /// <summary>
     /// gives the player their bonus stars for levels already completed, when they purchase the +1 stars pack

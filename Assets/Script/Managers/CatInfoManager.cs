@@ -222,15 +222,25 @@ public class CatInfoManager : MonoBehaviour
     }
     public void NextColor(GameObject Reference)
     {
-
-        if (Accessories[CurrentAccessoryIndex].AcessoryUnlock == false)
+        CurrentAccessoryIndex = GetAccessoryIndex();
+        if (Accessories[CurrentAccessoryIndex].AcessoryColorCost == 0)
         {
-            GameManager.Instance._WarningTxtManager.SwitchTxtAccColor(2);
+            GameManager.Instance._WarningTxtManager.SwitchTxtAccColor(3);
         }
         else
         {
-            GameManager.Instance._WarningTxtManager.HideTxtColor();
-            GameManager.Instance._WarningTxtManager.EnableConfirmButton();
+            if (Accessories[CurrentAccessoryIndex].AcessoryUnlock == false)
+            {
+                GameManager.Instance._WarningTxtManager.SwitchTxtAccColor(2);
+            }
+            else
+            {
+                GameManager.Instance._WarningTxtManager.HideTxtColor();
+                GameManager.Instance._WarningTxtManager.EnableConfirmButton();
+
+
+
+            }
         }
     }
     public void PreviousColor(GameObject Reference)
@@ -245,5 +255,14 @@ public class CatInfoManager : MonoBehaviour
             GameManager.Instance._WarningTxtManager.HideTxtColor();
             GameManager.Instance._WarningTxtManager.EnableConfirmButton();
         }
+    }
+
+    public void Clear()
+    {
+        Catlist[CurrentSelected].Acessory1 = Accessories[0].Acessory;
+        Catlist[CurrentSelected].nameofAcessory1 = Accessories[0].Name;
+        Catlist[CurrentSelected].Acessory1ListNum = 0;
+        Catlist[CurrentSelected].Skin = SkinList[0].Skin;
+
     }
 }

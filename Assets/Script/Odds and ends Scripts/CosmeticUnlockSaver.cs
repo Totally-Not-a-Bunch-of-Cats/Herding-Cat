@@ -103,13 +103,13 @@ public class CosmeticUnlockSaver : MonoBehaviour
                     break;
                 }
             }
-            if (GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryUnlock == false)
+            if (GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryColorUnlock == false)
             {
-                if (GameManager.Instance.StarCount >= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryCost)
+                if (GameManager.Instance.StarCount >= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryColorCost)
                 {
                     GameManager.Instance._PlayerPrefsManager.SaveBool(AcessoryName, true);
-                    GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryUnlock = true;
-                    GameManager.Instance.StarCount -= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryCost;
+                    GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryColorUnlock = true;
+                    GameManager.Instance.StarCount -= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryColorCost;
                     GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", GameManager.Instance.StarCount);
                 }
                 else

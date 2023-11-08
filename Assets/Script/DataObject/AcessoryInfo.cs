@@ -9,6 +9,7 @@ public class AcessoryInfo
     public int AcessoryCost;
     public bool AcessoryColorUnlock;
     public int AcessoryColorCost;
+    public string AcessoryColorListName;
     public Vector3 CatPrefabLocation;
     public Vector3 CatPrefabScale;
     public Vector2 MaxoffsetforCatButton;

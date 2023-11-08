@@ -194,7 +194,7 @@ public class MatchManager : MonoBehaviour
             }
 
             MarkTubes(TubePairs);
-            GameManager.Instance.StartMatchMusic();
+            //GameManager.Instance.StartMatchMusic();
 
             //places items 
             for (int i = 0; i < currentLevel.GetPossibleItems().Length; i++)
@@ -889,6 +889,7 @@ public class MatchManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator VictoryPause()
     {
+       //StartCoroutine(GameManager.Instance._musicManager.FadeOut());
         GameManager.Instance.GamesTillRewardAd -= 1;
         GameManager.Instance.GamesTillMandatoryAd -= 1;
         if(GameManager.Instance.GamesTillRewardAd == 0)
