@@ -40,7 +40,8 @@ public class MusicManager : MonoBehaviour
         }
         if (AudioPlayer != null)
         {
-            if (AudioPlayer.GetComponent<AudioSource>().isPlaying == false)
+            TrackProgression = AudioPlayer.GetComponent<AudioSource>().time;
+            if (AudioPlayer.GetComponent<AudioSource>().clip.length <= TrackProgression)
             {
                 NextTrack();
             }
