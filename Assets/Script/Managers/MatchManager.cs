@@ -889,7 +889,6 @@ public class MatchManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator VictoryPause()
     {
-       //StartCoroutine(GameManager.Instance._musicManager.FadeOut());
         GameManager.Instance.GamesTillRewardAd -= 1;
         GameManager.Instance.GamesTillMandatoryAd -= 1;
         if(GameManager.Instance.GamesTillRewardAd == 0)

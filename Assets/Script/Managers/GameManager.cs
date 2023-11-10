@@ -132,6 +132,7 @@ public class GameManager : MonoBehaviour
         if(Name == "Main Menu")
         {
             yield return new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
             GameObject WaringTxt = GameObject.Find("Canvas");
             Instance._WarningTxtManager = WaringTxt.GetComponent<WarningTxtManager>();
         }
@@ -215,7 +216,7 @@ public class GameManager : MonoBehaviour
 
         //loads the board and starts the level by generating a match using the match info and matchmanager
         yield return new WaitForEndOfFrame();
-
+        yield return new WaitForSeconds(.5f);
         GameObject _board = GameObject.Find("Board");
         Instance._uiManager.FindBoard(_board);
         _uiManager.SelectedItem = null;

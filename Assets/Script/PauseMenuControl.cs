@@ -39,16 +39,16 @@ public class PauseMenuControl : MonoBehaviour
 
     public void ReturnMainMenu()
     {
-        StartCoroutine(GameManager.Instance.SwitchScene("Main Menu"));
+        GameManager.Instance.ChangeScene("Main Menu");
     }
     public void NavagateToLevelSeelct()
     {
-        StartCoroutine(GameManager.Instance.SwitchScene("Main Menu"));
+        GameManager.Instance.ChangeScene("Main Menu");
         StartCoroutine(GameManager.Instance.GotoLevelSecet("Level Select"));
     }
     public void NavagateToCatCust()
     {
-        StartCoroutine(GameManager.Instance.SwitchScene("Main Menu"));
-        StartCoroutine(GameManager.Instance.GotoLevelSecet("Cat Menu"));
+        GameManager.Instance.ChangeScene("Main Menu");
+        StartCoroutine(GameManager.Instance.GotoLevelSecet("CatMenu"));
     }
 }

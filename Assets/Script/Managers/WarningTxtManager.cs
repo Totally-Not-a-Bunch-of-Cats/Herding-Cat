@@ -68,27 +68,36 @@ public class WarningTxtManager : MonoBehaviour
     /// </summary>
     public void HideTxtAccessory()
     {
-        Warning1.SetActive(false);
-        WarningTxt1 = "";
-        WarningTMP1.text = WarningTxt1;
+        if(Warning1.activeInHierarchy)
+        {
+            Warning1.SetActive(false);
+            WarningTxt1 = "";
+            WarningTMP1.text = WarningTxt1;
+        }
     }
     /// <summary>
     /// deactivates the warning txt for the accessory
     /// </summary>
     public void HideTxtSkin()
     {
-        Warning2.SetActive(false);
-        WarningTxt2 = "";
-        WarningTMP2.text = WarningTxt2;
+        if(Warning3.activeInHierarchy)
+        {
+            Warning3.SetActive(false);
+            WarningTxt3 = "";
+            WarningTMP3.text = WarningTxt2;
+        }
     }
     /// <summary>
     /// deactivates the warning txt for the accessory
     /// </summary>
     public void HideTxtColor()
     {
-        Warning3.SetActive(false);
-        WarningTxt3 = "";
-        WarningTMP3.text = WarningTxt3;
+        if(Warning2.activeInHierarchy)
+        {
+            Warning2.SetActive(false);
+            WarningTxt2 = "";
+            WarningTMP2.text = WarningTxt3;
+        }
     }
     /// <summary>
     /// disables teh confirm button preventing the player from locking in something they down own,

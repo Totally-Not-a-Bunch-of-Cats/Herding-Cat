@@ -67,7 +67,6 @@ public class MusicManager : MonoBehaviour
     public void PlayTrack()
     {
         AudioPlayer.GetComponent<AudioSource>().clip = AudioTracks[CurrentLevelTrack];
-        Debug.Log(CurrentLevelTrack);
         GetAudioLevel();
         AudioPlayer.GetComponent<AudioSource>().Play();
         StartCoroutine(FadeIn());
@@ -77,7 +76,6 @@ public class MusicManager : MonoBehaviour
     /// </summary>
     public void PlayMenuSong()
     {
-        Debug.Log("mop");
         AudioPlayer.GetComponent<AudioSource>().clip = MainMenuTrack;
         GetAudioLevel();
         AudioPlayer.GetComponent<AudioSource>().Play();
@@ -94,7 +92,6 @@ public class MusicManager : MonoBehaviour
 
     public void NextTrack()
     {
-        Debug.Log("next track active");
         if(CurrentLevelTrack + 1 < AudioTracks.Count)
         {
             CurrentLevelTrack += 1;
