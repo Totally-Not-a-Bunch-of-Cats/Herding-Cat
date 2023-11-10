@@ -214,6 +214,7 @@ public class GameManager : MonoBehaviour
         //loads the board and starts the level by generating a match using the match info and matchmanager
         yield return new WaitForEndOfFrame();
 
+        yield return new WaitForSeconds(.5f);
         GameObject _board = GameObject.Find("Board");
         Instance._uiManager.FindBoard(_board);
         _uiManager.SelectedItem = null;

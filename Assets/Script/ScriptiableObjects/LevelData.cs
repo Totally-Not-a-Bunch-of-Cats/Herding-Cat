@@ -157,7 +157,7 @@ public class LevelData: ScriptableObject
         {
             NewStarsEarned++;
         }
-        if (StarsEarned > NewStarsEarned)
+        if (StarsEarned >= NewStarsEarned)
         {
             AdjustStarCount = false;
         }
