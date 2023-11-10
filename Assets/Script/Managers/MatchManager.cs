@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using System;
+using log4net.Core;
 
 [System.Serializable]
 /// <summary>
@@ -486,11 +487,11 @@ public class MatchManager : MonoBehaviour
                 {
                     GameManager.Instance._PlayerPrefsManager.SaveString("FurthestLevel", NextLevelName);
                 }
-                GameManager.Instance.Levels.Find(level => level.name == NextLevelName).SetUnlocked(true);
+                //GameManager.Instance.Levels.Find(level => level.name == NextLevelName).SetUnlocked(true);
                 //unlock levels equal to the number of stars earned
                 if (GameManager.Instance.Levels.Exists(level => level.name == NextLevelName))
                 {
-                    for(int j =1; j < CurrentLevel.StarsEarned; j++)
+                    /*for(int j =1; j < CurrentLevel.StarsEarned; j++)
                     {
                         string[] additionalLevelName = NextLevelName.Split('-');
                         NextLevelName = "";
@@ -508,6 +509,27 @@ public class MatchManager : MonoBehaviour
                         if (GameManager.Instance.Levels.Exists(level => level.name == NextLevelName))
                         {
                             GameManager.Instance.Levels.Find(level => level.name == NextLevelName).SetUnlocked(true);
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }*/
+                    int NextLevelPlacement = GameManager.Instance.Levels.IndexOf(CurrentLevel) + 1;
+                    int NewestLockedLevel = 0;
+                    for(int j = NextLevelPlacement; j <= GameManager.Instance.Levels.Count - 1; j++)
+                    {
+                        if(GameManager.Instance.Levels[j].GetUnlocked() == false)
+                        {
+                            NewestLockedLevel = j;
+                            break;
+                        }
+                    }
+                    for(int j = NewestLockedLevel; j <= GameManager.Instance.Levels.Count - 1; j++)
+                    {
+                        if(GameManager.Instance.StarCount >= j)
+                        {
+                            GameManager.Instance.Levels[j].SetUnlocked(true);
                         }
                         else
                         {
