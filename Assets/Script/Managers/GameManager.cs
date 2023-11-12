@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     [Header("Option Varables")]
     public float CatSpeed = 1;
     public bool ItemIndicators = false;
-    public float sfxVolume;
+    public float SFXVolume;
     public bool SFXToggle;
     public float musicVolume;
     public bool MusicToggle;
@@ -216,7 +216,7 @@ public class GameManager : MonoBehaviour
 
         //loads the board and starts the level by generating a match using the match info and matchmanager
         yield return new WaitForEndOfFrame();
-        yield return new WaitForSeconds(.5f);
+        //yield return new WaitForSeconds(.2f);
         GameObject _board = GameObject.Find("Board");
         Instance._uiManager.FindBoard(_board);
         _uiManager.SelectedItem = null;

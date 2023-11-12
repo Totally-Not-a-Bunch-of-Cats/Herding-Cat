@@ -31,7 +31,7 @@ public class OptionsMenuControl : MonoBehaviour
     {
         SpeedAdjustSlider.value = (GameManager.Instance.CatSpeed - .75f) / .25f;
         MusicAdjustSlider.value = GameManager.Instance.musicVolume * 5;
-        SFXAdjustSlider.value = GameManager.Instance.sfxVolume * 5;
+        SFXAdjustSlider.value = GameManager.Instance.SFXVolume * 5;
         ItemAffectButtons[1].interactable = !GameManager.Instance.ItemIndicators;
         ItemAffectButtons[0].interactable = GameManager.Instance.ItemIndicators;
         if (MusicToggleButtons[0] != null)
@@ -80,10 +80,10 @@ public class OptionsMenuControl : MonoBehaviour
     {
         float AgmentAmount = SFXAdjustSlider.value / 5;
         SFXAdjustText.text = SFXAdjustWording + AgmentAmount;
-        GameManager.Instance.sfxVolume = AgmentAmount;
+        GameManager.Instance.SFXVolume = AgmentAmount;
         if (GameManager.Instance.PlayerPrefsTrue == true)
         {
-            GameManager.Instance._PlayerPrefsManager.SaveFloat("SfxVolume", AgmentAmount);
+            GameManager.Instance._PlayerPrefsManager.SaveFloat("SFXVolume", AgmentAmount);
         }
     }
 

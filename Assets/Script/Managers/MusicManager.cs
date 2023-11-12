@@ -30,11 +30,11 @@ public class MusicManager : MonoBehaviour
     }
     private void LateUpdate()
     {
-        if(SceneManager.GetActiveScene().name == "Match" && SwitchFromMainMenuMusic)
+        if (SceneManager.GetActiveScene().name == "Match" && SwitchFromMainMenuMusic)
         {
             StartCoroutine(FadeOut());
         }
-        if(SceneManager.GetActiveScene().name == "Main Menu" && !SwitchFromMainMenuMusic)
+        if (SceneManager.GetActiveScene().name == "Main Menu" && !SwitchFromMainMenuMusic)
         {
             StartCoroutine(FadeOutMainMenu());
         }
