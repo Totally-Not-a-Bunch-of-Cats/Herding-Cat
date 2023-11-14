@@ -16,20 +16,20 @@ public class MusicManager : MonoBehaviour
 
 
 
-    private void Awake()
+    private void Start()
     {
-        if (AudioPlayer == null)
-        {
-            AudioPlayer = GameObject.FindGameObjectWithTag("Music");
-        }
         if (CurrentLevelTrack == -1)
         {
             RandomTrack();
         }
-        PlayMenuSong();
     }
     private void LateUpdate()
     {
+        if (AudioPlayer == null)
+        {
+            AudioPlayer = GameObject.FindGameObjectWithTag("Music");
+            PlayMenuSong();
+        }
         if (SceneManager.GetActiveScene().name == "Match" && SwitchFromMainMenuMusic)
         {
             StartCoroutine(FadeOut());
@@ -46,6 +46,7 @@ public class MusicManager : MonoBehaviour
                 NextTrack();
             }
         }
+        GetAudioLevel();
     }
 
     /// <summary>
@@ -55,6 +56,24 @@ public class MusicManager : MonoBehaviour
     {
         AudioLevel = GameManager.Instance.musicVolume;
     }
+
+    public void Mute()
+    {
+        Debug.Log("lets go");
+        if(GameManager.Instance.MusicToggle == true)
+        {
+            Debug.Log("loudened");
+            GameManager.Instance.musicVolume = 1;
+            AudioPlayer.GetComponent<AudioSource>().volume = 1;
+        }
+        else
+        {
+            Debug.Log("muted");
+            GameManager.Instance.musicVolume = 0;
+            AudioPlayer.GetComponent<AudioSource>().volume = 0;
+        }
+    }
+
     /// <summary>
     /// randomly choses an aduio track
     /// </summary>
@@ -143,7 +162,7 @@ public class MusicManager : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         AudioPlayer.GetComponent<AudioSource>().volume -= AudioLevel / 6;
         yield return new WaitForSeconds(.5f);
-        AudioPlayer.GetComponent<AudioSource>().volume = .05f;
+        AudioPlayer.GetComponent<AudioSource>().volume -= AudioLevel / 8;
         PlayTrack();
     }
     /// <summary>
@@ -164,7 +183,7 @@ public class MusicManager : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         AudioPlayer.GetComponent<AudioSource>().volume -= AudioLevel / 6;
         yield return new WaitForSeconds(.5f);
-        AudioPlayer.GetComponent<AudioSource>().volume = .05f;
+        AudioPlayer.GetComponent<AudioSource>().volume -= AudioLevel / 8;
         PlayMenuSong();
     }
 }

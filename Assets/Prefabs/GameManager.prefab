@@ -74,8 +74,6 @@ MonoBehaviour:
   ADsoff: 0
   CatSpeed: 1
   ItemIndicators: 0
-  SFXVolume: 0
-  SFXToggle: 1
   musicVolume: 1
   MusicToggle: 1
   UpdateLevelData: 1
@@ -229,9 +227,9 @@ MonoBehaviour:
     MinoffsetforExternalCatButton: {x: 0, y: 0}
   - Name: Headset
     Acessory: {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
-    AcessoryUnlock: 1
+    AcessoryUnlock: 0
     AcessoryCost: 30
-    AcessoryColorUnlock: 1
+    AcessoryColorUnlock: 0
     AcessoryColorCost: 20
     AcessoryColorListName: HeadsetColors
     CatPrefabLocation: {x: -0.245, y: 0.328, z: 1}

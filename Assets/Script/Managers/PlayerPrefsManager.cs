@@ -19,25 +19,25 @@ public class PlayerPrefsManager : MonoBehaviour
     public void LoadSettings()
     {
         //checks to see if SFXVolme has a key and if it doesnt it makes one
-        if(!PlayerPrefs.HasKey("SFXVolume"))
-        {
-            GameManager.Instance.SFXVolume = 1;
-            PlayerPrefs.SetFloat("SFXVolume", 1);
-        }
-        else
-        {
-            GameManager.Instance.SFXVolume = PlayerPrefs.GetFloat("SFXVolume");
-        }
+        ////if(!PlayerPrefs.HasKey("SFXVolume"))
+        ////{
+        ////    GameManager.Instance.SFXVolume = 1;
+        ////    PlayerPrefs.SetFloat("SFXVolume", 1);
+        ////}
+        //else
+        //{
+        //    GameManager.Instance.SFXVolume = PlayerPrefs.GetFloat("SFXVolume");
+        //}
         //checks to see if SFXToggle has a key and if it doesnt it makes one
-        if (!PlayerPrefs.HasKey("SFXToggle"))
-        {
-            GameManager.Instance.SFXToggle = true;
-            SaveBool("SFXToggle", true);
-        }
-        else
-        {
-            GameManager.Instance.SFXToggle = GetBool("SFXToggle");
-        }
+        //if (!PlayerPrefs.HasKey("SFXToggle"))
+        //{
+        //    GameManager.Instance.SFXToggle = true;
+        //    SaveBool("SFXToggle", true);
+        //}
+        //else
+        //{
+        //    GameManager.Instance.SFXToggle = GetBool("SFXToggle");
+        //}
         //checks to see if musicvolue has a key and if it doesnt it makes a key for it
         if (!PlayerPrefs.HasKey("MusicVolume"))
         {
@@ -132,6 +132,7 @@ public class PlayerPrefsManager : MonoBehaviour
             {
                 if (GameManager.Instance.FurthestLevel == GameManager.Instance.Levels[i].name)
                 {
+                    GameManager.Instance.Levels[i].SetUnlocked(true);
                     if (PlayerPrefs.GetInt(GameManager.Instance.Levels[i].name) > 0)
                     {
                         GameManager.Instance.Levels[i].StarsEarned = PlayerPrefs.GetInt(GameManager.Instance.Levels[i].name);
@@ -144,11 +145,42 @@ public class PlayerPrefsManager : MonoBehaviour
                 else
                 {
                     GameManager.Instance.Levels[i].StarsEarned = PlayerPrefs.GetInt(GameManager.Instance.Levels[i].name);
+                    GameManager.Instance.Levels[i].SetUnlocked(true);
                 }
             }
             else
             {
                 break;
+            }
+        }
+    }
+    public void UnlockCosmetics()
+    {
+        for(int i = 0; i < GameManager.Instance._catInfoManager.Accessories.Count; i++)
+        {
+            if (PlayerPrefs.HasKey(GameManager.Instance._catInfoManager.Accessories[i].Name))
+            {
+                if(GetBool(GameManager.Instance._catInfoManager.Accessories[i].Name))
+                {
+                    GameManager.Instance._catInfoManager.Accessories[i].AcessoryUnlock = true;
+                }
+            }
+            if (PlayerPrefs.HasKey(GameManager.Instance._catInfoManager.Accessories[i].Name + "Color"))
+            {
+                if (GetBool(GameManager.Instance._catInfoManager.Accessories[i].Name + "Color"))
+                {
+                    GameManager.Instance._catInfoManager.Accessories[i].AcessoryColorUnlock = true;
+                }
+            }
+        }
+        for (int j = 0; j < GameManager.Instance._catInfoManager.SkinList.Count; j++)
+        {
+            if (PlayerPrefs.HasKey(GameManager.Instance._catInfoManager.SkinList[j].Name))
+            {
+                if (GetBool(GameManager.Instance._catInfoManager.SkinList[j].Name))
+                {
+                    GameManager.Instance._catInfoManager.SkinList[j].Unlocked = true;
+                }
             }
         }
     }

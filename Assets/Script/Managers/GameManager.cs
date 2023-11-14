@@ -48,8 +48,8 @@ public class GameManager : MonoBehaviour
     [Header("Option Varables")]
     public float CatSpeed = 1;
     public bool ItemIndicators = false;
-    public float SFXVolume;
-    public bool SFXToggle;
+    //public float SFXVolume;
+    //public bool SFXToggle;
     public float musicVolume;
     public bool MusicToggle;
 
@@ -107,6 +107,7 @@ public class GameManager : MonoBehaviour
             _PlayerPrefsManager.LoadSettings();
             _PlayerPrefsManager.CheckLevels();
             _PlayerPrefsManager.RemoveHelpScreens();
+            _PlayerPrefsManager.UnlockCosmetics();
         }
         StartCoroutine(SwitchScene("Main Menu"));
         StartCoroutine(StartMenuMusic());
@@ -250,7 +251,23 @@ public class GameManager : MonoBehaviour
     public void Purchasemade()
     {
         ADsoff = true;
-        _PlayerPrefsManager.SaveBool("Adsoff", true);
+        _PlayerPrefsManager.SaveBool("ADsoff", true);
+    }
+
+    public void MuteToggle()
+    {
+        if(Instance.MusicToggle == true)
+        {
+            Debug.Log("off");
+            Instance.MusicToggle = false;
+            Instance._musicManager.Mute();
+        }
+        else
+        {
+            Debug.Log("on");
+            Instance.MusicToggle = true;
+            Instance._musicManager.Mute();
+        }
     }
 
     public int GetWorldNumber(){return WorldNumber;}

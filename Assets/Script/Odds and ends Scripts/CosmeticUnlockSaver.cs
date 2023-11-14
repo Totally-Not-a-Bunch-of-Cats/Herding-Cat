@@ -107,7 +107,7 @@ public class CosmeticUnlockSaver : MonoBehaviour
             {
                 if (GameManager.Instance.StarCount >= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryColorCost)
                 {
-                    GameManager.Instance._PlayerPrefsManager.SaveBool(AcessoryName, true);
+                    GameManager.Instance._PlayerPrefsManager.SaveBool(AcessoryName + "Color", true);
                     GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryColorUnlock = true;
                     GameManager.Instance.StarCount -= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryColorCost;
                     GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", GameManager.Instance.StarCount);
@@ -129,6 +129,13 @@ public class CosmeticUnlockSaver : MonoBehaviour
     public void DisableButton(GameObject button)
     {
         if(GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryUnlock == true)
+        {
+            button.SetActive(false);
+        }
+    }
+    public void DisableColorButton(GameObject button)
+    {
+        if (GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryColorUnlock == true)
         {
             button.SetActive(false);
         }
