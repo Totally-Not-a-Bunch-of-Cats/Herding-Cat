@@ -103,10 +103,12 @@ public class CosmeticUnlockSaver : MonoBehaviour
                     break;
                 }
             }
-            if (GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryColorUnlock == false)
+            Debug.Log(AcessoryName);
+            if (GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryUnlock == true)
             {
                 if (GameManager.Instance.StarCount >= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryColorCost)
                 {
+                    Debug.Log(GameManager.Instance.StarCount >= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryColorCost);
                     GameManager.Instance._PlayerPrefsManager.SaveBool(AcessoryName + "Color", true);
                     GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryColorUnlock = true;
                     GameManager.Instance.StarCount -= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryColorCost;
@@ -118,6 +120,12 @@ public class CosmeticUnlockSaver : MonoBehaviour
                     Debug.Log("oops all tears");
                     PurchaseFailure.SetActive(true);
                 }
+            }
+            else
+            {
+                //make error screen for not enough stars
+                Debug.Log("oops all tears");
+                PurchaseFailure.SetActive(true);
             }
         }
         else

@@ -150,9 +150,9 @@ public class UIManager : MonoBehaviour
                     {
                         if (GameManager.Instance._matchManager.CurrentLevel.name == "1-1" && WorldPosition == new Vector3(1, 0, 3))
                         {
-                            if(GameManager.Instance._matchManager.HelpIndicator2 == null)
+                            if (GameManager.Instance._matchManager.HelpIndicator2 == null)
                             {
-                                GameManager.Instance._matchManager.HelpIndicator2 = 
+                                GameManager.Instance._matchManager.HelpIndicator2 =
                                     Instantiate(GameManager.Instance._matchManager.UIHelpIndicator, GameObject.Find("End Turn Button").transform.position, Quaternion.identity, GUI.transform);
                             }
                             else
@@ -173,7 +173,7 @@ public class UIManager : MonoBehaviour
                         {
                             if (GameManager.Instance._matchManager.HelpIndicator2 == null)
                             {
-                                GameManager.Instance._matchManager.HelpIndicator2 = 
+                                GameManager.Instance._matchManager.HelpIndicator2 =
                                     Instantiate(GameManager.Instance._matchManager.Indicator, new Vector3(0f, -1f, 0), Quaternion.identity, Board.transform);
                             }
                             else
@@ -223,6 +223,16 @@ public class UIManager : MonoBehaviour
             else
             {
                 CanPlaceItem = true;
+            }
+            if(GameManager.Instance._matchManager != null)
+            {
+                //turns off the indicators if youve won the game
+                if (GameManager.Instance._matchManager.ActiveMatch == false)
+                {
+                    GameManager.Instance._matchManager.HelpIndicator.SetActive(false);
+                    GameManager.Instance._matchManager.HelpIndicator2.SetActive(false);
+                    GameManager.Instance._matchManager.HelpIndicator3.SetActive(false);
+                }
             }
         }
     }

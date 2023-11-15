@@ -15,14 +15,14 @@ MonoBehaviour:
   Dimensions: {x: 7, y: 8}
   TargetRounds: 3
   TargetItems: 12
-  NewThingIntroduced: 1
+  NewThingIntroduced: 0
   Category: 1
   TileName: Rewind
-  StarsEarned: 0
-  Unlocked: 0
+  StarsEarned: 3
+  Unlocked: 1
   NewItemIntroduced: 0
-  SpecialHelpTxt: 0
-  SpecialHelpLevelNum: -1
+  SpecialHelpTxt: 1
+  SpecialHelpLevelNum: 10
   BackgroundTile: {fileID: 11400000, guid: d756be87d23ee174f869fab071be06bf, type: 2}
   Tiles:
   - name: 

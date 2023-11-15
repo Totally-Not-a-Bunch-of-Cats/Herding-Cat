@@ -50,11 +50,12 @@ public class MusicManager : MonoBehaviour
     }
 
     /// <summary>
-    /// gets the audio level from the game manager
+    /// gets the audio level from the game manager and adjust it
     /// </summary>
     public void GetAudioLevel()
     {
         AudioLevel = GameManager.Instance.musicVolume;
+        AudioPlayer.GetComponent<AudioSource>().volume = AudioLevel;
     }
 
     public void Mute()

@@ -14166,8 +14166,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -19247,7 +19247,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 896329900}
   m_HandleRect: {fileID: 896329899}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -22125,20 +22125,19 @@ MonoBehaviour:
   RewindButton: {fileID: 2074573724}
   EndTurnButton: {fileID: 372479316}
   SpecHelpText:
-  - Press on the open glowing square to place items to lure the cat into the yellow
-    carrying cage.
-  - Press on the open glowing squares (both of them) to lure the cat into the cage.
-  - Use what you learned on the last 2 levels and attempt to place items in such
-    a way that you complete the level in one go
-  - Now their are two cats the toy item can affect two cats at the same time.
-  - Press on the open glowing squre to place the sanake down to scare teh cat into
-    the cage.
-  - Now you have acess to both item. Use them in combination to earn all the stars.
-  - Watch out for the bed! Cats are notoriously sleepy and will not react to other
-    items after sleeping.
+  - Press on the glowing square in the open space to place a toy to lure the cat
+    into the cage. ZZZZZ...
+  - Press on the glowing squares in succession to lure the cat into the cage. ZZZZZ...
+  - Use what you learned and try to beat the level in one GO.
+  - Now there are two cats! The toy can affect both at the same time. ZZZZZ...
+  - 'Press on the glowing square to place a snake and scare the cat into the cage.  '
+  - Now you have access to both items. Use them in combination to earn all the stars.
+  - 'Watch out for the bed! Cats are notoriously sleepy and will not react to other
+    items while sleeping. '
   - Cats can jump over tiles with the help of a cat tower.
-  - Cats are predictable if there is space they always go through the tube.
-  - Cats are naturally slippery just slinding in the direction of any pads.
+  - Cat tubes with the same symbol connect, allowing cats to traverse their insides.
+  - 'Cats like humans love moving sidewalks and will always ride them to the end. '
+  - Don't be impawtient, some levels need multiple rounds to beat. ZZZZZ...
 --- !u!1 &1814370818
 GameObject:
   m_ObjectHideFlags: 0

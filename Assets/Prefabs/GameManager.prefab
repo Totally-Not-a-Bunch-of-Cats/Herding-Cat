@@ -74,7 +74,7 @@ MonoBehaviour:
   ADsoff: 0
   CatSpeed: 1
   ItemIndicators: 0
-  musicVolume: 1
+  musicVolume: 0.8
   MusicToggle: 1
   UpdateLevelData: 1
   PlayerPrefsTrue: 1

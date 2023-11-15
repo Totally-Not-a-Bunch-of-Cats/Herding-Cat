@@ -50,8 +50,6 @@ public class CatInfoManager : MonoBehaviour
         CurrentAccessoryIndex = GetAccessoryIndex();
         GameManager.Instance._catInfoManager.CurrentAccessoryIndex = GetAccessoryIndex();
         Reference.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Image>().sprite = Catlist[CurrentSelected].Acessory1;
-        Debug.Log(-Accessories[CurrentAccessoryIndex].MaxoffsetforCatButton);
-        Debug.Log(CurrentAccessoryIndex);
         Reference.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<RectTransform>().offsetMax = -Accessories[CurrentAccessoryIndex].MaxoffsetforCatButton;
         Reference.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<RectTransform>().offsetMin = Accessories[CurrentAccessoryIndex].MinoffsetforCatButton;
         CurrentSkinIndex = GetSkinIndex();
