@@ -49,6 +49,6 @@ public class PauseMenuControl : MonoBehaviour
     public void NavagateToCatCust()
     {
         GameManager.Instance.ChangeScene("Main Menu");
-        StartCoroutine(GameManager.Instance.GotoLevelSecet("CatMenu"));
+        StartCoroutine(GameManager.Instance.GotoLevelSecet("Cat Store"));
     }
 }

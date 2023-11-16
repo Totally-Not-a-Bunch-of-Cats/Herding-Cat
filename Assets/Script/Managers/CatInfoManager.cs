@@ -33,7 +33,6 @@ public class CatInfoManager : MonoBehaviour
     [SerializeField] int CurrentSkinIndex;
     [SerializeField] int CurrentAccessoryIndex;
     [SerializeField] int CurrentAccessoryColorIndex = 0;
-    public GameObject Warning;
     // Opens the Customize Screen
     public void GoToCustomize(GameObject Reference)
     {

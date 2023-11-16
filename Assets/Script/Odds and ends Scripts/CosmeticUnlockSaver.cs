@@ -9,22 +9,44 @@ public class CosmeticUnlockSaver : MonoBehaviour
     int SelectedSkin;
     public string SkinName = "NA";
     public string AcessoryColorName = "NA";
-    public GameObject PurchaseFailure;
+    public GameObject PurchaseFailure1;
+    public GameObject PurchaseFailure2;
     [SerializeField] GameObject PurchaseButton;
 
     private void OnEnable()
     {
-        for (int i = 0; i < GameManager.Instance._catInfoManager.Accessories.Count; i++)
+        if(AcessoryName != "NA")
         {
-            if (GameManager.Instance._catInfoManager.Accessories[i].Name == AcessoryName 
-                && GameManager.Instance._catInfoManager.Accessories[i].AcessoryUnlock == true)
+            for (int i = 0; i < GameManager.Instance._catInfoManager.Accessories.Count; i++)
             {
-                PurchaseButton.SetActive(false);
-                break;
+                if (GameManager.Instance._catInfoManager.Accessories[i].Name == AcessoryName
+                    && GameManager.Instance._catInfoManager.Accessories[i].AcessoryUnlock == true
+                    && AcessoryColorName == "NA")
+                {
+                    PurchaseButton.SetActive(false);
+                    break;
+                }
+                if(GameManager.Instance._catInfoManager.Accessories[i].Name == AcessoryName
+                    && GameManager.Instance._catInfoManager.Accessories[i].AcessoryColorUnlock == true)
+                {
+                    PurchaseButton.SetActive(false);
+                    break;
+                }
+            }
+        }
+        if(SkinName != "NA")
+        {
+            for (int j = 0; j < GameManager.Instance._catInfoManager.SkinList.Count; j++)
+            {
+                if (GameManager.Instance._catInfoManager.SkinList[j].Name == SkinName 
+                    && GameManager.Instance._catInfoManager.SkinList[j].Unlocked == true)
+                {
+                    PurchaseButton.SetActive(false);
+                    break;
+                }
             }
         }
     }
-    // && GameManager.Instance._catInfoManager.Accessories[i].Unlocked == true
     public void UnlockAccessory()
     {
         if (GameManager.Instance.PlayerPrefsTrue)
@@ -50,7 +72,7 @@ public class CosmeticUnlockSaver : MonoBehaviour
                 {
                     //make error screen for not enough stars
                     Debug.Log("oops all tears");
-                    PurchaseFailure.SetActive(true);
+                    PurchaseFailure1.SetActive(true);
                 }
             }
         }
@@ -82,7 +104,7 @@ public class CosmeticUnlockSaver : MonoBehaviour
             {
                 //make error screen for not enough stars
                 Debug.Log("oops all tears");
-                PurchaseFailure.SetActive(true);
+                PurchaseFailure1.SetActive(true);
             }
         }
         else
@@ -118,14 +140,14 @@ public class CosmeticUnlockSaver : MonoBehaviour
                 {
                     //make error screen for not enough stars
                     Debug.Log("oops all tears");
-                    PurchaseFailure.SetActive(true);
+                    PurchaseFailure1.SetActive(true);
                 }
             }
             else
             {
                 //make error screen for not enough stars
                 Debug.Log("oops all tears");
-                PurchaseFailure.SetActive(true);
+                PurchaseFailure2.SetActive(true);
             }
         }
         else
