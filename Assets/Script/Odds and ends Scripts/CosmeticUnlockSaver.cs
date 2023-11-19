@@ -170,4 +170,11 @@ public class CosmeticUnlockSaver : MonoBehaviour
             button.SetActive(false);
         }
     }
+    public void DisableSkinButton(GameObject button)
+    {
+        if (GameManager.Instance._catInfoManager.SkinList[SelectedSkin].Unlocked == true)
+        {
+            button.SetActive(false);
+        }
+    }
 }

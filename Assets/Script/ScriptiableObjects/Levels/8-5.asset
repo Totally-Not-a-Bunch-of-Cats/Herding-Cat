@@ -21,6 +21,8 @@ MonoBehaviour:
   StarsEarned: 0
   Unlocked: 0
   NewItemIntroduced: 0
+  SpecialHelpTxt: 0
+  SpecialHelpLevelNum: -1
   BackgroundTile: {fileID: 11400000, guid: 103593486162c964aa10539a0ed04a9e, type: 2}
   Tiles:
   - name: Alfred (4,3)
@@ -30,17 +32,17 @@ MonoBehaviour:
     Redirection: {x: -1, y: 0}
   - name: Alfred (5,4)
     Position: {x: 5, y: 4}
-    Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
+    Slate: {fileID: 11400000, guid: b1b6c6f21d028124bbc63e252f176c41, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: -1, y: 0}
   - name: Alfred (4,5)
     Position: {x: 4, y: 5}
-    Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
+    Slate: {fileID: 11400000, guid: 1874b8b6a361f564880fa4a3e13e85c5, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: -1, y: 0}
   - name: Alfred (3,4)
     Position: {x: 3, y: 4}
-    Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
+    Slate: {fileID: 11400000, guid: e555ba895d5a24446bccda1cb968e5d7, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: -1, y: 0}
   - name: Wall (5,3)

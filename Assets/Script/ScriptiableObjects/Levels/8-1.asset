@@ -21,6 +21,8 @@ MonoBehaviour:
   StarsEarned: 0
   Unlocked: 0
   NewItemIntroduced: 0
+  SpecialHelpTxt: 0
+  SpecialHelpLevelNum: -1
   BackgroundTile: {fileID: 11400000, guid: 76fd22e01f2468b4792085d395c67cd9, type: 2}
   Tiles:
   - name: Wall (9,0)
@@ -120,7 +122,7 @@ MonoBehaviour:
     Redirection: {x: -1, y: 0}
   - name: Nina (7,1)
     Position: {x: 7, y: 1}
-    Slate: {fileID: 11400000, guid: b1b6c6f21d028124bbc63e252f176c41, type: 2}
+    Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: -1, y: 0}
   - name: Nina (8,2)
