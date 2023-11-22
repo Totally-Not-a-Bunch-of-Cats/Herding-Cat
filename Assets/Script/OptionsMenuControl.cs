@@ -17,7 +17,6 @@ public class OptionsMenuControl : MonoBehaviour
     public TMP_Text SFXAdjustText;
     public Button[] ItemAffectButtons;
     public Button[] MusicToggleButtons;
-    public Button[] SFXToggleButtons;
     public Button[] SkipVideoButtons;
 
     private readonly string SpeedAdjustWording = "Cat Speed Augment: ";

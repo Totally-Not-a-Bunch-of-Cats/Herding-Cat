@@ -444,7 +444,6 @@ MonoBehaviour:
   CurrentSkinIndex: 0
   CurrentAccessoryIndex: 10
   CurrentAccessoryColorIndex: 0
-  Warning: {fileID: 38641375586690239, guid: a3b1f80bdb434f143aff86bb93adcdb7, type: 3}
 --- !u!114 &918842532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,3 +468,4 @@ MonoBehaviour:
   AudioEffect:
   - {fileID: 8300000, guid: 7d7ad6a831001834aa32a0dad156b033, type: 3}
   SwitchFromMainMenuMusic: 1
+  FirstPlay: 1

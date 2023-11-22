@@ -13,6 +13,8 @@ public class MusicManager : MonoBehaviour
     public List<AudioClip> AudioEffect;
     float AudioLevel;
     [SerializeField] bool SwitchFromMainMenuMusic = true;
+    [SerializeField] bool FirstPlay = true;
+    [SerializeField] bool SoundChanging = true;
 
 
 
@@ -28,6 +30,11 @@ public class MusicManager : MonoBehaviour
         if (AudioPlayer == null)
         {
             AudioPlayer = GameObject.FindGameObjectWithTag("Music");
+        }
+        if (AudioPlayer != null && SceneManager.GetActiveScene().name == "Main Menu" && FirstPlay)
+        {
+            Debug.Log("mep");
+            FirstPlay = false;
             PlayMenuSong();
         }
         if (SceneManager.GetActiveScene().name == "Match" && SwitchFromMainMenuMusic)
@@ -38,7 +45,7 @@ public class MusicManager : MonoBehaviour
         {
             StartCoroutine(FadeOutMainMenu());
         }
-        if (AudioPlayer != null)
+        if (AudioPlayer != null && SceneManager.GetActiveScene().name != "Main Menu")
         {
             TrackProgression = AudioPlayer.GetComponent<AudioSource>().time;
             if (AudioPlayer.GetComponent<AudioSource>().clip.length <= TrackProgression)
@@ -46,7 +53,10 @@ public class MusicManager : MonoBehaviour
                 NextTrack();
             }
         }
-        GetAudioLevel();
+        if (AudioPlayer != null && SoundChanging)
+        {
+            GetAudioLevel();
+        }
     }
 
     /// <summary>
@@ -87,6 +97,7 @@ public class MusicManager : MonoBehaviour
     /// </summary>
     public void PlayTrack()
     {
+        SoundChanging = true;
         AudioPlayer.GetComponent<AudioSource>().clip = AudioTracks[CurrentLevelTrack];
         GetAudioLevel();
         AudioPlayer.GetComponent<AudioSource>().Play();
@@ -97,6 +108,7 @@ public class MusicManager : MonoBehaviour
     /// </summary>
     public void PlayMenuSong()
     {
+        SoundChanging = true;
         AudioPlayer.GetComponent<AudioSource>().clip = MainMenuTrack;
         GetAudioLevel();
         AudioPlayer.GetComponent<AudioSource>().Play();
@@ -132,6 +144,7 @@ public class MusicManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator FadeIn()
     {
+        SoundChanging = false;
         yield return new WaitForSeconds(.5f);
         AudioPlayer.GetComponent<AudioSource>().volume += AudioLevel / 6;
         yield return new WaitForSeconds(.5f);
@@ -144,6 +157,7 @@ public class MusicManager : MonoBehaviour
         AudioPlayer.GetComponent<AudioSource>().volume += AudioLevel / 6;
         yield return new WaitForSeconds(.5f);
         AudioPlayer.GetComponent<AudioSource>().volume += AudioLevel / 6;
+        SoundChanging = true;
     }
     /// <summary>
     /// fades the music out to start the level music 
@@ -151,6 +165,7 @@ public class MusicManager : MonoBehaviour
     /// <returns></returns>
     public IEnumerator FadeOut()
     {
+        SoundChanging = false;
         SwitchFromMainMenuMusic = false;
         yield return new WaitForSeconds(.5f);
         AudioPlayer.GetComponent<AudioSource>().volume -= AudioLevel / 6;
@@ -173,6 +188,7 @@ public class MusicManager : MonoBehaviour
     public IEnumerator FadeOutMainMenu()
     {
         SwitchFromMainMenuMusic = true;
+        SoundChanging = false;
         yield return new WaitForSeconds(.5f);
         AudioPlayer.GetComponent<AudioSource>().volume -= AudioLevel / 6;
         yield return new WaitForSeconds(.5f);
