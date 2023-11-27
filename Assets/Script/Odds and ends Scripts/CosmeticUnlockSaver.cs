@@ -6,6 +6,7 @@ public class CosmeticUnlockSaver : MonoBehaviour
 {
     public string AcessoryName = "NA";
     int SelectedAccessory;
+    int BackUPSelectedAccessory;
     int SelectedSkin;
     public string SkinName = "NA";
     public string AcessoryColorName = "NA";
@@ -119,18 +120,28 @@ public class CosmeticUnlockSaver : MonoBehaviour
         {
             for (int i = 0; i < GameManager.Instance._catInfoManager.Accessories.Count; i++)
             {
+                Debug.Log(GameManager.Instance._catInfoManager.Accessories[2].Name);
+                Debug.Log(GameManager.Instance._catInfoManager.Accessories[7].Name);
                 if (GameManager.Instance._catInfoManager.Accessories[i].Name == AcessoryName)
                 {
                     SelectedAccessory = i;
-                    break;
+                }
+                else if(GameManager.Instance._catInfoManager.Accessories[2].Name == AcessoryName)
+                {
+                    Debug.Log("m0p");
+                    BackUPSelectedAccessory = 2;
+                }
+                else if (GameManager.Instance._catInfoManager.Accessories[7].Name == AcessoryName)
+                {
+                    Debug.Log("mep");
+                    BackUPSelectedAccessory = 7;
                 }
             }
-            Debug.Log(AcessoryName);
+            Debug.Log(SelectedAccessory);
             if (GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryUnlock == true)
             {
                 if (GameManager.Instance.StarCount >= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryColorCost)
                 {
-                    Debug.Log(GameManager.Instance.StarCount >= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryColorCost);
                     GameManager.Instance._PlayerPrefsManager.SaveBool(AcessoryName + "Color", true);
                     GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryColorUnlock = true;
                     GameManager.Instance.StarCount -= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryColorCost;
@@ -139,7 +150,43 @@ public class CosmeticUnlockSaver : MonoBehaviour
                 else
                 {
                     //make error screen for not enough stars
-                    Debug.Log("oops all tears");
+                    Debug.Log("oo0ps all tears");
+                    PurchaseFailure1.SetActive(true);
+                }
+            }
+            else if(GameManager.Instance._catInfoManager.Accessories[3].AcessoryUnlock == true || 
+                GameManager.Instance._catInfoManager.Accessories[4].AcessoryUnlock == true)
+            {
+                if (GameManager.Instance.StarCount >= GameManager.Instance._catInfoManager.Accessories[BackUPSelectedAccessory].AcessoryColorCost)
+                {
+                    Debug.Log("we are in");
+                    GameManager.Instance._PlayerPrefsManager.SaveBool(AcessoryName + "Color", true);
+                    GameManager.Instance._catInfoManager.Accessories[BackUPSelectedAccessory].AcessoryColorUnlock = true;
+                    GameManager.Instance.StarCount -= GameManager.Instance._catInfoManager.Accessories[BackUPSelectedAccessory].AcessoryColorCost;
+                    GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", GameManager.Instance.StarCount);
+                }
+                else
+                {
+                    //make error screen for not enough stars
+                    Debug.Log("oo00ps all tears");
+                    PurchaseFailure1.SetActive(true);
+                }
+            }
+            else if (GameManager.Instance._catInfoManager.Accessories[8].AcessoryUnlock == true ||
+                GameManager.Instance._catInfoManager.Accessories[9].AcessoryUnlock == true)
+            {
+                if (GameManager.Instance.StarCount >= GameManager.Instance._catInfoManager.Accessories[BackUPSelectedAccessory].AcessoryColorCost)
+                {
+                    Debug.Log("we are in");
+                    GameManager.Instance._PlayerPrefsManager.SaveBool(AcessoryName + "Color", true);
+                    GameManager.Instance._catInfoManager.Accessories[BackUPSelectedAccessory].AcessoryColorUnlock = true;
+                    GameManager.Instance.StarCount -= GameManager.Instance._catInfoManager.Accessories[BackUPSelectedAccessory].AcessoryColorCost;
+                    GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", GameManager.Instance.StarCount);
+                }
+                else
+                {
+                    //make error screen for not enough stars
+                    Debug.Log("oo00ps all tears");
                     PurchaseFailure1.SetActive(true);
                 }
             }

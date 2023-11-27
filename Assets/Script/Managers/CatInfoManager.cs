@@ -51,7 +51,7 @@ public class CatInfoManager : MonoBehaviour
         Reference.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Image>().sprite = Catlist[CurrentSelected].Acessory1;
         Reference.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<RectTransform>().offsetMax = -Accessories[CurrentAccessoryIndex].MaxoffsetforCatButton;
         Reference.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<RectTransform>().offsetMin = Accessories[CurrentAccessoryIndex].MinoffsetforCatButton;
-        CurrentSkinIndex = GetSkinIndex();
+        GameManager.Instance._catInfoManager.CurrentSkinIndex = GetSkinIndex();
     }
 
     int GetSkinIndex()
@@ -93,15 +93,14 @@ public class CatInfoManager : MonoBehaviour
     public void NextSkin(GameObject Reference)
     {
         // Go forwards one in the list to swap to the new choice
-        CurrentSkinIndex++;
-
+        GameManager.Instance._catInfoManager.CurrentSkinIndex++;
         // Loops the skins back around so that user doesn't have to go back from hitting the walls
-        if(CurrentSkinIndex >= SkinList.Count)
+        if (GameManager.Instance._catInfoManager.CurrentSkinIndex >= SkinList.Count)
         {
-            CurrentSkinIndex = 0;
+            GameManager.Instance._catInfoManager.CurrentSkinIndex = 0;
         }
         //Checks to see if skin is unlocked
-        if (GameManager.Instance._catInfoManager.SkinList[CurrentSkinIndex].Unlocked == false)
+        if (GameManager.Instance._catInfoManager.SkinList[GameManager.Instance._catInfoManager.CurrentSkinIndex].Unlocked == false)
         {
             GameManager.Instance._WarningTxtManager.SwitchTxtSkin(1);
         }
@@ -111,9 +110,9 @@ public class CatInfoManager : MonoBehaviour
             GameManager.Instance._WarningTxtManager.EnableConfirmButton();
         }
         // Setting the visual in the customization to fit the new skin, as well as adjusting the scriptable object to the new skin
-        CurrentAnim = SkinList[CurrentSkinIndex].CatAnim;
+        CurrentAnim = SkinList[GameManager.Instance._catInfoManager.CurrentSkinIndex].CatAnim;
         Catlist[CurrentSelected].AnimationController = CurrentAnim;
-        CurrentSkin = SkinList[CurrentSkinIndex].Skin;
+        CurrentSkin = SkinList[GameManager.Instance._catInfoManager.CurrentSkinIndex].Skin;
         Catlist[CurrentSelected].Skin = CurrentSkin;
         Reference.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Image>().sprite = CurrentSkin;
     }
@@ -123,15 +122,14 @@ public class CatInfoManager : MonoBehaviour
     {
 
         // Go backwards one in the list to swap to the new choice
-        CurrentSkinIndex--;
-
+        GameManager.Instance._catInfoManager.CurrentSkinIndex--;
         // Loops the skins back around so that user doesn't have to go back from hitting the walls
-        if(CurrentSkinIndex < 0)
+        if (GameManager.Instance._catInfoManager.CurrentSkinIndex < 0)
         {
-            CurrentSkinIndex = SkinList.Count - 1;
+            GameManager.Instance._catInfoManager.CurrentSkinIndex = SkinList.Count - 1;
         }
         //Checks to see if skin is unlocked
-        if (GameManager.Instance._catInfoManager.SkinList[CurrentSkinIndex].Unlocked == false)
+        if (GameManager.Instance._catInfoManager.SkinList[GameManager.Instance._catInfoManager.CurrentSkinIndex].Unlocked == false)
         {
             GameManager.Instance._WarningTxtManager.SwitchTxtSkin(1);
         }
@@ -141,9 +139,9 @@ public class CatInfoManager : MonoBehaviour
             GameManager.Instance._WarningTxtManager.EnableConfirmButton();
         }
         // Setting the visual in the customization to fit the new skin, as well as adjusting the scriptable object to the new skin
-        CurrentAnim = SkinList[CurrentSkinIndex].CatAnim;
+        CurrentAnim = SkinList[GameManager.Instance._catInfoManager.CurrentSkinIndex].CatAnim;
         Catlist[CurrentSelected].AnimationController = CurrentAnim;
-        CurrentSkin = SkinList[CurrentSkinIndex].Skin;
+        CurrentSkin = SkinList[GameManager.Instance._catInfoManager.CurrentSkinIndex].Skin;
         Catlist[CurrentSelected].Skin = CurrentSkin;
         Reference.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Image>().sprite = CurrentSkin;
     }

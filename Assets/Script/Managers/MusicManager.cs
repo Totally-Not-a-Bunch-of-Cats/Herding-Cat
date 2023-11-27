@@ -33,7 +33,6 @@ public class MusicManager : MonoBehaviour
         }
         if (AudioPlayer != null && SceneManager.GetActiveScene().name == "Main Menu" && FirstPlay)
         {
-            Debug.Log("mep");
             FirstPlay = false;
             PlayMenuSong();
         }
@@ -45,7 +44,7 @@ public class MusicManager : MonoBehaviour
         {
             StartCoroutine(FadeOutMainMenu());
         }
-        if (AudioPlayer != null && SceneManager.GetActiveScene().name != "Main Menu")
+        if (AudioPlayer != null && SceneManager.GetActiveScene().name != "Main Menu" && AudioPlayer.GetComponent<AudioSource>().clip)
         {
             TrackProgression = AudioPlayer.GetComponent<AudioSource>().time;
             if (AudioPlayer.GetComponent<AudioSource>().clip.length <= TrackProgression)
@@ -70,16 +69,13 @@ public class MusicManager : MonoBehaviour
 
     public void Mute()
     {
-        Debug.Log("lets go");
         if(GameManager.Instance.MusicToggle == true)
         {
-            Debug.Log("loudened");
             GameManager.Instance.musicVolume = 1;
             AudioPlayer.GetComponent<AudioSource>().volume = 1;
         }
         else
         {
-            Debug.Log("muted");
             GameManager.Instance.musicVolume = 0;
             AudioPlayer.GetComponent<AudioSource>().volume = 0;
         }

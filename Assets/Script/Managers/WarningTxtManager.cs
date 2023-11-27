@@ -80,11 +80,11 @@ public class WarningTxtManager : MonoBehaviour
     /// </summary>
     public void HideTxtSkin()
     {
-        if(Warning3.activeInHierarchy)
+        if (Warning2.activeInHierarchy)
         {
-            Warning3.SetActive(false);
-            WarningTxt3 = "";
-            WarningTMP3.text = WarningTxt2;
+            Warning2.SetActive(false);
+            WarningTxt2 = "";
+            WarningTMP2.text = WarningTxt2;
         }
     }
     /// <summary>
@@ -92,11 +92,11 @@ public class WarningTxtManager : MonoBehaviour
     /// </summary>
     public void HideTxtColor()
     {
-        if(Warning2.activeInHierarchy)
+        if(Warning3.activeInHierarchy)
         {
-            Warning2.SetActive(false);
-            WarningTxt2 = "";
-            WarningTMP2.text = WarningTxt3;
+            Warning3.SetActive(false);
+            WarningTxt3 = "";
+            WarningTMP3.text = WarningTxt3;
         }
     }
     /// <summary>

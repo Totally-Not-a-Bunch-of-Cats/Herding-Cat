@@ -258,13 +258,11 @@ public class GameManager : MonoBehaviour
     {
         if(Instance.MusicToggle == true)
         {
-            Debug.Log("off");
             Instance.MusicToggle = false;
             Instance._musicManager.Mute();
         }
         else
         {
-            Debug.Log("on");
             Instance.MusicToggle = true;
             Instance._musicManager.Mute();
         }

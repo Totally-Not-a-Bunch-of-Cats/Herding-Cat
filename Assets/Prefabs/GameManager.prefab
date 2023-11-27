@@ -323,12 +323,12 @@ MonoBehaviour:
     AcessoryColorUnlock: 0
     AcessoryColorCost: 0
     AcessoryColorListName: FlowerHatAccessoryColors
-    CatPrefabLocation: {x: -0.238, y: 0.49, z: 1}
-    CatPrefabScale: {x: 0.285, y: 0.22, z: 1}
+    CatPrefabLocation: {x: -0.25, y: 0.66, z: 1}
+    CatPrefabScale: {x: 0.21, y: 0.5, z: 1}
     MaxoffsetforCatButton: {x: 135, y: 80}
     MinoffsetforCatButton: {x: 60, y: 192}
-    MaxoffsetforExternalCatButton: {x: 69, y: -4.5}
-    MinoffsetforExternalCatButton: {x: 6, y: 111}
+    MaxoffsetforExternalCatButton: {x: 79, y: -34}
+    MinoffsetforExternalCatButton: {x: 17, y: 113}
   - Name: Wide Flower Hat
     Acessory: {fileID: 21300000, guid: 09f8a11800e601e4f9b1d2dd4de98575, type: 3}
     AcessoryUnlock: 0
@@ -469,3 +469,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7d7ad6a831001834aa32a0dad156b033, type: 3}
   SwitchFromMainMenuMusic: 1
   FirstPlay: 1
+  SoundChanging: 1

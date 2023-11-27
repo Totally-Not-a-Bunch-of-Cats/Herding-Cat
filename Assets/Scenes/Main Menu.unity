@@ -15370,7 +15370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.40392157, b: 0, a: 1}
+  m_Color: {r: 0.28235295, g: 0.28235295, b: 0.2509804, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -15776,7 +15776,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &407751689
 MonoBehaviour:
@@ -16924,7 +16924,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6593748991052650734, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1136.1333
+      value: 1136.6666
       objectReference: {fileID: 0}
     - target: {fileID: 6593748991052650734, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -24891,7 +24891,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6593748991052650734, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 926.13336
+      value: 926.6666
       objectReference: {fileID: 0}
     - target: {fileID: 6593748991052650734, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -27807,7 +27807,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &779166942
 MonoBehaviour:
@@ -28429,14 +28429,14 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 810580501}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2141771347}
         m_TargetAssemblyTypeName: OptionsMenuControl, Scripts
-        m_MethodName: SkipVideoToggle
+        m_MethodName: MusicToggle
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -28767,7 +28767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.40227598, b: 0, a: 1}
+  m_Color: {r: 0.28235295, g: 0.28235295, b: 0.2509804, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -32765,7 +32765,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1109752987
 MonoBehaviour:
@@ -34689,7 +34689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6593748991052650734, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 716.13336
+      value: 716.6666
       objectReference: {fileID: 0}
     - target: {fileID: 6593748991052650734, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -36022,7 +36022,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1223591678
 MonoBehaviour:
@@ -36200,14 +36200,14 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1227964169}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2141771347}
         m_TargetAssemblyTypeName: OptionsMenuControl, Scripts
-        m_MethodName: SkipVideoToggle
+        m_MethodName: MusicToggle
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -40130,8 +40130,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9.3115, y: 2.6012}
-  m_SizeDelta: {x: 776.15, y: 144.9815}
+  m_AnchoredPosition: {x: 6.7553, y: 2.6012}
+  m_SizeDelta: {x: 745.4767, y: 144.9815}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1445232248
 MonoBehaviour:
@@ -40182,8 +40182,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48
-  m_fontSizeBase: 48
+  m_fontSize: 46
+  m_fontSizeBase: 46
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -48306,7 +48306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6593748991052650734, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 296.13336
+      value: 296.66663
       objectReference: {fileID: 0}
     - target: {fileID: 6593748991052650734, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -49204,7 +49204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.28235295, g: 0.28235295, b: 0.2509804, a: 1}
+  m_Color: {r: 1, g: 0.40392157, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -49996,7 +49996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2830189, g: 0.28186804, b: 0.24964403, a: 1}
+  m_Color: {r: 1, g: 0.40392157, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -50580,7 +50580,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.5397, y: 40.328}
+  m_AnchoredPosition: {x: -0.00003171, y: 35.5}
   m_SizeDelta: {x: 120, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1772181503
@@ -50603,7 +50603,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Cat Store
+  m_text: Star Store
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c2f49fe8c22d94f9a9e6cd06ad490155, type: 2}
   m_sharedMaterial: {fileID: 3074828514974314926, guid: c2f49fe8c22d94f9a9e6cd06ad490155, type: 2}
@@ -53183,7 +53183,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Cat Type
+  m_text: Skin
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9a2157e1f9c4c4d38841fbb92558f587, type: 2}
   m_sharedMaterial: {fileID: -6360588970910393389, guid: 9a2157e1f9c4c4d38841fbb92558f587, type: 2}
@@ -58428,7 +58428,7 @@ MonoBehaviour:
   WarningTxt3: 
   WarningList:
   - You dont own this accessory.
-  - You dont own this Cat Type.
+  - You dont own this skin.
   - You dont own this accessory's colors.
   - There are no colors for this accessory.
 --- !u!1 &1958608612
@@ -63937,7 +63937,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Cat Type
+  m_text: Skin
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9a2157e1f9c4c4d38841fbb92558f587, type: 2}
   m_sharedMaterial: {fileID: -6360588970910393389, guid: 9a2157e1f9c4c4d38841fbb92558f587, type: 2}
@@ -70120,7 +70120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6593748991052650734, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 506.13336
+      value: 506.66663
       objectReference: {fileID: 0}
     - target: {fileID: 6593748991052650734, guid: 0473fad9d701de34397ab3aad345a093, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -72249,7 +72249,6 @@ MonoBehaviour:
   MusicToggleButtons:
   - {fileID: 1227964171}
   - {fileID: 810580500}
-  SFXToggleButtons: []
   SkipVideoButtons:
   - {fileID: 407751688}
   - {fileID: 779166941}
