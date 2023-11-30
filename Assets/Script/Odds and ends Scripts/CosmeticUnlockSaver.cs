@@ -128,13 +128,7 @@ public class CosmeticUnlockSaver : MonoBehaviour
                 }
                 else if(GameManager.Instance._catInfoManager.Accessories[2].Name == AcessoryName)
                 {
-                    Debug.Log("m0p");
                     BackUPSelectedAccessory = 2;
-                }
-                else if (GameManager.Instance._catInfoManager.Accessories[7].Name == AcessoryName)
-                {
-                    Debug.Log("mep");
-                    BackUPSelectedAccessory = 7;
                 }
             }
             Debug.Log(SelectedAccessory);

@@ -774,6 +774,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Holding Box (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 8704733061347679510, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
 --- !u!224 &33307853 stripped
@@ -28809,7 +28813,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 220446011442911747, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
       propertyPath: AcessoryName
-      value: Tall Hat
+      value: Circle Glasses
       objectReference: {fileID: 0}
     - target: {fileID: 220446011442911747, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
       propertyPath: PurchaseButton
@@ -28893,7 +28897,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2037722024967833063, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
       propertyPath: m_text
-      value: Circle Glasses
+      value: Round Glasses
       objectReference: {fileID: 0}
     - target: {fileID: 2037722024967833063, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
       propertyPath: m_fontSize
@@ -29005,7 +29009,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8383893330752543830, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
       propertyPath: m_text
-      value: 'Cost: 30'
+      value: 'Cost: 25'
       objectReference: {fileID: 0}
     - target: {fileID: 8704733061347679510, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
       propertyPath: m_Name
@@ -39179,6 +39183,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Holding Box (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 8704733061347679510, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
 --- !u!224 &1393235622 stripped
@@ -46685,7 +46693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 220446011442911747, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
       propertyPath: AcessoryName
-      value: Wide Hat
+      value: Square Glasses
       objectReference: {fileID: 0}
     - target: {fileID: 220446011442911747, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
       propertyPath: PurchaseButton
@@ -46873,7 +46881,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8383893330752543830, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
       propertyPath: m_text
-      value: 'Cost: 30'
+      value: 'Cost: 25'
       objectReference: {fileID: 0}
     - target: {fileID: 8704733061347679510, guid: 797d754e09198924fb4f48f304506c4b, type: 3}
       propertyPath: m_Name

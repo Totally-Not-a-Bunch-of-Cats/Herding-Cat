@@ -229,9 +229,18 @@ public class UIManager : MonoBehaviour
                 //turns off the indicators if youve won the game
                 if (GameManager.Instance._matchManager.ActiveMatch == false)
                 {
-                    GameManager.Instance._matchManager.HelpIndicator.SetActive(false);
-                    GameManager.Instance._matchManager.HelpIndicator2.SetActive(false);
-                    GameManager.Instance._matchManager.HelpIndicator3.SetActive(false);
+                    if(GameManager.Instance._matchManager.HelpIndicator != null)
+                    {
+                        GameManager.Instance._matchManager.HelpIndicator.SetActive(false);
+                    }
+                    if (GameManager.Instance._matchManager.HelpIndicator2 != null)
+                    {
+                        GameManager.Instance._matchManager.HelpIndicator2.SetActive(false);
+                    }
+                    if (GameManager.Instance._matchManager.HelpIndicator3 != null)
+                    {
+                        GameManager.Instance._matchManager.HelpIndicator3.SetActive(false);
+                    }
                 }
             }
         }
