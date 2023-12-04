@@ -16,8 +16,8 @@ MonoBehaviour:
   TargetRounds: 3
   TargetItems: 12
   NewThingIntroduced: 0
-  Category: 1
-  TileName: Rewind
+  Category: 0
+  TileName: 
   StarsEarned: 3
   Unlocked: 1
   NewItemIntroduced: 0

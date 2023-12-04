@@ -361,6 +361,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rewind Button
       objectReference: {fileID: 0}
+    - target: {fileID: 6156069698143656507, guid: 01a0f943f87154d288a7ba9a4ca79cf1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6669377453556499572, guid: 01a0f943f87154d288a7ba9a4ca79cf1, type: 3}
       propertyPath: m_text
       value: Rewind
@@ -4982,26 +4986,26 @@ MonoBehaviour:
   - name: Deleting
     Description: To delete an already placed toy, select that item in the sidebar,
       then tap the toy you want to remove.
-    Video: {fileID: 32900000, guid: 20ca5a7ba55da5a449d98f26d7f4d3ac, type: 3}
+    Video: {fileID: 32900000, guid: 725e90b366d33c74292f2415dd419c24, type: 3}
     Icon: {fileID: 21300000, guid: 007c4d4e8afd3b240a8c9e8e29568fa6, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Replacing
     Description: To swap a placed toy with another item, select the item you want
       to be placed instead in the sidebar, then tap the toy you want to replace.
-    Video: {fileID: 32900000, guid: de076491bfa57ab47b7d37dcac795635, type: 3}
+    Video: {fileID: 32900000, guid: d79fa304245ca4a4ca2f2db5a41bcc95, type: 3}
     Icon: {fileID: 21300000, guid: d9ef869993077c740a5923036c118cca, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Re-Ordering
     Description: You can change the execution order of the items by moving the items
       in the side panel up or down. To highlight the toy you're reordering, tap it
       in the side panel.
-    Video: {fileID: 32900000, guid: 8cebf9bfb4d28b44aa3e7ab16ccecd31, type: 3}
+    Video: {fileID: 32900000, guid: 81d8e03f8927f7343a1ec47fb3265c88, type: 3}
     Icon: {fileID: 21300000, guid: 5f22d0bfe63561b45a5d1874d67934f9, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Blocking Cats with items
     Description: 'Cats will not move onto occupied tiles, including items you''ve
       placed. '
-    Video: {fileID: 32900000, guid: f40435247fa9a804398d0ec63586055a, type: 3}
+    Video: {fileID: 32900000, guid: 6e17f2df6f89c0a4cb193d8e9e9bf4a5, type: 3}
     Icon: {fileID: 21300000, guid: b2f225a2bf37a6c4a8ca3403ea876b44, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Rewind
@@ -5012,12 +5016,12 @@ MonoBehaviour:
     IconScale: {x: 0, y: 0, z: 0}
   - name: HelpScreen
     Description: This is how you nivigate to the in level options screen
-    Video: {fileID: 32900000, guid: 5b1c1ca5ea128c540a1507a9bd8bd0ff, type: 3}
+    Video: {fileID: 32900000, guid: b18b6a7a8e6ed794abe818a2751a015c, type: 3}
     Icon: {fileID: 21300000, guid: 980038792ed813d48a7aae6df5228fbd, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Navigate to Cat Store
     Description: This is how you nivigate to the in level options screen
-    Video: {fileID: 32900000, guid: aab5510bb88c96649b4af30324f9ae66, type: 3}
+    Video: {fileID: 32900000, guid: ec77861e29f1afc41952c4a5d92e7687, type: 3}
     Icon: {fileID: 21300000, guid: 980038792ed813d48a7aae6df5228fbd, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   ItemHelpList:
@@ -5048,25 +5052,25 @@ MonoBehaviour:
   - name: Cat Bed
     Description: If a cat enters the tile of a cat bed, it falls asleep and doesn't
       respond to items for the rest of the round.
-    Video: {fileID: 32900000, guid: 9642a0324e9d0ac468370f4f31acf7a6, type: 3}
+    Video: {fileID: 32900000, guid: d283aa3f275e63246a10784b7205090d, type: 3}
     Icon: {fileID: 21300000, guid: 8bebb7f836e4fc84f8e8ab51822695ad, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Cat Tree
     Description: The cat tree lets cats jump over the next tile in the direction
       they're headed.
-    Video: {fileID: 32900000, guid: 24c0dabf29e2f7548a2863fa645952d0, type: 3}
+    Video: {fileID: 32900000, guid: c85e88086cdb58449b2bc18ecbd0aae3, type: 3}
     Icon: {fileID: 21300000, guid: af8552716c77bd94b8a1b01fb1f8e8ca, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Cat Tube
     Description: When a cat enters a cat tube, it pops out at the other tube in the
       pair.
-    Video: {fileID: 32900000, guid: 1fcca3c23be647147b890e309eee44b1, type: 3}
+    Video: {fileID: 32900000, guid: fe42fa2b0dd3fdf438d44f206fa7ad74, type: 3}
     Icon: {fileID: 21300000, guid: 0bdb3af61a58fa34980e7ea90f01efd4, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   - name: Redirection Pad
     Description: When a cat enters a tile of a redirection pad, it will be moved
       in the indicated direction.
-    Video: {fileID: 32900000, guid: b6fe6ae97457c094783f2b9e93931885, type: 3}
+    Video: {fileID: 32900000, guid: df309b2dedd5a6248a6d82269479e55f, type: 3}
     Icon: {fileID: 21300000, guid: cf5aa3c6046982d4b9b2d668c6bc3923, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
   VideoPlayer: {fileID: 918059139}

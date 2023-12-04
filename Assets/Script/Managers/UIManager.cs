@@ -256,7 +256,7 @@ public class UIManager : MonoBehaviour
         //get the restart button and make an event 
         GameObject.Find("Restart Button").GetComponent<Button>().onClick.AddListener(() => Restart());
         //rewind button and make an event
-        GameObject.Find("Rewind Button").GetComponent<Button>().onClick.AddListener(() => Rewind());
+        //GameObject.Find("Rewind Button").GetComponent<Button>().onClick.AddListener(() => Rewind());
     }
 
     /// <summary>
@@ -312,9 +312,9 @@ public class UIManager : MonoBehaviour
             Override = false;
             GameManager.Instance._matchManager.CatJustinCage = false;
             GameManager.Instance._matchManager.GameBoard.SecondCatList.Clear();
-            //lock you out fron pressing buttons
+            //lock you out from pressing buttons
             GameManager.Instance._ReWindManager.SaveRewind(GameManager.Instance._matchManager.GameBoard, GameManager.Instance._matchManager.RoundsPlayed,
-                GameManager.Instance._matchManager.ItemsUsed, GameManager.Instance._matchManager.CurrentLevel.GetTiles());
+            GameManager.Instance._matchManager.ItemsUsed, GameManager.Instance._matchManager.CurrentLevel.GetTiles());
             GameManager.Instance._matchManager.RoundsPlayed++;
             StartCoroutine(GameManager.Instance._matchManager.EndRound());
         }

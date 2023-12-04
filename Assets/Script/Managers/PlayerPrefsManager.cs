@@ -118,6 +118,15 @@ public class PlayerPrefsManager : MonoBehaviour
         {
             GameManager.Instance.SkipForcedVids = GetBool("SkipForcedVids");
         }
+        if (!PlayerPrefs.HasKey("PurchasedStarBoost"))
+        {
+            GameManager.Instance.PurchasedStarBoost = false;
+            SaveBool("PurchasedStarBoost", false);
+        }
+        else
+        {
+            GameManager.Instance.SkipForcedVids = GetBool("SkipForcedVids");
+        }
     }
 
     /// <summary>

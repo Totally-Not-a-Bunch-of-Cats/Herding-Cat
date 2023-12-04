@@ -19,7 +19,7 @@ MonoBehaviour:
   Category: 0
   TileName: 
   StarsEarned: 0
-  Unlocked: 0
+  Unlocked: 1
   NewItemIntroduced: 0
   SpecialHelpTxt: 0
   SpecialHelpLevelNum: -1

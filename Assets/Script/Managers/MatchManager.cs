@@ -418,7 +418,7 @@ public class MatchManager : MonoBehaviour
                 }
             }
         }
-        
+
         // Removes entries in item adjust window
         for (int i = 0; i < GameBoard.Items.Count; i++)
         {

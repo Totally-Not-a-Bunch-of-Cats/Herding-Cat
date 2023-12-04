@@ -127,24 +127,6 @@ public class OptionsMenuControl : MonoBehaviour
             GameManager.Instance._PlayerPrefsManager.SaveBool("MusicToggle", !Music);
         }
     }
-    //public void SFXToggle(bool SFX)
-    //{
-    //    GameManager.Instance.SFXToggle = SFX;
-    //    if (SFX)
-    //    {
-    //        SFXToggleButtons[1].interactable = !SFX;
-    //        SFXToggleButtons[0].interactable = SFX;
-    //    }
-    //    else
-    //    {
-    //        SFXToggleButtons[0].interactable = SFX;
-    //        SFXToggleButtons[1].interactable = !SFX;
-    //    }
-    //    if (GameManager.Instance.PlayerPrefsTrue == true)
-    //    {
-    //        GameManager.Instance._PlayerPrefsManager.SaveBool("SFXToggle", SFX);
-    //    }
-    //}
 
     public void SkipVideoToggle(bool ForcedVideo)
     {

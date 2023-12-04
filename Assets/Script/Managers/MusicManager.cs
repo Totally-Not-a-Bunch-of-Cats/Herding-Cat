@@ -64,15 +64,18 @@ public class MusicManager : MonoBehaviour
     public void GetAudioLevel()
     {
         AudioLevel = GameManager.Instance.musicVolume;
-        AudioPlayer.GetComponent<AudioSource>().volume = AudioLevel;
+        if(GameManager.Instance.MusicToggle == true)
+        {
+            AudioPlayer.GetComponent<AudioSource>().volume = AudioLevel;
+        }
     }
 
     public void Mute()
     {
         if(GameManager.Instance.MusicToggle == true)
         {
-            GameManager.Instance.musicVolume = 1;
-            AudioPlayer.GetComponent<AudioSource>().volume = 1;
+            GameManager.Instance.musicVolume = .8f;
+            AudioPlayer.GetComponent<AudioSource>().volume = .8f;
         }
         else
         {

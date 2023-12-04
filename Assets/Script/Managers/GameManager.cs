@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     public int LevelPosition = 0;
     public int WorldNumber = 1;
     //public bool ActivateItemIndicators = false;
-    public bool ClearStartHelpScreen = false;
+    public bool ClearStartHelpScreen = false; //might do nothing also maybe should be true for launch
     public bool PurchasedStarBoost = false;
     public bool SkipForcedVids = false;
 
@@ -179,6 +179,13 @@ public class GameManager : MonoBehaviour
         }
         Instance._musicManager.PlayTrack();
     }
+    public void StarBoost()
+    {
+        PurchasedStarBoost = true;
+        Instance._PlayerPrefsManager.SaveBool("PurchasedStarBoost", true);
+        GrantBonusStars();
+    }
+
     /// <summary>
     /// gives the player their bonus stars for levels already completed, when they purchase the +1 stars pack
     /// </summary>
