@@ -53,6 +53,23 @@ public class MatchManager : MonoBehaviour
     public GameObject ForcedHelpObject;
 
 
+
+    //private void Update()
+    //{
+    //    GameBoard.ItemsActive.Clear();
+    //    if (GameBoard != null)
+    //    {
+    //        Debug.Log("mep");
+    //        for (int i = 0; i < GameBoard.Items.Count; i++)
+    //        {
+    //            if(GameBoard.Items[i] != null)
+    //            {
+    //                GameBoard.ItemsActive.Add(GameBoard.Items[i]);
+    //            }
+    //        }
+    //    }
+    //}
+
     /// <summary>
     /// Initialize the <see cref="Board"/> and all scene <see cref="GameObject"/>s for the match
     /// </summary>
