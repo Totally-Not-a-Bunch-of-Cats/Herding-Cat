@@ -6,6 +6,7 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour
 {
     public GameObject AudioPlayer;
+    public GameObject SoundEffectPlayer;
     public AudioClip MainMenuTrack;
     public int CurrentLevelTrack = -1;
     [SerializeField] float TrackProgression = 0;
@@ -30,6 +31,8 @@ public class MusicManager : MonoBehaviour
         if (AudioPlayer == null)
         {
             AudioPlayer = GameObject.FindGameObjectWithTag("Music");
+            GameManager.Instance._musicManager.SoundEffectPlayer = AudioPlayer.transform.GetChild(0).gameObject;
+            Debug.Log(GameManager.Instance._musicManager.SoundEffectPlayer.GetComponent<AudioSource>());
         }
         if (AudioPlayer != null && SceneManager.GetActiveScene().name == "Main Menu" && FirstPlay)
         {
@@ -115,11 +118,12 @@ public class MusicManager : MonoBehaviour
     }
 
 
-    //public void PlayAudioEffect(int location)
-    //{
-    //    AudioPlayer.GetComponent<AudioSource>().clip = AudioEffect[location];
-    //    AudioPlayer.GetComponent<AudioSource>().Play();
-    //}
+    public void PlayAudioEffect(int location)
+    {
+        Debug.Log(GameManager.Instance._musicManager.SoundEffectPlayer);
+        GameManager.Instance._musicManager.SoundEffectPlayer.GetComponent<AudioSource>().clip = AudioEffect[location];
+        GameManager.Instance._musicManager.SoundEffectPlayer.GetComponent<AudioSource>().Play();
+    }
 
 
     public void NextTrack()

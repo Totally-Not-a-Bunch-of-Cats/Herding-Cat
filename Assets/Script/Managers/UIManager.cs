@@ -95,7 +95,15 @@ public class UIManager : MonoBehaviour
                         {
                             TurnOnIndicator(GameManager.Instance._matchManager.GameBoard.Items[GameManager.Instance._matchManager.GameBoard.Items.Count-1]);
                         }
-                        
+                        if(SelectedItem.name == "Toy")
+                        {
+                            GameManager.Instance._musicManager.PlayAudioEffect(5);
+                        }
+                        if (SelectedItem.name == "Snake")
+                        {
+                            //GameManager.Instance._musicManager.PlayAudioEffect(5);
+                        }
+
                         // Adds Item to the list to delete/adjust order of items
                         GameObject NewItemEntry = Instantiate(ItemAdjPrefab, new Vector3(0, 0, 0), Quaternion.identity, ItemAdjPanel.transform.GetChild(0).GetChild(0));
                         NewItemEntry.GetComponent<ItemAdjPanel>().ItemImage.sprite = temp.GetComponent<SpriteRenderer>().sprite;

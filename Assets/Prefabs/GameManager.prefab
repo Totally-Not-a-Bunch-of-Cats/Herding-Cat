@@ -210,7 +210,7 @@ MonoBehaviour:
     Skin: {fileID: 1159634615, guid: cb60cf56fc227a14abd6491736b7b318, type: 3}
     CatAnim: {fileID: 9100000, guid: 0b62742f5e63a1c42bb417f48537734c, type: 2}
     Cost: 20
-    Unlocked: 0
+    Unlocked: 1
   Accessories:
   - Name: NA
     Acessory: {fileID: 21300000, guid: f9fc23c976581b94db2d0441c920e1c1, type: 3}
@@ -336,8 +336,8 @@ MonoBehaviour:
     AcessoryColorUnlock: 0
     AcessoryColorCost: 0
     AcessoryColorListName: 
-    CatPrefabLocation: {x: -0.238, y: 0.49, z: 1}
-    CatPrefabScale: {x: 0.285, y: 0.22, z: 1}
+    CatPrefabLocation: {x: -0.25, y: 0.265, z: 1}
+    CatPrefabScale: {x: 0.21, y: 0.22, z: 1}
     MaxoffsetforCatButton: {x: 137.5, y: 169.5}
     MinoffsetforCatButton: {x: 61.5, y: 168.8}
     MaxoffsetforExternalCatButton: {x: 81, y: 26.5}
@@ -349,8 +349,8 @@ MonoBehaviour:
     AcessoryColorUnlock: 0
     AcessoryColorCost: 0
     AcessoryColorListName: 
-    CatPrefabLocation: {x: -0.238, y: 0.49, z: 1}
-    CatPrefabScale: {x: 0.285, y: 0.22, z: 1}
+    CatPrefabLocation: {x: -0.25, y: 0.27, z: 1}
+    CatPrefabScale: {x: 0.22, y: 0.22, z: 1}
     MaxoffsetforCatButton: {x: 142, y: 170}
     MinoffsetforCatButton: {x: 64.8, y: 170}
     MaxoffsetforExternalCatButton: {x: 82.2, y: 25}
@@ -435,14 +435,14 @@ MonoBehaviour:
   - Name: BlueFlowerHat
     NamofBaseAcessory: Flower Hat, Tall Flower Hat, Wide Flower Hat
     ColorAcessory: {fileID: 21300000, guid: e38b43298d2b2a14cada11abf71b3c52, type: 3}
-  SelectCat: {fileID: 11400000, guid: 1874b8b6a361f564880fa4a3e13e85c5, type: 2}
+  SelectCat: {fileID: 11400000, guid: e555ba895d5a24446bccda1cb968e5d7, type: 2}
   CurrentAnim: {fileID: 9100000, guid: 3b3859dba476d7143977ce83cfa36e01, type: 2}
   CurrentSkin: {fileID: -251871438, guid: 3589b1d7c5d65374093d56104ed629bc, type: 3}
   CurrentAccessory: {fileID: 21300000, guid: f9fc23c976581b94db2d0441c920e1c1, type: 3}
-  CurrentName: NA
-  CurrentSelected: 2
+  CurrentName: Cone
+  CurrentSelected: 4
   CurrentSkinIndex: 0
-  CurrentAccessoryIndex: 0
+  CurrentAccessoryIndex: 5
   CurrentAccessoryColorIndex: 1
 --- !u!114 &918842532
 MonoBehaviour:
@@ -457,6 +457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AudioPlayer: {fileID: 0}
+  SoundEffectPlayer: {fileID: 0}
   MainMenuTrack: {fileID: 8300000, guid: 3b62462537581e54f81daa7afaab5cfa, type: 3}
   CurrentLevelTrack: -1
   TrackProgression: 0
@@ -466,6 +467,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: db73828ab95a53f4e888d6a11769f2bd, type: 3}
   - {fileID: 8300000, guid: 056cbe616c033974e8533109a8314102, type: 3}
   AudioEffect:
+  - {fileID: 8300000, guid: 7846535558c92fe47b59beb2b2ab096f, type: 3}
+  - {fileID: 8300000, guid: f473ff539b5a71040826df6e8d53ab74, type: 3}
+  - {fileID: 8300000, guid: 4d48ed40ecba7f148888fd8601fd67d5, type: 3}
+  - {fileID: 8300000, guid: 6f7773e3e87f11441a390d7f5a8df377, type: 3}
+  - {fileID: 8300000, guid: f63464c4c71105249a63b8d285ad59aa, type: 3}
+  - {fileID: 8300000, guid: d9db831df783bc1448f6c372cf1a09ff, type: 3}
+  - {fileID: 8300000, guid: e55a37b5b89c4d34fbe91523e4f9f7e2, type: 3}
   - {fileID: 8300000, guid: 7d7ad6a831001834aa32a0dad156b033, type: 3}
   SwitchFromMainMenuMusic: 1
   FirstPlay: 1

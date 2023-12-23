@@ -226,6 +226,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df858eec00287464cb4fa52b12969387, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AcessoryName: NA
+  SkinName: NA
+  AcessoryColorName: NA
+  PurchaseFailure1: {fileID: 0}
+  PurchaseFailure2: {fileID: 0}
+  PurchaseButton: {fileID: 0}
 --- !u!1 &8845604196546053635
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,4 +488,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8845604197927943761}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 918842532, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
+        m_TargetAssemblyTypeName: MusicManager, Scripts
+        m_MethodName: PlayAudioEffect
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
