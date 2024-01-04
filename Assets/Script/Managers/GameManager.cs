@@ -30,13 +30,12 @@ public class GameManager : MonoBehaviour
 
     [Header("Misc")]
     //list of all level data
-    //public static List<LevelData> Levels;
     public List<LevelData> Levels = new List<LevelData>();
     public GameLevels GamelevelList;
     public int LevelPosition = 0;
     public int WorldNumber = 1;
     //public bool ActivateItemIndicators = false;
-    public bool ClearStartHelpScreen = false;
+    public bool ClearStartHelpScreen = false; //might do nothing also maybe should be true for launch
     public bool PurchasedStarBoost = false;
     public bool SkipForcedVids = false;
 
@@ -49,8 +48,8 @@ public class GameManager : MonoBehaviour
     [Header("Option Varables")]
     public float CatSpeed = 1;
     public bool ItemIndicators = false;
-    public float sfxVolume;
-    public bool SFXToggle;
+    //public float SFXVolume;
+    //public bool SFXToggle;
     public float musicVolume;
     public bool MusicToggle;
 
@@ -108,6 +107,7 @@ public class GameManager : MonoBehaviour
             _PlayerPrefsManager.LoadSettings();
             _PlayerPrefsManager.CheckLevels();
             _PlayerPrefsManager.RemoveHelpScreens();
+            _PlayerPrefsManager.UnlockCosmetics();
         }
         StartCoroutine(SwitchScene("Main Menu"));
         StartCoroutine(StartMenuMusic());
@@ -132,6 +132,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
         if(Name == "Main Menu")
         {
+            yield return new WaitForEndOfFrame();
             yield return new WaitForEndOfFrame();
             GameObject WaringTxt = GameObject.Find("Canvas");
             Instance._WarningTxtManager = WaringTxt.GetComponent<WarningTxtManager>();
@@ -167,14 +168,24 @@ public class GameManager : MonoBehaviour
     public IEnumerator StartMenuMusic()
     {
         yield return new WaitForSeconds(0);
-        Instance._musicManager.PlayMenuSong();
+        //Instance._musicManager.PlayMenuSong();
     }
 
     public void StartMatchMusic()
     {
-       Instance._musicManager.RandomTrack();
-       Instance._musicManager.PlayTrack();
+        if (_musicManager.CurrentLevelTrack == -1)
+        {
+            Instance._musicManager.RandomTrack();
+        }
+        Instance._musicManager.PlayTrack();
     }
+    public void StarBoost()
+    {
+        PurchasedStarBoost = true;
+        Instance._PlayerPrefsManager.SaveBool("PurchasedStarBoost", true);
+        GrantBonusStars();
+    }
+
     /// <summary>
     /// gives the player their bonus stars for levels already completed, when they purchase the +1 stars pack
     /// </summary>
@@ -213,8 +224,7 @@ public class GameManager : MonoBehaviour
 
         //loads the board and starts the level by generating a match using the match info and matchmanager
         yield return new WaitForEndOfFrame();
-
-        yield return new WaitForSeconds(.5f);
+        //yield return new WaitForSeconds(.2f); //Dan look here
         GameObject _board = GameObject.Find("Board");
         Instance._uiManager.FindBoard(_board);
         _uiManager.SelectedItem = null;
@@ -248,7 +258,21 @@ public class GameManager : MonoBehaviour
     public void Purchasemade()
     {
         ADsoff = true;
-        _PlayerPrefsManager.SaveBool("Adsoff", true);
+        _PlayerPrefsManager.SaveBool("ADsoff", true);
+    }
+
+    public void MuteToggle()
+    {
+        if(Instance.MusicToggle == true)
+        {
+            Instance.MusicToggle = false;
+            Instance._musicManager.Mute();
+        }
+        else
+        {
+            Instance.MusicToggle = true;
+            Instance._musicManager.Mute();
+        }
     }
 
     public int GetWorldNumber(){return WorldNumber;}

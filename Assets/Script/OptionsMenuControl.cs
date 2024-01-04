@@ -17,12 +17,10 @@ public class OptionsMenuControl : MonoBehaviour
     public TMP_Text SFXAdjustText;
     public Button[] ItemAffectButtons;
     public Button[] MusicToggleButtons;
-    public Button[] SFXToggleButtons;
     public Button[] SkipVideoButtons;
 
     private readonly string SpeedAdjustWording = "Cat Speed Augment: ";
     private readonly string MusicAdjustWording = "Music Level: ";
-    private readonly string SFXAdjustWording = "Sound Effect Level: ";
 
     /// <summary>
     /// Sets the UI objects to the value that has been saved
@@ -31,23 +29,23 @@ public class OptionsMenuControl : MonoBehaviour
     {
         SpeedAdjustSlider.value = (GameManager.Instance.CatSpeed - .75f) / .25f;
         MusicAdjustSlider.value = GameManager.Instance.musicVolume * 5;
-        SFXAdjustSlider.value = GameManager.Instance.sfxVolume * 5;
-        ItemAffectButtons[1].interactable = !GameManager.Instance.ItemIndicators;
-        ItemAffectButtons[0].interactable = GameManager.Instance.ItemIndicators;
+        //SFXAdjustSlider.value = GameManager.Instance.SFXVolume * 5;
+        ItemAffectButtons[0].interactable = !GameManager.Instance.ItemIndicators;
+        ItemAffectButtons[1].interactable = GameManager.Instance.ItemIndicators;
         if (MusicToggleButtons[0] != null)
         {
-            MusicToggleButtons[1].interactable = !GameManager.Instance.MusicToggle;
-            MusicToggleButtons[0].interactable = GameManager.Instance.MusicToggle;
+            MusicToggleButtons[0].interactable = !GameManager.Instance.MusicToggle;
+            MusicToggleButtons[1].interactable = GameManager.Instance.MusicToggle;
         }
-        if (SFXToggleButtons[0] != null)
+        //if (SFXToggleButtons[0] != null)
+        //{
+        //    SFXToggleButtons[1].interactable = !GameManager.Instance.SFXToggle;
+        //    SFXToggleButtons[0].interactable = GameManager.Instance.SFXToggle;
+        //}
+        if (SkipVideoButtons.Length != 0)
         {
-            SFXToggleButtons[1].interactable = !GameManager.Instance.SFXToggle;
-            SFXToggleButtons[0].interactable = GameManager.Instance.SFXToggle;
-        }
-        if (SkipVideoButtons[0] != null)
-        {
-            SkipVideoButtons[1].interactable = !GameManager.Instance.SkipForcedVids;
-            SkipVideoButtons[0].interactable = GameManager.Instance.SkipForcedVids;
+            SkipVideoButtons[0].interactable = !GameManager.Instance.SkipForcedVids;
+            SkipVideoButtons[1].interactable = GameManager.Instance.SkipForcedVids;
         }
     }
 
@@ -76,16 +74,16 @@ public class OptionsMenuControl : MonoBehaviour
         }
     }
 
-    public void SFXChange()
-    {
-        float AgmentAmount = SFXAdjustSlider.value / 5;
-        SFXAdjustText.text = SFXAdjustWording + AgmentAmount;
-        GameManager.Instance.sfxVolume = AgmentAmount;
-        if (GameManager.Instance.PlayerPrefsTrue == true)
-        {
-            GameManager.Instance._PlayerPrefsManager.SaveFloat("SfxVolume", AgmentAmount);
-        }
-    }
+    //public void SFXChange()
+    //{
+    //    float AgmentAmount = SFXAdjustSlider.value / 5;
+    //    SFXAdjustText.text = SFXAdjustWording + AgmentAmount;
+    //    GameManager.Instance.SFXVolume = AgmentAmount;
+    //    if (GameManager.Instance.PlayerPrefsTrue == true)
+    //    {
+    //        GameManager.Instance._PlayerPrefsManager.SaveFloat("SFXVolume", AgmentAmount);
+    //    }
+    //}
 
     /// <summary>
     /// Controls turning on/off of the item affect indicators
@@ -94,15 +92,16 @@ public class OptionsMenuControl : MonoBehaviour
     public void AffectToggle(bool ItemAffect)
     {
         GameManager.Instance.ItemIndicators = ItemAffect;
+        Debug.Log(ItemAffect);
         if (ItemAffect)
         {
-            ItemAffectButtons[1].interactable = !ItemAffect;
-            ItemAffectButtons[0].interactable = ItemAffect;
+            ItemAffectButtons[0].interactable = !ItemAffect;
+            ItemAffectButtons[1].interactable = ItemAffect;
         }
         else
         {
-            ItemAffectButtons[0].interactable = ItemAffect;
-            ItemAffectButtons[1].interactable = !ItemAffect;
+            ItemAffectButtons[1].interactable = ItemAffect;
+            ItemAffectButtons[0].interactable = !ItemAffect;
         }
         if (GameManager.Instance.PlayerPrefsTrue == true)
         {
@@ -114,35 +113,18 @@ public class OptionsMenuControl : MonoBehaviour
         GameManager.Instance.MusicToggle = Music;
         if (Music)
         {
-            MusicToggleButtons[1].interactable = !Music;
-            MusicToggleButtons[0].interactable = Music;
-        }
-        else
-        {
             MusicToggleButtons[0].interactable = Music;
             MusicToggleButtons[1].interactable = !Music;
         }
-        if (GameManager.Instance.PlayerPrefsTrue == true)
-        {
-            GameManager.Instance._PlayerPrefsManager.SaveBool("MusicToggle", Music);
-        }
-    }
-    public void SFXToggle(bool SFX)
-    {
-        GameManager.Instance.SFXToggle = SFX;
-        if (SFX)
-        {
-            SFXToggleButtons[1].interactable = !SFX;
-            SFXToggleButtons[0].interactable = SFX;
-        }
         else
         {
-            SFXToggleButtons[0].interactable = SFX;
-            SFXToggleButtons[1].interactable = !SFX;
+            MusicToggleButtons[1].interactable = !Music;
+            MusicToggleButtons[0].interactable = Music;
         }
+        GameManager.Instance.MuteToggle();
         if (GameManager.Instance.PlayerPrefsTrue == true)
         {
-            GameManager.Instance._PlayerPrefsManager.SaveBool("SFXToggle", SFX);
+            GameManager.Instance._PlayerPrefsManager.SaveBool("MusicToggle", !Music);
         }
     }
 
@@ -151,13 +133,13 @@ public class OptionsMenuControl : MonoBehaviour
         GameManager.Instance.SkipForcedVids = ForcedVideo;
         if (ForcedVideo)
         {
-            SkipVideoButtons[1].interactable = !ForcedVideo;
-            SkipVideoButtons[0].interactable = ForcedVideo;
+            SkipVideoButtons[0].interactable = !ForcedVideo;
+            SkipVideoButtons[1].interactable = ForcedVideo;
         }
         else
         {
-            SkipVideoButtons[0].interactable = ForcedVideo;
-            SkipVideoButtons[1].interactable = !ForcedVideo;
+            SkipVideoButtons[1].interactable = ForcedVideo;
+            SkipVideoButtons[0].interactable = !ForcedVideo;
         }
         if (GameManager.Instance.PlayerPrefsTrue == true)
         {

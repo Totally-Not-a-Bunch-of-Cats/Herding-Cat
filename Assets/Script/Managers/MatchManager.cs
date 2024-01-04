@@ -1,5 +1,5 @@
 /*
- * Author: Zachary Boehm
+ * Author: Aaron Tweden, Zachary Boehm
  * Created: 08/17/2022
  */
 using System.Collections;
@@ -8,7 +8,6 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using System;
-using log4net.Core;
 
 [System.Serializable]
 /// <summary>
@@ -195,7 +194,6 @@ public class MatchManager : MonoBehaviour
             }
 
             MarkTubes(TubePairs);
-            GameManager.Instance.StartMatchMusic();
 
             //places items 
             for (int i = 0; i < currentLevel.GetPossibleItems().Length; i++)
@@ -420,7 +418,7 @@ public class MatchManager : MonoBehaviour
                 }
             }
         }
-        
+
         // Removes entries in item adjust window
         for (int i = 0; i < GameBoard.Items.Count; i++)
         {
@@ -477,72 +475,106 @@ public class MatchManager : MonoBehaviour
                     Debug.LogWarning("No Next Level");
                 }
             }
-            StartCoroutine(VictoryPause());
 
             // Checks if wants to update leveldata info
             if (GameManager.Instance.UpdateLevelData == true)
             {
-                // Updates level data info for current/next level
-                if (GameManager.Instance.PlayerPrefsTrue)
-                {
-                    GameManager.Instance._PlayerPrefsManager.SaveString("FurthestLevel", NextLevelName);
-                }
                 //GameManager.Instance.Levels.Find(level => level.name == NextLevelName).SetUnlocked(true);
                 //unlock levels equal to the number of stars earned
                 if (GameManager.Instance.Levels.Exists(level => level.name == NextLevelName))
                 {
-                    /*for(int j =1; j < CurrentLevel.StarsEarned; j++)
+                    if(false)
                     {
-                        string[] additionalLevelName = NextLevelName.Split('-');
+                        /*for(int j =1; j < CurrentLevel.StarsEarned; j++)
+                           {
+                                string[] additionalLevelName = NextLevelName.Split('-');
+                                NextLevelName = "";
+                                if (additionalLevelName[1] != "10")
+                                {
+                                    NextLevelName = additionalLevelName[0] + "-";
+                                    NextLevelName += int.Parse(additionalLevelName[1]) + 1;
+                                }
+                                else
+                                {
+                                    NextLevelName += int.Parse(additionalLevelName[0]) + 1;
+                                    NextLevelName = NextLevelName + "-1";
+                                }
+                                Debug.Log(NextLevelName);
+                                if (GameManager.Instance.Levels.Exists(level => level.name == NextLevelName))
+                                {
+                                    GameManager.Instance.Levels.Find(level => level.name == NextLevelName).SetUnlocked(true);
+                                }
+                                else
+                                {
+                                    
+                                }
+                           }*/
+
+
+                        //int NextLevelPlacement = GameManager.Instance.Levels.IndexOf(CurrentLevel) + 1;
+                        //int NewestLockedLevel = 0;
+                        //for (int j = NextLevelPlacement; j <= GameManager.Instance.Levels.Count - 1; j++)
+                        //{
+                        //    if (GameManager.Instance.Levels[j].GetUnlocked() == false)
+                        //    {
+                        //        NewestLockedLevel = j;
+                        //        break;
+                        //    }
+                        //}
+                        //for (int j = NewestLockedLevel; j <= GameManager.Instance.Levels.Count - 1; j++)
+                        //{
+                        //    Debug.Log(GameManager.Instance.StarCount);
+                        //    if (GameManager.Instance.StarCount >= j)
+                        //    {
+                        //        GameManager.Instance.Levels[j].SetUnlocked(true);
+                        //        // Updates level data info for current/next level
+                        //        if (GameManager.Instance.PlayerPrefsTrue)
+                        //        {
+                        //            GameManager.Instance._PlayerPrefsManager.SaveString("FurthestLevel", GameManager.Instance.Levels[j].name);
+                        //            Debug.Log(GameManager.Instance.Levels[j].name + " FurthestLevel");
+                        //        }
+                        //    }
+                        //    else
+                        //    {
+                        //        break;
+                        //    }
+                        //}
+                    }
+
+                    for (int z = 0; z < CurrentLevel.StarsEarned; z++)
+                    {
+                        string[] FurthestLevelSplit = GameManager.Instance.FurthestLevel.Split('-');
                         NextLevelName = "";
-                        if (additionalLevelName[1] != "10")
+                        if (FurthestLevelSplit[1] != "10")
                         {
-                            NextLevelName = additionalLevelName[0] + "-";
-                            NextLevelName += int.Parse(additionalLevelName[1]) + 1;
+                            NextLevelName = FurthestLevelSplit[0] + "-";
+                            NextLevelName += int.Parse(FurthestLevelSplit[1]) + 1;
                         }
                         else
                         {
-                            NextLevelName += int.Parse(additionalLevelName[0]) + 1;
+                            NextLevelName += int.Parse(FurthestLevelSplit[0]) + 1;
                             NextLevelName = NextLevelName + "-1";
                         }
-                        Debug.Log(NextLevelName);
-                        if (GameManager.Instance.Levels.Exists(level => level.name == NextLevelName))
+                        if (!GameManager.Instance.Levels.Exists(level => level.name == NextLevelName))
                         {
-                            GameManager.Instance.Levels.Find(level => level.name == NextLevelName).SetUnlocked(true);
-                        }
-                        else
-                        {
+                            Debug.LogWarning("No Next Level");
                             break;
                         }
-                    }*/
-                    int NextLevelPlacement = GameManager.Instance.Levels.IndexOf(CurrentLevel) + 1;
-                    int NewestLockedLevel = 0;
-                    for(int j = NextLevelPlacement; j <= GameManager.Instance.Levels.Count - 1; j++)
-                    {
-                        if(GameManager.Instance.Levels[j].GetUnlocked() == false)
+                        GameManager.Instance.Levels.Find(level => level.name == NextLevelName).SetUnlocked(true);
+                        GameManager.Instance.FurthestLevel = NextLevelName;
+                        if (GameManager.Instance.PlayerPrefsTrue)
                         {
-                            NewestLockedLevel = j;
-                            break;
+                            GameManager.Instance._PlayerPrefsManager.SaveString("FurthestLevel", NextLevelName);
                         }
                     }
-                    for(int j = NewestLockedLevel; j <= GameManager.Instance.Levels.Count - 1; j++)
-                    {
-                        if(GameManager.Instance.StarCount >= j)
-                        {
-                            GameManager.Instance.Levels[j].SetUnlocked(true);
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                }                
+                }
             }
             else
             {
                 // Logs in console that next level would be unlocked and value that current levels star count would be set to
                 Debug.Log($"Level {NextLevelName} Unlocked");
             }
+            StartCoroutine(VictoryPause());
         }
         GameManager.Instance._uiManager.Override = true;
         yield return null;
@@ -691,6 +723,7 @@ public class MatchManager : MonoBehaviour
                 CatJustinCage = true;
                 GameBoard.SecondCatList.Add(new PosObject(GameBoard.Cats[ListPos].Position, GameBoard.Cats[ListPos].Object, GameBoard.Cats[ListPos].ItemAdjObject, GameBoard.Cats[ListPos].Name, GameBoard.Cats[ListPos].Tile));
                 GameBoard.Set(CatPos, null);
+                GameManager.Instance._musicManager.PlayAudioEffect(3);
                 GameBoard.NumCatinPen++;
             }
             if (GameBoard.At(FinalDestination).name == "Toy")

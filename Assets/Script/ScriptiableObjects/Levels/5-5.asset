@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Dimensions: {x: 9, y: 9}
   TargetRounds: 2
-  TargetItems: 4
+  TargetItems: 10
   NewThingIntroduced: 0
   Category: 0
   TileName: 
-  StarsEarned: 3
-  Unlocked: 1
+  StarsEarned: 2
+  Unlocked: 0
   NewItemIntroduced: 0
+  SpecialHelpTxt: 0
+  SpecialHelpLevelNum: -1
   BackgroundTile: {fileID: 11400000, guid: 103593486162c964aa10539a0ed04a9e, type: 2}
   Tiles:
   - name: Wall (5,8)
@@ -63,16 +65,6 @@ MonoBehaviour:
     Slate: {fileID: 11400000, guid: 6539a1653aded724789464aef428b98b, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: -1, y: 0}
-  - name: Cat Tube (7,7)
-    Position: {x: 7, y: 7}
-    Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
-    TubeDestination: {x: 0, y: 1}
-    Redirection: {x: -1, y: 0}
-  - name: Cat Tube (0,1)
-    Position: {x: 0, y: 1}
-    Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
-    TubeDestination: {x: 7, y: 7}
-    Redirection: {x: -1, y: 0}
   - name: Small CatPen (1,1)
     Position: {x: 1, y: 1}
     Slate: {fileID: 11400000, guid: e9d6189f63d821045ab761e537a50a9c, type: 2}
@@ -82,6 +74,146 @@ MonoBehaviour:
     Position: {x: 7, y: 3}
     Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
     TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (5,4)
+    Position: {x: 5, y: 4}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (5,3)
+    Position: {x: 5, y: 3}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (5,2)
+    Position: {x: 5, y: 2}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (4,5)
+    Position: {x: 4, y: 5}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (3,5)
+    Position: {x: 3, y: 5}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (2,5)
+    Position: {x: 2, y: 5}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (1,5)
+    Position: {x: 1, y: 5}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (0,5)
+    Position: {x: 0, y: 5}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Cat Tree (3,1)
+    Position: {x: 3, y: 1}
+    Slate: {fileID: 11400000, guid: 6539a1653aded724789464aef428b98b, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (2,2)
+    Position: {x: 2, y: 2}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (1,2)
+    Position: {x: 1, y: 2}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (0,2)
+    Position: {x: 0, y: 2}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (0,1)
+    Position: {x: 0, y: 1}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (0,0)
+    Position: {x: 0, y: 0}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (1,0)
+    Position: {x: 1, y: 0}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (2,0)
+    Position: {x: 2, y: 0}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (2,1)
+    Position: {x: 2, y: 1}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Cat Tube (7,7)
+    Position: {x: 7, y: 7}
+    Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
+    TubeDestination: {x: 1, y: 7}
+    Redirection: {x: -1, y: 0}
+  - name: Cat Tube (1,7)
+    Position: {x: 1, y: 7}
+    Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
+    TubeDestination: {x: 7, y: 7}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (6,1)
+    Position: {x: 6, y: 1}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (7,1)
+    Position: {x: 7, y: 1}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (8,1)
+    Position: {x: 8, y: 1}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (2,3)
+    Position: {x: 2, y: 3}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (3,3)
+    Position: {x: 3, y: 3}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (4,3)
+    Position: {x: 4, y: 3}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Cat Tree (2,6)
+    Position: {x: 2, y: 6}
+    Slate: {fileID: 11400000, guid: 6539a1653aded724789464aef428b98b, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Cat Tube (4,4)
+    Position: {x: 4, y: 4}
+    Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
+    TubeDestination: {x: 4, y: 2}
+    Redirection: {x: -1, y: 0}
+  - name: Cat Tube (4,2)
+    Position: {x: 4, y: 2}
+    Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
+    TubeDestination: {x: 4, y: 4}
     Redirection: {x: -1, y: 0}
   PossibleItems:
   - {fileID: 11400000, guid: 089f360dd355a504085896f04d3eb986, type: 2}

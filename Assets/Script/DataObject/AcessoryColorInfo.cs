@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AcessoryColorInfo : MonoBehaviour
+[System.Serializable]
+public class AcessoryColorInfo
 {
     public string Name;
+    public string NamofBaseAcessory;
     public Sprite ColorAcessory;
 }

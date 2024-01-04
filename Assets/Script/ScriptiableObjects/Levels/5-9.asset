@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Dimensions: {x: 10, y: 10}
   TargetRounds: 5
-  TargetItems: 24
+  TargetItems: 30
   NewThingIntroduced: 0
   Category: 0
   TileName: 
-  StarsEarned: 1
+  StarsEarned: 2
   Unlocked: 1
   NewItemIntroduced: 0
+  SpecialHelpTxt: 0
+  SpecialHelpLevelNum: -1
   BackgroundTile: {fileID: 11400000, guid: 103593486162c964aa10539a0ed04a9e, type: 2}
   Tiles:
   - name: Wall (0,3)
@@ -255,7 +257,7 @@ MonoBehaviour:
     Redirection: {x: -1, y: 0}
   - name: Alfred (5,9)
     Position: {x: 5, y: 8}
-    Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
+    Slate: {fileID: 11400000, guid: b1b6c6f21d028124bbc63e252f176c41, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: -1, y: 0}
   PossibleItems:

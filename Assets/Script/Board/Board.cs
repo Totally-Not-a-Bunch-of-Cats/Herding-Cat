@@ -20,6 +20,7 @@ public class Board
     public List<PosObject> SecondCatList;
     public int NumberofCats = 0;
     public List<PosObject> Items;
+    //public List<PosObject> ItemsActive;
     public List<PosObject> CatPenLocation;
     public int NumCatinPen = 0;
     public List<PosTile> SavedTiles;
@@ -46,6 +47,7 @@ public class Board
         RedirectionPads = new List<PosTile>();
         SecondCatList = new List<PosObject>();
         Items = new List<PosObject>();
+        //ItemsActive = new List<PosObject>();
         CatPenLocation = new List<PosObject>();
         if (Tiles != null)
         {
@@ -88,6 +90,7 @@ public class Board
         SavedTiles = new List<PosTile>();
         SecondCatList = new List<PosObject>();
         Items = new List<PosObject>();
+        //ItemsActive = new List<PosObject>();
         CatPenLocation = new List<PosObject>();
         if (Tiles != null)
         {
@@ -132,6 +135,7 @@ public class Board
         CatVec2 = new List<Vector2Int>();
         SecondCatList = new List<PosObject>();
         Items = new List<PosObject>();
+        //ItemsActive = new List<PosObject>();
         Cats = new List<PosObject>();
         _cells = new Tile[_width, _height];
         int i = 0;
