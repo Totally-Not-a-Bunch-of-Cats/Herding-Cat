@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
     public Sprite SelectedBoxSprite;
     public Sprite BoxSprite;
     public bool NextIndicator = true;
+    public bool NextItem = false;
     public GameObject PauseMenu;
 
     /// <summary>
@@ -415,6 +416,35 @@ public class UIManager : MonoBehaviour
                     IndicatorList[i].gameObject.SetActive(true);
                 }
             }
+        }
+        StartCoroutine(TurnOffIndicator(IndicatorList));
+    }
+
+    IEnumerator TurnOffIndicator(AffectIndicator[] IndicatorList)
+    {
+        for (int i = 0; i < IndicatorList.Length; i++)
+        {
+            IndicatorList[i].transform.GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -.2f);
+        }
+        yield return new WaitForSeconds(.8f);
+        for (int i = 0; i < IndicatorList.Length; i++)
+        {
+            IndicatorList[i].transform.GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -.2f);
+        }
+        yield return new WaitForSeconds(.8f);
+        for (int i = 0; i < IndicatorList.Length; i++)
+        {
+            IndicatorList[i].transform.GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -.2f);
+        }
+        yield return new WaitForSeconds(.8f);
+        for (int i = 0; i < IndicatorList.Length; i++)
+        {
+            IndicatorList[i].transform.GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -.2f);
+        }
+        yield return new WaitForSeconds(.8f);
+        for(int i = 0; i < IndicatorList.Length; i++)
+        {
+            IndicatorList[i].transform.gameObject.SetActive(false);
         }
     }
 }

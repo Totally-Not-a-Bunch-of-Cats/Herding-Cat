@@ -23862,7 +23862,6 @@ GameObject:
   - component: {fileID: 573573429}
   - component: {fileID: 573573432}
   - component: {fileID: 573573433}
-  - component: {fileID: 573573434}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -23979,18 +23978,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 134a7f318d5ebb645aaeee07526427cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &573573434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 573573428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37ec9966b2e995345a14921542fe98c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &574304022
@@ -26523,6 +26510,7 @@ GameObject:
   - component: {fileID: 668644742}
   - component: {fileID: 668644744}
   - component: {fileID: 668644743}
+  - component: {fileID: 668644745}
   m_Layer: 0
   m_Name: Cat Store
   m_TagString: Untagged
@@ -26599,6 +26587,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 668644741}
   m_CullTransparentMesh: 1
+--- !u!114 &668644745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668644741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37ec9966b2e995345a14921542fe98c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &670532745
 GameObject:
   m_ObjectHideFlags: 0
@@ -58366,6 +58366,7 @@ GameObject:
   - component: {fileID: 1828687404}
   - component: {fileID: 1828687406}
   - component: {fileID: 1828687405}
+  - component: {fileID: 1828687407}
   m_Layer: 0
   m_Name: Main Menu
   m_TagString: Untagged
@@ -58442,6 +58443,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828687403}
   m_CullTransparentMesh: 1
+--- !u!114 &1828687407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828687403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37ec9966b2e995345a14921542fe98c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1832644730
 GameObject:
   m_ObjectHideFlags: 0
@@ -59705,6 +59718,7 @@ GameObject:
   - component: {fileID: 1885419094}
   - component: {fileID: 1885419093}
   - component: {fileID: 1885419092}
+  - component: {fileID: 1885419095}
   m_Layer: 0
   m_Name: Volume Toggle Button
   m_TagString: Untagged
@@ -59800,6 +59814,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1885419095}
+        m_TargetAssemblyTypeName: GamaChanger, Scripts
+        m_MethodName: ButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1885419093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59838,6 +59864,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1885419090}
   m_CullTransparentMesh: 1
+--- !u!114 &1885419095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885419090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47d2e76e9302e944d8a51a05c6111ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1887013264
 GameObject:
   m_ObjectHideFlags: 0
@@ -59849,6 +59887,7 @@ GameObject:
   - component: {fileID: 1887013265}
   - component: {fileID: 1887013267}
   - component: {fileID: 1887013266}
+  - component: {fileID: 1887013268}
   m_Layer: 5
   m_Name: Level Select
   m_TagString: Untagged
@@ -59920,6 +59959,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1887013264}
   m_CullTransparentMesh: 1
+--- !u!114 &1887013268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887013264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37ec9966b2e995345a14921542fe98c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1889536979
 GameObject:
   m_ObjectHideFlags: 0

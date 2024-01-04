@@ -73,8 +73,8 @@ MonoBehaviour:
   GamesTillMandatoryAd: 10
   ADsoff: 0
   CatSpeed: 1
-  ItemIndicators: 0
-  musicVolume: 0.8
+  ItemIndicators: 1
+  musicVolume: 0.6
   MusicToggle: 1
   UpdateLevelData: 1
   PlayerPrefsTrue: 0
@@ -120,6 +120,7 @@ MonoBehaviour:
   SelectedBoxSprite: {fileID: 21300000, guid: decba4c4f89a41748899f6742f60ef64, type: 3}
   BoxSprite: {fileID: 21300000, guid: 020dc191381a8284e854f98e51a53a43, type: 3}
   NextIndicator: 1
+  NextItem: 0
   PauseMenu: {fileID: 0}
 --- !u!114 &3686397751258903135
 MonoBehaviour:
