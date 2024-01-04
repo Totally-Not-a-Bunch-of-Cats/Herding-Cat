@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 9-10
   m_EditorClassIdentifier: 
   Dimensions: {x: 12, y: 10}
-  TargetRounds: 10
-  TargetItems: 10
+  TargetRounds: 5
+  TargetItems: 30
   NewThingIntroduced: 0
   Category: 0
   TileName: 
@@ -362,11 +362,6 @@ MonoBehaviour:
     Redirection: {x: -1, y: 0}
   - name: Alfred (9,1)
     Position: {x: 9, y: 1}
-    Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
-    TubeDestination: {x: 0, y: 0}
-    Redirection: {x: -1, y: 0}
-  - name: Alfred (11,1)
-    Position: {x: 11, y: 1}
     Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: -1, y: 0}

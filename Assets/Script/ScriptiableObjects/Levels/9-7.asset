@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 9-7
   m_EditorClassIdentifier: 
   Dimensions: {x: 12, y: 10}
-  TargetRounds: 10
-  TargetItems: 10
+  TargetRounds: 3
+  TargetItems: 30
   NewThingIntroduced: 0
   Category: 0
   TileName: 
@@ -52,11 +52,6 @@ MonoBehaviour:
     Redirection: {x: -1, y: 0}
   - name: Wall (0,0)
     Position: {x: 0, y: 0}
-    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
-    TubeDestination: {x: 0, y: 0}
-    Redirection: {x: -1, y: 0}
-  - name: Wall (1,7)
-    Position: {x: 1, y: 7}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: -1, y: 0}
@@ -297,11 +292,6 @@ MonoBehaviour:
     Redirection: {x: -1, y: 0}
   - name: Wall (10,3)
     Position: {x: 10, y: 3}
-    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
-    TubeDestination: {x: 0, y: 0}
-    Redirection: {x: -1, y: 0}
-  - name: Wall (10,2)
-    Position: {x: 10, y: 2}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: -1, y: 0}

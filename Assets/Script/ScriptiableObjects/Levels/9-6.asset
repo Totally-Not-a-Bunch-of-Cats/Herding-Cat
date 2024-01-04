@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Dimensions: {x: 12, y: 10}
   TargetRounds: 10
-  TargetItems: 10
+  TargetItems: 20
   NewThingIntroduced: 0
   Category: 0
   TileName: 
