@@ -18,13 +18,117 @@ public class PlayerPrefsManager : MonoBehaviour
     /// </summary>
     public void LoadSettings()
     {
-        GameManager.Instance.sfxVolume = GetFloat("SfxVolume");
-        GameManager.Instance.musicVolume = GetFloat("MusicVolume");
-        GameManager.Instance.StarCount = GetInt("StarCount");
-        GameManager.Instance.CatSpeed = GetFloat("CatSpeed");
-        GameManager.Instance.ItemIndicators = GetBool("ItemIndicators");
-        GameManager.Instance.FurthestLevel = GetString("FurthestLevel");
+        //checks to see if SFXVolme has a key and if it doesnt it makes one
+        ////if(!PlayerPrefs.HasKey("SFXVolume"))
+        ////{
+        ////    GameManager.Instance.SFXVolume = 1;
+        ////    PlayerPrefs.SetFloat("SFXVolume", 1);
+        ////}
+        //else
+        //{
+        //    GameManager.Instance.SFXVolume = PlayerPrefs.GetFloat("SFXVolume");
+        //}
+        //checks to see if SFXToggle has a key and if it doesnt it makes one
+        //if (!PlayerPrefs.HasKey("SFXToggle"))
+        //{
+        //    GameManager.Instance.SFXToggle = true;
+        //    SaveBool("SFXToggle", true);
+        //}
+        //else
+        //{
+        //    GameManager.Instance.SFXToggle = GetBool("SFXToggle");
+        //}
+        //checks to see if musicvolue has a key and if it doesnt it makes a key for it
+        if (!PlayerPrefs.HasKey("MusicVolume"))
+        {
+            GameManager.Instance.musicVolume = 1;
+            PlayerPrefs.SetFloat("MusicVolume", 1);
+        }
+        else
+        {
+            GameManager.Instance.musicVolume = PlayerPrefs.GetFloat("MusicVolume");
+        }
+        //checks to see if MusicToggle has a key and if it doesnt it makes one
+        if (!PlayerPrefs.HasKey("MusicToggle"))
+        {
+            GameManager.Instance.MusicToggle = true;
+            SaveBool("MusicToggle", true);
+        }
+        else
+        {
+            GameManager.Instance.MusicToggle = GetBool("MusicToggle");
+        }
+        //checks to see if StarCount has a key and if it doesnt it makes one
+        if (!PlayerPrefs.HasKey("StarCount"))
+        {
+            GameManager.Instance.StarCount = 0;
+            PlayerPrefs.SetFloat("StarCount", 0);
+        }
+        else
+        {
+            GameManager.Instance.StarCount = PlayerPrefs.GetInt("StarCount");
+        }
+        //checks to see if CatSpeed has a key and if it doesnt it makes one
+        if (!PlayerPrefs.HasKey("CatSpeed"))
+        {
+            GameManager.Instance.CatSpeed = 1;
+            PlayerPrefs.SetFloat("CatSpeed", 1);
+        }
+        else
+        {
+            GameManager.Instance.CatSpeed = PlayerPrefs.GetFloat("CatSpeed");
+        }
+        //checks to see if ItemIndicators has a key and if it doesnt it makes one
+        if (!PlayerPrefs.HasKey("ItemIndicators"))
+        {
+            GameManager.Instance.ItemIndicators = false;
+            SaveBool("ItemIndicators", false);
+        }
+        else
+        {
+            GameManager.Instance.ItemIndicators = GetBool("ItemIndicators");
+        }
+        //checks to see if FurthestLevel has a key and if it doesnt it makes one
+        if (!PlayerPrefs.HasKey("FurthestLevel"))
+        {
+            GameManager.Instance.FurthestLevel = "1-1";
+            SaveString("FurthestLevel", "1-1");
+        }
+        else
+        {
+            GameManager.Instance.FurthestLevel = PlayerPrefs.GetString("FurthestLevel");
+        }
+        //checks to see if ADsoff has a key and if it doesnt it makes one
+        if (!PlayerPrefs.HasKey("ADsoff"))
+        {
+            GameManager.Instance.ADsoff = false;
+            SaveBool("ADsoff", false);
+        }
+        else
+        {
+            GameManager.Instance.ADsoff = GetBool("ADsoff");
+        }
+        //checks to see if ItemIndicators has a key and if it doesnt it makes one
+        if (!PlayerPrefs.HasKey("SkipForcedVids"))
+        {
+            GameManager.Instance.SkipForcedVids = false;
+            SaveBool("SkipForcedVids", false);
+        }
+        else
+        {
+            GameManager.Instance.SkipForcedVids = GetBool("SkipForcedVids");
+        }
+        if (!PlayerPrefs.HasKey("PurchasedStarBoost"))
+        {
+            GameManager.Instance.PurchasedStarBoost = false;
+            SaveBool("PurchasedStarBoost", false);
+        }
+        else
+        {
+            GameManager.Instance.SkipForcedVids = GetBool("SkipForcedVids");
+        }
     }
+
     /// <summary>
     /// goes through the levels on game launch to make sure the level data matches the playerprefs data
     /// </summary> //make cause a bug/ crash if you have completed all levels
@@ -33,21 +137,78 @@ public class PlayerPrefsManager : MonoBehaviour
         //loop through all levels checking for saved data and making it match as well as unlocking all levels behind the FurthestUnlockedLevel
         for (int i = 0; i < GameManager.Instance.Levels.Count; i++)
         {
-            if (GetInt(GameManager.Instance.Levels[i].name) > 3)
+            if (PlayerPrefs.HasKey(GameManager.Instance.Levels[i].name))
             {
-                SaveInt(GameManager.Instance.Levels[i].name, 0);
-            }
-            else if(GameManager.Instance.FurthestLevel == GameManager.Instance.Levels[i].name)
-            {
-                if(GetInt(GameManager.Instance.Levels[i].name) > 0)
+                if (GameManager.Instance.FurthestLevel == GameManager.Instance.Levels[i].name)
                 {
-                    GameManager.Instance.Levels[i].StarsEarned = GetInt(GameManager.Instance.Levels[i].name);
+                    GameManager.Instance.Levels[i].SetUnlocked(true);
+                    if (PlayerPrefs.GetInt(GameManager.Instance.Levels[i].name) > 0)
+                    {
+                        GameManager.Instance.Levels[i].StarsEarned = PlayerPrefs.GetInt(GameManager.Instance.Levels[i].name);
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
-                break;
+                else
+                {
+                    GameManager.Instance.Levels[i].StarsEarned = PlayerPrefs.GetInt(GameManager.Instance.Levels[i].name);
+                    GameManager.Instance.Levels[i].SetUnlocked(true);
+                }
             }
             else
             {
-                GameManager.Instance.Levels[i].StarsEarned = GetInt(GameManager.Instance.Levels[i].name);
+                break;
+            }
+        }
+    }
+    public void UnlockCosmetics()
+    {
+        for(int i = 0; i < GameManager.Instance._catInfoManager.Accessories.Count; i++)
+        {
+            if (PlayerPrefs.HasKey(GameManager.Instance._catInfoManager.Accessories[i].Name))
+            {
+                if(GetBool(GameManager.Instance._catInfoManager.Accessories[i].Name))
+                {
+                    GameManager.Instance._catInfoManager.Accessories[i].AcessoryUnlock = true;
+                }
+            }
+            if (PlayerPrefs.HasKey(GameManager.Instance._catInfoManager.Accessories[i].Name + "Color"))
+            {
+                if (GetBool(GameManager.Instance._catInfoManager.Accessories[i].Name + "Color"))
+                {
+                    GameManager.Instance._catInfoManager.Accessories[i].AcessoryColorUnlock = true;
+                }
+            }
+        }
+        for (int j = 0; j < GameManager.Instance._catInfoManager.SkinList.Count; j++)
+        {
+            if (PlayerPrefs.HasKey(GameManager.Instance._catInfoManager.SkinList[j].Name))
+            {
+                if (GetBool(GameManager.Instance._catInfoManager.SkinList[j].Name))
+                {
+                    GameManager.Instance._catInfoManager.SkinList[j].Unlocked = true;
+                }
+            }
+        }
+    }
+
+    public void RemoveHelpScreens()
+    {
+        for (int i = 0; i < GameManager.Instance.Levels.Count; i++)
+        {
+            if (PlayerPrefs.HasKey(GameManager.Instance.Levels[i].name))
+            {
+                if (GetBool(GameManager.Instance.Levels[i].name) == true)
+                {
+                    GameManager.Instance.Levels[i].SpecialHelpTxt = false;
+                    GameManager.Instance.Levels[i].NewThingIntroduced = false;
+                }
+            }
+            else
+            {
+                break;
             }
         }
     }
@@ -57,35 +218,33 @@ public class PlayerPrefsManager : MonoBehaviour
     {
         PlayerPrefs.SetFloat(name, value);
     }
-    //gets float info with key
-    public float GetFloat(string KeyName)
-    {
-        return PlayerPrefs.GetFloat(KeyName , -1);
-    }
 
-
-
+    ////gets float info with key
+    //public float GetFloat(string KeyName)
+    //{
+    //    return PlayerPrefs.GetFloat(KeyName , 0);
+    //}
 
     //saves int with a key
     public void SaveInt(string name, int value)
     {
         PlayerPrefs.SetInt(name, value);
     }
-    public int GetInt(string KeyName)
-    {
-        return PlayerPrefs.GetInt(KeyName, -1);
-    }
+    //public int GetInt(string KeyName)
+    //{
+    //    return PlayerPrefs.GetInt(KeyName, 0);
+    //}
 
     //saves string
     public void SaveString(string name, string value)
     {
         PlayerPrefs.SetString(name, value);
     }
-    public string GetString(string KeyName)
-    {
-        return PlayerPrefs.GetString(KeyName,"");
-    }
 
+    //public string GetString(string KeyName)
+    //{
+    //    return PlayerPrefs.GetString(KeyName,"");
+    //}
 
     public void SaveBool(string name, bool value)
     {
@@ -101,6 +260,7 @@ public class PlayerPrefsManager : MonoBehaviour
             PlayerPrefs.SetInt(name, boolVal);
         }
     }
+
     public bool GetBool(string KeyName)
     {
         if(PlayerPrefs.GetInt(KeyName) == 1)
@@ -108,5 +268,9 @@ public class PlayerPrefsManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+    public void ClearPlayerPrefs()
+    {
+        PlayerPrefs.DeleteAll();
     }
 }

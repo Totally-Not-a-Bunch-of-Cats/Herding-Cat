@@ -95,7 +95,15 @@ public class UIManager : MonoBehaviour
                         {
                             TurnOnIndicator(GameManager.Instance._matchManager.GameBoard.Items[GameManager.Instance._matchManager.GameBoard.Items.Count-1]);
                         }
-                        
+                        if(SelectedItem.name == "Toy")
+                        {
+                            GameManager.Instance._musicManager.PlayAudioEffect(5);
+                        }
+                        if (SelectedItem.name == "Snake")
+                        {
+                            //GameManager.Instance._musicManager.PlayAudioEffect(5);
+                        }
+
                         // Adds Item to the list to delete/adjust order of items
                         GameObject NewItemEntry = Instantiate(ItemAdjPrefab, new Vector3(0, 0, 0), Quaternion.identity, ItemAdjPanel.transform.GetChild(0).GetChild(0));
                         NewItemEntry.GetComponent<ItemAdjPanel>().ItemImage.sprite = temp.GetComponent<SpriteRenderer>().sprite;
@@ -150,9 +158,9 @@ public class UIManager : MonoBehaviour
                     {
                         if (GameManager.Instance._matchManager.CurrentLevel.name == "1-1" && WorldPosition == new Vector3(1, 0, 3))
                         {
-                            if(GameManager.Instance._matchManager.HelpIndicator2 == null)
+                            if (GameManager.Instance._matchManager.HelpIndicator2 == null)
                             {
-                                GameManager.Instance._matchManager.HelpIndicator2 = 
+                                GameManager.Instance._matchManager.HelpIndicator2 =
                                     Instantiate(GameManager.Instance._matchManager.UIHelpIndicator, GameObject.Find("End Turn Button").transform.position, Quaternion.identity, GUI.transform);
                             }
                             else
@@ -173,7 +181,7 @@ public class UIManager : MonoBehaviour
                         {
                             if (GameManager.Instance._matchManager.HelpIndicator2 == null)
                             {
-                                GameManager.Instance._matchManager.HelpIndicator2 = 
+                                GameManager.Instance._matchManager.HelpIndicator2 =
                                     Instantiate(GameManager.Instance._matchManager.Indicator, new Vector3(0f, -1f, 0), Quaternion.identity, Board.transform);
                             }
                             else
@@ -224,6 +232,25 @@ public class UIManager : MonoBehaviour
             {
                 CanPlaceItem = true;
             }
+            if(GameManager.Instance._matchManager != null)
+            {
+                //turns off the indicators if youve won the game
+                if (GameManager.Instance._matchManager.ActiveMatch == false)
+                {
+                    if(GameManager.Instance._matchManager.HelpIndicator != null)
+                    {
+                        GameManager.Instance._matchManager.HelpIndicator.SetActive(false);
+                    }
+                    if (GameManager.Instance._matchManager.HelpIndicator2 != null)
+                    {
+                        GameManager.Instance._matchManager.HelpIndicator2.SetActive(false);
+                    }
+                    if (GameManager.Instance._matchManager.HelpIndicator3 != null)
+                    {
+                        GameManager.Instance._matchManager.HelpIndicator3.SetActive(false);
+                    }
+                }
+            }
         }
     }
 
@@ -237,7 +264,7 @@ public class UIManager : MonoBehaviour
         //get the restart button and make an event 
         GameObject.Find("Restart Button").GetComponent<Button>().onClick.AddListener(() => Restart());
         //rewind button and make an event
-        GameObject.Find("Rewind Button").GetComponent<Button>().onClick.AddListener(() => Rewind());
+        //GameObject.Find("Rewind Button").GetComponent<Button>().onClick.AddListener(() => Rewind());
     }
 
     /// <summary>
@@ -246,7 +273,6 @@ public class UIManager : MonoBehaviour
     /// <param name="item"><see cref="Item"/> that will be placed when clicked on board</param>
     public void PlaceItem(Item item, GameObject selectedButton)
     {
-        Debug.Log("we placing items");
         if (SelectedButton != null)
         {
             SelectedButton.GetComponent<Image>().sprite = BoxSprite;
@@ -294,9 +320,9 @@ public class UIManager : MonoBehaviour
             Override = false;
             GameManager.Instance._matchManager.CatJustinCage = false;
             GameManager.Instance._matchManager.GameBoard.SecondCatList.Clear();
-            //lock you out fron pressing buttons
+            //lock you out from pressing buttons
             GameManager.Instance._ReWindManager.SaveRewind(GameManager.Instance._matchManager.GameBoard, GameManager.Instance._matchManager.RoundsPlayed,
-                GameManager.Instance._matchManager.ItemsUsed, GameManager.Instance._matchManager.CurrentLevel.GetTiles());
+            GameManager.Instance._matchManager.ItemsUsed, GameManager.Instance._matchManager.CurrentLevel.GetTiles());
             GameManager.Instance._matchManager.RoundsPlayed++;
             StartCoroutine(GameManager.Instance._matchManager.EndRound());
         }

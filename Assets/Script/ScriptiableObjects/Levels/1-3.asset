@@ -15,76 +15,95 @@ MonoBehaviour:
   Dimensions: {x: 5, y: 5}
   TargetRounds: 3
   TargetItems: 8
-  NewThingIntroduced: 1
-  Category: 1
-  TileName: Deleting
+  NewThingIntroduced: 0
+  Category: 0
+  TileName: 
+  StarsEarned: 3
+  Unlocked: 1
+  NewItemIntroduced: 0
+  SpecialHelpTxt: 1
+  SpecialHelpLevelNum: 2
   BackgroundTile: {fileID: 11400000, guid: d756be87d23ee174f869fab071be06bf, type: 2}
   Tiles:
-  - Position: {x: 3, y: 1}
+  - name: 
+    Position: {x: 3, y: 1}
     Slate: {fileID: 11400000, guid: e9d6189f63d821045ab761e537a50a9c, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 0, y: 4}
+  - name: 
+    Position: {x: 0, y: 4}
     Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 0, y: 3}
+  - name: 
+    Position: {x: 0, y: 3}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 2, y: 3}
+  - name: 
+    Position: {x: 2, y: 3}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 3, y: 4}
+  - name: 
+    Position: {x: 3, y: 4}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 2, y: 1}
+  - name: 
+    Position: {x: 2, y: 1}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 0, y: 2}
+  - name: 
+    Position: {x: 0, y: 2}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 1, y: 0}
+  - name: 
+    Position: {x: 1, y: 0}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 0, y: 1}
+  - name: 
+    Position: {x: 0, y: 1}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 3, y: 3}
+  - name: 
+    Position: {x: 3, y: 3}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 4, y: 3}
+  - name: 
+    Position: {x: 4, y: 3}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 4, y: 4}
+  - name: 
+    Position: {x: 4, y: 4}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 0, y: 0}
+  - name: 
+    Position: {x: 0, y: 0}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 4, y: 0}
+  - name: 
+    Position: {x: 4, y: 0}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 2, y: 0}
+  - name: 
+    Position: {x: 2, y: 0}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 4, y: 1}
+  - name: 
+    Position: {x: 4, y: 1}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
   PossibleItems:
   - {fileID: 11400000, guid: 089f360dd355a504085896f04d3eb986, type: 2}
-  StarsEarned: 3
-  Unlocked: 1

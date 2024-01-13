@@ -21,6 +21,8 @@ MonoBehaviour:
   StarsEarned: 0
   Unlocked: 0
   NewItemIntroduced: 0
+  SpecialHelpTxt: 0
+  SpecialHelpLevelNum: -1
   BackgroundTile: {fileID: 11400000, guid: 76fd22e01f2468b4792085d395c67cd9, type: 2}
   Tiles:
   - name: 
@@ -60,7 +62,7 @@ MonoBehaviour:
     Redirection: {x: 0, y: 0}
   - name: 
     Position: {x: 0, y: 0}
-    Slate: {fileID: 11400000, guid: e555ba895d5a24446bccda1cb968e5d7, type: 2}
+    Slate: {fileID: 11400000, guid: b1b6c6f21d028124bbc63e252f176c41, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
   - name: 

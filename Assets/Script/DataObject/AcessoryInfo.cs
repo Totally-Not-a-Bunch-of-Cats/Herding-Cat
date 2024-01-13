@@ -5,8 +5,11 @@ public class AcessoryInfo
 {
     public string Name;
     public Sprite Acessory;
-    public int Cost;
-    public bool Unlocked;
+    public bool AcessoryUnlock;
+    public int AcessoryCost;
+    public bool AcessoryColorUnlock;
+    public int AcessoryColorCost;
+    public string AcessoryColorListName;
     public Vector3 CatPrefabLocation;
     public Vector3 CatPrefabScale;
     public Vector2 MaxoffsetforCatButton;

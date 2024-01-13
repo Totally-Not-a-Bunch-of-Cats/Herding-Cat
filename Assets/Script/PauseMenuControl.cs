@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +14,6 @@ public class PauseMenuControl : MonoBehaviour
 
     public void ClosePauseMenu()
     {
-
         PauseButton.SetActive(true);
         RestartButton.interactable = true;
         RewindButton.interactable = true;
@@ -23,9 +23,8 @@ public class PauseMenuControl : MonoBehaviour
         GameManager.Instance._uiManager.Override = true;
     }
 
-    public void RestartLevel ()
+    public void RestartLevel()
     {
-        Debug.Log("Restart Initiated");
         GameManager.Instance.StartCoroutine(GameManager.Instance.StartMatch(GameManager.Instance._matchManager.CurrentLevel.name));
     }
 
@@ -38,10 +37,18 @@ public class PauseMenuControl : MonoBehaviour
         }
     }
 
-    public void ReturnMainMenu ()
+    public void ReturnMainMenu()
     {
-        Debug.Log("MainMenu");
-        StartCoroutine(GameManager.Instance.SwitchScene("Main Menu"));
+        GameManager.Instance.ChangeScene("Main Menu");
     }
-
+    public void NavagateToLevelSeelct()
+    {
+        GameManager.Instance.ChangeScene("Main Menu");
+        StartCoroutine(GameManager.Instance.GotoLevelSecet("Level Select"));
+    }
+    public void NavagateToCatCust()
+    {
+        GameManager.Instance.ChangeScene("Main Menu");
+        StartCoroutine(GameManager.Instance.GotoLevelSecet("Cat Store"));
+    }
 }

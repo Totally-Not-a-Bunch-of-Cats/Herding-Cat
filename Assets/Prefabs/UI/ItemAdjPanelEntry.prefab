@@ -386,7 +386,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4670987370471983960}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 918842532, guid: 22b02908c8d36df4cacfe414353c6f07, type: 3}
+        m_TargetAssemblyTypeName: MusicManager, Scripts
+        m_MethodName: PlayAudioEffect
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7590409411873942551
 GameObject:
   m_ObjectHideFlags: 0
