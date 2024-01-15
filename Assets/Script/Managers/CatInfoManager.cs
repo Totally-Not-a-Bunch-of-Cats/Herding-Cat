@@ -208,6 +208,26 @@ public class CatInfoManager : MonoBehaviour
         Catlist[CurrentSelected].nameofAcessory1 = Accessories[GameManager.Instance._catInfoManager.CurrentAccessoryIndex].Name;
         Catlist[CurrentSelected].Acessory1ListNum = GameManager.Instance._catInfoManager.CurrentAccessoryIndex;
     }
+    
+    public void LoadCatsAcc(int Cat, string AccessoryName)
+    {
+        CurrentName = AccessoryName;
+        int AccIndex = GetAccessoryIndex();
+
+        Catlist[Cat].Acessory1 = Accessories[AccIndex].Acessory;
+        Catlist[Cat].nameofAcessory1 = Accessories[AccIndex].Name;
+        Catlist[Cat].Acessory1ListNum = AccIndex;
+    }
+    public void LoadCatsSkin(int Cat, string SkinName)
+    {
+        CurrentName = SkinName;
+        int SkinIndex = GetSkinIndex();
+        Catlist[Cat].AnimationController = SkinList[SkinIndex].CatAnim;
+        Catlist[Cat].Skin = SkinList[SkinIndex].Skin;
+    }
+
+
+
     public void NextColor(GameObject Reference)
     {
         GameManager.Instance._catInfoManager.CurrentAccessoryColorIndex++;

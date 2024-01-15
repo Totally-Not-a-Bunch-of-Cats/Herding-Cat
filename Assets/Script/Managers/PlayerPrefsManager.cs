@@ -127,6 +127,98 @@ public class PlayerPrefsManager : MonoBehaviour
         {
             GameManager.Instance.SkipForcedVids = GetBool("SkipForcedVids");
         }
+
+
+
+        if (!PlayerPrefs.HasKey("Cat1Acc"))
+        {
+            SaveString("Cat1Acc", "NA");
+        }
+        else
+        {
+            GameManager.Instance._catInfoManager.LoadCatsAcc(0, PlayerPrefs.GetString("Cat1Acc"));
+        }
+
+        if (!PlayerPrefs.HasKey("Cat1Skin"))
+        {
+            SaveString("Cat1Skin", "BlackCat");
+        }
+        else
+        {
+            GameManager.Instance._catInfoManager.LoadCatsSkin(0, PlayerPrefs.GetString("Cat1Skin"));
+        }
+
+        if (!PlayerPrefs.HasKey("Cat2Acc"))
+        {
+            SaveString("Cat2Acc", "NA");
+        }
+        else
+        {
+            GameManager.Instance._catInfoManager.LoadCatsAcc(1, PlayerPrefs.GetString("Cat2Acc"));
+        }
+
+        if (!PlayerPrefs.HasKey("Cat2Skin"))
+        {
+            SaveString("Cat2Skin", "BlackCat");
+        }
+        else
+        {
+            GameManager.Instance._catInfoManager.LoadCatsSkin(1, PlayerPrefs.GetString("Cat2Skin"));
+        }
+
+        if (!PlayerPrefs.HasKey("Cat3Acc"))
+        {
+            SaveString("Cat3Acc", "NA");
+        }
+        else
+        {
+            GameManager.Instance._catInfoManager.LoadCatsAcc(2, PlayerPrefs.GetString("Cat3Acc"));
+        }
+
+        if (!PlayerPrefs.HasKey("Cat3Skin"))
+        {
+            SaveString("Cat3Skin", "BlackCat");
+        }
+        else
+        {
+            GameManager.Instance._catInfoManager.LoadCatsSkin(2, PlayerPrefs.GetString("Cat3Skin"));
+        }
+
+        if (!PlayerPrefs.HasKey("Cat4Acc"))
+        {
+            SaveString("Cat4Acc", "NA");
+        }
+        else
+        {
+            GameManager.Instance._catInfoManager.LoadCatsAcc(3, PlayerPrefs.GetString("Cat4Acc"));
+        }
+
+        if (!PlayerPrefs.HasKey("Cat4Skin"))
+        {
+            SaveString("Cat4Skin", "BlackCat");
+        }
+        else
+        {
+            GameManager.Instance._catInfoManager.LoadCatsSkin(3, PlayerPrefs.GetString("Cat4Skin"));
+        }
+
+        if (!PlayerPrefs.HasKey("Cat5Acc"))
+        {
+            SaveString("Cat5Acc", "NA");
+        }
+        else
+        {
+            GameManager.Instance._catInfoManager.LoadCatsAcc(4, PlayerPrefs.GetString("Cat4Acc"));
+        }
+
+        if (!PlayerPrefs.HasKey("Cat5Skin"))
+        {
+            SaveString("Cat5Skin", "BlackCat");
+        }
+        else
+        {
+            GameManager.Instance._catInfoManager.LoadCatsSkin(4, PlayerPrefs.GetString("Cat5Skin"));
+        }
     }
 
     /// <summary>
