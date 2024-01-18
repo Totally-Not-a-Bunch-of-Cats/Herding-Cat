@@ -220,8 +220,14 @@ public class CatInfoManager : MonoBehaviour
     }
     public void LoadCatsSkin(int Cat, string SkinName)
     {
-        CurrentName = SkinName;
-        int SkinIndex = GetSkinIndex();
+        int SkinIndex = 0;
+        for (int i = 0; i < SkinList.Count; i++)
+        {
+            if(SkinList[i].Name == SkinName)
+            {
+                SkinIndex = i;
+            }
+        }
         Catlist[Cat].AnimationController = SkinList[SkinIndex].CatAnim;
         Catlist[Cat].Skin = SkinList[SkinIndex].Skin;
     }
@@ -501,5 +507,11 @@ public class CatInfoManager : MonoBehaviour
         Catlist[CurrentSelected].Acessory1ListNum = 0;
         Catlist[CurrentSelected].Skin = SkinList[0].Skin;
 
+    }
+
+    public void Lockin()
+    {
+        GameManager.Instance._PlayerPrefsManager.SaveString(Catlist[CurrentSelected].GetPrefab().name + "Acc", Catlist[CurrentSelected].nameofAcessory1);
+        GameManager.Instance._PlayerPrefsManager.SaveString(Catlist[CurrentSelected].GetPrefab().name + "Skin", SkinList[GetSkinIndex()].Name);
     }
 }
