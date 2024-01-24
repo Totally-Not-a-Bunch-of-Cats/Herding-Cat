@@ -15,11 +15,11 @@ MonoBehaviour:
   Dimensions: {x: 7, y: 8}
   TargetRounds: 3
   TargetItems: 12
-  NewThingIntroduced: 0
+  NewThingIntroduced: 1
   Category: 0
   TileName: 
-  StarsEarned: 3
-  Unlocked: 1
+  StarsEarned: 0
+  Unlocked: 0
   NewItemIntroduced: 0
   SpecialHelpTxt: 1
   SpecialHelpLevelNum: 10

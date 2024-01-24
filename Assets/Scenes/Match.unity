@@ -5143,6 +5143,11 @@ MonoBehaviour:
     Video: {fileID: 32900000, guid: ec77861e29f1afc41952c4a5d92e7687, type: 3}
     Icon: {fileID: 21300000, guid: 980038792ed813d48a7aae6df5228fbd, type: 3}
     IconScale: {x: 0, y: 0, z: 0}
+  - name: Blocking
+    Description: Shows of
+    Video: {fileID: 32900000, guid: 393c30b716426d44db59946e22406c6d, type: 3}
+    Icon: {fileID: 21300000, guid: 0f5c5f037c852294fa8f1585eae839a4, type: 3}
+    IconScale: {x: 0, y: 0, z: 0}
   ItemHelpList:
   - name: Toy
     Description: The Toy moves the Cat 1 tile closer to itself. It can even lure
@@ -10826,7 +10831,6 @@ GameObject:
   - component: {fileID: 688685781}
   - component: {fileID: 688685785}
   - component: {fileID: 688685786}
-  - component: {fileID: 688685787}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -10949,18 +10953,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
---- !u!114 &688685787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 688685780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37ec9966b2e995345a14921542fe98c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &691436277 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 882517880896304731, guid: 174527126ef779a458fcf4f2bf911d97, type: 3}
@@ -11138,7 +11130,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.00000065565, y: 0}
-  m_SizeDelta: {x: 40, y: 40}
+  m_SizeDelta: {x: 45, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &719142205
 MonoBehaviour:
@@ -15804,7 +15796,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 88.676, y: 0}
+  m_AnchoredPosition: {x: 130, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1293664576
@@ -17020,7 +17012,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 896329900}
   m_HandleRect: {fileID: 896329899}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -17798,7 +17790,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 376.6, y: -25}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 65, y: 56}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1545512454
 MonoBehaviour:
@@ -19298,8 +19290,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -396.58984, y: 3.1347656}
-  m_SizeDelta: {x: 769.4774, y: -55.3514}
+  m_AnchoredPosition: {x: -288.84637, y: 3.1347656}
+  m_SizeDelta: {x: 553.9904, y: -55.3514}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1695140743
 MonoBehaviour:
@@ -19639,6 +19631,10 @@ MonoBehaviour:
   - Cat tubes with the same symbol connect, allowing cats to traverse their insides.
   - 'Cats like humans love moving sidewalks and will always ride them to the end. '
   - Don't be impawtient, some levels need multiple rounds to beat. ZZZZZ...
+  - The Cats wont jump off the cat tower unless there is an open tile or the tile
+    is the cat cage.
+  - 'Items placed on the board take up space and can be "colided" with. This is known
+    as blocking. Use blocking as demonstracted in the video to beat the level. '
 --- !u!1 &1814370818
 GameObject:
   m_ObjectHideFlags: 0
@@ -19734,7 +19730,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.7
+  m_fontSize: 32.85
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -20578,7 +20574,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -142.5, y: -5.6}
+  m_AnchoredPosition: {x: -185.1, y: -5.6}
   m_SizeDelta: {x: 220, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1960486993

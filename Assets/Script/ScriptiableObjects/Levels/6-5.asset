@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: 6-5
   m_EditorClassIdentifier: 
   Dimensions: {x: 8, y: 7}
-  TargetRounds: 1
-  TargetItems: 1
+  TargetRounds: 3
+  TargetItems: 15
   NewThingIntroduced: 0
   Category: 0
   TileName: 
-  StarsEarned: 0
+  StarsEarned: 1
   Unlocked: 1
   NewItemIntroduced: 0
+  SpecialHelpTxt: 0
+  SpecialHelpLevelNum: -1
   BackgroundTile: {fileID: 11400000, guid: d756be87d23ee174f869fab071be06bf, type: 2}
   Tiles:
   - name: 

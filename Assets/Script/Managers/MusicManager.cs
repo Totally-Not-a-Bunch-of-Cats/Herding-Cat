@@ -59,6 +59,11 @@ public class MusicManager : MonoBehaviour
         {
             GetAudioLevel();
         }
+        if(!GameManager.Instance.MusicToggle)
+        {
+            GameManager.Instance.musicVolume = 0;
+            AudioPlayer.GetComponent<AudioSource>().volume = 0;
+        }
     }
 
     /// <summary>
@@ -77,8 +82,8 @@ public class MusicManager : MonoBehaviour
     {
         if(GameManager.Instance.MusicToggle == true)
         {
-            GameManager.Instance.musicVolume = .8f;
-            AudioPlayer.GetComponent<AudioSource>().volume = .8f;
+            GameManager.Instance.musicVolume = .6f;
+            AudioPlayer.GetComponent<AudioSource>().volume = .6f;
         }
         else
         {
@@ -120,7 +125,7 @@ public class MusicManager : MonoBehaviour
 
     public void PlayAudioEffect(int location)
     {
-        Debug.Log(GameManager.Instance._musicManager.SoundEffectPlayer);
+        GameManager.Instance._musicManager.SoundEffectPlayer.GetComponent<AudioSource>().volume = GameManager.Instance.musicVolume;
         GameManager.Instance._musicManager.SoundEffectPlayer.GetComponent<AudioSource>().clip = AudioEffect[location];
         GameManager.Instance._musicManager.SoundEffectPlayer.GetComponent<AudioSource>().Play();
     }

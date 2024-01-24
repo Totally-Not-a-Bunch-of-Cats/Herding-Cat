@@ -20,6 +20,14 @@ public class AfterGameStarReport : MonoBehaviour
         {
             Stars[i].color = Color.white;
         }
+        if(GameManager.Instance._matchManager.ItemsUsed > GameManager.Instance._matchManager.CurrentLevel.TargetItems)
+        {
+            ItemsUsed.color = Color.red;
+        }
+        if(GameManager.Instance._matchManager.RoundsPlayed > GameManager.Instance._matchManager.CurrentLevel.TargetRounds)
+        {
+            RoundsElapsed.color = Color.red;
+        }
     }
 
 }

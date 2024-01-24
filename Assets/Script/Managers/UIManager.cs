@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using System;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 
 /// <summary>
@@ -27,7 +28,9 @@ public class UIManager : MonoBehaviour
     public Sprite SelectedBoxSprite;
     public Sprite BoxSprite;
     public bool NextIndicator = true;
+    public bool NextItem = false;
     public GameObject PauseMenu;
+    public List<List<AffectIndicator>> IndicatorHolderList;
 
     /// <summary>
     /// finds the Board game object and GUI object
@@ -38,6 +41,7 @@ public class UIManager : MonoBehaviour
         Board = _board;
         GUI = GameObject.Find("GUI");
         ItemAdjPanel = GameObject.Find("ItemAdjPanel");
+        IndicatorHolderList = new List<List<AffectIndicator>>();
     }
 
     /// <summary>
@@ -414,6 +418,24 @@ public class UIManager : MonoBehaviour
                 {
                     IndicatorList[i].gameObject.SetActive(true);
                 }
+            }
+        }
+        IndicatorHolderList.Add(IndicatorList.ToList());
+        if (IndicatorHolderList.Count > 1)
+        {
+            for(int j = 0; j < IndicatorHolderList.Count;)
+            {
+                List<AffectIndicator> inside = IndicatorHolderList[IndicatorHolderList.Count -2];
+                for (int k = 0; k < inside.Count; k++)
+                {
+                    if(inside[k] == null)
+                    {
+                        IndicatorHolderList.RemoveAt(k);
+                        break;
+                    }
+                    inside[k].gameObject.SetActive(false);
+                }
+                break;
             }
         }
     }

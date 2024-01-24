@@ -48,15 +48,25 @@ public class ForcedHelpScreen : MonoBehaviour
         }
         
     }
-
+    /// <summary>
+    /// Forces player to look at help screen before enabling teh exit button
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator CountDown()
     {
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(6);
+        StartCoroutine(AutoClose());
         EnableExitButton();
     }
 
     void EnableExitButton()
     {
         ExitButton.SetActive(true);
+    }
+
+    public IEnumerator AutoClose()
+    {
+        yield return new WaitForSeconds(5);
+        gameObject.SetActive(false);
     }
 }
