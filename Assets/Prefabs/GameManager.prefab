@@ -77,7 +77,7 @@ MonoBehaviour:
   musicVolume: 0.6
   MusicToggle: 1
   UpdateLevelData: 1
-  PlayerPrefsTrue: 0
+  PlayerPrefsTrue: 1
 --- !u!114 &590294061082041625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,15 +203,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkinList:
   - Name: BlackCat
-    Skin: {fileID: -251871438, guid: 3589b1d7c5d65374093d56104ed629bc, type: 3}
+    Skin: {fileID: 21300000, guid: 941d07d8bb8cfaf46a6e4f7d69480933, type: 3}
     CatAnim: {fileID: 9100000, guid: 3b3859dba476d7143977ce83cfa36e01, type: 2}
     Cost: 0
     Unlocked: 1
   - Name: OrangeCat
-    Skin: {fileID: 1159634615, guid: cb60cf56fc227a14abd6491736b7b318, type: 3}
+    Skin: {fileID: 21300000, guid: 15304aa15dcae884491e8dcbaf798809, type: 3}
     CatAnim: {fileID: 9100000, guid: 0b62742f5e63a1c42bb417f48537734c, type: 2}
     Cost: 20
-    Unlocked: 1
+    Unlocked: 0
+  - Name: WhiteCat
+    Skin: {fileID: 21300000, guid: fba3816cf364068438467be382fa612f, type: 3}
+    CatAnim: {fileID: 9100000, guid: 5bae1f3f25cd33f41be97549f6d8209b, type: 2}
+    Cost: 20
+    Unlocked: 0
+  - Name: CreamCat
+    Skin: {fileID: 21300000, guid: f9d2d55648372ad4b8c807b0efe39833, type: 3}
+    CatAnim: {fileID: 9100000, guid: 06e853638ee9cdd45bd1fe8ec755e34d, type: 2}
+    Cost: 20
+    Unlocked: 0
+  - Name: GreyCat
+    Skin: {fileID: 21300000, guid: 67ee23160e91d8640b64813d55483240, type: 3}
+    CatAnim: {fileID: 9100000, guid: f3f08f26e3fa725498e02bea5f9a1c27, type: 2}
+    Cost: 20
+    Unlocked: 0
+  - Name: BlueCat
+    Skin: {fileID: 21300000, guid: e64c9de360fc06546ba1f427d011d209, type: 3}
+    CatAnim: {fileID: 9100000, guid: 3cb5692d590c6de4ab3d2a296833b4d3, type: 2}
+    Cost: 20
+    Unlocked: 0
+  - Name: RedCat
+    Skin: {fileID: 21300000, guid: cab772752a3ea324eb08a4d8de71cd7e, type: 3}
+    CatAnim: {fileID: 9100000, guid: 3701364e2310e6b42bed2a7641d0a4e1, type: 2}
+    Cost: 20
+    Unlocked: 0
+  - Name: BrownCat
+    Skin: {fileID: 21300000, guid: adb40fd32fb2a354eb8e0ae14c62c5b2, type: 3}
+    CatAnim: {fileID: 9100000, guid: 3e4fc39b1527d454ea1a092d39574556, type: 2}
+    Cost: 20
+    Unlocked: 0
+  - Name: TanCat
+    Skin: {fileID: 21300000, guid: 145c65d34f13b294bbb981d35bf6f127, type: 3}
+    CatAnim: {fileID: 9100000, guid: 4ab15bf0208d088468f091b85b2be824, type: 2}
+    Cost: 20
+    Unlocked: 0
   Accessories:
   - Name: NA
     Acessory: {fileID: 21300000, guid: f9fc23c976581b94db2d0441c920e1c1, type: 3}
@@ -230,93 +265,93 @@ MonoBehaviour:
     Acessory: {fileID: 21300000, guid: 2dd57dc680177d74c948767421701ccc, type: 3}
     AcessoryUnlock: 1
     AcessoryCost: 30
-    AcessoryColorUnlock: 1
+    AcessoryColorUnlock: 0
     AcessoryColorCost: 20
     AcessoryColorListName: HeadsetColors
     CatPrefabLocation: {x: -0.245, y: 0.328, z: 1}
     CatPrefabScale: {x: 0.21, y: 0.185, z: 1}
     MaxoffsetforCatButton: {x: 120, y: 141}
     MinoffsetforCatButton: {x: 46, y: 157}
-    MaxoffsetforExternalCatButton: {x: 67, y: 9}
-    MinoffsetforExternalCatButton: {x: 7, y: 80.5}
+    MaxoffsetforExternalCatButton: {x: 94, y: 24}
+    MinoffsetforExternalCatButton: {x: 32, y: 100}
   - Name: Normal Hat
     Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
     AcessoryUnlock: 1
     AcessoryCost: 30
-    AcessoryColorUnlock: 1
+    AcessoryColorUnlock: 0
     AcessoryColorCost: 20
     AcessoryColorListName: HatAccessoryColors
     CatPrefabLocation: {x: -0.245, y: 0.47, z: 1}
     CatPrefabScale: {x: 0.18, y: 0.16, z: 1}
     MaxoffsetforCatButton: {x: 138, y: 134}
     MinoffsetforCatButton: {x: 63, y: 198}
-    MaxoffsetforExternalCatButton: {x: 79, y: -3}
-    MinoffsetforExternalCatButton: {x: 19, y: 111}
+    MaxoffsetforExternalCatButton: {x: 111, y: 14.5}
+    MinoffsetforExternalCatButton: {x: 45, y: 137}
   - Name: Tall Hat
     Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
     AcessoryUnlock: 1
     AcessoryCost: 30
-    AcessoryColorUnlock: 1
+    AcessoryColorUnlock: 0
     AcessoryColorCost: 0
     AcessoryColorListName: HatAccessoryColors
     CatPrefabLocation: {x: -0.25, y: 0.66, z: 1}
     CatPrefabScale: {x: 0.21, y: 0.5, z: 1}
     MaxoffsetforCatButton: {x: 139, y: 80}
     MinoffsetforCatButton: {x: 60, y: 192}
-    MaxoffsetforExternalCatButton: {x: 79, y: -34}
-    MinoffsetforExternalCatButton: {x: 17, y: 113}
+    MaxoffsetforExternalCatButton: {x: 108, y: -17}
+    MinoffsetforExternalCatButton: {x: 40, y: 137}
   - Name: Wide Hat
     Acessory: {fileID: 21300000, guid: bc7d6324d46b06b4ab7360df26c2ba23, type: 3}
     AcessoryUnlock: 1
     AcessoryCost: 30
-    AcessoryColorUnlock: 1
+    AcessoryColorUnlock: 0
     AcessoryColorCost: 0
     AcessoryColorListName: HatAccessoryColors
     CatPrefabLocation: {x: -0.238, y: 0.49, z: 1}
     CatPrefabScale: {x: 0.285, y: 0.22, z: 1}
     MaxoffsetforCatButton: {x: 115, y: 130.5}
     MinoffsetforCatButton: {x: 38.5, y: 198.5}
-    MaxoffsetforExternalCatButton: {x: 69, y: -4.5}
-    MinoffsetforExternalCatButton: {x: 6, y: 111}
+    MaxoffsetforExternalCatButton: {x: 99, y: 16}
+    MinoffsetforExternalCatButton: {x: 32, y: 132}
   - Name: Cone
     Acessory: {fileID: 21300000, guid: b5e6f9a25b92b674a95212436df6d7ac, type: 3}
     AcessoryUnlock: 1
     AcessoryCost: 30
-    AcessoryColorUnlock: 1
+    AcessoryColorUnlock: 0
     AcessoryColorCost: 20
     AcessoryColorListName: ConeColors
     CatPrefabLocation: {x: -0.252, y: 0.226, z: 1}
     CatPrefabScale: {x: 0.21, y: 0.22, z: 1}
     MaxoffsetforCatButton: {x: 107, y: 149.5}
     MinoffsetforCatButton: {x: 20, y: 135}
-    MaxoffsetforExternalCatButton: {x: 56.5, y: 14}
-    MinoffsetforExternalCatButton: {x: -10, y: 74}
+    MaxoffsetforExternalCatButton: {x: 85, y: 32}
+    MinoffsetforExternalCatButton: {x: 11, y: 85}
   - Name: Flower
     Acessory: {fileID: 21300000, guid: d355f321b02fed3469680c75b1d853a5, type: 3}
     AcessoryUnlock: 1
     AcessoryCost: 30
-    AcessoryColorUnlock: 1
+    AcessoryColorUnlock: 0
     AcessoryColorCost: 20
     AcessoryColorListName: FlowerColors
     CatPrefabLocation: {x: -0.115, y: 0.4227, z: 1}
     CatPrefabScale: {x: 0.2, y: 0.2, z: 1}
     MaxoffsetforCatButton: {x: 134.5, y: 142}
     MinoffsetforCatButton: {x: 98, y: 197.5}
-    MaxoffsetforExternalCatButton: {x: 78, y: 6.5}
-    MinoffsetforExternalCatButton: {x: 46.5, y: 115.5}
-  - Name: Flower Hat
+    MaxoffsetforExternalCatButton: {x: 113, y: 26}
+    MinoffsetforExternalCatButton: {x: 72, y: 133}
+  - Name: FlowerHat
     Acessory: {fileID: 21300000, guid: 09f8a11800e601e4f9b1d2dd4de98575, type: 3}
     AcessoryUnlock: 1
     AcessoryCost: 30
-    AcessoryColorUnlock: 1
+    AcessoryColorUnlock: 0
     AcessoryColorCost: 20
     AcessoryColorListName: FlowerHatAccessoryColors
     CatPrefabLocation: {x: -0.24, y: 0.44, z: 1}
     CatPrefabScale: {x: 0.17, y: 0.15, z: 1}
     MaxoffsetforCatButton: {x: 138, y: 134}
     MinoffsetforCatButton: {x: 60, y: 198}
-    MaxoffsetforExternalCatButton: {x: 77, y: 2}
-    MinoffsetforExternalCatButton: {x: 18, y: 111.5}
+    MaxoffsetforExternalCatButton: {x: 111, y: 14.5}
+    MinoffsetforExternalCatButton: {x: 45, y: 137}
   - Name: Even Wider Flower Hat
     Acessory: {fileID: 21300000, guid: 09f8a11800e601e4f9b1d2dd4de98575, type: 3}
     AcessoryUnlock: 1
@@ -328,8 +363,8 @@ MonoBehaviour:
     CatPrefabScale: {x: 0.285, y: 0.22, z: 1}
     MaxoffsetforCatButton: {x: 80, y: 129.5}
     MinoffsetforCatButton: {x: 7, y: 193.5}
-    MaxoffsetforExternalCatButton: {x: 69, y: -4.5}
-    MinoffsetforExternalCatButton: {x: 6, y: 111}
+    MaxoffsetforExternalCatButton: {x: 86, y: 10}
+    MinoffsetforExternalCatButton: {x: 21, y: 136}
   - Name: Square Glasses
     Acessory: {fileID: 21300000, guid: 88c49f261b0208244b34a5f99e070cfd, type: 3}
     AcessoryUnlock: 1
@@ -341,8 +376,8 @@ MonoBehaviour:
     CatPrefabScale: {x: 0.21, y: 0.22, z: 1}
     MaxoffsetforCatButton: {x: 137.5, y: 169.5}
     MinoffsetforCatButton: {x: 61.5, y: 168.8}
-    MaxoffsetforExternalCatButton: {x: 81, y: 26.5}
-    MinoffsetforExternalCatButton: {x: 17, y: 90.5}
+    MaxoffsetforExternalCatButton: {x: 108, y: 42}
+    MinoffsetforExternalCatButton: {x: 40.5, y: 111}
   - Name: Circle Glasses
     Acessory: {fileID: 21300000, guid: 0c98cc86d4ddc184d905cc2d1165933f, type: 3}
     AcessoryUnlock: 1
@@ -354,8 +389,21 @@ MonoBehaviour:
     CatPrefabScale: {x: 0.22, y: 0.22, z: 1}
     MaxoffsetforCatButton: {x: 142, y: 170}
     MinoffsetforCatButton: {x: 64.8, y: 170}
-    MaxoffsetforExternalCatButton: {x: 82.2, y: 25}
-    MinoffsetforExternalCatButton: {x: 17.5, y: 92.5}
+    MaxoffsetforExternalCatButton: {x: 112, y: 43}
+    MinoffsetforExternalCatButton: {x: 43.5, y: 112}
+  - Name: Even Taller Flower Hat
+    Acessory: {fileID: 21300000, guid: 09f8a11800e601e4f9b1d2dd4de98575, type: 3}
+    AcessoryUnlock: 1
+    AcessoryCost: 30
+    AcessoryColorUnlock: 0
+    AcessoryColorCost: 0
+    AcessoryColorListName: 
+    CatPrefabLocation: {x: -0.238, y: 0.49, z: 1}
+    CatPrefabScale: {x: 0.285, y: 0.22, z: 1}
+    MaxoffsetforCatButton: {x: 136, y: 45}
+    MinoffsetforCatButton: {x: 60, y: 195}
+    MaxoffsetforExternalCatButton: {x: 105, y: -40}
+    MinoffsetforExternalCatButton: {x: 40, y: 128.5}
   Catlist:
   - {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
   - {fileID: 11400000, guid: b1b6c6f21d028124bbc63e252f176c41, type: 2}
@@ -436,15 +484,17 @@ MonoBehaviour:
   - Name: BlueFlowerHat
     NamofBaseAcessory: Flower Hat, Tall Flower Hat, Wide Flower Hat
     ColorAcessory: {fileID: 21300000, guid: e38b43298d2b2a14cada11abf71b3c52, type: 3}
-  SelectCat: {fileID: 11400000, guid: e555ba895d5a24446bccda1cb968e5d7, type: 2}
+  SelectCat: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
   CurrentAnim: {fileID: 9100000, guid: 3b3859dba476d7143977ce83cfa36e01, type: 2}
-  CurrentSkin: {fileID: -251871438, guid: 3589b1d7c5d65374093d56104ed629bc, type: 3}
+  CurrentSkin: {fileID: 21300000, guid: 941d07d8bb8cfaf46a6e4f7d69480933, type: 3}
   CurrentAccessory: {fileID: 21300000, guid: f9fc23c976581b94db2d0441c920e1c1, type: 3}
-  CurrentName: Cone
-  CurrentSelected: 4
+  StartingAccessoryNum: 11
+  StartingSkinNum: 0
+  CurrentName: Even Taller Flower Hat
+  CurrentSelected: 0
   CurrentSkinIndex: 0
-  CurrentAccessoryIndex: 5
-  CurrentAccessoryColorIndex: 1
+  CurrentAccessoryIndex: 11
+  CurrentAccessoryColorIndex: 0
 --- !u!114 &918842532
 MonoBehaviour:
   m_ObjectHideFlags: 0

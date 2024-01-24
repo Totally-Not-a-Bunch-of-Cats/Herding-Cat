@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: 6-9
   m_EditorClassIdentifier: 
   Dimensions: {x: 6, y: 6}
-  TargetRounds: 1
-  TargetItems: 1
+  TargetRounds: 3
+  TargetItems: 16
   NewThingIntroduced: 0
   Category: 0
   TileName: 
-  StarsEarned: 0
-  Unlocked: 0
+  StarsEarned: 1
+  Unlocked: 1
   NewItemIntroduced: 0
+  SpecialHelpTxt: 0
+  SpecialHelpLevelNum: -1
   BackgroundTile: {fileID: 11400000, guid: 103593486162c964aa10539a0ed04a9e, type: 2}
   Tiles:
   - name: Cat Tree (1,1)

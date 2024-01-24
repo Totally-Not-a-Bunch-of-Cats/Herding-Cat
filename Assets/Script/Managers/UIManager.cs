@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using System;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 
 /// <summary>
@@ -29,6 +30,7 @@ public class UIManager : MonoBehaviour
     public bool NextIndicator = true;
     public bool NextItem = false;
     public GameObject PauseMenu;
+    public List<List<AffectIndicator>> IndicatorHolderList;
 
     /// <summary>
     /// finds the Board game object and GUI object
@@ -39,6 +41,7 @@ public class UIManager : MonoBehaviour
         Board = _board;
         GUI = GameObject.Find("GUI");
         ItemAdjPanel = GameObject.Find("ItemAdjPanel");
+        IndicatorHolderList = new List<List<AffectIndicator>>();
     }
 
     /// <summary>
@@ -417,34 +420,23 @@ public class UIManager : MonoBehaviour
                 }
             }
         }
-        StartCoroutine(TurnOffIndicator(IndicatorList));
-    }
-
-    IEnumerator TurnOffIndicator(AffectIndicator[] IndicatorList)
-    {
-        for (int i = 0; i < IndicatorList.Length; i++)
+        IndicatorHolderList.Add(IndicatorList.ToList());
+        if (IndicatorHolderList.Count > 1)
         {
-            IndicatorList[i].transform.GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -.2f);
-        }
-        yield return new WaitForSeconds(.8f);
-        for (int i = 0; i < IndicatorList.Length; i++)
-        {
-            IndicatorList[i].transform.GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -.2f);
-        }
-        yield return new WaitForSeconds(.8f);
-        for (int i = 0; i < IndicatorList.Length; i++)
-        {
-            IndicatorList[i].transform.GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -.2f);
-        }
-        yield return new WaitForSeconds(.8f);
-        for (int i = 0; i < IndicatorList.Length; i++)
-        {
-            IndicatorList[i].transform.GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -.2f);
-        }
-        yield return new WaitForSeconds(.8f);
-        for(int i = 0; i < IndicatorList.Length; i++)
-        {
-            IndicatorList[i].transform.gameObject.SetActive(false);
+            for(int j = 0; j < IndicatorHolderList.Count;)
+            {
+                List<AffectIndicator> inside = IndicatorHolderList[IndicatorHolderList.Count -2];
+                for (int k = 0; k < inside.Count; k++)
+                {
+                    if(inside[k] == null)
+                    {
+                        IndicatorHolderList.RemoveAt(k);
+                        break;
+                    }
+                    inside[k].gameObject.SetActive(false);
+                }
+                break;
+            }
         }
     }
 }

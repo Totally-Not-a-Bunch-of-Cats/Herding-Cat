@@ -94,18 +94,21 @@ public class CosmeticUnlockSaver : MonoBehaviour
                     break;
                 }
             }
-            if (GameManager.Instance.StarCount >= GameManager.Instance._catInfoManager.SkinList[SelectedSkin].Cost)
+            if (GameManager.Instance._catInfoManager.SkinList[SelectedSkin].Unlocked == false)
             {
-                GameManager.Instance._PlayerPrefsManager.SaveBool(SkinName, true);
-                GameManager.Instance._catInfoManager.SkinList[SelectedSkin].Unlocked = true;
-                GameManager.Instance.StarCount -= GameManager.Instance._catInfoManager.SkinList[SelectedSkin].Cost;
-                GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", GameManager.Instance.StarCount);
-            }
-            else
-            {
-                //make error screen for not enough stars
-                Debug.Log("oops all tears");
-                PurchaseFailure1.SetActive(true);
+                if (GameManager.Instance.StarCount >= GameManager.Instance._catInfoManager.SkinList[SelectedSkin].Cost)
+                {
+                    GameManager.Instance._PlayerPrefsManager.SaveBool(SkinName, true);
+                    GameManager.Instance._catInfoManager.SkinList[SelectedSkin].Unlocked = true;
+                    GameManager.Instance.StarCount -= GameManager.Instance._catInfoManager.SkinList[SelectedSkin].Cost;
+                    GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", GameManager.Instance.StarCount);
+                }
+                else
+                {
+                    //make error screen for not enough stars
+                    Debug.Log("oops all tears");
+                    PurchaseFailure1.SetActive(true);
+                }
             }
         }
         else
@@ -120,8 +123,6 @@ public class CosmeticUnlockSaver : MonoBehaviour
         {
             for (int i = 0; i < GameManager.Instance._catInfoManager.Accessories.Count; i++)
             {
-                Debug.Log(GameManager.Instance._catInfoManager.Accessories[2].Name);
-                Debug.Log(GameManager.Instance._catInfoManager.Accessories[7].Name);
                 if (GameManager.Instance._catInfoManager.Accessories[i].Name == AcessoryName)
                 {
                     SelectedAccessory = i;
@@ -131,7 +132,6 @@ public class CosmeticUnlockSaver : MonoBehaviour
                     BackUPSelectedAccessory = 2;
                 }
             }
-            Debug.Log(SelectedAccessory);
             if (GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryUnlock == true)
             {
                 if (GameManager.Instance.StarCount >= GameManager.Instance._catInfoManager.Accessories[SelectedAccessory].AcessoryColorCost)
@@ -153,7 +153,6 @@ public class CosmeticUnlockSaver : MonoBehaviour
             {
                 if (GameManager.Instance.StarCount >= GameManager.Instance._catInfoManager.Accessories[BackUPSelectedAccessory].AcessoryColorCost)
                 {
-                    Debug.Log("we are in");
                     GameManager.Instance._PlayerPrefsManager.SaveBool(AcessoryName + "Color", true);
                     GameManager.Instance._catInfoManager.Accessories[BackUPSelectedAccessory].AcessoryColorUnlock = true;
                     GameManager.Instance.StarCount -= GameManager.Instance._catInfoManager.Accessories[BackUPSelectedAccessory].AcessoryColorCost;

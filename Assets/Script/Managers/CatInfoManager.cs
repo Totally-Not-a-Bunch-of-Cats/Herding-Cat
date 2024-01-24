@@ -28,6 +28,8 @@ public class CatInfoManager : MonoBehaviour
     public RuntimeAnimatorController CurrentAnim;
     public Sprite CurrentSkin;
     public Sprite CurrentAccessory;
+    public int StartingAccessoryNum;
+    public int StartingSkinNum;
     public string CurrentName;
     public int CurrentSelected;
     [SerializeField] int CurrentSkinIndex;
@@ -43,10 +45,12 @@ public class CatInfoManager : MonoBehaviour
         // Updates the variables that hold the selected cat's customizations and then updates the screen to match the sele
         CurrentAnim = SelectCat.AnimationController;
         CurrentSkin = SelectCat.Skin;
+        StartingSkinNum = GetSkinIndex();
         Reference.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Image>().sprite = CurrentSkin;
         GameManager.Instance._catInfoManager.CurrentAccessory = SelectCat.Acessory1;
         CurrentName = SelectCat.nameofAcessory1;
         CurrentAccessoryIndex = GetAccessoryIndex();
+        StartingAccessoryNum = CurrentAccessoryIndex;
         GameManager.Instance._catInfoManager.CurrentAccessoryIndex = GetAccessoryIndex();
         Reference.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Image>().sprite = Catlist[CurrentSelected].Acessory1;
         Reference.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<RectTransform>().offsetMax = -Accessories[CurrentAccessoryIndex].MaxoffsetforCatButton;
@@ -506,7 +510,16 @@ public class CatInfoManager : MonoBehaviour
         Catlist[CurrentSelected].nameofAcessory1 = Accessories[0].Name;
         Catlist[CurrentSelected].Acessory1ListNum = 0;
         Catlist[CurrentSelected].Skin = SkinList[0].Skin;
+        Catlist[CurrentSelected].AnimationController = SkinList[0].CatAnim;
+    }
 
+    public void Undo()
+    {
+        Catlist[CurrentSelected].Acessory1 = Accessories[StartingAccessoryNum].Acessory;
+        Catlist[CurrentSelected].nameofAcessory1 = Accessories[StartingAccessoryNum].Name;
+        Catlist[CurrentSelected].Acessory1ListNum = StartingAccessoryNum;
+        Catlist[CurrentSelected].Skin = SkinList[StartingSkinNum].Skin;
+        Catlist[CurrentSelected].AnimationController = SkinList[StartingSkinNum].CatAnim;
     }
 
     public void Lockin()
