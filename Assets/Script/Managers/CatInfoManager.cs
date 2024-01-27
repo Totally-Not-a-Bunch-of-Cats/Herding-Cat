@@ -232,6 +232,7 @@ public class CatInfoManager : MonoBehaviour
                 SkinIndex = i;
             }
         }
+        //Debug.Log(SkinName);
         Catlist[Cat].AnimationController = SkinList[SkinIndex].CatAnim;
         Catlist[Cat].Skin = SkinList[SkinIndex].Skin;
     }

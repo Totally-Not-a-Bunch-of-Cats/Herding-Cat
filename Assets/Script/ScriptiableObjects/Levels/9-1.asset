@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: 9-1
   m_EditorClassIdentifier: 
   Dimensions: {x: 8, y: 8}
-  TargetRounds: 0
-  TargetItems: 0
+  TargetRounds: 3
+  TargetItems: 40
   NewThingIntroduced: 0
   Category: 0
   TileName: 
   StarsEarned: 0
-  Unlocked: 0
+  Unlocked: 1
   NewItemIntroduced: 0
   SpecialHelpTxt: 0
   SpecialHelpLevelNum: -1
@@ -113,7 +113,7 @@ MonoBehaviour:
   - name: Cat Tube (6,1)
     Position: {x: 6, y: 1}
     Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
-    TubeDestination: {x: 5, y: 3}
+    TubeDestination: {x: 6, y: 6}
     Redirection: {x: -1, y: 0}
   - name: Cat Tube (5,4)
     Position: {x: 5, y: 4}
