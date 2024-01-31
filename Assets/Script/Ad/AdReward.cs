@@ -10,12 +10,10 @@ public class AdReward : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListe
     string adUnitId = null; // This will remain null for unsupported platforms
 
     private void OnEnable()
-    {
-#if UNITY_IOS
-    adUnitId = _iOSAdUnitId;
-#elif UNITY_ANDROID
-    adUnitId = _androidAdUnitId;
-#endif
+    { 
+        adUnitId = (Application.platform == RuntimePlatform.IPhonePlayer)
+            ? _iOSAdUnitId
+            : _androidAdUnitId;
         _showAdButton.interactable = false;
         if(Advertisement.isInitialized == true)
         {
@@ -44,11 +42,8 @@ public class AdReward : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListe
     // Implement a method to execute when the user clicks the button:
     public void ShowAd()
     {
-        // Disable the button:
-        _showAdButton.interactable = false;
         // Then show the ad:
         Advertisement.Show(adUnitId, this);
-        GameManager.Instance.GamesTillRewardAd = 4;
     }
 
     // Implement the Show Listener's OnUnityAdsShowComplete callback method to determine if the user gets a reward:
@@ -56,7 +51,8 @@ public class AdReward : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListe
     {
         if (adUnitId.Equals(adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
-            // Grant a reward.
+            GameManager.Instance.StarCount += 5;
+            GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", GameManager.Instance.StarCount);
         }
     }
 

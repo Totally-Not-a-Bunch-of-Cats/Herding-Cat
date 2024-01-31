@@ -963,7 +963,7 @@ public class MatchManager : MonoBehaviour
             {
                 GameManager.Instance.StarCount += CurrentLevel.StarsEarned;
                 GameManager.Instance._PlayerPrefsManager.SaveInt(CurrentLevel.name, CurrentLevel.StarsEarned);
-                GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", CurrentLevel.StarsEarned + GameManager.Instance.StarCount);
+                GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", GameManager.Instance.StarCount);
             }
         }
         GameWonUI.SetActive(true);
