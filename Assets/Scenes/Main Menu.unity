@@ -8849,7 +8849,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 11.849, y: 43}
+  m_AnchoredPosition: {x: 11.849121, y: 43}
   m_SizeDelta: {x: -639.6412, y: -649.811}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &275963733
@@ -10190,7 +10190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8526488524890148182, guid: b54639a173a2fed428fe11c55a06fbbc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 15
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8526488524890148182, guid: b54639a173a2fed428fe11c55a06fbbc, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -29185,7 +29185,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Restore Sucesful
+  m_text: Restore Successful
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -39871,7 +39871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8526488524890148182, guid: 27a92dd2d2d211c42ab320aa09e6be0b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -15
+      value: -55
       objectReference: {fileID: 0}
     - target: {fileID: 8526488524890148182, guid: 27a92dd2d2d211c42ab320aa09e6be0b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -43227,7 +43227,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bannerPosition: 1
-  _testMode: 1
   _androidAdUnitId: Banner_Android
   _iOSAdUnitId: Banner_iOS
 --- !u!1 &1465703086
@@ -55394,7 +55393,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bannerPosition: 1
-  _testMode: 1
   _androidAdUnitId: Banner_Android
   _iOSAdUnitId: Banner_iOS
 --- !u!1 &1587168150

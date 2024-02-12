@@ -4,7 +4,6 @@ using UnityEngine.Advertisements;
 public class AdBanner : MonoBehaviour
 {
     [SerializeField] BannerPosition _bannerPosition = BannerPosition.TOP_CENTER;
-    [SerializeField] bool _testMode = true;
     [SerializeField] string _androidAdUnitId = "Banner_Android";
     [SerializeField] string _iOSAdUnitId = "Banner_iOS";
     string adUnitId = null;

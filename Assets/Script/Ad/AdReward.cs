@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.Advertisements;
 public class AdReward : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
-    [SerializeField] bool _testMode = true;
+    [SerializeField] bool _testMode = false;
     [SerializeField] Button _showAdButton;
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
     [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";

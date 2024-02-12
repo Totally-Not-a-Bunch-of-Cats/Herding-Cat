@@ -955,8 +955,6 @@ public class MatchManager : MonoBehaviour
             ForcedAD.SetActive(true);
             GameManager.Instance.GamesTillMandatoryAd = 10;
         }
-        yield return new WaitWhile(() => CatMoving);
-        yield return new WaitForSeconds(.15f);
         if (GameManager.Instance.PlayerPrefsTrue)
         {
             if (PlayerPrefs.GetInt(CurrentLevel.name) == 0 || PlayerPrefs.GetInt(CurrentLevel.name) > CurrentLevel.StarsEarned)
@@ -966,6 +964,8 @@ public class MatchManager : MonoBehaviour
                 GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", GameManager.Instance.StarCount);
             }
         }
+        yield return new WaitWhile(() => CatMoving);
+        yield return new WaitForSeconds(.15f);
         GameWonUI.SetActive(true);
     }
 
