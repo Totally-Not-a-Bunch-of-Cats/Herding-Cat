@@ -229,30 +229,55 @@ public class PlayerPrefsManager : MonoBehaviour
         //loop through all levels checking for saved data and making it match as well as unlocking all levels behind the FurthestUnlockedLevel
         for (int i = 0; i < GameManager.Instance.Levels.Count; i++)
         {
-            if (PlayerPrefs.HasKey(GameManager.Instance.Levels[i].name))
+            if(GameManager.Instance.Levels[i].name == GameManager.Instance.FurthestLevel)
             {
-                if (GameManager.Instance.FurthestLevel == GameManager.Instance.Levels[i].name)
+                GameManager.Instance.Levels[i].SetUnlocked(true);
+                if (PlayerPrefs.GetInt(GameManager.Instance.Levels[i].name) > 0)
                 {
-                    GameManager.Instance.Levels[i].SetUnlocked(true);
-                    if (PlayerPrefs.GetInt(GameManager.Instance.Levels[i].name) > 0)
-                    {
-                        GameManager.Instance.Levels[i].StarsEarned = PlayerPrefs.GetInt(GameManager.Instance.Levels[i].name);
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    GameManager.Instance.Levels[i].StarsEarned = PlayerPrefs.GetInt(GameManager.Instance.Levels[i].name);
                 }
                 else
                 {
-                    GameManager.Instance.Levels[i].StarsEarned = PlayerPrefs.GetInt(GameManager.Instance.Levels[i].name);
-                    GameManager.Instance.Levels[i].SetUnlocked(true);
+                    break;
                 }
             }
             else
             {
-                break;
+                if(PlayerPrefs.HasKey(GameManager.Instance.Levels[i].name))
+                {
+                    GameManager.Instance.Levels[i].StarsEarned = PlayerPrefs.GetInt(GameManager.Instance.Levels[i].name);
+                }
+                GameManager.Instance.Levels[i].SetUnlocked(true);
             }
+
+
+
+            ////check to see if it has a key
+            //if (PlayerPrefs.HasKey(GameManager.Instance.Levels[i].name))
+            //{
+            //    //check to see if the furtherest unlocked level is current level name is equal to the furtherst level.
+            //    if (GameManager.Instance.FurthestLevel == GameManager.Instance.Levels[i].name)
+            //    {
+            //        GameManager.Instance.Levels[i].SetUnlocked(true);
+            //        if (PlayerPrefs.GetInt(GameManager.Instance.Levels[i].name) > 0)
+            //        {
+            //            GameManager.Instance.Levels[i].StarsEarned = PlayerPrefs.GetInt(GameManager.Instance.Levels[i].name);
+            //        }
+            //        else
+            //        {
+            //            break;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        GameManager.Instance.Levels[i].StarsEarned = PlayerPrefs.GetInt(GameManager.Instance.Levels[i].name);
+            //        GameManager.Instance.Levels[i].SetUnlocked(true);
+            //    }
+            //}
+            //else
+            //{
+            //    GameManager.Instance.Levels[i].SetUnlocked(true);
+            //}
         }
     }
     public void UnlockCosmetics()

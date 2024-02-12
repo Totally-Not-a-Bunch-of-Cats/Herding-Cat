@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<package version="software5.7" xmlns="http://apple.com/itunes/importer">
+  <provider>8QXMF24G29</provider>
+  <team_id>8QXMF24G29</team_id>
+  <software>
+    <vendor_id>CorrallingCats</vendor_id>
+    <software_metadata>
+      <in_app_purchases>
+        <in_app_purchase>
+          <product_id>6475056184</product_id>
+          <reference_name>corralling_cats.small_star_bundle</reference_name>
+          <type>consumable</type>
+          <products>
+            <product>
+              <cleared_for_sale>true</cleared_for_sale>
+              <wholesale_price_tier>1</wholesale_price_tier>
+            </product>
+          </products>
+          <locales>
+            <locale name="en-US">
+              <title>200 Stars</title>
+              <description>Grants the purchaser 200 stars.</description>
+            </locale>
+          </locales>
+          <review_screenshot>
+            <file_name>Corralling_Cats_1.png</file_name>
+          </review_screenshot>
+        </in_app_purchase>
+        <in_app_purchase>
+          <product_id>6475056303</product_id>
+          <reference_name>corralling_cats.medium_star_bundle</reference_name>
+          <type>consumable</type>
+          <products>
+            <product>
+              <cleared_for_sale>true</cleared_for_sale>
+              <wholesale_price_tier>5</wholesale_price_tier>
+            </product>
+          </products>
+          <locales>
+            <locale name="en-US">
+              <title>1000 Star</title>
+              <description>Grants the purchaser 1000 stars.</description>
+            </locale>
+          </locales>
+          <review_screenshot>
+            <file_name>Corralling_Cats_2.png</file_name>
+          </review_screenshot>
+        </in_app_purchase>
+        <in_app_purchase>
+          <product_id>6475056400</product_id>
+          <reference_name>corralling_cats.mega_star_bundle</reference_name>
+          <type>consumable</type>
+          <products>
+            <product>
+              <cleared_for_sale>true</cleared_for_sale>
+              <wholesale_price_tier>10</wholesale_price_tier>
+            </product>
+          </products>
+          <locales>
+            <locale name="en-US">
+              <title>5000 Stars</title>
+              <description>Grants the purchaser 5000 stars.</description>
+            </locale>
+          </locales>
+          <review_screenshot>
+            <file_name>Corralling_Cats_3.png</file_name>
+          </review_screenshot>
+        </in_app_purchase>
+        <in_app_purchase>
+          <product_id>6475056147</product_id>
+          <reference_name>corralling_cats.star_bonus</reference_name>
+          <type>non-consumable</type>
+          <products>
+            <product>
+              <cleared_for_sale>true</cleared_for_sale>
+              <wholesale_price_tier>2</wholesale_price_tier>
+            </product>
+          </products>
+          <locales>
+            <locale name="en-US">
+              <title>Permanent +1 Stars</title>
+              <description>Grants the player +1 to </description>
+            </locale>
+          </locales>
+          <review_screenshot>
+            <file_name>Corralling_Cats_4.png</file_name>
+          </review_screenshot>
+        </in_app_purchase>
+      </in_app_purchases>
+    </software_metadata>
+  </software>
+</package>

@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: 6-6
   m_EditorClassIdentifier: 
   Dimensions: {x: 8, y: 5}
-  TargetRounds: 1
-  TargetItems: 1
+  TargetRounds: 2
+  TargetItems: 5
   NewThingIntroduced: 0
   Category: 0
   TileName: 
   StarsEarned: 0
   Unlocked: 0
   NewItemIntroduced: 0
+  SpecialHelpTxt: 0
+  SpecialHelpLevelNum: -1
   BackgroundTile: {fileID: 11400000, guid: d756be87d23ee174f869fab071be06bf, type: 2}
   Tiles:
   - name: 
@@ -56,11 +58,6 @@ MonoBehaviour:
   - name: 
     Position: {x: 1, y: 4}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
-    TubeDestination: {x: 0, y: 0}
-    Redirection: {x: 0, y: 0}
-  - name: 
-    Position: {x: 5, y: 4}
-    Slate: {fileID: 11400000, guid: e9d6189f63d821045ab761e537a50a9c, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
   - name: 
@@ -133,16 +130,6 @@ MonoBehaviour:
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: -1, y: 0}
-  - name: Redirection Pad (3,1)
-    Position: {x: 3, y: 1}
-    Slate: {fileID: 11400000, guid: 53efc83f5a114514f9d2e8cd576d0992, type: 2}
-    TubeDestination: {x: 0, y: 0}
-    Redirection: {x: 0, y: -1}
-  - name: Redirection Pad (3,0)
-    Position: {x: 3, y: 0}
-    Slate: {fileID: 11400000, guid: 53efc83f5a114514f9d2e8cd576d0992, type: 2}
-    TubeDestination: {x: 0, y: 0}
-    Redirection: {x: -1, y: 0}
   - name: Wall (2,2)
     Position: {x: 2, y: 2}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
@@ -160,6 +147,36 @@ MonoBehaviour:
     Redirection: {x: -1, y: 0}
   - name: Wall (5,2)
     Position: {x: 5, y: 2}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (2,1)
+    Position: {x: 2, y: 1}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (3,1)
+    Position: {x: 3, y: 1}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Cat Tree (3,2)
+    Position: {x: 3, y: 2}
+    Slate: {fileID: 11400000, guid: 6539a1653aded724789464aef428b98b, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Small CatPen (7,4)
+    Position: {x: 7, y: 4}
+    Slate: {fileID: 11400000, guid: e9d6189f63d821045ab761e537a50a9c, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (5,4)
+    Position: {x: 5, y: 4}
+    Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
+    TubeDestination: {x: 0, y: 0}
+    Redirection: {x: -1, y: 0}
+  - name: Wall (6,4)
+    Position: {x: 6, y: 4}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: -1, y: 0}
