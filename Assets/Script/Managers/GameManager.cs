@@ -108,6 +108,7 @@ public class GameManager : MonoBehaviour
             _PlayerPrefsManager.CheckLevels();
             _PlayerPrefsManager.RemoveHelpScreens();
             _PlayerPrefsManager.UnlockCosmetics();
+            TurnOnIndicators();
         }
         StartCoroutine(SwitchScene("Main Menu"));
         StartCoroutine(StartMenuMusic());
@@ -272,6 +273,14 @@ public class GameManager : MonoBehaviour
         {
             Instance.MusicToggle = true;
             Instance._musicManager.Mute();
+        }
+    }
+    public void TurnOnIndicators()
+    {
+        if (PlayerPrefs.HasKey("ItemIndicators"))
+        {
+            GameManager.Instance.ItemIndicators = true;
+            _PlayerPrefsManager.SaveBool("ItemIndicators", true);
         }
     }
 

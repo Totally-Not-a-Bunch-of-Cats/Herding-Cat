@@ -479,68 +479,9 @@ public class MatchManager : MonoBehaviour
             // Checks if wants to update leveldata info
             if (GameManager.Instance.UpdateLevelData == true)
             {
-                //GameManager.Instance.Levels.Find(level => level.name == NextLevelName).SetUnlocked(true);
                 //unlock levels equal to the number of stars earned
                 if (GameManager.Instance.Levels.Exists(level => level.name == NextLevelName))
                 {
-                    if(false)
-                    {
-                        /*for(int j =1; j < CurrentLevel.StarsEarned; j++)
-                           {
-                                string[] additionalLevelName = NextLevelName.Split('-');
-                                NextLevelName = "";
-                                if (additionalLevelName[1] != "10")
-                                {
-                                    NextLevelName = additionalLevelName[0] + "-";
-                                    NextLevelName += int.Parse(additionalLevelName[1]) + 1;
-                                }
-                                else
-                                {
-                                    NextLevelName += int.Parse(additionalLevelName[0]) + 1;
-                                    NextLevelName = NextLevelName + "-1";
-                                }
-                                Debug.Log(NextLevelName);
-                                if (GameManager.Instance.Levels.Exists(level => level.name == NextLevelName))
-                                {
-                                    GameManager.Instance.Levels.Find(level => level.name == NextLevelName).SetUnlocked(true);
-                                }
-                                else
-                                {
-                                    
-                                }
-                           }*/
-
-
-                        //int NextLevelPlacement = GameManager.Instance.Levels.IndexOf(CurrentLevel) + 1;
-                        //int NewestLockedLevel = 0;
-                        //for (int j = NextLevelPlacement; j <= GameManager.Instance.Levels.Count - 1; j++)
-                        //{
-                        //    if (GameManager.Instance.Levels[j].GetUnlocked() == false)
-                        //    {
-                        //        NewestLockedLevel = j;
-                        //        break;
-                        //    }
-                        //}
-                        //for (int j = NewestLockedLevel; j <= GameManager.Instance.Levels.Count - 1; j++)
-                        //{
-                        //    Debug.Log(GameManager.Instance.StarCount);
-                        //    if (GameManager.Instance.StarCount >= j)
-                        //    {
-                        //        GameManager.Instance.Levels[j].SetUnlocked(true);
-                        //        // Updates level data info for current/next level
-                        //        if (GameManager.Instance.PlayerPrefsTrue)
-                        //        {
-                        //            GameManager.Instance._PlayerPrefsManager.SaveString("FurthestLevel", GameManager.Instance.Levels[j].name);
-                        //            Debug.Log(GameManager.Instance.Levels[j].name + " FurthestLevel");
-                        //        }
-                        //    }
-                        //    else
-                        //    {
-                        //        break;
-                        //    }
-                        //}
-                    }
-
                     for (int z = 0; z < CurrentLevel.StarsEarned; z++)
                     {
                         string[] FurthestLevelSplit = GameManager.Instance.FurthestLevel.Split('-');
@@ -957,9 +898,19 @@ public class MatchManager : MonoBehaviour
         }
         if (GameManager.Instance.PlayerPrefsTrue)
         {
-            if (PlayerPrefs.GetInt(CurrentLevel.name) == 0 || PlayerPrefs.GetInt(CurrentLevel.name) > CurrentLevel.StarsEarned)
+            Debug.Log(PlayerPrefs.GetInt(CurrentLevel.name));
+            Debug.Log(CurrentLevel.StarsEarned);
+            if (PlayerPrefs.GetInt(CurrentLevel.name) == 0 || PlayerPrefs.GetInt(CurrentLevel.name) < CurrentLevel.StarsEarned)
             {
-                GameManager.Instance.StarCount += CurrentLevel.StarsEarned;
+                if(PlayerPrefs.GetInt(CurrentLevel.name) == 0)
+                {
+                    GameManager.Instance.StarCount += CurrentLevel.StarsEarned;
+                }
+                else
+                {
+                    int temp = CurrentLevel.StarsEarned - PlayerPrefs.GetInt(CurrentLevel.name);
+                    GameManager.Instance.StarCount += temp;
+                }
                 GameManager.Instance._PlayerPrefsManager.SaveInt(CurrentLevel.name, CurrentLevel.StarsEarned);
                 GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", GameManager.Instance.StarCount);
             }
@@ -968,7 +919,7 @@ public class MatchManager : MonoBehaviour
         yield return new WaitForSeconds(.15f);
         GameWonUI.SetActive(true);
     }
-
+    
     /// <summary>
     /// Decays the sleep zzz's
     /// </summary>

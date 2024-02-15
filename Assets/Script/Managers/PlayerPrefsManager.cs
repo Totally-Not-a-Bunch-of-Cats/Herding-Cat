@@ -81,8 +81,8 @@ public class PlayerPrefsManager : MonoBehaviour
         //checks to see if ItemIndicators has a key and if it doesnt it makes one
         if (!PlayerPrefs.HasKey("ItemIndicators"))
         {
-            GameManager.Instance.ItemIndicators = false;
-            SaveBool("ItemIndicators", false);
+            GameManager.Instance.ItemIndicators = true;
+            SaveBool("ItemIndicators", true);
         }
         else
         {

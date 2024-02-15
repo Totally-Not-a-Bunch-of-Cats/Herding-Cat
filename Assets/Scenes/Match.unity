@@ -17041,7 +17041,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 896329900}
   m_HandleRect: {fileID: 896329899}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -19664,6 +19664,7 @@ MonoBehaviour:
     is the cat cage.
   - 'Items placed on the board take up space and can be "colided" with. This is known
     as blocking. Use blocking as demonstracted in the video to beat the level. '
+  - If you're enjoying the game leave a review! ZZZZZ....
 --- !u!1 &1814370818
 GameObject:
   m_ObjectHideFlags: 0

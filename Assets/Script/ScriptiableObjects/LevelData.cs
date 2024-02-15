@@ -157,9 +157,12 @@ public class LevelData: ScriptableObject
         {
             NewStarsEarned++;
         }
-        if (StarsEarned >= NewStarsEarned)
+        Debug.Log(StarsEarned);
+        Debug.Log(NewStarsEarned);
+        if (StarsEarned <= NewStarsEarned)
         {
-            AdjustStarCount = false;
+            Debug.Log("mep");
+            AdjustStarCount = true;
         }
         if (GameManager.Instance.PurchasedStarBoost == true)
         {
