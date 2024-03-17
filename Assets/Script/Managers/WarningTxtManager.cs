@@ -50,7 +50,10 @@ public class WarningTxtManager : MonoBehaviour
         {
             WarningTxt3 = WarningList[pos];
             DisplayTxt(WarningTxt3, WarningTMP3, Warning3);
-            DisableConfirmButton();
+            if(pos != 3)
+            {
+                DisableConfirmButton();
+            }
             return;
         }
     }

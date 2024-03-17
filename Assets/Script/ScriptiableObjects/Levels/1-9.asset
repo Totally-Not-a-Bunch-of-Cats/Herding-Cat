@@ -15,7 +15,7 @@ MonoBehaviour:
   Dimensions: {x: 7, y: 8}
   TargetRounds: 3
   TargetItems: 12
-  NewThingIntroduced: 1
+  NewThingIntroduced: 0
   Category: 0
   TileName: 
   StarsEarned: 0

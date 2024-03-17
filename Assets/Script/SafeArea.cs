@@ -8,7 +8,6 @@ public class SafeArea : MonoBehaviour
     void Start()
     {
         Area = new Vector2(Screen.safeArea.y, 0);
-        Debug.Log(Area);
         transform.GetComponent<RectTransform>().offsetMax = -Area;
         transform.GetComponent<RectTransform>().offsetMin = Area;
     }

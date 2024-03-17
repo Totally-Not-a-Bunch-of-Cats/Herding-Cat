@@ -41,8 +41,8 @@ public class PlayerPrefsManager : MonoBehaviour
         //checks to see if musicvolue has a key and if it doesnt it makes a key for it
         if (!PlayerPrefs.HasKey("MusicVolume"))
         {
-            GameManager.Instance.musicVolume = 1;
-            PlayerPrefs.SetFloat("MusicVolume", 1);
+            GameManager.Instance.musicVolume = .6f;
+            PlayerPrefs.SetFloat("MusicVolume", .6f);
         }
         else
         {

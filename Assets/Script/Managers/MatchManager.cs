@@ -898,8 +898,6 @@ public class MatchManager : MonoBehaviour
         }
         if (GameManager.Instance.PlayerPrefsTrue)
         {
-            Debug.Log(PlayerPrefs.GetInt(CurrentLevel.name));
-            Debug.Log(CurrentLevel.StarsEarned);
             if (PlayerPrefs.GetInt(CurrentLevel.name) == 0 || PlayerPrefs.GetInt(CurrentLevel.name) < CurrentLevel.StarsEarned)
             {
                 if(PlayerPrefs.GetInt(CurrentLevel.name) == 0)
