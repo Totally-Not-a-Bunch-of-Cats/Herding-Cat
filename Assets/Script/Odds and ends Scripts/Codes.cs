@@ -8,6 +8,8 @@ public class Codes : MonoBehaviour
     private string GiveMeStars = "CatStars50";
     private string GiveMeMoreStars = "CatStars100";
     private string PurchaseBack = "";
+    public GameObject SuccessWarning;
+    public GameObject FailWarning;
 
     public GameObject InputField;
 
@@ -18,7 +20,7 @@ public class Codes : MonoBehaviour
             if (!PlayerPrefs.HasKey("CatAdsGone"))
             {
                 GameManager.Instance.Purchasemade();
-                Debug.Log("mep");
+                SuccessWarning.SetActive(true);
             }
         }
         if(InputField.GetComponent<TMP_InputField>().text == GiveMeStars)
@@ -27,17 +29,21 @@ public class Codes : MonoBehaviour
             {
                 GameManager.Instance.StarCount += 50;
                 GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", GameManager.Instance.StarCount);
-                Debug.Log("mep");
+                SuccessWarning.SetActive(true);
             }
         }
         if (InputField.GetComponent<TMP_InputField>().text == GiveMeMoreStars)
         {
-            if (!PlayerPrefs.HasKey("CatStars100"))
+            if(!PlayerPrefs.HasKey("CatStars100"))
             {
                 GameManager.Instance.StarCount += 100;
                 GameManager.Instance._PlayerPrefsManager.SaveInt("StarCount", GameManager.Instance.StarCount);
-                Debug.Log("mep");
+                SuccessWarning.SetActive(true);
             }
+        }
+        if(InputField.GetComponent<TMP_InputField>().text != GiveMeMoreStars || InputField.GetComponent<TMP_InputField>().text != GiveMeStars || InputField.GetComponent<TMP_InputField>().text != AdsBeGone)
+        {
+            FailWarning.SetActive(true);
         }
     }
 }

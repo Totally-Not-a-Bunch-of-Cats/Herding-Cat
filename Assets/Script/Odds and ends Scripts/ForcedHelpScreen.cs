@@ -13,7 +13,6 @@ public class ForcedHelpScreen : MonoBehaviour
     private void OnEnable()
     {
         transform.SetAsLastSibling();
-        //GameManager.Instance._matchManager.CurrentLevel.TileName
         for(int i = 0; i < HelpGui.GetComponent<HelpGUIController>().GeneralHelpList.Count; i++)
         {
             if(GameManager.Instance._matchManager.CurrentLevel.TileName == HelpGui.GetComponent<HelpGUIController>().GeneralHelpList[i].name)
@@ -41,6 +40,7 @@ public class ForcedHelpScreen : MonoBehaviour
         if(GameManager.Instance.SkipForcedVids == true)
         {
             EnableExitButton();
+            StartCoroutine(CountDown());
         }
         else
         {
