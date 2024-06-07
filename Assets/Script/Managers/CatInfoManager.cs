@@ -251,9 +251,13 @@ public class CatInfoManager : MonoBehaviour
             if (GameManager.Instance._catInfoManager.Accessories[GameManager.Instance._catInfoManager.CurrentAccessoryIndex].AcessoryColorUnlock == false)
             {
                 Transform ReferenceChild = Reference.transform.GetChild(1).GetChild(1).GetChild(1);
-                GameManager.Instance._WarningTxtManager.SwitchTxtAccColor(2);
+                if(!GameManager.Instance._catInfoManager.Accessories[2].AcessoryColorUnlock)
+                {
+                    GameManager.Instance._WarningTxtManager.SwitchTxtAccColor(2);
+                }
                 if (GameManager.Instance._catInfoManager.Accessories[GameManager.Instance._catInfoManager.CurrentAccessoryIndex].AcessoryColorListName == "HatAccessoryColors")
                 {
+                    Debug.Log("epp");
                     if (GameManager.Instance._catInfoManager.CurrentAccessoryColorIndex >= HatAccessoryColors.Count)
                     {
                         GameManager.Instance._catInfoManager.CurrentAccessoryColorIndex = 0;
@@ -263,6 +267,9 @@ public class CatInfoManager : MonoBehaviour
                     ReferenceChild.GetComponent<RectTransform>().offsetMin = Accessories[GameManager.Instance._catInfoManager.CurrentAccessoryIndex].MinoffsetforCatButton;
                     Catlist[CurrentSelected].Acessory1 = HatAccessoryColors[GameManager.Instance._catInfoManager.CurrentAccessoryColorIndex].ColorAcessory;
                 }
+
+
+
                 if (GameManager.Instance._catInfoManager.Accessories[GameManager.Instance._catInfoManager.CurrentAccessoryIndex].AcessoryColorListName == "HeadsetColors")
                 {
                     if (GameManager.Instance._catInfoManager.CurrentAccessoryColorIndex >= GameManager.Instance._catInfoManager.HeadsetColors.Count)
@@ -313,8 +320,10 @@ public class CatInfoManager : MonoBehaviour
                 Transform ReferenceChild = Reference.transform.GetChild(1).GetChild(1).GetChild(1);
                 GameManager.Instance._WarningTxtManager.HideTxtColor();
                 GameManager.Instance._WarningTxtManager.EnableConfirmButton();
-                if(GameManager.Instance._catInfoManager.Accessories[GameManager.Instance._catInfoManager.CurrentAccessoryIndex].AcessoryColorListName == "HatAccessoryColors")
+                Debug.Log("lep");
+                if (GameManager.Instance._catInfoManager.Accessories[GameManager.Instance._catInfoManager.CurrentAccessoryIndex].AcessoryColorListName == "HatAccessoryColors")
                 {
+                    Debug.Log("mepo");
                     if (GameManager.Instance._catInfoManager.CurrentAccessoryColorIndex >= HatAccessoryColors.Count)
                     {
                         GameManager.Instance._catInfoManager.CurrentAccessoryColorIndex = 0;
@@ -373,8 +382,7 @@ public class CatInfoManager : MonoBehaviour
     }
     public void PreviousColor(GameObject Reference)
     {
-        CurrentAccessoryColorIndex--;
-        //GameManager.Instance._catInfoManager.CurrentAccessoryIndex = GetAccessoryIndex();
+        GameManager.Instance._catInfoManager.CurrentAccessoryColorIndex--;
         if (GameManager.Instance._catInfoManager.Accessories[GameManager.Instance._catInfoManager.CurrentAccessoryIndex].AcessoryColorListName == "")
         {
             GameManager.Instance._WarningTxtManager.SwitchTxtAccColor(3);

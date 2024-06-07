@@ -330,7 +330,7 @@ public class Board
                 {
                     Vector2Int CatTreeCellPos = new Vector2Int(x + (direction.x * 2), y + (direction.y * 2));
                     if (_cells[CatTreeCellPos.x, CatTreeCellPos.y] == null || _cells[CatTreeCellPos.x, CatTreeCellPos.y].Is<CatPen>()
-                        || _cells[CatTreeCellPos.x, CatTreeCellPos.y].name == "Bed")
+                        || _cells[CatTreeCellPos.x, CatTreeCellPos.y].name == "Bed" || _cells[CatTreeCellPos.x, CatTreeCellPos.y].name == "Redirection Pad")
                     {
                         //|| _cells[Destination.x, y].name == "Redirection Pad" maybe think about handeling this exception
                         //handles bed execption

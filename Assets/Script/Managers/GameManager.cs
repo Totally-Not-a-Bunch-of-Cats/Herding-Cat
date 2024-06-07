@@ -108,6 +108,7 @@ public class GameManager : MonoBehaviour
             _PlayerPrefsManager.CheckLevels();
             _PlayerPrefsManager.RemoveHelpScreens();
             _PlayerPrefsManager.UnlockCosmetics();
+            TurnOnIndicators();
         }
         StartCoroutine(SwitchScene("Main Menu"));
         StartCoroutine(StartMenuMusic());
@@ -267,11 +268,29 @@ public class GameManager : MonoBehaviour
         {
             Instance.MusicToggle = false;
             Instance._musicManager.Mute();
+            if (PlayerPrefs.HasKey("MusicToggle"))
+            {
+                GameManager.Instance.ItemIndicators = false;
+                _PlayerPrefsManager.SaveBool("MusicToggle", false);
+            }
         }
         else
         {
             Instance.MusicToggle = true;
             Instance._musicManager.Mute();
+            if (PlayerPrefs.HasKey("MusicToggle"))
+            {
+                GameManager.Instance.ItemIndicators = true;
+                _PlayerPrefsManager.SaveBool("MusicToggle", true);
+            }
+        }
+    }
+    public void TurnOnIndicators()
+    {
+        if (PlayerPrefs.HasKey("ItemIndicators"))
+        {
+            ItemIndicators = true;
+            _PlayerPrefsManager.SaveBool("ItemIndicators", true);
         }
     }
 

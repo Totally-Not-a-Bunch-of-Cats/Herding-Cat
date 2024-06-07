@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 918842532}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: Game Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
   WorldNumber: 1
   ClearStartHelpScreen: 1
   PurchasedStarBoost: 0
-  SkipForcedVids: 1
+  SkipForcedVids: 0
   GamesTillRewardAd: 4
   GamesTillMandatoryAd: 10
   ADsoff: 0

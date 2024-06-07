@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Board
   - Music
+  - Game Manager
   layers:
   - Default
   - TransparentFX
