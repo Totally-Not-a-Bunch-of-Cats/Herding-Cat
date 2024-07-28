@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 8-3
   m_EditorClassIdentifier: 
   Dimensions: {x: 11, y: 11}
+  WorldNumber: 1
   TargetRounds: 10
   TargetItems: 10
   NewThingIntroduced: 0
@@ -21,6 +22,8 @@ MonoBehaviour:
   StarsEarned: 0
   Unlocked: 0
   NewItemIntroduced: 0
+  SpecialHelpTxt: 0
+  SpecialHelpLevelNum: -1
   BackgroundTile: {fileID: 11400000, guid: d756be87d23ee174f869fab071be06bf, type: 2}
   Tiles:
   - name: Alfred (5,6)

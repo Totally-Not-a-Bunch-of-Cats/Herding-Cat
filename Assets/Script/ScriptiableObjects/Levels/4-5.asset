@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 4-5
   m_EditorClassIdentifier: 
   Dimensions: {x: 8, y: 8}
+  WorldNumber: 1
   TargetRounds: 3
   TargetItems: 12
   NewThingIntroduced: 0
@@ -21,97 +22,122 @@ MonoBehaviour:
   StarsEarned: 2
   Unlocked: 1
   NewItemIntroduced: 0
+  SpecialHelpTxt: 0
+  SpecialHelpLevelNum: -1
   BackgroundTile: {fileID: 11400000, guid: 103593486162c964aa10539a0ed04a9e, type: 2}
   Tiles:
-  - Position: {x: 0, y: 5}
+  - name: 
+    Position: {x: 0, y: 5}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 1, y: 5}
+  - name: 
+    Position: {x: 1, y: 5}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 3, y: 6}
+  - name: 
+    Position: {x: 3, y: 6}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 2, y: 5}
+  - name: 
+    Position: {x: 2, y: 5}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 2, y: 7}
+  - name: 
+    Position: {x: 2, y: 7}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 2, y: 6}
+  - name: 
+    Position: {x: 2, y: 6}
     Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
     TubeDestination: {x: 4, y: 6}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 4, y: 6}
+  - name: 
+    Position: {x: 4, y: 6}
     Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
     TubeDestination: {x: 2, y: 6}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 3, y: 5}
+  - name: 
+    Position: {x: 3, y: 5}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 4, y: 5}
+  - name: 
+    Position: {x: 4, y: 5}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 5, y: 5}
+  - name: 
+    Position: {x: 5, y: 5}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 6, y: 5}
+  - name: 
+    Position: {x: 6, y: 5}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 7, y: 5}
+  - name: 
+    Position: {x: 7, y: 5}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 6, y: 7}
+  - name: 
+    Position: {x: 6, y: 7}
     Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
     TubeDestination: {x: 6, y: 1}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 6, y: 1}
+  - name: 
+    Position: {x: 6, y: 1}
     Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
     TubeDestination: {x: 6, y: 7}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 7, y: 2}
+  - name: 
+    Position: {x: 7, y: 2}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 6, y: 2}
+  - name: 
+    Position: {x: 6, y: 2}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 5, y: 2}
+  - name: 
+    Position: {x: 5, y: 2}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 7, y: 3}
+  - name: 
+    Position: {x: 7, y: 3}
     Slate: {fileID: 11400000, guid: e9d6189f63d821045ab761e537a50a9c, type: 2}
     TubeDestination: {x: 6, y: 1}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 4, y: 2}
+  - name: 
+    Position: {x: 4, y: 2}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 3, y: 2}
+  - name: 
+    Position: {x: 3, y: 2}
     Slate: {fileID: 11400000, guid: d208a7761fd158042a0520312d69cb4e, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 0, y: 0}
+  - name: 
+    Position: {x: 0, y: 0}
     Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
     TubeDestination: {x: 5, y: 4}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 5, y: 4}
+  - name: 
+    Position: {x: 5, y: 4}
     Slate: {fileID: 11400000, guid: 9a8c2cf85b846594f964a58012869643, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}
-  - Position: {x: 1, y: 6}
+  - name: 
+    Position: {x: 1, y: 6}
     Slate: {fileID: 11400000, guid: 4092971444c651a4b928b703daf4e863, type: 2}
     TubeDestination: {x: 0, y: 0}
     Redirection: {x: 0, y: 0}

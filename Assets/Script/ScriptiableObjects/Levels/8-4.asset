@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 8-4
   m_EditorClassIdentifier: 
   Dimensions: {x: 8, y: 8}
+  WorldNumber: 1
   TargetRounds: 2
   TargetItems: 15
   NewThingIntroduced: 0

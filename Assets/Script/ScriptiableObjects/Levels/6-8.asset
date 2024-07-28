@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 6-8
   m_EditorClassIdentifier: 
   Dimensions: {x: 7, y: 9}
+  WorldNumber: 1
   TargetRounds: 2
   TargetItems: 18
   NewThingIntroduced: 0
@@ -21,6 +22,8 @@ MonoBehaviour:
   StarsEarned: 1
   Unlocked: 1
   NewItemIntroduced: 0
+  SpecialHelpTxt: 0
+  SpecialHelpLevelNum: -1
   BackgroundTile: {fileID: 11400000, guid: 103593486162c964aa10539a0ed04a9e, type: 2}
   Tiles:
   - name: Redirection Pad (1,0)

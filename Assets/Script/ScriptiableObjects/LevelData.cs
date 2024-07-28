@@ -12,6 +12,7 @@ using UnityEngine;
 public class LevelData: ScriptableObject
 {
     public Vector2Int Dimensions;
+    public int WorldNumber;
     public int TargetRounds;
     public int TargetItems;
     public bool NewThingIntroduced = false;

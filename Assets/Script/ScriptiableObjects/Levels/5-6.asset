@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 5-6
   m_EditorClassIdentifier: 
   Dimensions: {x: 8, y: 7}
+  WorldNumber: 1
   TargetRounds: 2
   TargetItems: 5
   NewThingIntroduced: 0
@@ -21,6 +22,8 @@ MonoBehaviour:
   StarsEarned: 0
   Unlocked: 1
   NewItemIntroduced: 0
+  SpecialHelpTxt: 0
+  SpecialHelpLevelNum: -1
   BackgroundTile: {fileID: 11400000, guid: 76cbab4e70ed36846808f77c6f9b14f9, type: 2}
   Tiles:
   - name: Wall (4,4)
