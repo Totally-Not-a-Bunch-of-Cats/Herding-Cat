@@ -41,7 +41,7 @@ public class LevelSelectGeneration : MonoBehaviour
     /// Creates the level select buttons according to the current world the player is on
     /// </summary>
     /// <param name="CurrentWorld"> The current world that the player is going to </param>
-    /// <param name="NumberOfWorlds"> The number of worlds that will be displayed </param>
+    /// <param name="CurrentLevelGroup"> The current level group that will be displayed </param>
     public void CreateWorldButtons(int CurrentLevelGroup, int CurrentWorld)
     {
         // Destorying previous buttons that will no longer be used
@@ -100,6 +100,7 @@ public class LevelSelectGeneration : MonoBehaviour
             GameManager.Instance.SetWorldNumber(LevelNumber + (WorldNumber - 1) * 10);
         }
 
+        // Sets the transfer button for the levels to active or not
         if(CurrentLevelGroup == 1)
         {     
             PreviousLevelGroupButton.gameObject.SetActive(false);
@@ -109,6 +110,7 @@ public class LevelSelectGeneration : MonoBehaviour
             NextLevelGroupButton.gameObject.SetActive(false);
         }
 
+        // Sets the world buttons to active or not depending on amount of levels
         if(CurrentWorld == 1)
         {     
             PreviousWorldButton.gameObject.SetActive(false);
@@ -129,7 +131,7 @@ public class LevelSelectGeneration : MonoBehaviour
     }
 
     /// <summary>
-    /// Moves the player to the next world in the level select
+    /// Moves the player to the next group of levels in the level select
     /// </summary>
     public void NextLevelGroup()
     {
@@ -137,7 +139,7 @@ public class LevelSelectGeneration : MonoBehaviour
         GameManager.Instance.SetWorldNumber(LevelNumber);
         CreateWorldButtons(LevelNumber, WorldNumber);
 
-        // Check to see if the user is on the last world
+        // Check to see if the user is on the last level group
         double NumberOfLevelGroups = ((double)(GameManager.Instance.Levels.Count) / 10) - (WorldNumber - 1) * 10;
         if(NumberOfLevelGroups > 10 * WorldNumber)
         {
@@ -157,7 +159,7 @@ public class LevelSelectGeneration : MonoBehaviour
     }
 
     /// <summary>
-    /// Moves the player to the previous world in the level select
+    /// Moves the player to the previous level group in the level select
     /// </summary>
     public void PreviousLevelGroup()
     {
@@ -165,7 +167,7 @@ public class LevelSelectGeneration : MonoBehaviour
         GameManager.Instance.SetWorldNumber(LevelNumber);
         CreateWorldButtons(LevelNumber, WorldNumber);
 
-        // Check to see if the user is on the first world
+        // Check to see if the user is on the first group of levels
         if (LevelNumber == 1)
         {
             PreviousLevelGroupButton.gameObject.SetActive(false);
