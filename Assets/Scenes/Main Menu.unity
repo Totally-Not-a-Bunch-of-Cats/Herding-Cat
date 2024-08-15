@@ -2445,7 +2445,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Previous World
+  m_text: World 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
@@ -22548,7 +22548,7 @@ GameObject:
   - component: {fileID: 416270280}
   - component: {fileID: 416270279}
   m_Layer: 5
-  m_Name: ToPreviousWorld
+  m_Name: World 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22573,7 +22573,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: -200, y: 75}
-  m_SizeDelta: {x: 350, y: 100}
+  m_SizeDelta: {x: 275, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &416270279
 MonoBehaviour:
@@ -22621,12 +22621,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2128546928}
         m_TargetAssemblyTypeName: LevelSelectGeneration, Scripts
-        m_MethodName: PreviousWorld
-        m_Mode: 1
+        m_MethodName: GoToWorld
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
@@ -30778,7 +30778,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Next World
+  m_text: World 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
@@ -70518,7 +70518,7 @@ GameObject:
   - component: {fileID: 1882751652}
   - component: {fileID: 1882751651}
   m_Layer: 5
-  m_Name: ToNextWorld
+  m_Name: World 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70543,7 +70543,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 200, y: 75}
-  m_SizeDelta: {x: 350, y: 100}
+  m_SizeDelta: {x: 275, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1882751651
 MonoBehaviour:
@@ -70591,12 +70591,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2128546928}
         m_TargetAssemblyTypeName: LevelSelectGeneration, Scripts
-        m_MethodName: NextWorld
-        m_Mode: 1
+        m_MethodName: GoToWorld
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
@@ -71659,8 +71659,6 @@ MonoBehaviour:
   LevelButtonPrefab: {fileID: 3679828283678333991, guid: a0cbec469cc58d345b3b6ffcf6cfe649, type: 3}
   NextLevelGroupButton: {fileID: 1866810076}
   PreviousLevelGroupButton: {fileID: 99836025}
-  NextWorldButton: {fileID: 849462342}
-  PreviousWorldButton: {fileID: 504464149}
   LevelNumber: 1
   WorldNumber: 1
 --- !u!114 &1924763676
@@ -90688,8 +90686,6 @@ MonoBehaviour:
   LevelButtonPrefab: {fileID: 3679828283678333991, guid: a0cbec469cc58d345b3b6ffcf6cfe649, type: 3}
   NextLevelGroupButton: {fileID: 534389714}
   PreviousLevelGroupButton: {fileID: 355503551}
-  NextWorldButton: {fileID: 1882751650}
-  PreviousWorldButton: {fileID: 416270278}
   LevelNumber: 1
   WorldNumber: 1
 --- !u!1 &2133151410

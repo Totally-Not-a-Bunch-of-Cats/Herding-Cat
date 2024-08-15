@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using log4net.Core;
+using System.Diagnostics;
 
 /**
 * Author: Declin Anderson
@@ -24,9 +25,7 @@ public class LevelSelectGeneration : MonoBehaviour
     // References to the next world and previous Level Group button in the scene
     [SerializeField] private Transform NextLevelGroupButton;
     [SerializeField] private Transform PreviousLevelGroupButton;
-    // References to the next world and previous world button in the scene
-    [SerializeField] private Transform NextWorldButton;
-    [SerializeField] private Transform PreviousWorldButton;
+
     // Int holding the current world the user is on
     public int LevelNumber = 1;
     public int WorldNumber = 1;
@@ -50,6 +49,7 @@ public class LevelSelectGeneration : MonoBehaviour
             Destroy(buttonTransform.gameObject);
         }
 
+        // Clears the level list to create the new buttons
         LevelList.Clear();
 
         // Checking to make sure that there is 10 levels to create and if not reducing the amount of levels created
@@ -64,24 +64,26 @@ public class LevelSelectGeneration : MonoBehaviour
         // Creating 10 buttons for the current world that the player has entered
         for (int i = 0; i < AmountOfButtons; i++)
         {
-            // Creates a button in the level select
+            // Creates a button in the level select using the level button prefab
             Transform levelButtonTransform = Instantiate(LevelButtonPrefab, this.transform);
-            // Sets the text of the button to the respective level
-            levelButtonTransform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Level: " + CurrentLevelGroup + "-" + (i + 1);
+            // Sets the text of the button to the respective level (EX: "1-1, 1-2, 1-3")
+            levelButtonTransform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Level: " + (CurrentLevelGroup + ((CurrentWorld - 1) * 10)) + "-" + (i + 1);
             // Sets the button to active or inactive depending on if the level has been unlocked
-            levelButtonTransform.GetComponent<Button>().enabled = GameManager.Instance.Levels[i + ((CurrentLevelGroup - 1) * 10)].GetUnlocked();
+            levelButtonTransform.GetComponent<Button>().enabled = GameManager.Instance.Levels[i + ((CurrentLevelGroup - 1) * 10 + (CurrentWorld - 1) * 100)].GetUnlocked();
 
             // Creates the action on the button that will load the level associated with the button
             int currentLevel = i + 1;
-            levelButtonTransform.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.LevelSelected(CurrentLevelGroup + "-" + currentLevel));
+            levelButtonTransform.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.LevelSelected(CurrentLevelGroup + (CurrentWorld - 1) * 10 + "-" + currentLevel));
             // Creates the action that updates the current level position to fit with what level you are on
-            levelButtonTransform.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.ButtonOfSelectedNum(currentLevel + ((CurrentLevelGroup - 1) * 10)));
+            levelButtonTransform.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.ButtonOfSelectedNum(currentLevel + ((CurrentLevelGroup - 1) * 10) + (CurrentWorld - 1) * 100));
 
             // Colors the stars according to starts earned on the level by the player
             for (int j = 0; j < 3; j++)
             {
-                if (GameManager.Instance.Levels[i + ((CurrentLevelGroup - 1) * 10)].StarsEarned > j)
+                // Looks for if level currently being created has stars already unlocked
+                if (GameManager.Instance.Levels[i + ((CurrentLevelGroup - 1) * 10) + (CurrentWorld -1) * 100].StarsEarned > j)
                 {
+                    // Gets the star and changes its color to be the correct for finishing it
                     levelButtonTransform.GetChild(0).GetChild(j).GetComponent<Image>().color = Color.yellow;
                 }
             }
@@ -90,43 +92,54 @@ public class LevelSelectGeneration : MonoBehaviour
             LevelList.Add(levelButtonTransform.gameObject);
         }
 
-        // Updates the world value to the world that player is moving towards
-        if (CurrentLevelGroup < LevelNumber)
+        // Updates the level number to the level number the player is going to
+        if (CurrentLevelGroup < LevelNumber || LevelNumber > CurrentLevelGroup)
         {
-            GameManager.Instance.SetWorldNumber(LevelNumber + (WorldNumber - 1) * 10);
-        }
-        else if (LevelNumber > CurrentLevelGroup)
-        {
-            GameManager.Instance.SetWorldNumber(LevelNumber + (WorldNumber - 1) * 10);
+            // The level number is updated to new level number value
+            GameManager.Instance.SetWorldNumber(LevelNumber + (CurrentWorld - 1) * 10);
         }
 
-        // Sets the transfer button for the levels to active or not
+        // Sets the two transfer level buttons to true so they can be turned off if necessary
+        PreviousLevelGroupButton.gameObject.SetActive(true);
+        NextLevelGroupButton.gameObject.SetActive(true);
+
+        // Checks to see if when the levels have been created if its the first level group
         if(CurrentLevelGroup == 1)
-        {     
+        {    
+            // Set the previous level button to false since its at the start of the world
             PreviousLevelGroupButton.gameObject.SetActive(false);
+
         }
+        // Checks to see if the current level group is at the end of the world so it doesn't have to create the next button
         if(CurrentLevelGroup + (WorldNumber - 1) * 10 == Math.Ceiling((double)(GameManager.Instance.Levels.Count) / 10))
         {
+            // Makes the next level group button inactive
             NextLevelGroupButton.gameObject.SetActive(false);
-        }
-
-        // Sets the world buttons to active or not depending on amount of levels
-        if(CurrentWorld == 1)
-        {     
-            PreviousWorldButton.gameObject.SetActive(false);
-        }
-        if(CurrentWorld == Math.Ceiling((double)(GameManager.Instance.Levels.Count)/100))
-        {
-            NextWorldButton.gameObject.SetActive(false);
         }
     }
 
     /// <summary>
-    /// Reloads the level to current gen
+    /// Reloads the level to current level group
     /// </summary>
     public void LoadLevelGroup()
     {
-        LevelNumber = GameManager.Instance.WorldNumber;
+        // Gets the current level that the world is on
+        switch(GameManager.Instance.WorldNumber)
+        {
+            case 1:
+                LevelNumber = GameManager.Instance.LevelGroupWorld1;
+                break;
+            case 2:
+                LevelNumber = GameManager.Instance.LevelGroupWorld2;
+                break;
+        }
+
+        // Sets the World number to match the game manager value
+        WorldNumber = GameManager.Instance.WorldNumber;
+
+        // Edit the title to be the correct world number
+        WorldTitle.text = "World " + WorldNumber;
+        // Creates the level buttons based on the current level number and world number
         CreateWorldButtons(LevelNumber, WorldNumber);
     }
 
@@ -135,26 +148,45 @@ public class LevelSelectGeneration : MonoBehaviour
     /// </summary>
     public void NextLevelGroup()
     {
+        // Increases the level up to produce the next group of levels
         LevelNumber++;
-        GameManager.Instance.SetWorldNumber(LevelNumber);
+        switch(GameManager.Instance.WorldNumber)
+        {
+            case 1:
+                GameManager.Instance.LevelGroupWorld1++;
+                break;
+            case 2:
+                GameManager.Instance.LevelGroupWorld2++;
+                break;
+        }
+        // Sets the current level tracker of the world in the gamemanger
+        //GameManager.Instance.SetWorldNumber(WorldNumber);
+
+        // Generates the Buttons based current level group and world the player is on
         CreateWorldButtons(LevelNumber, WorldNumber);
 
-        // Check to see if the user is on the last level group
+        // Check to see if the user is on the last level group by seeing how many level gropus there are then cutting it off based on number of worlds(each world is 100 levels at max)
         double NumberOfLevelGroups = ((double)(GameManager.Instance.Levels.Count) / 10) - (WorldNumber - 1) * 10;
+
+        // If more than 10 level groups reduce to 10 since max 10 level groups a world can have
         if(NumberOfLevelGroups > 10 * WorldNumber)
         {
             NumberOfLevelGroups = 10;
         }
 
+        // if the level number is at the end of the number of levels accessible then doesn't allow moving to the next level group
         if (LevelNumber >= Math.Ceiling(NumberOfLevelGroups))
         {
+            // The next level button is made inactive
             NextLevelGroupButton.gameObject.SetActive(false);
         }
         else
         {
+            // The next level button is made active since there is a level group to go to
             NextLevelGroupButton.gameObject.SetActive(true);
         }
 
+        // Since the player moved forward a level group it means they have a level group to go back to
         PreviousLevelGroupButton.gameObject.SetActive(true);
     }
 
@@ -163,80 +195,69 @@ public class LevelSelectGeneration : MonoBehaviour
     /// </summary>
     public void PreviousLevelGroup()
     {
+        // Reduces the level down to produce the previous group of levels
         LevelNumber--;
-        GameManager.Instance.SetWorldNumber(LevelNumber);
+
+        switch(GameManager.Instance.WorldNumber)
+        {
+            case 1:
+                GameManager.Instance.LevelGroupWorld1--;
+                break;
+            case 2:
+                GameManager.Instance.LevelGroupWorld2--;
+                break;
+        }
+        // Sets the current level tracker of the world in the gamemanger
+        //GameManager.Instance.SetWorldNumber(LevelNumber);
+
+        // Generates the Buttons based current level group and world the player is on
         CreateWorldButtons(LevelNumber, WorldNumber);
 
         // Check to see if the user is on the first group of levels
         if (LevelNumber == 1)
         {
+            // Sets the previous level group button to false since the player is at the start of the world
             PreviousLevelGroupButton.gameObject.SetActive(false);
         }
         else
         {
+            // Sets the previous level group button to true since the player is not at the start of the world
             PreviousLevelGroupButton.gameObject.SetActive(true);
         }
 
-
+        // The player is going down a level group so that means there is future levels the player can go to
         NextLevelGroupButton.gameObject.SetActive(true);
     }
 
-    /// <summary>
-    /// Moves the player to the next world in the level select
-    /// </summary>
-    public void NextWorld()
-    {
-        WorldNumber++;
-        LevelNumber = 1;
-        CreateWorldButtons(LevelNumber, WorldNumber);
-
-        // Check to see if the user is on the last world
-        double NumberOfWorlds = (double)(GameManager.Instance.WorldNumber / 100);
-
-        if (WorldNumber >= Math.Ceiling(NumberOfWorlds))
-        {
-            NextWorldButton.gameObject.SetActive(false);
-          
-        }
-        else
-        {
-            NextWorldButton.gameObject.SetActive(true);
-        }
-
-        if(GameManager.Instance.Levels.Count > ((WorldNumber - 1) * 100) + 10)
-        {
-            NextLevelGroupButton.gameObject.SetActive(true);
-        }
-        else
-        {
-            NextLevelGroupButton.gameObject.SetActive(false);
-        }
-
-        PreviousWorldButton.gameObject.SetActive(true);
-        WorldTitle.text = "World " + WorldNumber;
-    }
 
     /// <summary>
-    /// Moves the player to the previous world in the level select
+    /// Goes the world that is passed into the button and searches for what level group the player left that level on
     /// </summary>
-    public void PreviousWorld()
+    /// <param name="WorldSelected"> The level that the player wishes to travel to
+    public void GoToWorld(int WorldSelected)
     {
-        WorldNumber--;
-        LevelNumber = 1;
-        CreateWorldButtons(LevelNumber, WorldNumber);
+        // Sets the current world number to that of the world selected
+        WorldNumber = WorldSelected;
+        GameManager.Instance.WorldNumber = WorldNumber;
 
-        // Check to see if the user is on the first world
-        if (WorldNumber == 1)
+        // Depending the World it will pull what level they last left off on
+        switch(WorldNumber)
         {
-            PreviousWorldButton.gameObject.SetActive(false);
-        }
-        else
-        {
-            PreviousWorldButton.gameObject.SetActive(true);
+            // If world 1
+            case 1:
+                // Creates the world according to where the world left off on when the player switched world
+                LevelNumber = GameManager.Instance.LevelGroupWorld1;
+                CreateWorldButtons(LevelNumber, WorldNumber);
+                break;
+            // If world 2
+            case 2:
+                // Creates the world according to where the world left off on when the player switched world
+                LevelNumber = GameManager.Instance.LevelGroupWorld2;
+                CreateWorldButtons(LevelNumber, WorldNumber);
+                break;
         }
 
-        NextLevelGroupButton.gameObject.SetActive(true);
-        NextWorldButton.gameObject.SetActive(true);
+        // Edit the title to be the correct world number
         WorldTitle.text = "World " + WorldNumber;
     }
 }

@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
     public List<LevelData> Levels = new List<LevelData>();
     public GameLevels GamelevelList;
     public int LevelPosition = 0;
+    public int LevelGroupWorld1 = 1;
+    public int LevelGroupWorld2 = 1;
     public int WorldNumber = 1;
     //public bool ActivateItemIndicators = false;
     public bool ClearStartHelpScreen = false; //might do nothing also maybe should be true for launch
