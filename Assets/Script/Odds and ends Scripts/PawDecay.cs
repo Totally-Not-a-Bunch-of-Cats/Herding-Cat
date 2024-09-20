@@ -10,7 +10,8 @@ public class PawDecay : MonoBehaviour
     }
     IEnumerator Decay()
     {
+        print("we deleting");
         yield return new WaitForSeconds(.5f);
-        Destroy(this);
+        Destroy(gameObject);
     }
 }

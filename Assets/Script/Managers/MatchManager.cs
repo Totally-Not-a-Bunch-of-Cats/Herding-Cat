@@ -609,6 +609,10 @@ public class MatchManager : MonoBehaviour
                     Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
                     Animator.SetBool("Idle", false);
                     Animator.SetBool("Walk", true);
+                    GameBoard.Cats[ListPos].Object.GetComponentInChildren<PawHolder>().Paw1.GetComponent<SpwanPaw>().Walking = true;
+                    GameBoard.Cats[ListPos].Object.GetComponentInChildren<PawHolder>().Paw3.GetComponent<SpwanPaw>().Walking = true;
+                    GameBoard.Cats[ListPos].Object.GetComponentInChildren<PawHolder>().Paw1.GetComponent<SpwanPaw>().PawRotation = -90;
+                    GameBoard.Cats[ListPos].Object.GetComponentInChildren<PawHolder>().Paw3.GetComponent<SpwanPaw>().PawRotation = -90;
                     GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 180, 0, 0);
                     StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
                 }
@@ -621,6 +625,10 @@ public class MatchManager : MonoBehaviour
                 {
                     Animator.SetBool("Idle", false);
                     Animator.SetBool("Walk", true);
+                    GameBoard.Cats[ListPos].Object.GetComponentInChildren<PawHolder>().Paw1.GetComponent<SpwanPaw>().Walking = true;
+                    GameBoard.Cats[ListPos].Object.GetComponentInChildren<PawHolder>().Paw3.GetComponent<SpwanPaw>().Walking = true;
+                    GameBoard.Cats[ListPos].Object.GetComponentInChildren<PawHolder>().Paw1.GetComponent<SpwanPaw>().PawRotation = 0;
+                    GameBoard.Cats[ListPos].Object.GetComponentInChildren<PawHolder>().Paw3.GetComponent<SpwanPaw>().PawRotation = 0;
                     GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 0, 0, -90);
                     StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
                 }
@@ -633,6 +641,10 @@ public class MatchManager : MonoBehaviour
                     Vector3 TempDestination = GameBoard.Cats[ListPos].Object.localPosition + new Vector3(Direction.x * Goalpos.x, Direction.y * Goalpos.y, 0);
                     Animator.SetBool("Idle", false);
                     Animator.SetBool("Walk", true);
+                    GameBoard.Cats[ListPos].Object.GetComponentInChildren<PawHolder>().Paw1.GetComponent<SpwanPaw>().Walking = true;
+                    GameBoard.Cats[ListPos].Object.GetComponentInChildren<PawHolder>().Paw3.GetComponent<SpwanPaw>().Walking = true;
+                    GameBoard.Cats[ListPos].Object.GetComponentInChildren<PawHolder>().Paw1.GetComponent<SpwanPaw>().PawRotation = 90;
+                    GameBoard.Cats[ListPos].Object.GetComponentInChildren<PawHolder>().Paw3.GetComponent<SpwanPaw>().PawRotation = 90;
                     GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 0, 0, 0);
                     StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
                 }
@@ -646,6 +658,10 @@ public class MatchManager : MonoBehaviour
                 {
                     Animator.SetBool("Idle", false);
                     Animator.SetBool("Walk", true);
+                    GameBoard.Cats[ListPos].Object.GetComponentInChildren<PawHolder>().Paw1.GetComponent<SpwanPaw>().Walking = true;
+                    GameBoard.Cats[ListPos].Object.GetComponentInChildren<PawHolder>().Paw3.GetComponent<SpwanPaw>().Walking = true;
+                    GameBoard.Cats[ListPos].Object.GetComponentInChildren<PawHolder>().Paw1.GetComponent<SpwanPaw>().PawRotation = 180;
+                    GameBoard.Cats[ListPos].Object.GetComponentInChildren<PawHolder>().Paw3.GetComponent<SpwanPaw>().PawRotation = 180;
                     GameBoard.Cats[ListPos].Object.rotation = new Quaternion(0, 0, 0, 90);
                     StartCoroutine(MoveObject(GameBoard.Cats[ListPos].Object.localPosition, TempDestination, 0.5f, ListPos, FinalDestination));
                 }
@@ -797,6 +813,12 @@ public class MatchManager : MonoBehaviour
         {
             CatMoving = false;
         }
+        //stops the paws from spawning
+        print("stop paw");
+        GameBoard.Cats[ListPos].Object.GetComponentInChildren<PawHolder>().Paw1.GetComponent<SpwanPaw>().Walking = false;
+        GameBoard.Cats[ListPos].Object.GetComponentInChildren<PawHolder>().Paw2.GetComponent<SpwanPaw>().Walking = false;
+        GameBoard.Cats[ListPos].Object.GetComponentInChildren<PawHolder>().Paw3.GetComponent<SpwanPaw>().Walking = false;
+        GameBoard.Cats[ListPos].Object.GetComponentInChildren<PawHolder>().Paw4.GetComponent<SpwanPaw>().Walking = false;
         ClearAnims();
     }
 
