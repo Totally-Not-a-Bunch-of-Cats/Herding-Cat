@@ -1,5 +1,143 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &889315548135861311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 333770629163902860}
+  - component: {fileID: 1074996751825921755}
+  m_Layer: 0
+  m_Name: CatPaw Spawn (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &333770629163902860
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889315548135861311}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.39, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5787017892918878053}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1074996751825921755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889315548135861311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2245331d0dd4ae047a32eefafa8494a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Paw: {fileID: 3614118196543246507, guid: 27e179e4e90bb344682c70277427809b, type: 3}
+  Walking: 0
+--- !u!1 &2563155371882853106
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4871446409165599881}
+  - component: {fileID: 5169966449925512811}
+  m_Layer: 0
+  m_Name: CatPaw Spawn (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4871446409165599881
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2563155371882853106}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.27, y: -0.48, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5787017892918878053}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5169966449925512811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2563155371882853106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2245331d0dd4ae047a32eefafa8494a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Paw: {fileID: 3614118196543246507, guid: 27e179e4e90bb344682c70277427809b, type: 3}
+  Walking: 0
+--- !u!1 &3208493891679306848
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1808658314876335157}
+  - component: {fileID: 796352762937859911}
+  m_Layer: 0
+  m_Name: CatPaw Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1808658314876335157
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3208493891679306848}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.14, y: -0.51, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5787017892918878053}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &796352762937859911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3208493891679306848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2245331d0dd4ae047a32eefafa8494a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Paw: {fileID: 3614118196543246507, guid: 27e179e4e90bb344682c70277427809b, type: 3}
+  Walking: 0
 --- !u!1 &6503079976663304829
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,9 +168,59 @@ Transform:
   m_Children:
   - {fileID: 166714742118820638}
   - {fileID: 398966955084587051}
+  - {fileID: 1808658314876335157}
+  - {fileID: 4871446409165599881}
+  - {fileID: 3114854898502740333}
+  - {fileID: 333770629163902860}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8774160787950123148
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3114854898502740333}
+  - component: {fileID: 6705604300810536874}
+  m_Layer: 0
+  m_Name: CatPaw Spawn (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3114854898502740333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8774160787950123148}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.24, y: -0.48, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5787017892918878053}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6705604300810536874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8774160787950123148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2245331d0dd4ae047a32eefafa8494a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Paw: {fileID: 3614118196543246507, guid: 27e179e4e90bb344682c70277427809b, type: 3}
+  Walking: 0
 --- !u!1 &9127214910622555087
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,3 +379,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3894235358167945715, guid: 318b20a3d666ecc48b6c2ae8b88120fe, type: 3}
   m_PrefabInstance: {fileID: 3772697349962201837}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2795470972999928777 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1337800303392485668, guid: 318b20a3d666ecc48b6c2ae8b88120fe, type: 3}
+  m_PrefabInstance: {fileID: 3772697349962201837}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7569222146407562547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2795470972999928777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5da438ba2e5462f4984729e32b025420, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Paw1: {fileID: 3208493891679306848}
+  Paw2: {fileID: 2563155371882853106}
+  Paw3: {fileID: 8774160787950123148}
+  Paw4: {fileID: 889315548135861311}

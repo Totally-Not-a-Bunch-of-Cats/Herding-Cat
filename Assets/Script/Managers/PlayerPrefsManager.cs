@@ -249,35 +249,6 @@ public class PlayerPrefsManager : MonoBehaviour
                 }
                 GameManager.Instance.Levels[i].SetUnlocked(true);
             }
-
-
-
-            ////check to see if it has a key
-            //if (PlayerPrefs.HasKey(GameManager.Instance.Levels[i].name))
-            //{
-            //    //check to see if the furtherest unlocked level is current level name is equal to the furtherst level.
-            //    if (GameManager.Instance.FurthestLevel == GameManager.Instance.Levels[i].name)
-            //    {
-            //        GameManager.Instance.Levels[i].SetUnlocked(true);
-            //        if (PlayerPrefs.GetInt(GameManager.Instance.Levels[i].name) > 0)
-            //        {
-            //            GameManager.Instance.Levels[i].StarsEarned = PlayerPrefs.GetInt(GameManager.Instance.Levels[i].name);
-            //        }
-            //        else
-            //        {
-            //            break;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        GameManager.Instance.Levels[i].StarsEarned = PlayerPrefs.GetInt(GameManager.Instance.Levels[i].name);
-            //        GameManager.Instance.Levels[i].SetUnlocked(true);
-            //    }
-            //}
-            //else
-            //{
-            //    GameManager.Instance.Levels[i].SetUnlocked(true);
-            //}
         }
     }
     public void UnlockCosmetics()
