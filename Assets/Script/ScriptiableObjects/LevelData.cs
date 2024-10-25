@@ -22,7 +22,7 @@ public class LevelData: ScriptableObject
     public bool NewItemIntroduced = false;
     public bool SpecialHelpTxt = false;
     public int SpecialHelpLevelNum = -1;
-
+    public int WorldNumber = 1;
     [Header("Tile Data")]
     // Tile that is set for the backgound of play area
     [SerializeField] public UnityEngine.Tilemaps.Tile BackgroundTile;

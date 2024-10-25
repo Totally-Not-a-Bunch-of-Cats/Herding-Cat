@@ -63651,7 +63651,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1887013265
 RectTransform:
   m_ObjectHideFlags: 0
@@ -83174,9 +83174,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af0c3f303f9c2864aac65c64bf8e24f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WorldTitle: {fileID: 0}
   LevelButtonPrefab: {fileID: 3679828283678333991, guid: a0cbec469cc58d345b3b6ffcf6cfe649, type: 3}
-  NextWorldButton: {fileID: 534389714}
-  PreviousWorldButton: {fileID: 355503551}
+  NextLevelGroupButton: {fileID: 0}
+  PreviousLevelGroupButton: {fileID: 0}
+  LevelNumber: 1
   WorldNumber: 1
 --- !u!1 &2133151410
 GameObject:
